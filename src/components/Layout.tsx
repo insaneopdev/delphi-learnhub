@@ -45,7 +45,7 @@ export function Layout({ children }: LayoutProps) {
               className="flex items-center gap-3 hover:opacity-80 transition-opacity"
             >
               <img
-                src="/assets/images/delphi-tvs-logo.png"
+                src="/assets/images/delphi-tvs-logo.png?v=1.4"
                 alt="Delphi TVS"
                 className="h-12 w-auto"
                 onError={(e) => {

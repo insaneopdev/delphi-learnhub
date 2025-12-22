@@ -34,7 +34,7 @@ export function LoginForm() {
           {/* Logo and Company Name */}
           <div className="flex items-center gap-4 mb-12">
             <img
-              src="/assets/images/delphi-tvs-logo.png"
+              src="/assets/images/delphi-tvs-logo.png?v=1.4"
               alt="Delphi TVS"
               className="h-16 w-auto bg-white p-2 rounded-lg"
             />
@@ -100,7 +100,7 @@ export function LoginForm() {
           {/* Mobile Logo */}
           <div className="lg:hidden text-center mb-8 animate-fade-in">
             <img
-              src="/assets/images/delphi-tvs-logo.png"
+              src="/assets/images/delphi-tvs-logo.png?v=1.4"
               alt="Delphi TVS"
               className="h-20 w-auto mx-auto mb-4"
             />

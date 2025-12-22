@@ -190,7 +190,7 @@ export function LoginForm() {
         </div>
       </div>
       <div className="absolute bottom-4 text-xs text-muted-foreground/50">
-        v1.3 (Live)
+        v1.4 (Live)
       </div>
     </div>
   );

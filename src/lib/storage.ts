@@ -13,6 +13,7 @@ export interface Module {
   title: Record<string, string>;
   description: Record<string, string>;
   icon: string;
+  imageUrl?: string;
   steps: Step[];
 }
 
@@ -24,6 +25,7 @@ export interface Step {
   videoUrl?: string;
   imageUrl?: string;
   quiz?: QuizStep;
+  testId?: string;
 }
 
 export interface QuizStep {
@@ -36,12 +38,15 @@ export interface QuizStep {
 export interface Question {
   id: string;
   moduleId: string;
+  stepId?: string;
   text: Record<string, string>;
   type: 'single' | 'multi' | 'code' | 'fill';
   options?: Record<string, string[]>;
   answer: string | string[] | number | number[];
   hint?: Record<string, string>;
   difficulty: 'simple' | 'complex';
+  imageUrl?: string;
+  optionImages?: string[];
 }
 
 export interface Test {
@@ -184,6 +189,10 @@ export function getQuestionsByModule(moduleId: string): Question[] {
   return getQuestions().filter(q => q.moduleId === moduleId);
 }
 
+export function getQuestionsByModuleAndStep(moduleId: string, stepId: string): Question[] {
+  return getQuestions().filter(q => q.moduleId === moduleId && q.stepId === stepId);
+}
+
 export function saveQuestion(question: Question): void {
   const questions = getQuestions();
   const index = questions.findIndex(q => q.id === question.id);
@@ -251,6 +260,18 @@ export function saveAttempt(attempt: TestAttempt): void {
     attempts.push(attempt);
   }
   saveToStorage(STORAGE_KEYS.ATTEMPTS, attempts);
+}
+
+export function deleteAttempt(id: string): void {
+  const attempts = getAttempts().filter(a => a.id !== id);
+  saveToStorage(STORAGE_KEYS.ATTEMPTS, attempts);
+  // Also remove from sessionStorage if it exists
+  const allKeys = Object.keys(sessionStorage);
+  allKeys.forEach(key => {
+    if (sessionStorage.getItem(key) === id) {
+      sessionStorage.removeItem(key);
+    }
+  });
 }
 
 // Progress operations

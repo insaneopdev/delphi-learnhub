@@ -43,10 +43,11 @@ export default function TestSession() {
   const { t } = useLanguage();
   const navigate = useNavigate();
 
-  const test = testId ? getTestById(testId) : undefined;
-  const questions = test
-    ? test.questionIds.map((id) => getQuestionById(id)).filter(Boolean) as Question[]
-    : [];
+  const test = React.useMemo(() => testId ? getTestById(testId) : undefined, [testId]);
+  const questions = React.useMemo(() =>
+    test ? test.questionIds.map((id) => getQuestionById(id)).filter(Boolean) as Question[] : [],
+    [test]
+  );
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string | string[]>>({});
@@ -106,23 +107,6 @@ export default function TestSession() {
     sessionStorage.setItem(`test_attempt_${test.id}`, newAttemptId);
   }, [test, user]);
 
-  // Timer
-  useEffect(() => {
-    if (!test || isPaused || timeRemaining <= 0) return;
-
-    const timer = setInterval(() => {
-      setTimeRemaining((prev) => {
-        if (prev <= 1) {
-          clearInterval(timer);
-          handleSubmit(true);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [test, isPaused, timeRemaining]);
 
   // Auto-save progress
   useEffect(() => {
@@ -147,6 +131,32 @@ export default function TestSession() {
     const interval = setInterval(saveProgress, 5000);
     return () => clearInterval(interval);
   }, [attemptId, answers, timePerQuestion, user, test]);
+
+  // Block navigation during test
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = 'Test in progress. Are you sure you want to leave? Your progress will be lost.';
+      return e.returnValue;
+    };
+
+    const handlePopState = (e: PopStateEvent) => {
+      const confirmLeave = window.confirm('Test in progress. Are you sure you want to leave? Your progress will be lost.');
+      if (!confirmLeave) {
+        window.history.pushState(null, '', window.location.href);
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener('popstate', handlePopState);
+    window.history.pushState(null, '', window.location.href);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
+
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -178,9 +188,9 @@ export default function TestSession() {
     return Math.round((correct / total) * 100);
   }, [answers, questions]);
 
-  const handleSubmit = async (autoSubmit = false) => {
+  const handleSubmit = useCallback(async (autoSubmit = false) => {
     if (!attemptId || !user || !test || isSubmitting) return;
-    
+
     setIsSubmitting(true);
 
     const score = calculateScore();
@@ -192,6 +202,10 @@ export default function TestSession() {
       timeSpent: timePerQuestion[questionId] || 0,
     }));
 
+    // Calculate actual duration based on timestamps
+    const now = new Date();
+    const duration = startTime ? Math.floor((now.getTime() - startTime.getTime()) / 1000) : 0;
+
     const attempt: TestAttempt = {
       id: attemptId,
       userId: user.id,
@@ -200,8 +214,8 @@ export default function TestSession() {
       score,
       passed,
       startedAt: startTime?.toISOString() || new Date().toISOString(),
-      finishedAt: new Date().toISOString(),
-      durationSeconds: test.timeLimitMinutes * 60 - timeRemaining,
+      finishedAt: now.toISOString(),
+      durationSeconds: duration,
       status: 'completed',
     };
 
@@ -216,7 +230,24 @@ export default function TestSession() {
     });
 
     navigate(`/testing/${test.id}/results/${attemptId}`);
-  };
+  }, [attemptId, user, test, isSubmitting, calculateScore, answers, timePerQuestion, startTime, toast, navigate]);
+
+  // Timer
+  useEffect(() => {
+    if (!test || isPaused || timeRemaining <= 0) return;
+
+    const timer = setInterval(() => {
+      setTimeRemaining((prev) => {
+        if (prev <= 1) {
+          handleSubmit(true);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [test, isPaused, handleSubmit, timeRemaining]);
 
   const handleQuestionChange = (newIndex: number) => {
     // Save time spent on current question
@@ -257,6 +288,20 @@ export default function TestSession() {
     );
   }
 
+  // Prevent admins from taking tests
+  if (user?.role === 'admin') {
+    return (
+      <Layout>
+        <div className="container mx-auto px-4 py-8 text-center">
+          <p className="text-muted-foreground">Admins cannot take tests here. Use the Admin panel to manage tests and questions.</p>
+          <Button onClick={() => navigate('/admin')} className="mt-4 btn-hero text-primary-foreground">
+            Go to Admin Panel
+          </Button>
+        </div>
+      </Layout>
+    );
+  }
+
   const currentQuestion = questions[currentQuestionIndex];
   const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
   const isUrgent = timeRemaining < 60;
@@ -276,11 +321,10 @@ export default function TestSession() {
 
           {/* Timer */}
           <div
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg font-mono text-lg font-bold ${
-              isUrgent
-                ? 'bg-destructive/10 text-destructive timer-urgent'
-                : 'bg-muted text-foreground'
-            }`}
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg font-mono text-lg font-bold ${isUrgent
+              ? 'bg-destructive/10 text-destructive timer-urgent'
+              : 'bg-muted text-foreground'
+              }`}
           >
             <Clock className="w-5 h-5" />
             <span>{formatTime(timeRemaining)}</span>
@@ -310,13 +354,12 @@ export default function TestSession() {
             <button
               key={q.id}
               onClick={() => handleQuestionChange(index)}
-              className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all ${
-                index === currentQuestionIndex
-                  ? 'hero-gradient text-primary-foreground'
-                  : answers[q.id]
+              className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all ${index === currentQuestionIndex
+                ? 'hero-gradient text-primary-foreground'
+                : answers[q.id]
                   ? 'bg-success/20 text-success'
                   : 'bg-muted text-muted-foreground hover:bg-muted/80'
-              }`}
+                }`}
             >
               {answers[q.id] ? <Check className="w-4 h-4" /> : index + 1}
             </button>
@@ -347,11 +390,10 @@ export default function TestSession() {
             <span className="px-2 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium capitalize">
               {currentQuestion.type}
             </span>
-            <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-              currentQuestion.difficulty === 'complex' 
-                ? 'bg-warning/10 text-warning' 
-                : 'bg-muted text-muted-foreground'
-            }`}>
+            <span className={`px-2 py-1 rounded-full text-xs font-medium ${currentQuestion.difficulty === 'complex'
+              ? 'bg-warning/10 text-warning'
+              : 'bg-muted text-muted-foreground'
+              }`}>
               {currentQuestion.difficulty}
             </span>
           </div>
@@ -361,6 +403,18 @@ export default function TestSession() {
             {t(currentQuestion.text)}
           </p>
 
+          {/* Question Image */}
+          {currentQuestion.imageUrl && (
+            <div className="mb-6">
+              <img
+                src={currentQuestion.imageUrl}
+                alt="Question"
+                className="max-w-md rounded-lg shadow"
+                onError={(e) => (e.currentTarget.style.display = 'none')}
+              />
+            </div>
+          )}
+
           {/* Answer Options */}
           {currentQuestion.type === 'single' && currentQuestion.options && (
             <div className="space-y-3">
@@ -368,22 +422,31 @@ export default function TestSession() {
                 <button
                   key={index}
                   onClick={() => handleAnswerChange(currentQuestion.id, String(index))}
-                  className={`quiz-option ${
-                    answers[currentQuestion.id] === String(index) ? 'selected' : ''
-                  }`}
+                  className={`quiz-option ${answers[currentQuestion.id] === String(index) ? 'selected' : ''
+                    }`}
                 >
                   <div
-                    className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
-                      answers[currentQuestion.id] === String(index)
-                        ? 'bg-primary border-primary'
-                        : 'border-border'
-                    }`}
+                    className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${answers[currentQuestion.id] === String(index)
+                      ? 'bg-primary border-primary'
+                      : 'border-border'
+                      }`}
                   >
                     {answers[currentQuestion.id] === String(index) && (
                       <Check className="w-4 h-4 text-primary-foreground" />
                     )}
                   </div>
-                  <span className="text-foreground">{option}</span>
+                  <div className="flex-1">
+                    <span className="text-foreground">{option}</span>
+                    {/* Option Image */}
+                    {currentQuestion.optionImages && currentQuestion.optionImages[index] && (
+                      <img
+                        src={currentQuestion.optionImages[index]}
+                        alt={`Option ${index + 1}`}
+                        className="mt-2 max-w-sm max-h-40 rounded shadow"
+                        onError={(e) => (e.currentTarget.style.display = 'none')}
+                      />
+                    )}
+                  </div>
                 </button>
               ))}
             </div>
@@ -403,13 +466,23 @@ export default function TestSession() {
                     className={`quiz-option ${selected ? 'selected' : ''}`}
                   >
                     <div
-                      className={`w-6 h-6 rounded flex items-center justify-center flex-shrink-0 border-2 ${
-                        selected ? 'bg-primary border-primary' : 'border-border'
-                      }`}
+                      className={`w-6 h-6 rounded flex items-center justify-center flex-shrink-0 border-2 ${selected ? 'bg-primary border-primary' : 'border-border'
+                        }`}
                     >
                       {selected && <Check className="w-4 h-4 text-primary-foreground" />}
                     </div>
-                    <span className="text-foreground">{option}</span>
+                    <div className="flex-1">
+                      <span className="text-foreground">{option}</span>
+                      {/* Option Image */}
+                      {currentQuestion.optionImages && currentQuestion.optionImages[index] && (
+                        <img
+                          src={currentQuestion.optionImages[index]}
+                          alt={`Option ${index + 1}`}
+                          className="mt-2 max-w-sm max-h-40 rounded shadow"
+                          onError={(e) => (e.currentTarget.style.display = 'none')}
+                        />
+                      )}
+                    </div>
                   </button>
                 );
               })}

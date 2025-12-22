@@ -28,9 +28,9 @@ export function Layout({ children }: LayoutProps) {
 
   const navItems = [
     { path: '/dashboard', label: 'Dashboard' },
-    { path: '/training', label: 'Training' },
+    ...(!isAdmin ? [{ path: '/training', label: 'Training' }] : []),
     { path: '/testing', label: 'Testing' },
-    ...(isAdmin ? [{ path: '/review', label: 'Review' }] : []),
+    ...(isAdmin ? [{ path: '/review', label: 'Review' }, { path: '/admin', label: 'Admin' }] : []),
   ];
 
   return (
@@ -44,12 +44,25 @@ export function Layout({ children }: LayoutProps) {
               onClick={() => navigate('/dashboard')}
               className="flex items-center gap-3 hover:opacity-80 transition-opacity"
             >
-              <div className="w-10 h-10 rounded-lg hero-gradient flex items-center justify-center">
+              <img
+                src="/assets/images/delphi-tvs-logo.png"
+                alt="Delphi TVS"
+                className="h-12 w-auto"
+                onError={(e) => {
+                  // Fallback to shield icon if logo doesn't load
+                  e.currentTarget.style.display = 'none';
+                  const fallback = e.currentTarget.nextElementSibling as HTMLElement;
+                  if (fallback) fallback.style.display = 'flex';
+                }}
+              />
+              <div className="w-10 h-10 rounded-lg hero-gradient items-center justify-center hidden">
                 <Shield className="w-5 h-5 text-primary-foreground" />
               </div>
               <div className="hidden sm:block">
-                <h1 className="text-lg font-bold text-foreground leading-tight">Delphi TVS</h1>
-                <p className="text-xs text-muted-foreground -mt-0.5">Training System</p>
+                <h1 className="text-lg font-bold bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
+                  Delphi TVS
+                </h1>
+                <p className="text-xs text-muted-foreground">Technologies Ltd</p>
               </div>
             </button>
 
@@ -127,9 +140,8 @@ export function Layout({ children }: LayoutProps) {
               variant="ghost"
               size="sm"
               onClick={() => navigate(item.path)}
-              className={`flex-col h-auto py-2 px-4 ${
-                location.pathname === item.path ? 'text-primary' : 'text-muted-foreground'
-              }`}
+              className={`flex-col h-auto py-2 px-4 ${location.pathname === item.path ? 'text-primary' : 'text-muted-foreground'
+                }`}
             >
               <span className="text-xs">{item.label}</span>
             </Button>

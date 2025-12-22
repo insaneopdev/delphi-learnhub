@@ -21,10 +21,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     // Initialize seed data and check session
     const init = async () => {
-      await initializeSeedData();
-      const existingSession = getSession();
-      setSession(existingSession);
-      setIsLoading(false);
+      try {
+        await initializeSeedData();
+        const existingSession = getSession();
+        setSession(existingSession);
+      } catch (error) {
+        console.error('Failed to initialize app:', error);
+      } finally {
+        setIsLoading(false);
+      }
     };
     init();
   }, []);

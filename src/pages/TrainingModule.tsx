@@ -5,19 +5,20 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { ProgressBar } from '@/components/ProgressBar';
-import { 
-  getModuleById, 
-  getModuleProgress, 
-  saveProgress, 
-  type Step, 
-  type UserProgress 
+import {
+  getModuleById,
+  getModuleProgress,
+  saveProgress,
+  getQuestionsByModuleAndStep,
+  type Step,
+  type UserProgress
 } from '@/lib/storage';
-import { 
-  ArrowLeft, 
-  ArrowRight, 
-  CheckCircle2, 
-  PlayCircle, 
-  BookOpen, 
+import {
+  ArrowLeft,
+  ArrowRight,
+  CheckCircle2,
+  PlayCircle,
+  BookOpen,
   HelpCircle,
   Lightbulb,
   Check,
@@ -33,13 +34,14 @@ export default function TrainingModule() {
 
   const module = moduleId ? getModuleById(moduleId) : undefined;
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const [selectedAnswer, setSelectedAnswer] = useState<number | number[] | null>(null);
   const [showResult, setShowResult] = useState(false);
   const [completedSteps, setCompletedSteps] = useState<Set<string>>(new Set());
+  const [currentQuestions, setCurrentQuestions] = useState<any[]>([]);
 
   useEffect(() => {
     if (!module || !user) return;
-    
+
     // Load existing progress
     const progress = getModuleProgress(user.id, module.id);
     if (progress) {
@@ -54,6 +56,18 @@ export default function TrainingModule() {
     }
   }, [module, user]);
 
+  // Load questions when current step changes
+  useEffect(() => {
+    if (!module || !moduleId) return;
+    const currentStep = module.steps[currentStepIndex];
+    if (currentStep?.type === 'quiz') {
+      const questions = getQuestionsByModuleAndStep(moduleId, currentStep.id);
+      setCurrentQuestions(questions);
+    } else {
+      setCurrentQuestions([]);
+    }
+  }, [module, moduleId, currentStepIndex]);
+
   if (!module) {
     return (
       <Layout>
@@ -67,13 +81,29 @@ export default function TrainingModule() {
     );
   }
 
+  // If admin, show shortcut to admin editor instead of trainee view
+  if (user?.role === 'admin') {
+    return (
+      <Layout>
+        <div className="container mx-auto px-4 py-8 text-center">
+          <h2 className="text-lg font-semibold text-foreground">Admin: Edit Module</h2>
+          <p className="text-muted-foreground mb-4">Admins can edit module content from the Admin panel. Changes will apply to trainees immediately.</p>
+          <div className="flex justify-center gap-4">
+            <Button onClick={() => navigate('/admin')} className="btn-hero text-primary-foreground">Open Admin Panel</Button>
+            <Button variant="outline" onClick={() => navigate('/training')} >Back to Training</Button>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
+
   const currentStep = module.steps[currentStepIndex];
   const progress = ((currentStepIndex + 1) / module.steps.length) * 100;
   const isLastStep = currentStepIndex === module.steps.length - 1;
 
   const markStepComplete = (stepId: string) => {
     if (!user) return;
-    
+
     const newCompleted = new Set(completedSteps);
     newCompleted.add(stepId);
     setCompletedSteps(newCompleted);
@@ -100,7 +130,7 @@ export default function TrainingModule() {
 
   const handleNext = () => {
     markStepComplete(currentStep.id);
-    
+
     if (isLastStep) {
       navigate('/training');
     } else {
@@ -118,16 +148,44 @@ export default function TrainingModule() {
     }
   };
 
-  const handleQuizAnswer = (index: number) => {
+  const handleQuizAnswer = (questionId: string, index: number) => {
     if (showResult) return;
-    setSelectedAnswer(index);
+    const question = currentQuestions.find(q => q.id === questionId);
+    if (!question) return;
+
+    if (question.type === 'multi') {
+      // Multiple choice - toggle selection
+      const current = Array.isArray(selectedAnswer) ? selectedAnswer : [];
+      if (current.includes(index)) {
+        setSelectedAnswer(current.filter(i => i !== index));
+      } else {
+        setSelectedAnswer([...current, index]);
+      }
+    } else {
+      // Single choice
+      setSelectedAnswer(index);
+    }
   };
 
   const checkAnswer = () => {
-    if (selectedAnswer === null) return;
+    if (selectedAnswer === null || currentQuestions.length === 0) return;
     setShowResult(true);
-    
-    if (currentStep.quiz && selectedAnswer === currentStep.quiz.correctIndex) {
+
+    // Check if answer is correct (works for both single and multi)
+    const question = currentQuestions[0]; // For now, show first question
+    let isCorrect = false;
+
+    if (question.type === 'multi') {
+      // For multiple choice, check if arrays match
+      const correctAnswers = Array.isArray(question.answer) ? question.answer.sort() : [];
+      const selectedAnswers = Array.isArray(selectedAnswer) ? [...selectedAnswer].sort() : [];
+      isCorrect = JSON.stringify(correctAnswers) === JSON.stringify(selectedAnswers);
+    } else {
+      // For single choice
+      isCorrect = selectedAnswer === question.answer;
+    }
+
+    if (isCorrect) {
       toast({
         title: "Correct! ✓",
         description: "Great job! You got it right.",
@@ -170,55 +228,157 @@ export default function TrainingModule() {
         {/* Step Title */}
         <h2 className="text-2xl font-bold text-foreground mb-6">{t(step.title)}</h2>
 
-        {/* Content based on step type */}
-        {step.type === 'quiz' && step.quiz ? (
-          <div className="space-y-4">
-            <p className="text-lg text-foreground font-medium mb-6">
-              {t(step.quiz.question)}
-            </p>
+        {/* Step Image */}
+        {step.imageUrl && (
+          <div className="mb-6">
+            <img
+              src={step.imageUrl}
+              alt={t(step.title)}
+              className="w-full max-w-2xl rounded-lg shadow-lg"
+              onError={(e) => (e.currentTarget.style.display = 'none')}
+            />
+          </div>
+        )}
 
-            <div className="space-y-3">
-              {(t(step.quiz.options) as string[] || []).map((option: string, index: number) => {
-                const isSelected = selectedAnswer === index;
-                const isCorrect = step.quiz?.correctIndex === index;
-                
-                let optionClass = 'quiz-option';
-                if (showResult) {
-                  if (isCorrect) optionClass += ' correct';
-                  else if (isSelected && !isCorrect) optionClass += ' incorrect';
-                } else if (isSelected) {
-                  optionClass += ' selected';
-                }
+        {/* Step Video - YouTube or Uploaded */}
+        {step.type === 'video' && step.videoUrl && (() => {
+          // Extract YouTube video ID from various URL formats
+          const getYouTubeId = (url: string): string | null => {
+            const patterns = [
+              /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\?\/\s]+)/,
+              /youtube\.com\/embed\/([^&\?\/\s]+)/,
+            ];
+            for (const pattern of patterns) {
+              const match = url.match(pattern);
+              if (match) return match[1];
+            }
+            return null;
+          };
 
-                return (
-                  <button
-                    key={index}
-                    onClick={() => handleQuizAnswer(index)}
-                    disabled={showResult}
-                    className={optionClass}
-                  >
-                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-colors ${
-                      isSelected 
-                        ? showResult 
-                          ? isCorrect ? 'bg-success border-success' : 'bg-destructive border-destructive'
-                          : 'bg-primary border-primary'
-                        : 'border-border'
-                    }`}>
-                      {showResult && isCorrect && <Check className="w-4 h-4 text-success-foreground" />}
-                      {showResult && isSelected && !isCorrect && <X className="w-4 h-4 text-destructive-foreground" />}
-                    </div>
-                    <span className="text-foreground">{option}</span>
-                  </button>
-                );
-              })}
-            </div>
+          const youtubeId = getYouTubeId(step.videoUrl);
 
-            {step.quiz.hint && !showResult && (
-              <div className="flex items-start gap-2 p-4 rounded-lg bg-muted/50 border border-border mt-4">
-                <Lightbulb className="w-5 h-5 text-warning flex-shrink-0 mt-0.5" />
-                <p className="text-sm text-muted-foreground">{t(step.quiz.hint)}</p>
+          if (youtubeId) {
+            // Render YouTube embed
+            return (
+              <div className="mb-6">
+                <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow-lg">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${youtubeId}`}
+                    title={t(step.title)}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="absolute inset-0 w-full h-full"
+                  />
+                </div>
               </div>
-            )}
+            );
+          } else {
+            // Render uploaded video
+            return (
+              <div className="mb-6">
+                <video
+                  controls
+                  className="w-full max-w-4xl rounded-lg shadow-lg"
+                  src={step.videoUrl}
+                  onError={(e) => {
+                    console.error('Video failed to load');
+                    (e.currentTarget.style.display = 'none');
+                  }}
+                >
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            );
+          }
+        })()}
+
+        {/* Content based on step type */}
+        {step.type === 'quiz' && currentQuestions.length > 0 ? (
+          <div className="space-y-6">
+            {currentQuestions.map((question, qIdx) => {
+              const isMulti = question.type === 'multi';
+              const isSingle = question.type === 'single';
+
+              return (
+                <div key={question.id} className="space-y-4">
+                  <p className="text-lg text-foreground font-medium">
+                    {qIdx + 1}. {t(question.text)}
+                  </p>
+
+                  {/* Question Image */}
+                  {question.imageUrl && (
+                    <div className="my-4">
+                      <img
+                        src={question.imageUrl}
+                        alt="Question"
+                        className="max-w-md rounded-lg shadow"
+                        onError={(e) => (e.currentTarget.style.display = 'none')}
+                      />
+                    </div>
+                  )}
+
+                  {(isSingle || isMulti) && question.options && (
+                    <div className="space-y-3">
+                      {(t(question.options) as string[] || []).map((option: string, index: number) => {
+                        const isSelected = isMulti
+                          ? Array.isArray(selectedAnswer) && selectedAnswer.includes(index)
+                          : selectedAnswer === index;
+                        const correctAnswer = question.answer;
+                        const isCorrect = isMulti
+                          ? Array.isArray(correctAnswer) && correctAnswer.includes(index)
+                          : correctAnswer === index;
+
+                        let optionClass = 'quiz-option';
+                        if (showResult) {
+                          if (isCorrect) optionClass += ' correct';
+                          else if (isSelected && !isCorrect) optionClass += ' incorrect';
+                        } else if (isSelected) {
+                          optionClass += ' selected';
+                        }
+
+                        return (
+                          <button
+                            key={index}
+                            onClick={() => handleQuizAnswer(question.id, index)}
+                            disabled={showResult}
+                            className={optionClass}
+                          >
+                            <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-colors ${isSelected
+                              ? showResult
+                                ? isCorrect ? 'bg-success border-success' : 'bg-destructive border-destructive'
+                                : 'bg-primary border-primary'
+                              : 'border-border'
+                              }`}>
+                              {showResult && isCorrect && <Check className="w-4 h-4 text-success-foreground" />}
+                              {showResult && isSelected && !isCorrect && <X className="w-4 h-4 text-destructive-foreground" />}
+                            </div>
+                            <div className="flex-1">
+                              <span className="text-foreground">{option}</span>
+                              {/* Option Image */}
+                              {question.optionImages && question.optionImages[index] && (
+                                <img
+                                  src={question.optionImages[index]}
+                                  alt={`Option ${index + 1}`}
+                                  className="mt-2 max-w-sm max-h-40 rounded shadow"
+                                  onError={(e) => (e.currentTarget.style.display = 'none')}
+                                />
+                              )}
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                  {question.hint && !showResult && (
+                    <div className="flex items-start gap-2 p-4 rounded-lg bg-muted/50 border border-border">
+                      <Lightbulb className="w-5 h-5 text-warning flex-shrink-0 mt-0.5" />
+                      <p className="text-sm text-muted-foreground">{t(question.hint)}</p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
 
             {selectedAnswer !== null && !showResult && (
               <Button onClick={checkAnswer} className="mt-4 btn-hero text-primary-foreground">
@@ -227,23 +387,64 @@ export default function TrainingModule() {
             )}
 
             {showResult && (
-              <div className={`p-4 rounded-lg mt-4 ${
-                selectedAnswer === step.quiz.correctIndex 
-                  ? 'bg-success/10 border border-success/20' 
-                  : 'bg-destructive/10 border border-destructive/20'
-              }`}>
-                <p className={`font-medium ${
-                  selectedAnswer === step.quiz.correctIndex ? 'text-success' : 'text-destructive'
+              <div className={`p-4 rounded-lg ${
+                // Check if correct
+                (() => {
+                  const question = currentQuestions[0];
+                  if (question.type === 'multi') {
+                    const correctAnswers = Array.isArray(question.answer) ? [...question.answer].sort() : [];
+                    const selectedAnswers = Array.isArray(selectedAnswer) ? [...selectedAnswer].sort() : [];
+                    return JSON.stringify(correctAnswers) === JSON.stringify(selectedAnswers)
+                      ? 'bg-success/10 border border-success/20'
+                      : 'bg-destructive/10 border border-destructive/20';
+                  } else {
+                    return selectedAnswer === question.answer
+                      ? 'bg-success/10 border border-success/20'
+                      : 'bg-destructive/10 border border-destructive/20';
+                  }
+                })()
                 }`}>
-                  {selectedAnswer === step.quiz.correctIndex 
-                    ? '✓ Correct! Well done.' 
-                    : `✗ Incorrect. The correct answer was: ${t(step.quiz.options)?.[step.quiz.correctIndex]}`}
+                <p className={`font-medium ${(() => {
+                  const question = currentQuestions[0];
+                  if (question.type === 'multi') {
+                    const correctAnswers = Array.isArray(question.answer) ? [...question.answer].sort() : [];
+                    const selectedAnswers = Array.isArray(selectedAnswer) ? [...selectedAnswer].sort() : [];
+                    return JSON.stringify(correctAnswers) === JSON.stringify(selectedAnswers) ? 'text-success' : 'text-destructive';
+                  } else {
+                    return selectedAnswer === question.answer ? 'text-success' : 'text-destructive';
+                  }
+                })()
+                  }`}>
+                  {(() => {
+                    const question = currentQuestions[0];
+                    let isCorrect = false;
+                    if (question.type === 'multi') {
+                      const correctAnswers = Array.isArray(question.answer) ? [...question.answer].sort() : [];
+                      const selectedAnswers = Array.isArray(selectedAnswer) ? [...selectedAnswer].sort() : [];
+                      isCorrect = JSON.stringify(correctAnswers) === JSON.stringify(selectedAnswers);
+                    } else {
+                      isCorrect = selectedAnswer === question.answer;
+                    }
+
+                    if (isCorrect) {
+                      return '✓ Correct! Well done.';
+                    } else {
+                      const correctOptionText = Array.isArray(question.answer)
+                        ? question.answer.map((idx: number) => t(question.options)?.[idx]).join(', ')
+                        : t(question.options)?.[question.answer as number];
+                      return `✗ Incorrect. The correct answer was: ${correctOptionText}`;
+                    }
+                  })()}
                 </p>
               </div>
             )}
           </div>
+        ) : step.type === 'quiz' ? (
+          <div className="text-center py-8 text-muted-foreground">
+            <p>No questions available for this quiz yet.</p>
+          </div>
         ) : (
-          <div 
+          <div
             className="prose prose-slate max-w-none text-foreground"
             dangerouslySetInnerHTML={{ __html: t(step.content) || '' }}
           />
@@ -287,13 +488,12 @@ export default function TrainingModule() {
                 setSelectedAnswer(null);
                 setShowResult(false);
               }}
-              className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all ${
-                index === currentStepIndex
-                  ? 'hero-gradient text-primary-foreground'
-                  : completedSteps.has(step.id)
+              className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all ${index === currentStepIndex
+                ? 'hero-gradient text-primary-foreground'
+                : completedSteps.has(step.id)
                   ? 'bg-success/20 text-success'
                   : 'bg-muted text-muted-foreground hover:bg-muted/80'
-              }`}
+                }`}
             >
               {completedSteps.has(step.id) ? (
                 <Check className="w-4 h-4" />

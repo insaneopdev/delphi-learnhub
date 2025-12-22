@@ -19,6 +19,28 @@ export function ModuleCard({ module, progress = 0, onClick, variant = 'default' 
 
   const isCompleted = progress === 100;
 
+  // Render icon or image
+  const renderIcon = (size: 'small' | 'large') => {
+    const sizeClasses = size === 'small' ? 'w-6 h-6' : 'w-7 h-7';
+
+    if (module.imageUrl) {
+      return (
+        <img
+          src={module.imageUrl}
+          alt={t(module.title)}
+          className={`${sizeClasses} object-cover rounded`}
+          onError={(e) => {
+            // Fallback to icon if image fails to load
+            e.currentTarget.style.display = 'none';
+            const fallback = e.currentTarget.nextElementSibling as HTMLElement;
+            if (fallback) fallback.style.display = 'block';
+          }}
+        />
+      );
+    }
+    return <IconComponent className={`${sizeClasses} text-primary-foreground`} />;
+  };
+
   if (variant === 'compact') {
     return (
       <button
@@ -26,21 +48,38 @@ export function ModuleCard({ module, progress = 0, onClick, variant = 'default' 
         className="module-card group text-left w-full"
       >
         <div className="flex items-center gap-4">
-          <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
-            isCompleted ? 'success-gradient' : 'hero-gradient'
-          } group-hover:scale-110`}>
-            <IconComponent className="w-6 h-6 text-primary-foreground" />
+          <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 ${isCompleted ? 'success-gradient' : 'hero-gradient'
+            } group-hover:scale-110 overflow-hidden`}>
+            {module.imageUrl ? (
+              <>
+                <img
+                  src={module.imageUrl}
+                  alt={t(module.title)}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                    const fallback = e.currentTarget.nextElementSibling as HTMLElement;
+                    if (fallback) fallback.style.display = 'flex';
+                  }}
+                />
+                <div className="w-full h-full hidden items-center justify-center">
+                  <IconComponent className="w-6 h-6 text-primary-foreground" />
+                </div>
+              </>
+            ) : (
+              <IconComponent className="w-6 h-6 text-primary-foreground" />
+            )}
           </div>
           <div className="flex-1 min-w-0">
             <h3 className="font-semibold text-foreground truncate">{t(module.title)}</h3>
             <div className="flex items-center gap-2 mt-1">
               <div className="flex-1 h-1.5 rounded-full bg-muted overflow-hidden">
-                <div 
+                <div
                   className="h-full rounded-full transition-all duration-500"
-                  style={{ 
+                  style={{
                     width: `${progress}%`,
-                    background: isCompleted 
-                      ? 'var(--gradient-success)' 
+                    background: isCompleted
+                      ? 'var(--gradient-success)'
                       : 'var(--gradient-accent)'
                   }}
                 />
@@ -58,28 +97,45 @@ export function ModuleCard({ module, progress = 0, onClick, variant = 'default' 
       onClick={onClick}
       className="module-card group text-left w-full"
     >
-      <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-4 transition-all duration-300 ${
-        isCompleted ? 'success-gradient' : 'hero-gradient'
-      } group-hover:scale-110 group-hover:shadow-glow`}>
-        <IconComponent className="w-7 h-7 text-primary-foreground" />
+      <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-4 transition-all duration-300 ${isCompleted ? 'success-gradient' : 'hero-gradient'
+        } group-hover:scale-110 group-hover:shadow-glow overflow-hidden`}>
+        {module.imageUrl ? (
+          <>
+            <img
+              src={module.imageUrl}
+              alt={t(module.title)}
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                e.currentTarget.style.display = 'none';
+                const fallback = e.currentTarget.nextElementSibling as HTMLElement;
+                if (fallback) fallback.style.display = 'flex';
+              }}
+            />
+            <div className="w-full h-full hidden items-center justify-center">
+              <IconComponent className="w-7 h-7 text-primary-foreground" />
+            </div>
+          </>
+        ) : (
+          <IconComponent className="w-7 h-7 text-primary-foreground" />
+        )}
       </div>
-      
+
       <h3 className="font-semibold text-lg text-foreground mb-2 group-hover:text-primary transition-colors">
         {t(module.title)}
       </h3>
-      
+
       <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
         {t(module.description)}
       </p>
 
       <div className="flex items-center gap-3">
         <div className="flex-1 progress-bar">
-          <div 
+          <div
             className="progress-bar-fill"
-            style={{ 
+            style={{
               width: `${progress}%`,
-              background: isCompleted 
-                ? 'var(--gradient-success)' 
+              background: isCompleted
+                ? 'var(--gradient-success)'
                 : 'var(--gradient-accent)'
             }}
           />

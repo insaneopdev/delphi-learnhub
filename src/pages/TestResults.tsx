@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/Layout';
 import { Button } from '@/components/ui/button';
@@ -8,6 +9,7 @@ import { Trophy, XCircle, Clock, Target, ArrowLeft, RotateCcw, Check, X } from '
 
 export default function TestResults() {
   const { testId, attemptId } = useParams<{ testId: string; attemptId: string }>();
+  const { user } = useAuth();
   const { t } = useLanguage();
   const navigate = useNavigate();
 
@@ -38,7 +40,7 @@ export default function TestResults() {
   const getAnswerStatus = (questionId: string) => {
     const question = questions.find((q) => q?.id === questionId);
     const userAnswer = attempt.answers.find((a) => a.questionId === questionId);
-    
+
     if (!question || !userAnswer) return { correct: false, userAnswer: null };
 
     let correct = false;
@@ -61,9 +63,8 @@ export default function TestResults() {
         {/* Result Header */}
         <div className="card-elevated p-8 text-center mb-8 animate-scale-in">
           <div
-            className={`w-20 h-20 rounded-full mx-auto mb-4 flex items-center justify-center ${
-              attempt.passed ? 'success-gradient' : 'bg-destructive'
-            }`}
+            className={`w-20 h-20 rounded-full mx-auto mb-4 flex items-center justify-center ${attempt.passed ? 'success-gradient' : 'bg-destructive'
+              }`}
           >
             {attempt.passed ? (
               <Trophy className="w-10 h-10 text-success-foreground" />
@@ -119,84 +120,83 @@ export default function TestResults() {
           </div>
         </div>
 
-        {/* Question Review */}
-        <div className="card-elevated p-6 mb-8">
-          <h2 className="font-semibold text-foreground mb-4">Question Review</h2>
-          <div className="space-y-4">
-            {questions.map((question, index) => {
-              if (!question) return null;
-              const { correct, userAnswer } = getAnswerStatus(question.id);
+        {/* Admin-Only Question Review */}
+        {user?.role === 'admin' && (
+          <div className="card-elevated p-6 mb-8">
+            <h2 className="font-semibold text-foreground mb-4">Detailed Question Review (Admin Only)</h2>
+            <div className="space-y-4">
+              {questions.map((question, index) => {
+                if (!question) return null;
+                const { correct, userAnswer } = getAnswerStatus(question.id);
 
-              return (
-                <div
-                  key={question.id}
-                  className={`p-4 rounded-lg border-2 ${
-                    correct
+                return (
+                  <div
+                    key={question.id}
+                    className={`p-4 rounded-lg border-2 ${correct
                       ? 'border-success/30 bg-success/5'
                       : 'border-destructive/30 bg-destructive/5'
-                  }`}
-                >
-                  <div className="flex items-start gap-3">
-                    <div
-                      className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 ${
-                        correct ? 'bg-success' : 'bg-destructive'
                       }`}
-                    >
-                      {correct ? (
-                        <Check className="w-4 h-4 text-success-foreground" />
-                      ) : (
-                        <X className="w-4 h-4 text-destructive-foreground" />
-                      )}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm text-muted-foreground mb-1">Question {index + 1}</p>
-                      <p className="text-foreground font-medium">{t(question.text)}</p>
+                  >
+                    <div className="flex items-start gap-3">
+                      <div
+                        className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 ${correct ? 'bg-success' : 'bg-destructive'
+                          }`}
+                      >
+                        {correct ? (
+                          <Check className="w-4 h-4 text-success-foreground" />
+                        ) : (
+                          <X className="w-4 h-4 text-destructive-foreground" />
+                        )}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm text-muted-foreground mb-1">Question {index + 1}</p>
+                        <p className="text-foreground font-medium mb-2">{t(question.text)}</p>
 
-                      {!correct && question.options && (
-                        <div className="mt-2 text-sm">
-                          <p className="text-destructive">
-                            Your answer:{' '}
-                            {question.type === 'multi' && Array.isArray(userAnswer)
-                              ? userAnswer.map((i) => t(question.options)?.[Number(i)]).join(', ')
-                              : t(question.options)?.[Number(userAnswer)] || userAnswer}
-                          </p>
-                          <p className="text-success">
-                            Correct answer:{' '}
-                            {question.type === 'multi'
-                              ? (question.answer as number[])
-                                  .map((i) => t(question.options)?.[i])
-                                  .join(', ')
-                              : t(question.options)?.[question.answer as number]}
-                          </p>
-                        </div>
-                      )}
+                        {question.options && (
+                          <div className="mt-2 text-sm space-y-1">
+                            <p className={correct ? "text-success font-medium" : "text-destructive"}>
+                              User's answer:{' '}
+                              {question.type === 'multi' && Array.isArray(userAnswer)
+                                ? userAnswer.map((i) => t(question.options)?.[Number(i)]).join(', ')
+                                : t(question.options)?.[Number(userAnswer)] || userAnswer || 'Not answered'}
+                            </p>
+                            {!correct && (
+                              <p className="text-success font-medium">
+                                Correct answer:{' '}
+                                {question.type === 'multi'
+                                  ? (question.answer as number[])
+                                    .map((i) => t(question.options)?.[i])
+                                    .join(', ')
+                                  : t(question.options)?.[question.answer as number]}
+                              </p>
+                            )}
+                          </div>
+                        )}
 
-                      {!correct && !question.options && (
-                        <div className="mt-2 text-sm">
-                          <p className="text-destructive">Your answer: {userAnswer || 'Not answered'}</p>
-                          <p className="text-success">Correct answer: {question.answer}</p>
-                        </div>
-                      )}
+                        {!question.options && (
+                          <div className="mt-2 text-sm space-y-1">
+                            <p className={correct ? "text-success font-medium" : "text-destructive"}>
+                              User's answer: {userAnswer || 'Not answered'}
+                            </p>
+                            {!correct && (
+                              <p className="text-success font-medium">Correct answer: {question.answer}</p>
+                            )}
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Actions */}
         <div className="flex gap-4">
           <Button variant="outline" onClick={() => navigate('/testing')} className="flex-1">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Tests
-          </Button>
-          <Button
-            onClick={() => navigate(`/testing/${testId}`)}
-            className="flex-1 btn-hero text-primary-foreground"
-          >
-            <RotateCcw className="w-4 h-4 mr-2" />
-            Retry Test
           </Button>
         </div>
       </div>

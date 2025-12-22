@@ -45,6 +45,7 @@ import {
   Eye,
   Printer,
   Download,
+  Edit,
 } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 
@@ -59,6 +60,11 @@ export default function Review() {
   const [newPassword, setNewPassword] = useState('');
   const [newRole, setNewRole] = useState<'trainee' | 'admin'>('trainee');
   const [selectedTrainee, setSelectedTrainee] = useState<User | null>(null);
+
+  // Edit user state
+  const [editingUser, setEditingUser] = useState<User | null>(null);
+  const [editRole, setEditRole] = useState<'trainee' | 'admin'>('trainee');
+  const [editPassword, setEditPassword] = useState('');
 
   const modules = getModules();
   const tests = getTests();
@@ -130,6 +136,31 @@ export default function Review() {
     });
 
     toast({ title: 'Success', description: 'User deleted' });
+  };
+
+  const handleEditUser = async () => {
+    if (!editingUser) return;
+
+    const updatedUser: User = { ...editingUser, role: editRole };
+    if (editPassword) {
+      updatedUser.passwordHash = await hashPassword(editPassword);
+    }
+
+    saveUser(updatedUser);
+    setUsers(getUsers());
+
+    addAuditLog({
+      userId: user!.id,
+      action: 'update',
+      entityType: 'user',
+      entityId: editingUser.id,
+      details: `Updated user: ${editingUser.username} (role: ${editRole})${editPassword ? ', password changed' : ''}`,
+    });
+
+    setEditingUser(null);
+    setEditPassword('');
+
+    toast({ title: 'Success', description: 'User updated successfully' });
   };
 
   const getTraineeStats = (traineeId: string) => {
@@ -235,8 +266,8 @@ export default function Review() {
                           score >= 80
                             ? 'var(--gradient-success)'
                             : score >= 60
-                            ? 'var(--gradient-accent)'
-                            : 'hsl(var(--destructive))',
+                              ? 'var(--gradient-accent)'
+                              : 'hsl(var(--destructive))',
                       }}
                     />
                   </div>
@@ -280,6 +311,7 @@ export default function Review() {
                   <th>Score</th>
                   <th>Status</th>
                   <th>Date</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -291,17 +323,25 @@ export default function Review() {
                       <td className="font-medium">{attempt.score}%</td>
                       <td>
                         <span
-                          className={`px-2 py-1 rounded-full text-xs font-medium ${
-                            attempt.passed
-                              ? 'bg-success/10 text-success'
-                              : 'bg-destructive/10 text-destructive'
-                          }`}
+                          className={`px-2 py-1 rounded-full text-xs font-medium ${attempt.passed
+                            ? 'bg-success/10 text-success'
+                            : 'bg-destructive/10 text-destructive'
+                            }`}
                         >
                           {attempt.passed ? 'Passed' : 'Failed'}
                         </span>
                       </td>
                       <td className="text-muted-foreground text-sm">
                         {new Date(attempt.finishedAt || attempt.startedAt).toLocaleDateString()}
+                      </td>
+                      <td>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => navigate(`/testing/${attempt.testId}/results/${attempt.id}`)}
+                        >
+                          View Details
+                        </Button>
                       </td>
                     </tr>
                   );
@@ -425,11 +465,10 @@ export default function Review() {
                         <td className="font-medium">{u.username}</td>
                         <td>
                           <span
-                            className={`px-2 py-1 rounded-full text-xs font-medium ${
-                              u.role === 'admin'
-                                ? 'bg-primary/10 text-primary'
-                                : 'bg-muted text-muted-foreground'
-                            }`}
+                            className={`px-2 py-1 rounded-full text-xs font-medium ${u.role === 'admin'
+                              ? 'bg-primary/10 text-primary'
+                              : 'bg-muted text-muted-foreground'
+                              }`}
                           >
                             {u.role}
                           </span>
@@ -438,21 +477,70 @@ export default function Review() {
                           {new Date(u.createdAt).toLocaleDateString()}
                         </td>
                         <td>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => handleDeleteUser(u.id)}
-                            disabled={u.username === 'admin'}
-                            className="text-destructive hover:text-destructive"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </Button>
+                          <div className="flex gap-2">
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              onClick={() => {
+                                setEditingUser(u);
+                                setEditRole(u.role);
+                                setEditPassword('');
+                              }}
+                              className="text-primary hover:text-primary"
+                            >
+                              <Edit className="w-4 h-4" />
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              onClick={() => handleDeleteUser(u.id)}
+                              disabled={u.username === 'admin'}
+                              className="text-destructive hover:text-destructive"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </Button>
+                          </div>
                         </td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
+
+              {/* Edit User Dialog */}
+              <Dialog open={!!editingUser} onOpenChange={(open) => !open && setEditingUser(null)}>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>Edit User: {editingUser?.username}</DialogTitle>
+                  </DialogHeader>
+                  <div className="space-y-4 mt-4">
+                    <div>
+                      <Label>Role</Label>
+                      <Select value={editRole} onValueChange={(v) => setEditRole(v as any)}>
+                        <SelectTrigger>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="trainee">Trainee</SelectItem>
+                          <SelectItem value="admin">Admin</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label>New Password (optional)</Label>
+                      <Input
+                        type="password"
+                        value={editPassword}
+                        onChange={(e) => setEditPassword(e.target.value)}
+                        placeholder="Leave blank to keep current"
+                      />
+                    </div>
+                    <Button onClick={handleEditUser} className="w-full btn-hero text-primary-foreground">
+                      Update User
+                    </Button>
+                  </div>
+                </DialogContent>
+              </Dialog>
             </div>
           </TabsContent>
 
@@ -471,11 +559,10 @@ export default function Review() {
                         <button
                           key={trainee.id}
                           onClick={() => setSelectedTrainee(trainee)}
-                          className={`w-full p-3 rounded-lg text-left transition-colors ${
-                            selectedTrainee?.id === trainee.id
-                              ? 'bg-primary/10 border border-primary/20'
-                              : 'hover:bg-muted'
-                          }`}
+                          className={`w-full p-3 rounded-lg text-left transition-colors ${selectedTrainee?.id === trainee.id
+                            ? 'bg-primary/10 border border-primary/20'
+                            : 'hover:bg-muted'
+                            }`}
                         >
                           <p className="font-medium text-foreground">{trainee.username}</p>
                           <p className="text-xs text-muted-foreground">
@@ -577,13 +664,12 @@ export default function Review() {
                             <td className="font-medium">{logUser?.username || 'Unknown'}</td>
                             <td>
                               <span
-                                className={`px-2 py-1 rounded-full text-xs font-medium ${
-                                  log.action === 'create'
-                                    ? 'bg-success/10 text-success'
-                                    : log.action === 'delete'
+                                className={`px-2 py-1 rounded-full text-xs font-medium ${log.action === 'create'
+                                  ? 'bg-success/10 text-success'
+                                  : log.action === 'delete'
                                     ? 'bg-destructive/10 text-destructive'
                                     : 'bg-warning/10 text-warning'
-                                }`}
+                                  }`}
                               >
                                 {log.action}
                               </span>

@@ -3,17 +3,16 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Delphi TVS Training - Safety Training Management System</title>
     <script>
-        // GitHub Pages SPA redirect workaround
-        // Store the path and redirect to index.html
-        sessionStorage.setItem('redirectPath', location.pathname);
-        location.replace('/delphi-learnhub/');
+        // Simple redirect to index.html
+        if (window.location.pathname !== '/delphi-learnhub/') {
+            window.location.replace('/delphi-learnhub/');
+        }
     </script>
 </head>
 
 <body>
+    <p>Redirecting...</p>
 </body>
 
 </html>

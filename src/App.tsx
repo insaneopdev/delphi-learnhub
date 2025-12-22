@@ -148,7 +148,7 @@ const App = () => (
           <LanguageProvider>
             <Toaster />
             <Sonner />
-            <BrowserRouter basename="/delphi-learnhub">
+            <BrowserRouter>
               <AppRoutes />
             </BrowserRouter>
           </LanguageProvider>

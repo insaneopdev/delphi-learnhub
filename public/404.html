@@ -5,25 +5,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Delphi TVS Training - Safety Training Management System</title>
-    <meta name="description"
-        content="Comprehensive safety training platform for TVS employees. Learn workplace safety protocols, take assessments, and track your progress." />
-    <meta name="author" content="Delphi TVS" />
-    <meta property="og:title" content="Delphi TVS Training" />
-    <meta property="og:description" content="Comprehensive safety training platform for TVS employees." />
-    <meta property="og:type" content="website" />
-    <link rel="icon" type="image/png" href="/delphi-learnhub/favicon.png" />
-    <link rel="apple-touch-icon" href="/delphi-learnhub/favicon.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <script>
-        // Redirect to hash-based root for HashRouter
-        window.location.replace('/delphi-learnhub/#/');
+        // GitHub Pages SPA redirect workaround
+        // Store the path and redirect to index.html
+        sessionStorage.setItem('redirectPath', location.pathname);
+        location.replace('/delphi-learnhub/');
     </script>
 </head>
 
 <body>
-    <div id="root"></div>
-    <script type="module" src="/delphi-learnhub/src/main.tsx"></script>
 </body>
 
 </html>

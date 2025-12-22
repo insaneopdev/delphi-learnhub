@@ -189,6 +189,10 @@ export function LoginForm() {
           </p>
         </div>
       </div>
+      <div className="absolute bottom-4 text-xs text-muted-foreground/50">
+        v1.3 (Live)
+      </div>
     </div>
   );
 }
+```

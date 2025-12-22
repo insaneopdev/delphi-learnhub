@@ -3,7 +3,7 @@ import App from "./App.tsx";
 import "./index.css";
 
 // Log version to confirm deployment update
-console.log("🚀 Delphi LearnHub - Deployment v1.2 (Logo Restored) - Loaded at " + new Date().toISOString());
+console.log("🚀 Delphi LearnHub - Deployment v1.3 (Cache Busting) - Loaded at " + new Date().toISOString());
 
 const rootElement = document.getElementById("root");
 if (!rootElement) {

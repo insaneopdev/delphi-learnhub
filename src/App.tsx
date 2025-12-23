@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import { DisplayProvider } from "@/contexts/DisplayContext";
 import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import Training from "./pages/Training";
@@ -146,11 +147,13 @@ const App = () => (
       <TooltipProvider>
         <AuthProvider>
           <LanguageProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter basename="/delphi-learnhub">
-              <AppRoutes />
-            </BrowserRouter>
+            <DisplayProvider>
+              <Toaster />
+              <Sonner />
+              <BrowserRouter basename="/delphi-learnhub">
+                <AppRoutes />
+              </BrowserRouter>
+            </DisplayProvider>
           </LanguageProvider>
         </AuthProvider>
       </TooltipProvider>

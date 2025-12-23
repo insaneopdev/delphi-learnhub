@@ -46,6 +46,9 @@ import {
   Printer,
   Download,
   Edit,
+  Search,
+  ChevronUp,
+  ChevronDown,
 } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 
@@ -65,6 +68,45 @@ export default function Review() {
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [editRole, setEditRole] = useState<'trainee' | 'admin'>('trainee');
   const [editPassword, setEditPassword] = useState('');
+
+  // Search and Sort State for Users
+  const [userSortField, setUserSortField] = useState<'username' | 'role' | 'created'>('created');
+  const [userSortDirection, setUserSortDirection] = useState<'asc' | 'desc'>('desc');
+  const [userSearchQuery, setUserSearchQuery] = useState('');
+
+  // Filter and Sort Users
+  const sortedUsers = React.useMemo(() => {
+    let filtered = users;
+    if (userSearchQuery.trim()) {
+      const q = userSearchQuery.toLowerCase();
+      filtered = users.filter((u) => u.username.toLowerCase().includes(q));
+    }
+
+    return [...filtered].sort((a, b) => {
+      let compareValue = 0;
+      switch (userSortField) {
+        case 'username':
+          compareValue = a.username.localeCompare(b.username);
+          break;
+        case 'role':
+          compareValue = a.role.localeCompare(b.role);
+          break;
+        case 'created':
+          compareValue = new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+          break;
+      }
+      return userSortDirection === 'asc' ? compareValue : -compareValue;
+    });
+  }, [users, userSearchQuery, userSortField, userSortDirection]);
+
+  const handleUserSort = (field: typeof userSortField) => {
+    if (userSortField === field) {
+      setUserSortDirection((prev) => (prev === 'asc' ? 'desc' : 'asc'));
+    } else {
+      setUserSortField(field);
+      setUserSortDirection('asc');
+    }
+  };
 
   const modules = getModules();
   const tests = getTests();
@@ -338,7 +380,7 @@ export default function Review() {
                         <Button
                           variant="ghost"
                           size="sm"
-                          onClick={() => navigate(`/testing/${attempt.testId}/results/${attempt.id}`)}
+                          onClick={() => navigate(`/testing/${attempt.testId}/results/${attempt.id}`, { state: { returnTo: '/review' } })}
                         >
                           View Details
                         </Button>
@@ -364,14 +406,49 @@ export default function Review() {
   return (
     <Layout>
       <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
-          <Button variant="ghost" size="icon" onClick={() => navigate('/dashboard')}>
-            <ArrowLeft className="w-5 h-5" />
-          </Button>
-          <div>
-            <h1 className="text-2xl font-bold text-foreground">Admin Review</h1>
-            <p className="text-muted-foreground">Manage users, content, and view analytics</p>
+        {/* Header Section */}
+        <div className="mb-10">
+          <div className="flex items-center gap-4 mb-6">
+            <Button variant="ghost" size="icon" onClick={() => navigate('/dashboard')} className="hover:bg-muted/50">
+              <ArrowLeft className="w-5 h-5" />
+            </Button>
+            <div>
+              <h1 className="text-3xl font-bold tracking-tight text-foreground">Admin Review</h1>
+              <p className="text-muted-foreground text-lg">Manage users, content, and view system analytics</p>
+            </div>
+          </div>
+
+          {/* Quick Stats Row */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-slide-up">
+            <div className="glass-card rounded-3xl p-6 flex items-center justify-between group hover-lift shadow-sm hover:shadow-xl transition-all duration-300">
+              <div>
+                <p className="text-sm font-medium text-muted-foreground mb-1">Total Users</p>
+                <h3 className="text-3xl font-bold tracking-tight text-foreground">{users.length}</h3>
+              </div>
+              <div className="w-14 h-14 rounded-2xl hero-gradient flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-transform duration-300">
+                <Users className="w-7 h-7 drop-shadow-sm" />
+              </div>
+            </div>
+
+            <div className="glass-card rounded-3xl p-6 flex items-center justify-between group hover-lift shadow-sm hover:shadow-xl transition-all duration-300">
+              <div>
+                <p className="text-sm font-medium text-muted-foreground mb-1">Total Attempts</p>
+                <h3 className="text-3xl font-bold tracking-tight text-foreground">{allAttempts.length}</h3>
+              </div>
+              <div className="w-14 h-14 rounded-2xl accent-gradient flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-transform duration-300">
+                <BarChart3 className="w-7 h-7 drop-shadow-sm" />
+              </div>
+            </div>
+
+            <div className="glass-card rounded-3xl p-6 flex items-center justify-between group hover-lift shadow-sm hover:shadow-xl transition-all duration-300">
+              <div>
+                <p className="text-sm font-medium text-muted-foreground mb-1">System Events</p>
+                <h3 className="text-3xl font-bold tracking-tight text-foreground">{auditLogs.length}</h3>
+              </div>
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-transform duration-300">
+                <History className="w-7 h-7 drop-shadow-sm" />
+              </div>
+            </div>
           </div>
         </div>
 
@@ -396,8 +473,8 @@ export default function Review() {
           </TabsList>
 
           {/* Users Tab */}
-          <TabsContent value="users">
-            <div className="card-elevated p-6">
+          <TabsContent value="users" className="animate-fade-in space-y-6">
+            <div className="glass-card p-6">
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-lg font-semibold text-foreground">User Management</h2>
                 <Dialog open={showCreateUser} onOpenChange={setShowCreateUser}>
@@ -449,21 +526,65 @@ export default function Review() {
                 </Dialog>
               </div>
 
+              {/* Search Bar */}
+              <div className="mb-4">
+                <div className="relative max-w-md">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <Input
+                    type="text"
+                    placeholder="Search by username..."
+                    value={userSearchQuery}
+                    onChange={(e) => setUserSearchQuery(e.target.value)}
+                    className="pl-10"
+                  />
+                </div>
+              </div>
+
               <div className="admin-table overflow-x-auto">
-                <table>
+                <table className="w-full">
                   <thead>
                     <tr>
-                      <th>Username</th>
-                      <th>Role</th>
-                      <th>Created</th>
+                      <th
+                        className="cursor-pointer hover:bg-muted/50 transition-colors"
+                        onClick={() => handleUserSort('username')}
+                      >
+                        <div className="flex items-center gap-2">
+                          Username
+                          {userSortField === 'username' && (
+                            userSortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
+                          )}
+                        </div>
+                      </th>
+                      <th
+                        className="cursor-pointer hover:bg-muted/50 transition-colors"
+                        onClick={() => handleUserSort('role')}
+                      >
+                        <div className="flex items-center gap-2">
+                          Role
+                          {userSortField === 'role' && (
+                            userSortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
+                          )}
+                        </div>
+                      </th>
+                      <th
+                        className="cursor-pointer hover:bg-muted/50 transition-colors"
+                        onClick={() => handleUserSort('created')}
+                      >
+                        <div className="flex items-center gap-2">
+                          Created
+                          {userSortField === 'created' && (
+                            userSortDirection === 'asc' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />
+                          )}
+                        </div>
+                      </th>
                       <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {users.map((u) => (
-                      <tr key={u.id}>
-                        <td className="font-medium">{u.username}</td>
-                        <td>
+                    {sortedUsers.map((u) => (
+                      <tr key={u.id} className="border-b border-border hover:bg-muted/30 transition-colors">
+                        <td className="font-medium p-4">{u.username}</td>
+                        <td className="p-4">
                           <span
                             className={`px-2 py-1 rounded-full text-xs font-medium ${u.role === 'admin'
                               ? 'bg-primary/10 text-primary'
@@ -473,10 +594,10 @@ export default function Review() {
                             {u.role}
                           </span>
                         </td>
-                        <td className="text-muted-foreground">
+                        <td className="text-muted-foreground p-4">
                           {new Date(u.createdAt).toLocaleDateString()}
                         </td>
-                        <td>
+                        <td className="p-4">
                           <div className="flex gap-2">
                             <Button
                               variant="ghost"
@@ -503,6 +624,13 @@ export default function Review() {
                         </td>
                       </tr>
                     ))}
+                    {sortedUsers.length === 0 && (
+                      <tr>
+                        <td colSpan={4} className="text-center text-muted-foreground py-8">
+                          No users found
+                        </td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -545,10 +673,10 @@ export default function Review() {
           </TabsContent>
 
           {/* Trainee Review Tab */}
-          <TabsContent value="trainees">
+          <TabsContent value="trainees" className="animate-fade-in">
             <div className="grid lg:grid-cols-3 gap-6">
               {/* Trainee List */}
-              <div className="card-elevated p-6">
+              <div className="glass-card p-6">
                 <h2 className="text-lg font-semibold text-foreground mb-4">Trainees</h2>
                 <div className="space-y-2">
                   {users
@@ -592,15 +720,15 @@ export default function Review() {
           </TabsContent>
 
           {/* Content Tab */}
-          <TabsContent value="content">
+          <TabsContent value="content" className="animate-fade-in">
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="card-elevated p-6">
+              <div className="glass-card p-6">
                 <h2 className="text-lg font-semibold text-foreground mb-4">
                   Modules ({modules.length})
                 </h2>
                 <div className="space-y-3">
                   {modules.map((module) => (
-                    <div key={module.id} className="p-3 rounded-lg bg-muted/50">
+                    <div key={module.id} className="p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
                       <p className="font-medium text-foreground">{t(module.title)}</p>
                       <p className="text-xs text-muted-foreground">
                         {module.steps.length} steps
@@ -610,7 +738,7 @@ export default function Review() {
                 </div>
               </div>
 
-              <div className="card-elevated p-6">
+              <div className="glass-card p-6">
                 <div className="flex justify-between items-center mb-4">
                   <h2 className="text-lg font-semibold text-foreground">Tests ({tests.length})</h2>
                   <Button variant="outline" size="sm">
@@ -637,8 +765,8 @@ export default function Review() {
           </TabsContent>
 
           {/* Audit Log Tab */}
-          <TabsContent value="audit">
-            <div className="card-elevated p-6">
+          <TabsContent value="audit" className="animate-fade-in">
+            <div className="glass-card p-6">
               <h2 className="text-lg font-semibold text-foreground mb-4">Audit Log</h2>
               <div className="admin-table overflow-x-auto">
                 <table>

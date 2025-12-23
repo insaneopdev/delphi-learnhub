@@ -125,113 +125,118 @@ export default function Dashboard() {
     <Layout>
       <div className="container mx-auto px-4 py-8">
         {/* Welcome Section */}
-        <div className="mb-8 animate-fade-in">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
-            <span>EHS Induction Program</span>
+        <div className="mb-10 relative overflow-hidden rounded-3xl hero-gradient p-8 md:p-12 shadow-2xl animate-fade-in group">
+          <div className="relative z-10 max-w-5xl">
+            <h1 className="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]">
+              {t(uiStrings.welcomeBack)} {user?.username}
+            </h1>
+            <p className="text-blue-50/90 text-lg md:text-xl font-medium tracking-wide drop-shadow-md mb-10">
+              {t(uiStrings.subtitle)}
+            </p>
+
+            {/* Quick Stats Overlay - Center of the dashboard */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-8 border-t border-white/20">
+              {isAdmin ? (
+                <>
+                  <div className="flex flex-col">
+                    <div className="flex items-center gap-2 text-white/80 mb-1">
+                      <Users className="w-4 h-4" />
+                      <span className="text-sm font-medium">{t(uiStrings.totalUsers)}</span>
+                    </div>
+                    <p className="text-3xl font-bold text-white tracking-tight">{totalUsers}</p>
+                  </div>
+                  <div className="flex flex-col">
+                    <div className="flex items-center gap-2 text-white/80 mb-1">
+                      <BookOpen className="w-4 h-4" />
+                      <span className="text-sm font-medium">{t(uiStrings.modules)}</span>
+                    </div>
+                    <p className="text-3xl font-bold text-white tracking-tight">{totalModules}</p>
+                  </div>
+                  <div className="flex flex-col">
+                    <div className="flex items-center gap-2 text-white/80 mb-1">
+                      <ClipboardCheck className="w-4 h-4" />
+                      <span className="text-sm font-medium">{t(uiStrings.activeTests)}</span>
+                    </div>
+                    <p className="text-3xl font-bold text-white tracking-tight">{totalTests}</p>
+                  </div>
+                  <div className="flex flex-col">
+                    <div className="flex items-center gap-2 text-white/80 mb-1">
+                      <TrendingUp className="w-4 h-4" />
+                      <span className="text-sm font-medium">{t(uiStrings.completionRate)}</span>
+                    </div>
+                    <p className="text-3xl font-bold text-white tracking-tight">{completionRate}%</p>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="flex flex-col">
+                    <div className="flex items-center gap-2 text-white/80 mb-1">
+                      <BookOpen className="w-4 h-4" />
+                      <span className="text-sm font-medium">{t(uiStrings.modules)}</span>
+                    </div>
+                    <p className="text-3xl font-bold text-white tracking-tight">{completedModules}/{totalModules}</p>
+                  </div>
+                  <div className="flex flex-col">
+                    <div className="flex items-center gap-2 text-white/80 mb-1">
+                      <Trophy className="w-4 h-4" />
+                      <span className="text-sm font-medium">{t(uiStrings.testsPassed)}</span>
+                    </div>
+                    <p className="text-3xl font-bold text-white tracking-tight">{passedTests}</p>
+                  </div>
+                  <div className="flex flex-col">
+                    <div className="flex items-center gap-2 text-white/80 mb-1">
+                      <Target className="w-4 h-4" />
+                      <span className="text-sm font-medium">{t(uiStrings.avgScore)}</span>
+                    </div>
+                    <p className="text-3xl font-bold text-white tracking-tight">{avgScore}%</p>
+                  </div>
+                  <div className="flex flex-col">
+                    <div className="flex items-center gap-2 text-white/80 mb-1">
+                      <Clock className="w-4 h-4" />
+                      <span className="text-sm font-medium">{t(uiStrings.attempts)}</span>
+                    </div>
+                    <p className="text-3xl font-bold text-white tracking-tight">{totalAttempts}</p>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
-          <h1 className="text-3xl font-bold mb-2">
-            {t(uiStrings.welcomeBack)} <span style={{ background: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>{user?.username}</span>
-          </h1>
-          <p className="text-muted-foreground">
-            {t(uiStrings.subtitle)}
-          </p>
+
+          {/* Decorative circle */}
+          <div className="absolute -right-20 -top-20 w-80 h-80 bg-white/10 rounded-full blur-3xl group-hover:bg-white/20 transition-all duration-700"></div>
+          <div className="absolute right-20 -bottom-20 w-60 h-60 bg-accent/20 rounded-full blur-3xl animate-pulse-glow"></div>
         </div>
 
-        {/* Stats Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          {isAdmin ? (
-            <>
-              {/* Admin Stats */}
-              <div className="stat-card animate-slide-up">
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <Users className="w-4 h-4" />
-                  <span className="text-xs font-medium">{t(uiStrings.totalUsers)}</span>
-                </div>
-                <p className="text-2xl font-bold text-foreground">{totalUsers}</p>
-              </div>
-              <div className="stat-card animate-slide-up animation-delay-100">
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <BookOpen className="w-4 h-4" />
-                  <span className="text-xs font-medium">{t(uiStrings.modules)}</span>
-                </div>
-                <p className="text-2xl font-bold text-foreground">{totalModules}</p>
-              </div>
-              <div className="stat-card animate-slide-up animation-delay-200">
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <ClipboardCheck className="w-4 h-4" />
-                  <span className="text-xs font-medium">{t(uiStrings.activeTests)}</span>
-                </div>
-                <p className="text-2xl font-bold text-foreground">{totalTests}</p>
-              </div>
-              <div className="stat-card animate-slide-up animation-delay-300">
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <TrendingUp className="w-4 h-4" />
-                  <span className="text-xs font-medium">{t(uiStrings.completionRate)}</span>
-                </div>
-                <p className="text-2xl font-bold text-foreground">{completionRate}%</p>
-              </div>
-            </>
-          ) : (
-            <>
-              {/* Trainee Stats */}
-              <div className="stat-card animate-slide-up">
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <BookOpen className="w-4 h-4" />
-                  <span className="text-xs font-medium">{t(uiStrings.modules)}</span>
-                </div>
-                <p className="text-2xl font-bold text-foreground">{completedModules}/{totalModules}</p>
-              </div>
-              <div className="stat-card animate-slide-up animation-delay-100">
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <Trophy className="w-4 h-4" />
-                  <span className="text-xs font-medium">{t(uiStrings.testsPassed)}</span>
-                </div>
-                <p className="text-2xl font-bold text-foreground">{passedTests}</p>
-              </div>
-              <div className="stat-card animate-slide-up animation-delay-200">
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <Target className="w-4 h-4" />
-                  <span className="text-xs font-medium">{t(uiStrings.avgScore)}</span>
-                </div>
-                <p className="text-2xl font-bold text-foreground">{avgScore}%</p>
-              </div>
-              <div className="stat-card animate-slide-up animation-delay-300">
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <Clock className="w-4 h-4" />
-                  <span className="text-xs font-medium">{t(uiStrings.attempts)}</span>
-                </div>
-                <p className="text-2xl font-bold text-foreground">{totalAttempts}</p>
-              </div>
-            </>
-          )}
-        </div>
+
 
         {/* Main Menu Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 gap-6">
           {menuCards.map((card, index) => (
             <button
               key={card.path}
               onClick={() => navigate(card.path)}
-              className={`card-elevated p-6 text-left group animate-slide-up`}
+              className={`group relative overflow-hidden rounded-3xl p-8 cursor-pointer transition-all duration-300 hover:-translate-y-2 shadow-lg hover:shadow-2xl border border-border/50 bg-card text-left animate-slide-up`}
               style={{ animationDelay: `${(index + 1) * 100}ms` }}
             >
-              <div className={`w-14 h-14 rounded-xl ${card.gradient} flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110 group-hover:shadow-glow`}>
-                <card.icon className="w-7 h-7 text-primary-foreground" />
-              </div>
+              {/* Background Gradient Effect */}
+              <div className={`absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-500 bg-primary`} />
 
-              <h2 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
-                {card.title}
-              </h2>
+              <div className="relative z-10 flex flex-col h-full">
+                <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:scale-110 transition-transform duration-300 ${card.gradient}`}>
+                  <card.icon className="w-8 h-8 text-white drop-shadow-md" />
+                </div>
 
-              <p className="text-muted-foreground text-sm mb-4">
-                {card.description}
-              </p>
+                <h2 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors tracking-tight">{card.title}</h2>
+                <p className="text-muted-foreground text-base mb-6 flex-grow leading-relaxed">{card.description}</p>
 
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-medium text-muted-foreground bg-muted px-2 py-1 rounded-full">
-                  {card.stats}
-                </span>
-                <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                <div className="flex items-center justify-between mt-auto pt-4 border-t border-border/30">
+                  <span className="text-sm font-semibold text-primary/80 bg-primary/10 px-3 py-1 rounded-full">
+                    {card.stats}
+                  </span>
+                  <div className="w-10 h-10 rounded-full bg-muted group-hover:bg-primary group-hover:text-white flex items-center justify-center transition-all duration-300 shadow-sm">
+                    <ChevronRight className="w-5 h-5 ml-0.5" />
+                  </div>
+                </div>
               </div>
             </button>
           ))}

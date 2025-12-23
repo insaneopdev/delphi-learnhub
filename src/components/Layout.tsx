@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage, languageNames, type Language } from '@/contexts/LanguageContext';
+import { useDisplay } from '@/contexts/DisplayContext';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -8,7 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { LogOut, Globe, User } from 'lucide-react';
+import { LogOut, Globe, User, ZoomIn, ZoomOut, RotateCcw } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import delphiLogo from '@/assets/delphi-tvs-logo.png';
@@ -20,6 +21,7 @@ interface LayoutProps {
 export function Layout({ children }: LayoutProps) {
   const { user, logout, isAdmin } = useAuth();
   const { language, setLanguage } = useLanguage();
+  const { zoomLevel, increaseZoom, decreaseZoom, resetZoom } = useDisplay();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -38,7 +40,7 @@ export function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-card/80 backdrop-blur-xl">
+      <header className="sticky top-0 z-50 w-full border-b border-border/40 glass">
         <div className="container mx-auto px-4">
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
@@ -54,7 +56,7 @@ export function Layout({ children }: LayoutProps) {
                 />
               </div>
               <div className="hidden sm:block">
-                <h1 className="text-lg font-bold bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
+                <h1 className="text-lg font-extrabold text-primary tracking-tight">
                   Delphi TVS
                 </h1>
                 <p className="text-xs text-muted-foreground">Technologies Ltd</p>
@@ -78,6 +80,30 @@ export function Layout({ children }: LayoutProps) {
 
             {/* Right side */}
             <div className="flex items-center gap-2">
+              {/* Zoom Controls */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="sm" className="gap-2">
+                    {zoomLevel >= 100 ? <ZoomIn className="w-4 h-4" /> : <ZoomOut className="w-4 h-4" />}
+                    <span className="hidden sm:inline">{zoomLevel}%</span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={() => resetZoom()}>
+                    <RotateCcw className="w-4 h-4 mr-2" />
+                    Reset (100%)
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={decreaseZoom} disabled={zoomLevel <= 90}>
+                    <ZoomOut className="w-4 h-4 mr-2" />
+                    Zoom Out
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={increaseZoom} disabled={zoomLevel >= 150}>
+                    <ZoomIn className="w-4 h-4 mr-2" />
+                    Zoom In
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
               {/* Language Selector */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>

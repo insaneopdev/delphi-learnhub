@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/Layout';
@@ -12,6 +12,8 @@ export default function TestResults() {
   const { user } = useAuth();
   const { t } = useLanguage();
   const navigate = useNavigate();
+  const location = useLocation();
+  const returnTo = (location.state as any)?.returnTo || '/testing';
 
   const attempt = attemptId ? getAttemptById(attemptId) : undefined;
   const test = testId ? getTestById(testId) : undefined;
@@ -194,9 +196,9 @@ export default function TestResults() {
 
         {/* Actions */}
         <div className="flex gap-4">
-          <Button variant="outline" onClick={() => navigate('/testing')} className="flex-1">
+          <Button variant="outline" onClick={() => navigate(returnTo)} className="flex-1">
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Tests
+            {returnTo === '/review' ? 'Back to Review' : 'Back to Tests'}
           </Button>
         </div>
       </div>

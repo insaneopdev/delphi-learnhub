@@ -8,8 +8,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Shield, LogOut, Globe, User } from 'lucide-react';
+import { LogOut, Globe, User } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
+
+import delphiLogo from '@/assets/delphi-tvs-logo.png';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -44,19 +46,12 @@ export function Layout({ children }: LayoutProps) {
               onClick={() => navigate('/dashboard')}
               className="flex items-center gap-3 hover:opacity-80 transition-opacity"
             >
-              <img
-                src="/assets/images/delphi-tvs-logo.png?v=1.4"
-                alt="Delphi TVS"
-                className="h-12 w-auto"
-                onError={(e) => {
-                  // Fallback to shield icon if logo doesn't load
-                  e.currentTarget.style.display = 'none';
-                  const fallback = e.currentTarget.nextElementSibling as HTMLElement;
-                  if (fallback) fallback.style.display = 'flex';
-                }}
-              />
-              <div className="w-10 h-10 rounded-lg hero-gradient items-center justify-center hidden">
-                <Shield className="w-5 h-5 text-primary-foreground" />
+              <div className="h-10 w-auto bg-white rounded p-1">
+                <img
+                  src={delphiLogo}
+                  alt="Delphi TVS"
+                  className="h-full w-auto"
+                />
               </div>
               <div className="hidden sm:block">
                 <h1 className="text-lg font-bold bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">

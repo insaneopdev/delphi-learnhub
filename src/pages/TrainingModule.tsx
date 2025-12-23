@@ -234,7 +234,12 @@ export default function TrainingModule() {
             <img
               src={step.imageUrl}
               alt={t(step.title)}
-              className="w-full max-w-2xl rounded-lg shadow-lg"
+              className="rounded-lg shadow-lg"
+              style={{
+                width: step.imageWidth || 'auto',
+                height: step.imageHeight || 'auto',
+                maxWidth: '100%'
+              }}
               onError={(e) => (e.currentTarget.style.display = 'none')}
             />
           </div>

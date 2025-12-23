@@ -24,6 +24,8 @@ export interface Step {
   content?: Record<string, string>;
   videoUrl?: string;
   imageUrl?: string;
+  imageWidth?: string;
+  imageHeight?: string;
   quiz?: QuizStep;
   testId?: string;
 }

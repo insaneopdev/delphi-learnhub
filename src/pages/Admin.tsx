@@ -32,6 +32,8 @@ import {
 } from '@/lib/storage';
 import { toast } from '@/hooks/use-toast';
 import { translateToAllLanguages } from '@/lib/translator';
+import { htmlToMarkdown, markdownToHtml } from '@/lib/markdown';
+import { RichTextEditor } from '@/components/RichTextEditor';
 import { Shield, BookOpen, AlertTriangle, Zap, Heart, Star, Award, Target, Lightbulb, Briefcase, Wrench, HardHat } from 'lucide-react';
 
 export default function Admin() {
@@ -63,7 +65,7 @@ export default function Admin() {
     description: Record<string, string>;
     icon: string;
     imageUrl?: string;
-    steps: { id: string; type: string; title: Record<string, string>; content: Record<string, string>; imageUrl?: string; videoUrl?: string; questions?: any[] }[];
+    steps: { id: string; type: string; title: Record<string, string>; content: Record<string, string>; imageUrl?: string; imageWidth?: string; imageHeight?: string; videoUrl?: string; questions?: any[] }[];
   }>({ title: {}, description: {}, icon: '', imageUrl: '', steps: [] });
 
   const [testForm, setTestForm] = useState<{
@@ -224,7 +226,17 @@ export default function Admin() {
           imageUrl: item.imageUrl ?? '',
           steps: item.steps.map(s => {
             const stepQuestions = s.id ? getQuestionsByModuleAndStep(item.id, s.id) : [];
-            return { id: s.id, type: s.type, title: s.title || {}, content: s.content || {}, imageUrl: s.imageUrl ?? '', videoUrl: s.videoUrl ?? '', questions: stepQuestions };
+            return {
+              id: s.id,
+              type: s.type,
+              title: s.title || {},
+              content: s.content || {},
+              imageUrl: s.imageUrl ?? '',
+              imageWidth: s.imageWidth ?? '',
+              imageHeight: s.imageHeight ?? '',
+              videoUrl: s.videoUrl ?? '',
+              questions: stepQuestions
+            };
           }),
         });
       } else {
@@ -272,6 +284,8 @@ export default function Admin() {
           title: s.title,
           content: s.content && Object.keys(s.content).length > 0 ? s.content : undefined,
           imageUrl: s.imageUrl || undefined,
+          imageWidth: s.imageWidth || undefined,
+          imageHeight: s.imageHeight || undefined,
           videoUrl: s.videoUrl || undefined,
         })),
       };
@@ -716,61 +730,108 @@ export default function Admin() {
                             🌐 Translate
                           </Button>
                         </div>
-                        <div className="grid gap-2 mt-1">
+                        <div className="grid gap-4 mt-1">
                           {languageKeys.map((lk) => (
-                            <Textarea
-                              key={lk}
-                              placeholder={`${languageNames[lk]}`}
-                              value={s.content[lk] ?? ''}
-                              onChange={(e) => {
-                                const steps = [...moduleForm.steps];
-                                steps[idx].content = { ...steps[idx].content, [lk]: (e.target as HTMLTextAreaElement).value };
-                                setModuleForm(prev => ({ ...prev, steps }));
-                              }}
-                            />
+                            <div key={lk}>
+                              <Label className="text-xs text-muted-foreground mb-1">{languageNames[lk]}</Label>
+                              <RichTextEditor
+                                value={htmlToMarkdown(s.content[lk] ?? '')}
+                                onChange={(markdown) => {
+                                  const steps = [...moduleForm.steps];
+                                  steps[idx].content = { ...steps[idx].content, [lk]: markdownToHtml(markdown) };
+                                  setModuleForm(prev => ({ ...prev, steps }));
+                                }}
+                                placeholder={`Enter ${languageNames[lk]} content...`}
+                              />
+                            </div>
                           ))}
                         </div>
                       </div>
                     )}
 
                     <div>
-                      <Label className="text-sm">Step Image URL or Upload (optional)</Label>
-                      <div className="flex gap-2">
-                        <Input
-                          placeholder="https://example.com/step-image.jpg"
-                          value={s.imageUrl || ''}
-                          onChange={(e) => {
-                            const steps = [...moduleForm.steps];
-                            steps[idx].imageUrl = (e.target as HTMLInputElement).value;
-                            setModuleForm(prev => ({ ...prev, steps }));
-                          }}
-                        />
-                        <Button type="button" variant="outline" size="sm" onClick={() => {
-                          const input = document.createElement('input');
-                          input.type = 'file';
-                          input.accept = 'image/*';
-                          input.onchange = async (e) => {
-                            const file = (e.target as HTMLInputElement).files?.[0];
-                            if (file) {
-                              try {
-                                const base64 = await handleImageUpload(file);
+                      <Label className="text-sm">Step Image</Label>
+                      <div className="space-y-3 p-3 border rounded-lg bg-muted/20">
+                        <div>
+                          <Label className="text-xs text-muted-foreground mb-1">Image URL or Upload</Label>
+                          <div className="flex gap-2">
+                            <Input
+                              placeholder="https://example.com/step-image.jpg"
+                              value={s.imageUrl || ''}
+                              onChange={(e) => {
                                 const steps = [...moduleForm.steps];
-                                steps[idx].imageUrl = base64;
+                                steps[idx].imageUrl = (e.target as HTMLInputElement).value;
                                 setModuleForm(prev => ({ ...prev, steps }));
-                                toast({ title: 'Image uploaded' });
-                              } catch (error) {
-                                toast({ title: 'Upload failed', description: (error as Error).message, variant: 'destructive' });
-                              }
-                            }
-                          };
-                          input.click();
-                        }}>Upload</Button>
-                      </div>
-                      {s.imageUrl && (
-                        <div className="mt-2">
-                          <img src={s.imageUrl} alt="Step preview" className="max-w-xs max-h-32 rounded border" onError={(e) => (e.currentTarget.style.display = 'none')} />
+                              }}
+                            />
+                            <Button type="button" variant="outline" size="sm" onClick={() => {
+                              const input = document.createElement('input');
+                              input.type = 'file';
+                              input.accept = 'image/*';
+                              input.onchange = async (e) => {
+                                const file = (e.target as HTMLInputElement).files?.[0];
+                                if (file) {
+                                  try {
+                                    const base64 = await handleImageUpload(file);
+                                    const steps = [...moduleForm.steps];
+                                    steps[idx].imageUrl = base64;
+                                    setModuleForm(prev => ({ ...prev, steps }));
+                                    toast({ title: 'Image uploaded' });
+                                  } catch (error) {
+                                    toast({ title: 'Upload failed', description: (error as Error).message, variant: 'destructive' });
+                                  }
+                                }
+                              };
+                              input.click();
+                            }}>Upload</Button>
+                          </div>
                         </div>
-                      )}
+
+                        <div className="grid grid-cols-2 gap-4">
+                          <div>
+                            <Label className="text-xs text-muted-foreground mb-1">Width (optional)</Label>
+                            <Input
+                              placeholder="e.g. 50% or 300px"
+                              value={s.imageWidth || ''}
+                              onChange={(e) => {
+                                const steps = [...moduleForm.steps];
+                                steps[idx].imageWidth = (e.target as HTMLInputElement).value;
+                                setModuleForm(prev => ({ ...prev, steps }));
+                              }}
+                            />
+                          </div>
+                          <div>
+                            <Label className="text-xs text-muted-foreground mb-1">Height (optional)</Label>
+                            <Input
+                              placeholder="e.g. 200px"
+                              value={s.imageHeight || ''}
+                              onChange={(e) => {
+                                const steps = [...moduleForm.steps];
+                                steps[idx].imageHeight = (e.target as HTMLInputElement).value;
+                                setModuleForm(prev => ({ ...prev, steps }));
+                              }}
+                            />
+                          </div>
+                        </div>
+
+                        {s.imageUrl && (
+                          <div className="mt-2 text-center text-xs text-muted-foreground">
+                            <p className="mb-2">Preview (with applied size)</p>
+                            <div className="border rounded p-2 bg-background inline-block">
+                              <img
+                                src={s.imageUrl}
+                                alt="Step preview"
+                                style={{
+                                  width: s.imageWidth || 'auto',
+                                  height: s.imageHeight || 'auto',
+                                  maxWidth: '100%'
+                                }}
+                                onError={(e) => (e.currentTarget.style.display = 'none')}
+                              />
+                            </div>
+                          </div>
+                        )}
+                      </div>
                     </div>
 
                     {/* Video URL for Video Steps */}

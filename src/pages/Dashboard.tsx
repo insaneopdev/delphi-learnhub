@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Layout } from '@/components/Layout';
-import { getModules, getUserProgress, getAttemptsByUser, getTests } from '@/lib/storage';
-import { BookOpen, ClipboardCheck, BarChart3, ChevronRight, Trophy, Clock, Target } from 'lucide-react';
+import { getModules, getUserProgress, getAttemptsByUser, getTests, getUsers, getAttempts } from '@/lib/storage';
+import { BookOpen, ClipboardCheck, BarChart3, ChevronRight, Trophy, Clock, Target, Users, TrendingUp } from 'lucide-react';
 
 export default function Dashboard() {
   const { user, isAdmin } = useAuth();
@@ -16,7 +16,7 @@ export default function Dashboard() {
   const attempts = user ? getAttemptsByUser(user.id) : [];
   const tests = getTests();
 
-  // Calculate stats
+  // Calculate trainee stats
   const completedModules = userProgress.filter(p => p.completedAt).length;
   const totalModules = modules.length;
   const passedTests = attempts.filter(a => a.passed && a.status === 'completed').length;
@@ -24,6 +24,23 @@ export default function Dashboard() {
   const avgScore = totalAttempts > 0
     ? Math.round(attempts.filter(a => a.status === 'completed').reduce((sum, a) => sum + a.score, 0) / totalAttempts)
     : 0;
+
+  // Calculate admin stats
+  const allUsers = isAdmin ? getUsers() : [];
+  const totalUsers = allUsers.filter(u => u.role !== 'admin').length; // Exclude admins from count
+  const allAttempts = isAdmin ? getAttempts() : [];
+  const completedAttempts = allAttempts.filter(a => a.status === 'completed');
+  const overallAvgScore = completedAttempts.length > 0
+    ? Math.round(completedAttempts.reduce((sum, a) => sum + a.score, 0) / completedAttempts.length)
+    : 0;
+  const totalTests = tests.length;
+
+  // Calculate completion rate for admin (percentage of users who completed at least one module)
+  const usersWithProgress = isAdmin ? allUsers.filter(u => {
+    const progress = getUserProgress(u.id);
+    return progress.some(p => p.completedAt);
+  }).length : 0;
+  const completionRate = totalUsers > 0 ? Math.round((usersWithProgress / totalUsers) * 100) : 0;
 
   // Translatable UI strings
   const uiStrings = {
@@ -33,6 +50,10 @@ export default function Dashboard() {
     testsPassed: { en: 'Tests Passed', ta: 'தேர்வுகள் தேர்ச்சி', hi: 'परीक्षण उत्तीर्ण', te: 'పరీక్షలు ఉత్తీర్ణత' },
     avgScore: { en: 'Avg Score', ta: 'சராசரி மதிப்பெண்', hi: 'औसत स्कोर', te: 'సగటు స్కోర్' },
     attempts: { en: 'Attempts', ta: 'முயற்சிகள்', hi: 'प्रयास', te: 'ప్రయత్నాలు' },
+    totalUsers: { en: 'Total Users', ta: 'மொத்த பயனர்கள்', hi: 'कुल उपयोगकर्ता', te: 'మొత్తం వినియోగదారులు' },
+    activeTests: { en: 'Active Tests', ta: 'செயலில் சோதனைகள்', hi: 'सक्रिय परीक्षण', te: 'క్రియాశీల పరీక్షలు' },
+    completionRate: { en: 'Completion Rate', ta: 'நிறைவு விகிதம்', hi: 'पूर्ण होने की दर', te: 'పూర్తి రేటు' },
+    overallAvg: { en: 'Overall Avg', ta: 'ஒட்டுமொத்த சராசரி', hi: 'समग्र औसत', te: 'మొత్తం సగటు' },
     training: { en: 'Training', ta: 'பயிற்சி', hi: 'प्रशिक्षण', te: 'శిక్షణ' },
     trainingDesc: { en: 'Learn safety protocols through interactive modules', ta: 'ஊடாடும் தொகுதிகள் மூலம் பாதுகாப்பு நெறிமுறைகளை அறியவும்', hi: 'इंटरैक्टिव मॉड्यूल के माध्यम से सुरक्षा प्रोटोकॉल सीखें', te: 'ఇంటరాక్టివ్ మాడ్యూల్స్ ద్వారా భద్రతా ప్రోటోకాల్స్ నేర్చుకోండి' },
     modulesCompleted: { en: 'modules completed', ta: 'தொகுதிகள் நிறைவு', hi: 'मॉड्यूल पूर्ण', te: 'మాడ్యూల్స్ పూర్తయింది' },
@@ -118,34 +139,71 @@ export default function Dashboard() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          <div className="stat-card animate-slide-up">
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <BookOpen className="w-4 h-4" />
-              <span className="text-xs font-medium">{t(uiStrings.modules)}</span>
-            </div>
-            <p className="text-2xl font-bold text-foreground">{completedModules}/{totalModules}</p>
-          </div>
-          <div className="stat-card animate-slide-up animation-delay-100">
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <Trophy className="w-4 h-4" />
-              <span className="text-xs font-medium">{t(uiStrings.testsPassed)}</span>
-            </div>
-            <p className="text-2xl font-bold text-foreground">{passedTests}</p>
-          </div>
-          <div className="stat-card animate-slide-up animation-delay-200">
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <Target className="w-4 h-4" />
-              <span className="text-xs font-medium">{t(uiStrings.avgScore)}</span>
-            </div>
-            <p className="text-2xl font-bold text-foreground">{avgScore}%</p>
-          </div>
-          <div className="stat-card animate-slide-up animation-delay-300">
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <Clock className="w-4 h-4" />
-              <span className="text-xs font-medium">{t(uiStrings.attempts)}</span>
-            </div>
-            <p className="text-2xl font-bold text-foreground">{totalAttempts}</p>
-          </div>
+          {isAdmin ? (
+            <>
+              {/* Admin Stats */}
+              <div className="stat-card animate-slide-up">
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <Users className="w-4 h-4" />
+                  <span className="text-xs font-medium">{t(uiStrings.totalUsers)}</span>
+                </div>
+                <p className="text-2xl font-bold text-foreground">{totalUsers}</p>
+              </div>
+              <div className="stat-card animate-slide-up animation-delay-100">
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <BookOpen className="w-4 h-4" />
+                  <span className="text-xs font-medium">{t(uiStrings.modules)}</span>
+                </div>
+                <p className="text-2xl font-bold text-foreground">{totalModules}</p>
+              </div>
+              <div className="stat-card animate-slide-up animation-delay-200">
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <ClipboardCheck className="w-4 h-4" />
+                  <span className="text-xs font-medium">{t(uiStrings.activeTests)}</span>
+                </div>
+                <p className="text-2xl font-bold text-foreground">{totalTests}</p>
+              </div>
+              <div className="stat-card animate-slide-up animation-delay-300">
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <TrendingUp className="w-4 h-4" />
+                  <span className="text-xs font-medium">{t(uiStrings.completionRate)}</span>
+                </div>
+                <p className="text-2xl font-bold text-foreground">{completionRate}%</p>
+              </div>
+            </>
+          ) : (
+            <>
+              {/* Trainee Stats */}
+              <div className="stat-card animate-slide-up">
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <BookOpen className="w-4 h-4" />
+                  <span className="text-xs font-medium">{t(uiStrings.modules)}</span>
+                </div>
+                <p className="text-2xl font-bold text-foreground">{completedModules}/{totalModules}</p>
+              </div>
+              <div className="stat-card animate-slide-up animation-delay-100">
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <Trophy className="w-4 h-4" />
+                  <span className="text-xs font-medium">{t(uiStrings.testsPassed)}</span>
+                </div>
+                <p className="text-2xl font-bold text-foreground">{passedTests}</p>
+              </div>
+              <div className="stat-card animate-slide-up animation-delay-200">
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <Target className="w-4 h-4" />
+                  <span className="text-xs font-medium">{t(uiStrings.avgScore)}</span>
+                </div>
+                <p className="text-2xl font-bold text-foreground">{avgScore}%</p>
+              </div>
+              <div className="stat-card animate-slide-up animation-delay-300">
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <Clock className="w-4 h-4" />
+                  <span className="text-xs font-medium">{t(uiStrings.attempts)}</span>
+                </div>
+                <p className="text-2xl font-bold text-foreground">{totalAttempts}</p>
+              </div>
+            </>
+          )}
         </div>
 
         {/* Main Menu Cards */}

@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Shield, User, Lock, AlertCircle, Loader2 } from 'lucide-react';
+import delphiLogo from '@/assets/delphi-tvs-logo.png';
 
 export function LoginForm() {
   const { login } = useAuth();
@@ -33,11 +34,13 @@ export function LoginForm() {
         <div>
           {/* Logo and Company Name */}
           <div className="flex items-center gap-4 mb-12">
-            <img
-              src="/assets/images/delphi-tvs-logo.png?v=1.4"
-              alt="Delphi TVS"
-              className="h-16 w-auto bg-white p-2 rounded-lg"
-            />
+            <div className="h-24 w-24 bg-white rounded-lg flex items-center justify-center p-2">
+              <img
+                src={delphiLogo}
+                alt="Delphi TVS Logo"
+                className="h-full w-full object-contain"
+              />
+            </div>
             <div>
               <h1 className="text-3xl font-bold text-white">Delphi TVS</h1>
               <p className="text-white/80 text-sm">Technologies Ltd</p>

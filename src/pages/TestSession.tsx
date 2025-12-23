@@ -26,6 +26,7 @@ import {
   Send,
 } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
+import { isFuzzyMatch } from '@/lib/fuzzyMatch';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -179,8 +180,32 @@ export default function TestSession() {
         const userAnswers = (Array.isArray(userAnswer) ? userAnswer : [userAnswer]).map(String).sort();
         if (JSON.stringify(correctAnswers) === JSON.stringify(userAnswers)) correct++;
       } else if (q.type === 'fill') {
-        if (String(userAnswer).toLowerCase().trim() === String(q.answer).toLowerCase().trim()) {
-          correct++;
+        const userAns = String(userAnswer);
+        const correctAns = String(q.answer);
+
+        // Check if question has custom settings
+        const caseSensitive = (q as any).caseSensitive === true;
+        const allowSpelling = (q as any).allowSpelling !== false; // default to true
+
+        if (caseSensitive && !allowSpelling) {
+          // Exact match required
+          if (userAns.trim() === correctAns.trim()) correct++;
+        } else if (caseSensitive && allowSpelling) {
+          // Case-sensitive but allow spelling errors
+          if (userAns.trim() === correctAns.trim() ||
+            isFuzzyMatch(userAns, correctAns)) {
+            correct++;
+          }
+        } else if (!caseSensitive && !allowSpelling) {
+          // Case-insensitive but exact spelling
+          if (userAns.toLowerCase().trim() === correctAns.toLowerCase().trim()) {
+            correct++;
+          }
+        } else {
+          // Case-insensitive with spelling tolerance (default)
+          if (isFuzzyMatch(userAns, correctAns)) {
+            correct++;
+          }
         }
       }
     });

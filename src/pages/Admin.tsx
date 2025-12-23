@@ -1132,6 +1132,21 @@ export default function Admin() {
                               </div>
                             ) : null}
 
+                            {/* Fill in the blank answer */}
+                            {questionForm.type === 'fill' && (
+                              <div className="mb-3">
+                                <Label className="text-sm">Correct Answer</Label>
+                                <Input
+                                  placeholder="Enter the correct answer (e.g., MSDS, Safety Data Sheet)"
+                                  value={questionForm.correct as string || ''}
+                                  onChange={(e) => setQuestionForm(prev => ({ ...prev, correct: (e.target as HTMLInputElement).value }))}
+                                />
+                                <p className="text-xs text-muted-foreground mt-1">
+                                  Answer matching is case-insensitive and allows minor spelling variations
+                                </p>
+                              </div>
+                            )}
+
                             <div className="flex gap-2 mt-3">
                               <Button size="sm" onClick={() => {
                                 // Save question
@@ -1515,6 +1530,52 @@ export default function Admin() {
                     </div>
                   ) : null}
 
+                  {/* Fill in the blank answer */}
+                  {questionForm.type === 'fill' && (
+                    <div className="mb-3 space-y-3">
+                      <div>
+                        <Label className="text-sm">Correct Answer</Label>
+                        <Input
+                          placeholder="Enter the correct answer (e.g., MSDS, Safety Data Sheet)"
+                          value={questionForm.correct as string || ''}
+                          onChange={(e) => setQuestionForm(prev => ({ ...prev, correct: (e.target as HTMLInputElement).value }))}
+                        />
+                      </div>
+
+                      <div className="flex gap-4">
+                        <label className="flex items-center gap-2 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            className="w-4 h-4"
+                            checked={!(questionForm as any).caseSensitive}
+                            onChange={(e) => setQuestionForm(prev => ({ ...prev, caseSensitive: !e.target.checked } as any))}
+                          />
+                          <span className="text-sm">Case-insensitive matching</span>
+                        </label>
+
+                        <label className="flex items-center gap-2 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            className="w-4 h-4"
+                            checked={(questionForm as any).allowSpelling !== false}
+                            onChange={(e) => setQuestionForm(prev => ({ ...prev, allowSpelling: e.target.checked } as any))}
+                          />
+                          <span className="text-sm">Allow spelling mistakes</span>
+                        </label>
+                      </div>
+
+                      <p className="text-xs text-muted-foreground">
+                        {(questionForm as any).caseSensitive
+                          ? "✓ Exact case required"
+                          : "✓ Case-insensitive"}
+                        {" • "}
+                        {(questionForm as any).allowSpelling !== false
+                          ? "✓ Allows minor typos/spacing"
+                          : "✓ Exact spelling required"}
+                      </p>
+                    </div>
+                  )}
+
                   <div className="flex gap-2 mt-3">
                     <Button size="sm" onClick={() => {
                       // Save question
@@ -1529,6 +1590,8 @@ export default function Admin() {
                         difficulty: questionForm.difficulty,
                         imageUrl: questionForm.imageUrl,
                         optionImages: questionForm.optionImages,
+                        caseSensitive: (questionForm as any).caseSensitive,
+                        allowSpelling: (questionForm as any).allowSpelling,
                       };
                       saveQuestion(q);
                       addAuditLog({ userId: user?.id ?? 'system', action: questionForm.id ? 'update' : 'create', entityType: 'question', entityId: q.id, details: JSON.stringify({ text: q.text }) });

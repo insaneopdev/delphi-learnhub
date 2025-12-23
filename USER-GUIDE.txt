@@ -1,0 +1,95 @@
+DELPHI LEARNHUB - QUICK START GUIDE
+====================================
+
+WEBSITE: https://insaneopdev.github.io/delphi-learnhub/
+
+-----------------------------------
+LOGIN CREDENTIALS
+-----------------------------------
+
+For Employees (Trainees):
+  Username: trainee1
+  Password: pass1
+
+For Admins/Managers:
+  Username: admin
+  Password: admin123
+
+-----------------------------------
+HOW TO USE (FOR EMPLOYEES)
+-----------------------------------
+
+1. LOGIN
+   - Go to the website
+   - Enter your username and password
+   - Click "Sign In"
+
+2. COMPLETE TRAINING
+   - Click "Training" in the top menu
+   - Choose a module
+   - Read through the content
+   - Click "Next" to continue through pages
+
+3. TAKE TESTS
+   - Click "Testing" in the top menu
+   - Select a test (only available after completing the module)
+   - Answer all questions
+   - Click "Submit Test"
+   - View your results and download certificate if you passed
+
+4. CHANGE LANGUAGE
+   - Click the globe icon (top-right)
+   - Choose: English, Tamil, Hindi, or Telugu
+
+-----------------------------------
+HOW TO USE (FOR ADMINS)
+-----------------------------------
+
+1. CREATE TRAINING MODULE
+   - Go to "Admin" → "Modules" tab
+   - Click "Create New Module"
+   - Fill in title, description, and content
+   - Click "Save"
+
+2. CREATE TEST
+   - Go to "Admin" → "Tests" tab
+   - Click "Create New Test"
+   - Add questions and answers
+   - Mark correct answers
+   - Click "Save"
+
+3. REVIEW PROGRESS
+   - Go to "Review" section
+   - View all employee training progress
+   - Check test scores and completion rates
+
+-----------------------------------
+IMPORTANT NOTES
+-----------------------------------
+
+• Your progress is saved in your browser automatically
+• Use the same device/browser to see your progress
+• If you clear browser data, you'll lose your progress
+• Take your time - safety training is important!
+
+-----------------------------------
+TROUBLESHOOTING
+-----------------------------------
+
+Problem: Can't see the website / 404 error
+Solution: Press Ctrl+Shift+R (or Cmd+Shift+R on Mac) to hard refresh
+
+Problem: Lost my progress
+Solution: Make sure you're using the same browser and device
+
+Problem: Page won't load
+Solution: Clear browser cache or try incognito mode
+
+-----------------------------------
+SUPPORT
+-----------------------------------
+
+For help, contact your EHS/Training Department
+
+Version: v1.4
+© 2024 Delphi-TVS Technologies Ltd.

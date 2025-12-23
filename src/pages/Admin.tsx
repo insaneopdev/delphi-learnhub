@@ -964,7 +964,6 @@ export default function Admin() {
                                 <option value="single">Single choice</option>
                                 <option value="multi">Multiple choice</option>
                                 <option value="fill">Fill</option>
-                                <option value="code">Code</option>
                               </select>
                               <select className="input" value={questionForm.difficulty} onChange={(e) => setQuestionForm(prev => ({ ...prev, difficulty: (e.target as HTMLSelectElement).value as any }))}>
                                 <option value="simple">Simple</option>
@@ -1362,7 +1361,6 @@ export default function Admin() {
                       <option value="single">Single choice</option>
                       <option value="multi">Multiple choice</option>
                       <option value="fill">Fill</option>
-                      <option value="code">Code</option>
                     </select>
                     <select className="input" value={questionForm.difficulty} onChange={(e) => setQuestionForm(prev => ({ ...prev, difficulty: (e.target as HTMLSelectElement).value as any }))}>
                       <option value="simple">Simple</option>

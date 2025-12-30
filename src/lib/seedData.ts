@@ -55,21 +55,36 @@ export async function initializeSeedData() {
   saveUser(traineeUser);
 
   const modules: Module[] = [
-    {
-      id: 'ehs-001',
-      title: { en: 'Fundamentals & Safety Culture', ta: 'அடிப்படை & பாதுகாப்பு கலாச்சாரம்', hi: 'बुनियादी बातों और सुरक्षा संस्कृति', te: 'ప్రాథమిక అంశాలు & భద్రతా సంస్కృతి' },
-      description: { en: 'DTVS Policy, Zero Accident Vision', ta: 'DTVS கொள்கை, பூஜ்ஜிய விபத்து பார்வை', hi: 'DTVS नीति, शून्य दुर्घटना दृष्टि', te: 'DTVS విధానం, జీరో ప్రమాద విజన్' },
-      category: 'General Safety',
-      estimatedTime: '15 min',
-      icon: 'Shield',
-      thumbnail: assets.workerOrientation,
-      steps: [
-        {
-          id: 'step-1-1',
-          type: 'content',
-          title: { en: 'DTVS EHS Policy', ta: 'DTVS EHS கொள்கை', hi: 'DTVS EHS नीति', te: 'DTVS EHS విధానం' },
-          content: {
-            en: `
+  {
+    id: "ehs-001",
+    title: {
+      en: "Fundamentals & Safety Culture",
+      ta: "\u0b85\u0b9f\u0bbf\u0baa\u0bcd\u0baa\u0b9f\u0bc8 & \u0baa\u0bbe\u0ba4\u0bc1\u0b95\u0bbe\u0baa\u0bcd\u0baa\u0bc1 \u0b95\u0bb2\u0bbe\u0b9a\u0bcd\u0b9a\u0bbe\u0bb0\u0bae\u0bcd",
+      hi: "\u092c\u0941\u0928\u093f\u092f\u093e\u0926\u0940 \u092c\u093e\u0924\u094b\u0902 \u0914\u0930 \u0938\u0941\u0930\u0915\u094d\u0937\u093e \u0938\u0902\u0938\u094d\u0915\u0943\u0924\u093f",
+      te: "\u0c2a\u0c4d\u0c30\u0c3e\u0c25\u0c2e\u0c3f\u0c15 \u0c05\u0c02\u0c36\u0c3e\u0c32\u0c41 & \u0c2d\u0c26\u0c4d\u0c30\u0c24\u0c3e \u0c38\u0c02\u0c38\u0c4d\u0c15\u0c43\u0c24\u0c3f",
+    },
+    description: {
+      en: "DTVS Policy, Zero Accident Vision",
+      ta: "DTVS \u0b95\u0bca\u0bb3\u0bcd\u0b95\u0bc8, \u0baa\u0bc2\u0b9c\u0bcd\u0b9c\u0bbf\u0baf \u0bb5\u0bbf\u0baa\u0ba4\u0bcd\u0ba4\u0bc1 \u0baa\u0bbe\u0bb0\u0bcd\u0bb5\u0bc8",
+      hi: "DTVS \u0928\u0940\u0924\u093f, \u0936\u0942\u0928\u094d\u092f \u0926\u0941\u0930\u094d\u0918\u091f\u0928\u093e \u0926\u0943\u0937\u094d\u091f\u093f",
+      te: "DTVS \u0c35\u0c3f\u0c27\u0c3e\u0c28\u0c02, \u0c1c\u0c40\u0c30\u0c4b \u0c2a\u0c4d\u0c30\u0c2e\u0c3e\u0c26 \u0c35\u0c3f\u0c1c\u0c28\u0c4d",
+    },
+    category: "General Safety",
+    estimatedTime: "15 min",
+    icon: "Shield",
+    thumbnail: assets.workerOrientation,
+    steps: [
+      {
+        id: "step-1-1",
+        type: "content",
+        title: {
+          en: "DTVS EHS Policy",
+          ta: "DTVS EHS \u0b95\u0bca\u0bb3\u0bcd\u0b95\u0bc8",
+          hi: "DTVS EHS \u0928\u0940\u0924\u093f",
+          te: "DTVS EHS \u0c35\u0c3f\u0c27\u0c3e\u0c28\u0c02",
+        },
+        content: {
+          en: `
               <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-600">
                 <h3 class="text-blue-800 font-bold text-xl mb-4">Our Commitment</h3>
                 <ul class="space-y-3">
@@ -84,7 +99,7 @@ export async function initializeSeedData() {
                 </div>
               </div>
             `,
-            ta: `
+          ta: `
                <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-600">
                  <h3 class="text-blue-800 font-bold text-xl mb-4">எங்கள் உறுதிமொழி</h3>
                  <ul class="space-y-3">
@@ -97,22 +112,27 @@ export async function initializeSeedData() {
                  </div>
                </div>
             `,
-            hi: `
+          hi: `
               <h3>DTVS EHS नीति</h3>
               <p>हम एक सुरक्षित और स्वस्थ कार्यस्थल प्रदान करने के लिए प्रतिबद्ध हैं। हमारा लक्ष्य शून्य दुर्घटना है।</p>
             `,
-            te: `
+          te: `
               <h3>DTVS EHS విధానం</h3>
               <p>మేము సురక్షితమైన మరియు ఆరోగ్యకరమైన కార్యాలయాన్ని అందించడానికి కట్టుబడి ఉన్నాము. మా లక్ష్యం జీరో ప్రమాదం.</p>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-1-2',
-          type: 'content',
-          title: { en: '10 Rules for Workplace Safety', ta: 'பணியிட பாதுகாப்பிற்கான 10 விதிகள்', hi: 'कार्यस्थल सुरक्षा के 10 नियम', te: 'కార్యాలయంలో భద్రత కోసం 10 నియమాలు' },
-          content: {
-            en: `
+      },
+      {
+        id: "step-1-2",
+        type: "content",
+        title: {
+          en: "10 Rules for Workplace Safety",
+          ta: "\u0baa\u0ba3\u0bbf\u0baf\u0bbf\u0b9f \u0baa\u0bbe\u0ba4\u0bc1\u0b95\u0bbe\u0baa\u0bcd\u0baa\u0bbf\u0bb1\u0bcd\u0b95\u0bbe\u0ba9 10 \u0bb5\u0bbf\u0ba4\u0bbf\u0b95\u0bb3\u0bcd",
+          hi: "\u0915\u093e\u0930\u094d\u092f\u0938\u094d\u0925\u0932 \u0938\u0941\u0930\u0915\u094d\u0937\u093e \u0915\u0947 10 \u0928\u093f\u092f\u092e",
+          te: "\u0c15\u0c3e\u0c30\u0c4d\u0c2f\u0c3e\u0c32\u0c2f\u0c02\u0c32\u0c4b \u0c2d\u0c26\u0c4d\u0c30\u0c24 \u0c15\u0c4b\u0c38\u0c02 10 \u0c28\u0c3f\u0c2f\u0c2e\u0c3e\u0c32\u0c41",
+        },
+        content: {
+          en: `
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="bg-white p-4 shadow rounded border-t-4 border-green-500">1. Follow Safety Rules & Instructions</div>
                 <div class="bg-white p-4 shadow rounded border-t-4 border-green-500">2. Work Only After Proper Training</div>
@@ -129,7 +149,7 @@ export async function initializeSeedData() {
                  <img src="${assets.housekeeping5s}" alt="5S Methodology" class="max-w-md w-full rounded shadow-lg" />
               </div>
             `,
-            ta: `
+          ta: `
                <ul class="list-decimal pl-5 space-y-2">
                  <li>பாதுகாப்பு விதிகளைப் பின்பற்றவும்.</li>
                  <li>முறையான பயிற்சிக்குப் பிறகு மட்டுமே வேலை செய்யுங்கள்.</li>
@@ -138,7 +158,7 @@ export async function initializeSeedData() {
                  <li>தூய்மையை பராமரிக்கவும் (5S).</li>
                </ul>
             `,
-            hi: `
+          hi: `
               <ul class="list-decimal pl-5">
                 <li>सुरक्षा नियमों का पालन करें।</li>
                 <li>प्रशिक्षण के बाद ही काम करें।</li>
@@ -150,21 +170,26 @@ export async function initializeSeedData() {
                  <img src="${assets.rightsResponsibilities}" alt="Rights and Responsibilities" class="w-full max-w-lg rounded shadow border border-gray-200" />
               </div>
             `,
-            te: `
+          te: `
               <ul class="list-decimal pl-5">
                 <li>భద్రతా నియమాలను పాటించండి.</li>
                 <li>శిక్షణ తర్వాత పని చేయండి.</li>
               </ul>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-1-3',
-          type: 'content',
-          title: { en: 'Housekeeping & 5S Methodology', ta: 'வீட்டு பராமரிப்பு & 5S முறை', hi: 'साफ-सफाई और 5S पद्धति', te: 'గృహ నిర్వహణ & 5S పద్ధతి' },
-          imageUrl: assets.housekeeping5s,
-          content: {
-            en: `
+      },
+      {
+        id: "step-1-3",
+        type: "content",
+        title: {
+          en: "Housekeeping & 5S Methodology",
+          ta: "\u0bb5\u0bc0\u0b9f\u0bcd\u0b9f\u0bc1 \u0baa\u0bb0\u0bbe\u0bae\u0bb0\u0bbf\u0baa\u0bcd\u0baa\u0bc1 & 5S \u0bae\u0bc1\u0bb1\u0bc8",
+          hi: "\u0938\u093e\u092b-\u0938\u092b\u093e\u0908 \u0914\u0930 5S \u092a\u0926\u094d\u0927\u0924\u093f",
+          te: "\u0c17\u0c43\u0c39 \u0c28\u0c3f\u0c30\u0c4d\u0c35\u0c39\u0c23 & 5S \u0c2a\u0c26\u0c4d\u0c27\u0c24\u0c3f",
+        },
+        imageUrl: assets.housekeeping5s,
+        content: {
+          en: `
               <h3 class="text-lg font-bold text-blue-800 mb-4">Why is Housekeeping Important?</h3>
               <div class="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500 mb-4">
                 <p class="font-semibold">⚠️ Poor housekeeping causes 22% of all industrial accidents!</p>
@@ -212,7 +237,7 @@ export async function initializeSeedData() {
                 </ul>
               </div>
             `,
-            ta: `
+          ta: `
               <h3>வீட்டு பராமரிப்பு ஏன் முக்கியம்?</h3>
               <p>மோசமான வீட்டு பராமரிப்பு அனைத்து தொழில்துறை விபத்துகளில் 22% ஏற்படுத்துகிறது!</p>
               <h4>5S வழிமுறை</h4>
@@ -224,7 +249,7 @@ export async function initializeSeedData() {
                 <li><strong>நிலைத்திரு:</strong> ஒழுக்கத்தை பராமரிக்கவும்</li>
               </ol>
             `,
-            hi: `
+          hi: `
               <h3>साफ-सफाई क्यों महत्वपूर्ण है?</h3>
               <p>खराब साफ-सफाई सभी औद्योगिक दुर्घटनाओं में से 22% का कारण बनती है!</p>
               <h4>5S पद्धति</h4>
@@ -236,7 +261,7 @@ export async function initializeSeedData() {
                 <li><strong>बनाए रखें:</strong> अनुशासन बनाए रखें</li>
               </ol>
             `,
-            te: `
+          te: `
               <h3>గృహ నిర్వహణ ఎందుకు ముఖ్యమైనది?</h3>
               <p>పేలవమైన గృహ నిర్వహణ అన్ని పారిశ్రామిక ప్రమాదాలలో 22% కారణమవుతుంది!</p>
               <h4>5S పద్ధతి</h4>
@@ -247,16 +272,21 @@ export async function initializeSeedData() {
                 <li><strong>ప్రామాణికత:</strong> శుభ్రతను రొటీన్‌గా చేయండి</li>
                 <li><strong>కొనసాగించండి:</strong> క్రమశిక్షణను నిర్వహించండి</li>
               </ol>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-1-4',
-          type: 'content',
-          title: { en: 'Our Safety Policy', ta: 'எங்கள் பாதுகாப்பு கொள்கை', hi: 'हमारी सुरक्षा नीति', te: 'మా భద్రతా విధానం' },
-          imageUrl: assets.workerOrientation,
-          content: {
-            en: `
+      },
+      {
+        id: "step-1-4",
+        type: "content",
+        title: {
+          en: "Our Safety Policy",
+          ta: "\u0b8e\u0b99\u0bcd\u0b95\u0bb3\u0bcd \u0baa\u0bbe\u0ba4\u0bc1\u0b95\u0bbe\u0baa\u0bcd\u0baa\u0bc1 \u0b95\u0bca\u0bb3\u0bcd\u0b95\u0bc8",
+          hi: "\u0939\u092e\u093e\u0930\u0940 \u0938\u0941\u0930\u0915\u094d\u0937\u093e \u0928\u0940\u0924\u093f",
+          te: "\u0c2e\u0c3e \u0c2d\u0c26\u0c4d\u0c30\u0c24\u0c3e \u0c35\u0c3f\u0c27\u0c3e\u0c28\u0c02",
+        },
+        imageUrl: assets.workerOrientation,
+        content: {
+          en: `
               <h3 class="text-lg font-bold text-gray-800 mb-4">Safety First, Always</h3>
               <div class="bg-blue-50 p-6 rounded-lg text-center border border-blue-200 shadow-sm">
                 <p class="text-xl font-serif italic text-blue-900 mb-4">"No production is worth a life."</p>
@@ -271,7 +301,7 @@ export async function initializeSeedData() {
                 </ul>
               </div>
             `,
-            ta: `
+          ta: `
               <h3>எங்கள் பாதுகாப்பு கொள்கை</h3>
               <p>"எந்த உற்பத்தியும் ஒரு உயிருக்கு ஈடாகாது."</p>
               <ul>
@@ -281,7 +311,7 @@ export async function initializeSeedData() {
                 <li>பாதுகாப்பற்ற வேலையை நிறுத்தும் அதிகாரம்.</li>
               </ul>
             `,
-            hi: `
+          hi: `
               <h3>हमारी सुरक्षा नीति</h3>
               <p>"कोई भी उत्पादन जीवन से बढ़कर नहीं है।"</p>
               <ul>
@@ -291,7 +321,7 @@ export async function initializeSeedData() {
                 <li>असली काम को रोकने का अधिकार।</li>
               </ul>
             `,
-            te: `
+          te: `
               <h3>మా భద్రతా విధానం</h3>
               <p>"ఏ ఉత్పత్తి ప్రాణం కంటే ఎక్కువ కాదు."</p>
               <ul>
@@ -300,32 +330,57 @@ export async function initializeSeedData() {
                 <li>అందరికీ శిక్షణ.</li>
                 <li>సురక్షితం కాని పనిని ఆపే అధికారం.</li>
               </ul>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-1-quiz',
-          type: 'quiz',
-          title: { en: 'Module 1 Assessment', ta: 'தொகுதி 1 மதிப்பீடு', hi: 'मॉड्यूल 1 मूल्यांकन', te: 'మాడ్యూల్ 1 అసెస్మెంట్' },
-          content: { en: 'Test your understanding of Safety Culture.', ta: 'பாதுகாப்பு கலாச்சாரம் பற்றிய உங்கள் புரிதலை சோதிக்கவும்.', hi: 'सुरक्षा संस्कृति की अपनी समझ का परीक्षण करें।', te: 'భద్రతా సంస్కృతిపై మీ అవగాహనను పరీక్షించండి.' }
-        }
-      ]
+      },
+      {
+        id: "step-1-quiz",
+        type: "quiz",
+        title: {
+          en: "Module 1 Assessment",
+          ta: "\u0ba4\u0bca\u0b95\u0bc1\u0ba4\u0bbf 1 \u0bae\u0ba4\u0bbf\u0baa\u0bcd\u0baa\u0bc0\u0b9f\u0bc1",
+          hi: "\u092e\u0949\u0921\u094d\u092f\u0942\u0932 1 \u092e\u0942\u0932\u094d\u092f\u093e\u0902\u0915\u0928",
+          te: "\u0c2e\u0c3e\u0c21\u0c4d\u0c2f\u0c42\u0c32\u0c4d 1 \u0c05\u0c38\u0c46\u0c38\u0c4d\u0c2e\u0c46\u0c02\u0c1f\u0c4d",
+        },
+        content: {
+          en: "Test your understanding of Safety Culture.",
+          ta: "\u0baa\u0bbe\u0ba4\u0bc1\u0b95\u0bbe\u0baa\u0bcd\u0baa\u0bc1 \u0b95\u0bb2\u0bbe\u0b9a\u0bcd\u0b9a\u0bbe\u0bb0\u0bae\u0bcd \u0baa\u0bb1\u0bcd\u0bb1\u0bbf\u0baf \u0b89\u0b99\u0bcd\u0b95\u0bb3\u0bcd \u0baa\u0bc1\u0bb0\u0bbf\u0ba4\u0bb2\u0bc8 \u0b9a\u0bcb\u0ba4\u0bbf\u0b95\u0bcd\u0b95\u0bb5\u0bc1\u0bae\u0bcd.",
+          hi: "\u0938\u0941\u0930\u0915\u094d\u0937\u093e \u0938\u0902\u0938\u094d\u0915\u0943\u0924\u093f \u0915\u0940 \u0905\u092a\u0928\u0940 \u0938\u092e\u091d \u0915\u093e \u092a\u0930\u0940\u0915\u094d\u0937\u0923 \u0915\u0930\u0947\u0902\u0964",
+          te: "\u0c2d\u0c26\u0c4d\u0c30\u0c24\u0c3e \u0c38\u0c02\u0c38\u0c4d\u0c15\u0c43\u0c24\u0c3f\u0c2a\u0c48 \u0c2e\u0c40 \u0c05\u0c35\u0c17\u0c3e\u0c39\u0c28\u0c28\u0c41 \u0c2a\u0c30\u0c40\u0c15\u0c4d\u0c37\u0c3f\u0c02\u0c1a\u0c02\u0c21\u0c3f.",
+        },
+      },
+    ],
+  },
+  {
+    id: "ehs-002",
+    title: {
+      en: "Industrial Hazards",
+      ta: "\u0ba4\u0bca\u0bb4\u0bbf\u0bb2\u0bcd\u0ba4\u0bc1\u0bb1\u0bc8 \u0b86\u0baa\u0ba4\u0bcd\u0ba4\u0bc1\u0b95\u0bb3\u0bcd",
+      hi: "\u0914\u0926\u094d\u092f\u094b\u0917\u093f\u0915 \u0916\u0924\u0930\u0947",
+      te: "\u0c2a\u0c3e\u0c30\u0c3f\u0c36\u0c4d\u0c30\u0c3e\u0c2e\u0c3f\u0c15 \u0c2a\u0c4d\u0c30\u0c2e\u0c3e\u0c26\u0c3e\u0c32\u0c41",
     },
-    {
-      id: 'ehs-002',
-      title: { en: 'Industrial Hazards', ta: 'தொழில்துறை ஆபத்துகள்', hi: 'औद्योगिक खतरे', te: 'పారిశ్రామిక ప్రమాదాలు' },
-      description: { en: 'Identify -> Assess -> Control', ta: 'அடையாளம் -> மதிப்பீடு -> கட்டுப்பாடு', hi: 'पहचानें -> आकलन -> नियंत्रण', te: 'గుర్తించండి -> అంచనా -> నియంత్రణ' },
-      category: 'Occupational Health',
-      estimatedTime: '20 min',
-      icon: 'AlertTriangle',
-      thumbnail: assets.hazard,
-      steps: [
-        {
-          id: 'step-2-1',
-          type: 'content',
-          title: { en: 'Home vs Industry Hazards', ta: 'வீடு மற்றும் தொழில்துறை ஆபத்துகள்', hi: 'घर और उद्योग के खतरे', te: 'ఇల్లు vs పరిశ్రమ ప్రమాదాలు' },
-          content: {
-            en: `
+    description: {
+      en: "Identify -> Assess -> Control",
+      ta: "\u0b85\u0b9f\u0bc8\u0baf\u0bbe\u0bb3\u0bae\u0bcd -> \u0bae\u0ba4\u0bbf\u0baa\u0bcd\u0baa\u0bc0\u0b9f\u0bc1 -> \u0b95\u0b9f\u0bcd\u0b9f\u0bc1\u0baa\u0bcd\u0baa\u0bbe\u0b9f\u0bc1",
+      hi: "\u092a\u0939\u091a\u093e\u0928\u0947\u0902 -> \u0906\u0915\u0932\u0928 -> \u0928\u093f\u092f\u0902\u0924\u094d\u0930\u0923",
+      te: "\u0c17\u0c41\u0c30\u0c4d\u0c24\u0c3f\u0c02\u0c1a\u0c02\u0c21\u0c3f -> \u0c05\u0c02\u0c1a\u0c28\u0c3e -> \u0c28\u0c3f\u0c2f\u0c02\u0c24\u0c4d\u0c30\u0c23",
+    },
+    category: "Occupational Health",
+    estimatedTime: "20 min",
+    icon: "AlertTriangle",
+    thumbnail: assets.hazard,
+    steps: [
+      {
+        id: "step-2-1",
+        type: "content",
+        title: {
+          en: "Home vs Industry Hazards",
+          ta: "\u0bb5\u0bc0\u0b9f\u0bc1 \u0bae\u0bb1\u0bcd\u0bb1\u0bc1\u0bae\u0bcd \u0ba4\u0bca\u0bb4\u0bbf\u0bb2\u0bcd\u0ba4\u0bc1\u0bb1\u0bc8 \u0b86\u0baa\u0ba4\u0bcd\u0ba4\u0bc1\u0b95\u0bb3\u0bcd",
+          hi: "\u0918\u0930 \u0914\u0930 \u0909\u0926\u094d\u092f\u094b\u0917 \u0915\u0947 \u0916\u0924\u0930\u0947",
+          te: "\u0c07\u0c32\u0c4d\u0c32\u0c41 vs \u0c2a\u0c30\u0c3f\u0c36\u0c4d\u0c30\u0c2e \u0c2a\u0c4d\u0c30\u0c2e\u0c3e\u0c26\u0c3e\u0c32\u0c41",
+        },
+        content: {
+          en: `
               <table class="w-full border-collapse border border-gray-300">
                 <thead>
                   <tr class="bg-gray-100">
@@ -353,7 +408,7 @@ export async function initializeSeedData() {
                 </tbody>
               </table>
             `,
-            ta: `
+          ta: `
                <table class="w-full border-collapse border border-gray-300">
                  <thead>
                    <tr class="bg-gray-100">
@@ -376,20 +431,25 @@ export async function initializeSeedData() {
                  </tbody>
                </table>
             `,
-            hi: `
+          hi: `
               <p>उद्योग में घर की तुलना में अधिक जोखिम होता है।</p>
             `,
-            te: `
+          te: `
               <p>పరిశ్రమలో ఇంటి కంటే ఎక్కువ ప్రమాదం ఉంది.</p>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-2-2',
-          type: 'content',
-          title: { en: '5 Steps to Safety', ta: 'பாதுகாப்பிற்கான 5 படிகள்', hi: 'सुरक्षा के 5 चरण', te: 'భద్రతకు 5 దశలు' },
-          content: {
-            en: `
+      },
+      {
+        id: "step-2-2",
+        type: "content",
+        title: {
+          en: "5 Steps to Safety",
+          ta: "\u0baa\u0bbe\u0ba4\u0bc1\u0b95\u0bbe\u0baa\u0bcd\u0baa\u0bbf\u0bb1\u0bcd\u0b95\u0bbe\u0ba9 5 \u0baa\u0b9f\u0bbf\u0b95\u0bb3\u0bcd",
+          hi: "\u0938\u0941\u0930\u0915\u094d\u0937\u093e \u0915\u0947 5 \u091a\u0930\u0923",
+          te: "\u0c2d\u0c26\u0c4d\u0c30\u0c24\u0c15\u0c41 5 \u0c26\u0c36\u0c32\u0c41",
+        },
+        content: {
+          en: `
                 <div class="flex flex-col space-y-2">
                 <img src="/assets/generated/hazard_symbols_grid_1766741715124.png" alt="Common Hazard Symbols" class="w-full max-w-sm mx-auto mb-4 rounded shadow-md border border-gray-200" />
                 <div class="bg-blue-100 p-3 rounded flex items-center"><div class="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3 font-bold">1</div>Identify the Hazard</div>
@@ -409,7 +469,7 @@ export async function initializeSeedData() {
                 </div>
               </div>
             `,
-            ta: `
+          ta: `
                <ol class="list-decimal pl-5">
                  <li>ஆபத்தை அடையாளம் காணவும்</li>
                  <li>ஆபத்தை மதிப்பிடவும்</li>
@@ -418,21 +478,26 @@ export async function initializeSeedData() {
                  <li>சிக்கல்களைப் புகாரளிக்கவும்</li>
                </ol>
             `,
-            hi: `
+          hi: `
               <p>खतरे को पहचानें, आकलन करें और नियंत्रित करें।</p>
             `,
-            te: `
+          te: `
               <p>ప్రమాదాన్ని గుర్తించండి, అంచనా వేయండి మరియు నియంత్రించండి.</p>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-2-3',
-          type: 'content',
-          title: { en: 'Slip, Trip & Fall Prevention', ta: 'வழுக்கல், தடுக்கல் & விழுதல் தடுப்பு', hi: 'फिसलना, ठोकर और गिरावट की रोकथाम', te: 'జారడం, తొలగించడం & పతనాన్ని నివారణ' },
-          imageUrl: assets.slipTrip,
-          content: {
-            en: `
+      },
+      {
+        id: "step-2-3",
+        type: "content",
+        title: {
+          en: "Slip, Trip & Fall Prevention",
+          ta: "\u0bb5\u0bb4\u0bc1\u0b95\u0bcd\u0b95\u0bb2\u0bcd, \u0ba4\u0b9f\u0bc1\u0b95\u0bcd\u0b95\u0bb2\u0bcd & \u0bb5\u0bbf\u0bb4\u0bc1\u0ba4\u0bb2\u0bcd \u0ba4\u0b9f\u0bc1\u0baa\u0bcd\u0baa\u0bc1",
+          hi: "\u092b\u093f\u0938\u0932\u0928\u093e, \u0920\u094b\u0915\u0930 \u0914\u0930 \u0917\u093f\u0930\u093e\u0935\u091f \u0915\u0940 \u0930\u094b\u0915\u0925\u093e\u092e",
+          te: "\u0c1c\u0c3e\u0c30\u0c21\u0c02, \u0c24\u0c4a\u0c32\u0c17\u0c3f\u0c02\u0c1a\u0c21\u0c02 & \u0c2a\u0c24\u0c28\u0c3e\u0c28\u0c4d\u0c28\u0c3f \u0c28\u0c3f\u0c35\u0c3e\u0c30\u0c23",
+        },
+        imageUrl: assets.slipTrip,
+        content: {
+          en: `
               <h3 class="text-lg font-bold text-red-800 mb-4">⚠️ #1 Cause of Workplace Injuries</h3>
               <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-600 mb-6">
                 <p class="font-semibold">Slips, trips, and falls account for 30% of all workplace accidents!</p>
@@ -486,7 +551,7 @@ export async function initializeSeedData() {
                 <p class="text-sm mt-1">Don't assume someone else will handle it.</p>
               </div>
             `,
-            ta: `
+          ta: `
               <h3>வழுக்கல், தடுக்கல் & விழுதல் தடுப்பு</h3>
               <p class="font-semibold">வழுக்கல், தடுக்கல் மற்றும் விழுதல் அனைத்து பணியிட விபத்துகளில் 30% ஆகும்!</p>
               <h4>வழுக்கல்</h4>
@@ -501,7 +566,7 @@ export async function initializeSeedData() {
                 <li>பாதைகளை தெளிவாக வைக்கவும்</li>
               </ul>
             `,
-            hi: `
+          hi: `
               <h3>फिसलना, ठोकर और गिरावट की रोकथाम</h3>
               <p class="font-semibold">फिसलना, ठोकर और गिरना सभी कार्यस्थल दुर्घटनाओं का 30% है!</p>
               <h4>फिसलना</h4>
@@ -516,7 +581,7 @@ export async function initializeSeedData() {
                 <li>रास्ते साफ रखें</li>
               </ul>
             `,
-            te: `
+          te: `
               <h3>జారడం, తొలగించడం & పతనాన్ని నివారణ</h3>
               <p class="font-semibold">జారడం, తొలగించడం మరియు పడటం అన్ని కార్యాలయ ప్రమాదాలలో 30%!</p>
               <h4>జారడం</h4>
@@ -530,16 +595,21 @@ export async function initializeSeedData() {
                 <li>యాంటీ-స్లిప్ బూట్లు ధరించండి</li>
                 <li>నడక మార్గాలను క్లియర్‌గా ఉంచండి</li>
               </ul>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-2-4',
-          type: 'content',
-          title: { en: 'Risk Assessment Matrix', ta: 'இடர் மதிப்பீட்டு அணி', hi: 'जोखिम मूल्यांकन मैट्रिक्स', te: 'రిస్క్ అసెస్మెంట్ మ్యాట్రిక్స్' },
-          imageUrl: assets.hazard,
-          content: {
-            en: `
+      },
+      {
+        id: "step-2-4",
+        type: "content",
+        title: {
+          en: "Risk Assessment Matrix",
+          ta: "\u0b87\u0b9f\u0bb0\u0bcd \u0bae\u0ba4\u0bbf\u0baa\u0bcd\u0baa\u0bc0\u0b9f\u0bcd\u0b9f\u0bc1 \u0b85\u0ba3\u0bbf",
+          hi: "\u091c\u094b\u0916\u093f\u092e \u092e\u0942\u0932\u094d\u092f\u093e\u0902\u0915\u0928 \u092e\u0948\u091f\u094d\u0930\u093f\u0915\u094d\u0938",
+          te: "\u0c30\u0c3f\u0c38\u0c4d\u0c15\u0c4d \u0c05\u0c38\u0c46\u0c38\u0c4d\u0c2e\u0c46\u0c02\u0c1f\u0c4d \u0c2e\u0c4d\u0c2f\u0c3e\u0c1f\u0c4d\u0c30\u0c3f\u0c15\u0c4d\u0c38\u0c4d",
+        },
+        imageUrl: assets.hazard,
+        content: {
+          en: `
               <h3 class="text-lg font-bold text-gray-800 mb-4">How to Measure Risk?</h3>
               <p class="mb-4">Risk is calculated as: <strong>Risk = Probability x Severity</strong></p>
 
@@ -586,7 +656,7 @@ export async function initializeSeedData() {
                 </ol>
               </div>
             `,
-            ta: `
+          ta: `
               <h3>இடர் மதிப்பீடு கணிப்பு</h3>
               <p>இடர் = நிகழ்தகவு x தீவிரம்</p>
               <table>
@@ -595,7 +665,7 @@ export async function initializeSeedData() {
                 <tr><td>அதிக (6-9)</td><td>வேலையை நிறுத்தவும்</td></tr>
               </table>
             `,
-            hi: `
+          hi: `
               <h3>जोखिम मूल्यांकन</h3>
               <p>जोखिम = संभावना x गंभीरता</p>
               <table>
@@ -604,7 +674,7 @@ export async function initializeSeedData() {
                 <tr><td>उच्च (6-9)</td><td>काम रोकें</td></tr>
               </table>
             `,
-            te: `
+          te: `
               <h3>రిస్క్ అంచనా</h3>
               <p>రిస్క్ = సంభావ్యత x తీవ్రత</p>
               <table>
@@ -612,50 +682,127 @@ export async function initializeSeedData() {
                 <tr><td>మధ్యస్తం (3-4)</td><td>జాగ్రత్త</td></tr>
                 <tr><td>ఎక్కువ (6-9)</td><td>పని ఆపు</td></tr>
               </table>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-2-interactive',
-          type: 'interactive',
-          title: { en: 'Spot the Hazard - Exercise 1', ta: 'ஆபத்தை கண்டுபிடி - பயிற்சி 1', hi: 'खतरे को पहचानें - अभ्यास 1', te: 'ప్రమాదాన్ని గుర్తించండి - వ్యాయామం 1' },
-          interactive: {
-            image: assets.oilPuddle,
-            hazards: [
-              { id: 'h1', x: 20, y: 75, description: { en: 'Oil Spill - Slip Hazard', ta: 'எண்ணெய் கசிவு - வழுக்கும் ஆபத்து', hi: 'तेल रिसाव', te: 'నూనె చిందటం' } },
-              { id: 'h2', x: 45, y: 30, description: { en: 'Blocked Fire Extinguisher', ta: 'தீயணைப்பான் தடுக்கப்பட்டுள்ளது', hi: 'अवरुद्ध अग्निशामक', te: 'ఫైర్ ఎక్స్‌టింగ్విషర్ బ్లాక్ చేయబడింది' } },
-              { id: 'h3', x: 80, y: 60, description: { en: 'Trailing Cables - Trip Hazard', ta: 'கேபிள்கள் - தடுக்கும் ஆபத்து', hi: 'बिखरे हुए तार', te: 'కేబుల్స్' } }
-            ]
-          },
-          content: { en: 'Click on 3 hazards: Oil Spill, Blocked Extinguisher, Trailing Cable.', ta: '3 ஆபத்துகளைக் கிளிக் செய்யவும்: எண்ணெய் கசிவு, தடுக்கப்பட்ட தீயணைப்பான், கேபிள்.', hi: '3 खतरों पर क्लिक करें: तेल रिसाव, अवरुद्ध अग्निशामक, केबल।', te: '3 ప్రమాదాలపై క్లిక్ చేయండి.' }
+      },
+      {
+        id: "step-2-interactive",
+        type: "interactive",
+        title: {
+          en: "Spot the Hazard - Exercise 1",
+          ta: "\u0b86\u0baa\u0ba4\u0bcd\u0ba4\u0bc8 \u0b95\u0ba3\u0bcd\u0b9f\u0bc1\u0baa\u0bbf\u0b9f\u0bbf - \u0baa\u0baf\u0bbf\u0bb1\u0bcd\u0b9a\u0bbf 1",
+          hi: "\u0916\u0924\u0930\u0947 \u0915\u094b \u092a\u0939\u091a\u093e\u0928\u0947\u0902 - \u0905\u092d\u094d\u092f\u093e\u0938 1",
+          te: "\u0c2a\u0c4d\u0c30\u0c2e\u0c3e\u0c26\u0c3e\u0c28\u0c4d\u0c28\u0c3f \u0c17\u0c41\u0c30\u0c4d\u0c24\u0c3f\u0c02\u0c1a\u0c02\u0c21\u0c3f - \u0c35\u0c4d\u0c2f\u0c3e\u0c2f\u0c3e\u0c2e\u0c02 1",
         },
-        {
-          id: 'step-2-quiz',
-          type: 'interactive',
-          interactive: {
-            image: assets.quizBlockedExit,
-            hazards: [{ id: 'q1', x: 50, y: 50, description: { en: 'Blocked Emergency Exit', ta: 'தடுக்கப்பட்ட அவசர கால வழி', hi: 'अवरुद्ध निकास', te: 'నిరోధించబడిన నిష్క్రమణ' } }]
-          },
-          title: { en: 'Module 2 Assessment', ta: 'தொகுதி 2 மதிப்பீடு', hi: 'मॉड्यूल 2 मूल्यांकन', te: 'మాడ్యూల్ 2 అసెస్మెంట్' },
-          content: { en: 'Identify the hazard in this image.', ta: 'இந்த படத்தில் உள்ள ஆபத்தை அடையாளம் காணவும்.', hi: 'इस छवि में खतरे को पहचानें।', te: 'ఈ చిత్రంలో ప్రమాదాన్ని గుర్తించండి.' }
-        }
-      ]
+        interactive: {
+          image: assets.oilPuddle,
+          hazards: [
+            {
+              id: "h1",
+              x: 20,
+              y: 75,
+              description: {
+                en: "Oil Spill - Slip Hazard",
+                ta: "\u0b8e\u0ba3\u0bcd\u0ba3\u0bc6\u0baf\u0bcd \u0b95\u0b9a\u0bbf\u0bb5\u0bc1 - \u0bb5\u0bb4\u0bc1\u0b95\u0bcd\u0b95\u0bc1\u0bae\u0bcd \u0b86\u0baa\u0ba4\u0bcd\u0ba4\u0bc1",
+                hi: "\u0924\u0947\u0932 \u0930\u093f\u0938\u093e\u0935",
+                te: "\u0c28\u0c42\u0c28\u0c46 \u0c1a\u0c3f\u0c02\u0c26\u0c1f\u0c02",
+              },
+            },
+            {
+              id: "h2",
+              x: 45,
+              y: 30,
+              description: {
+                en: "Blocked Fire Extinguisher",
+                ta: "\u0ba4\u0bc0\u0baf\u0ba3\u0bc8\u0baa\u0bcd\u0baa\u0bbe\u0ba9\u0bcd \u0ba4\u0b9f\u0bc1\u0b95\u0bcd\u0b95\u0baa\u0bcd\u0baa\u0b9f\u0bcd\u0b9f\u0bc1\u0bb3\u0bcd\u0bb3\u0ba4\u0bc1",
+                hi: "\u0905\u0935\u0930\u0941\u0926\u094d\u0927 \u0905\u0917\u094d\u0928\u093f\u0936\u093e\u092e\u0915",
+                te: "\u0c2b\u0c48\u0c30\u0c4d \u0c0e\u0c15\u0c4d\u0c38\u0c4d\u200c\u0c1f\u0c3f\u0c02\u0c17\u0c4d\u0c35\u0c3f\u0c37\u0c30\u0c4d \u0c2c\u0c4d\u0c32\u0c3e\u0c15\u0c4d \u0c1a\u0c47\u0c2f\u0c2c\u0c21\u0c3f\u0c02\u0c26\u0c3f",
+              },
+            },
+            {
+              id: "h3",
+              x: 80,
+              y: 60,
+              description: {
+                en: "Trailing Cables - Trip Hazard",
+                ta: "\u0b95\u0bc7\u0baa\u0bbf\u0bb3\u0bcd\u0b95\u0bb3\u0bcd - \u0ba4\u0b9f\u0bc1\u0b95\u0bcd\u0b95\u0bc1\u0bae\u0bcd \u0b86\u0baa\u0ba4\u0bcd\u0ba4\u0bc1",
+                hi: "\u092c\u093f\u0916\u0930\u0947 \u0939\u0941\u090f \u0924\u093e\u0930",
+                te: "\u0c15\u0c47\u0c2c\u0c41\u0c32\u0c4d\u0c38\u0c4d",
+              },
+            },
+          ],
+        },
+        content: {
+          en: "Click on 3 hazards: Oil Spill, Blocked Extinguisher, Trailing Cable.",
+          ta: "3 \u0b86\u0baa\u0ba4\u0bcd\u0ba4\u0bc1\u0b95\u0bb3\u0bc8\u0b95\u0bcd \u0b95\u0bbf\u0bb3\u0bbf\u0b95\u0bcd \u0b9a\u0bc6\u0baf\u0bcd\u0baf\u0bb5\u0bc1\u0bae\u0bcd: \u0b8e\u0ba3\u0bcd\u0ba3\u0bc6\u0baf\u0bcd \u0b95\u0b9a\u0bbf\u0bb5\u0bc1, \u0ba4\u0b9f\u0bc1\u0b95\u0bcd\u0b95\u0baa\u0bcd\u0baa\u0b9f\u0bcd\u0b9f \u0ba4\u0bc0\u0baf\u0ba3\u0bc8\u0baa\u0bcd\u0baa\u0bbe\u0ba9\u0bcd, \u0b95\u0bc7\u0baa\u0bbf\u0bb3\u0bcd.",
+          hi: "3 \u0916\u0924\u0930\u094b\u0902 \u092a\u0930 \u0915\u094d\u0932\u093f\u0915 \u0915\u0930\u0947\u0902: \u0924\u0947\u0932 \u0930\u093f\u0938\u093e\u0935, \u0905\u0935\u0930\u0941\u0926\u094d\u0927 \u0905\u0917\u094d\u0928\u093f\u0936\u093e\u092e\u0915, \u0915\u0947\u092c\u0932\u0964",
+          te: "3 \u0c2a\u0c4d\u0c30\u0c2e\u0c3e\u0c26\u0c3e\u0c32\u0c2a\u0c48 \u0c15\u0c4d\u0c32\u0c3f\u0c15\u0c4d \u0c1a\u0c47\u0c2f\u0c02\u0c21\u0c3f.",
+        },
+      },
+      {
+        id: "step-2-quiz",
+        type: "interactive",
+        interactive: {
+          image: assets.quizBlockedExit,
+          hazards: [
+            {
+              id: "q1",
+              x: 50,
+              y: 50,
+              description: {
+                en: "Blocked Emergency Exit",
+                ta: "\u0ba4\u0b9f\u0bc1\u0b95\u0bcd\u0b95\u0baa\u0bcd\u0baa\u0b9f\u0bcd\u0b9f \u0b85\u0bb5\u0b9a\u0bb0 \u0b95\u0bbe\u0bb2 \u0bb5\u0bb4\u0bbf",
+                hi: "\u0905\u0935\u0930\u0941\u0926\u094d\u0927 \u0928\u093f\u0915\u093e\u0938",
+                te: "\u0c28\u0c3f\u0c30\u0c4b\u0c27\u0c3f\u0c02\u0c1a\u0c2c\u0c21\u0c3f\u0c28 \u0c28\u0c3f\u0c37\u0c4d\u0c15\u0c4d\u0c30\u0c2e\u0c23",
+              },
+            },
+          ],
+        },
+        title: {
+          en: "Module 2 Assessment",
+          ta: "\u0ba4\u0bca\u0b95\u0bc1\u0ba4\u0bbf 2 \u0bae\u0ba4\u0bbf\u0baa\u0bcd\u0baa\u0bc0\u0b9f\u0bc1",
+          hi: "\u092e\u0949\u0921\u094d\u092f\u0942\u0932 2 \u092e\u0942\u0932\u094d\u092f\u093e\u0902\u0915\u0928",
+          te: "\u0c2e\u0c3e\u0c21\u0c4d\u0c2f\u0c42\u0c32\u0c4d 2 \u0c05\u0c38\u0c46\u0c38\u0c4d\u0c2e\u0c46\u0c02\u0c1f\u0c4d",
+        },
+        content: {
+          en: "Identify the hazard in this image.",
+          ta: "\u0b87\u0ba8\u0bcd\u0ba4 \u0baa\u0b9f\u0ba4\u0bcd\u0ba4\u0bbf\u0bb2\u0bcd \u0b89\u0bb3\u0bcd\u0bb3 \u0b86\u0baa\u0ba4\u0bcd\u0ba4\u0bc8 \u0b85\u0b9f\u0bc8\u0baf\u0bbe\u0bb3\u0bae\u0bcd \u0b95\u0bbe\u0ba3\u0bb5\u0bc1\u0bae\u0bcd.",
+          hi: "\u0907\u0938 \u091b\u0935\u093f \u092e\u0947\u0902 \u0916\u0924\u0930\u0947 \u0915\u094b \u092a\u0939\u091a\u093e\u0928\u0947\u0902\u0964",
+          te: "\u0c08 \u0c1a\u0c3f\u0c24\u0c4d\u0c30\u0c02\u0c32\u0c4b \u0c2a\u0c4d\u0c30\u0c2e\u0c3e\u0c26\u0c3e\u0c28\u0c4d\u0c28\u0c3f \u0c17\u0c41\u0c30\u0c4d\u0c24\u0c3f\u0c02\u0c1a\u0c02\u0c21\u0c3f.",
+        },
+      },
+    ],
+  },
+  {
+    id: "ehs-003",
+    title: {
+      en: "Accidents & Theories",
+      ta: "\u0bb5\u0bbf\u0baa\u0ba4\u0bcd\u0ba4\u0bc1\u0b95\u0bcd\u0b95\u0bb3\u0bcd & \u0b95\u0bcb\u0b9f\u0bcd\u0baa\u0bbe\u0b9f\u0bc1\u0b95\u0bb3\u0bcd",
+      hi: "\u0926\u0941\u0930\u094d\u0918\u091f\u0928\u093e\u090f\u0902 \u0914\u0930 \u0938\u093f\u0926\u094d\u0927\u093e\u0902\u0924",
+      te: "\u0c2a\u0c4d\u0c30\u0c2e\u0c3e\u0c26\u0c3e\u0c32\u0c41 & \u0c38\u0c3f\u0c26\u0c4d\u0c27\u0c3e\u0c02\u0c24\u0c3e\u0c32\u0c41",
     },
-    {
-      id: 'ehs-003',
-      title: { en: 'Accidents & Theories', ta: 'விபத்துக்கள் & கோட்பாடுகள்', hi: 'दुर्घटनाएं और सिद्धांत', te: 'ప్రమాదాలు & సిద్ధాంతాలు' },
-      description: { en: 'Why accidents happen? Heinrich Triangle', ta: 'விபத்துக்கள் ஏன் நடக்கின்றன?', hi: 'दुर्घटनाएं क्यों होती हैं?', te: 'ప్రమాదాలు ఎందుకు జరుగుతాయి?' },
-      category: 'General Safety',
-      estimatedTime: '20 min',
-      icon: 'Activity',
-      thumbnail: assets.slipTrip,
-      steps: [
-        {
-          id: 'step-3-1',
-          type: 'content',
-          title: { en: 'Types of Accidents', ta: 'விபத்து வகைகள்', hi: 'दुर्घटनाओं के प्रकार', te: 'ప్రమాద రకాలు' },
-          content: {
-            en: `
+    description: {
+      en: "Why accidents happen? Heinrich Triangle",
+      ta: "\u0bb5\u0bbf\u0baa\u0ba4\u0bcd\u0ba4\u0bc1\u0b95\u0bcd\u0b95\u0bb3\u0bcd \u0b8f\u0ba9\u0bcd \u0ba8\u0b9f\u0b95\u0bcd\u0b95\u0bbf\u0ba9\u0bcd\u0bb1\u0ba9?",
+      hi: "\u0926\u0941\u0930\u094d\u0918\u091f\u0928\u093e\u090f\u0902 \u0915\u094d\u092f\u094b\u0902 \u0939\u094b\u0924\u0940 \u0939\u0948\u0902?",
+      te: "\u0c2a\u0c4d\u0c30\u0c2e\u0c3e\u0c26\u0c3e\u0c32\u0c41 \u0c0e\u0c02\u0c26\u0c41\u0c15\u0c41 \u0c1c\u0c30\u0c41\u0c17\u0c41\u0c24\u0c3e\u0c2f\u0c3f?",
+    },
+    category: "General Safety",
+    estimatedTime: "20 min",
+    icon: "Activity",
+    thumbnail: assets.slipTrip,
+    steps: [
+      {
+        id: "step-3-1",
+        type: "content",
+        title: {
+          en: "Types of Accidents",
+          ta: "\u0bb5\u0bbf\u0baa\u0ba4\u0bcd\u0ba4\u0bc1 \u0bb5\u0b95\u0bc8\u0b95\u0bb3\u0bcd",
+          hi: "\u0926\u0941\u0930\u094d\u0918\u091f\u0928\u093e\u0913\u0902 \u0915\u0947 \u092a\u094d\u0930\u0915\u093e\u0930",
+          te: "\u0c2a\u0c4d\u0c30\u0c2e\u0c3e\u0c26 \u0c30\u0c15\u0c3e\u0c32\u0c41",
+        },
+        content: {
+          en: `
               <div class="space-y-6">
                 <h3 class="text-xl font-bold text-center mb-6">Industrial Accident Classification</h3>
                 
@@ -703,7 +850,7 @@ export async function initializeSeedData() {
                 </div>
               </div>
             `,
-            ta: `
+          ta: `
                <div class="space-y-6">
                  <h3 class="text-xl font-bold text-center mb-6">விபத்து வகைப்பாடு</h3>
                  
@@ -737,22 +884,27 @@ export async function initializeSeedData() {
                  </div>
                </div>
             `,
-            hi: `
+          hi: `
               <h3>दुर्घटना के प्रकार</h3>
               <p>विस्तृत विवरण नीचे दी गई तालिका में है।</p>
             `,
-            te: `
+          te: `
               <h3>ప్రమాద రకాలు</h3>
               <p>వివరాలు పట్టికలో ఉన్నాయి.</p>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-3-2',
-          type: 'content',
-          title: { en: 'Heinrich Triangle Theory', ta: 'ஹெய்ன்ரிச் முக்கோண கோட்பாடு', hi: 'हेनरिक त्रिकोण सिद्धांत', te: 'హెన్రిచ్ త్రిభుజ సిద్ధాంతం' },
-          content: {
-            en: `
+      },
+      {
+        id: "step-3-2",
+        type: "content",
+        title: {
+          en: "Heinrich Triangle Theory",
+          ta: "\u0bb9\u0bc6\u0baf\u0bcd\u0ba9\u0bcd\u0bb0\u0bbf\u0b9a\u0bcd \u0bae\u0bc1\u0b95\u0bcd\u0b95\u0bcb\u0ba3 \u0b95\u0bcb\u0b9f\u0bcd\u0baa\u0bbe\u0b9f\u0bc1",
+          hi: "\u0939\u0947\u0928\u0930\u093f\u0915 \u0924\u094d\u0930\u093f\u0915\u094b\u0923 \u0938\u093f\u0926\u094d\u0927\u093e\u0902\u0924",
+          te: "\u0c39\u0c46\u0c28\u0c4d\u0c30\u0c3f\u0c1a\u0c4d \u0c24\u0c4d\u0c30\u0c3f\u0c2d\u0c41\u0c1c \u0c38\u0c3f\u0c26\u0c4d\u0c27\u0c3e\u0c02\u0c24\u0c02",
+        },
+        content: {
+          en: `
               <div class="flex flex-col items-center">
                 <h3 class="text-xl font-bold mb-4">Heinrich's Safety Pyramid</h3>
                 
@@ -783,7 +935,7 @@ export async function initializeSeedData() {
                 </div>
               </div>
             `,
-            ta: `
+          ta: `
                <div class="flex flex-col items-center">
                  <h3 class="text-xl font-bold mb-4">ஹெய்ன்ரிச் பிரமிட்</h3>
                  <p class="font-bold text-center mb-4">1 பெரிய விபத்திற்கு 29 சிறிய காயங்களும், 300 சம்பவங்களும் முன்னதாக நடக்கின்றன.</p>
@@ -792,20 +944,25 @@ export async function initializeSeedData() {
                  </div>
                </div>
             `,
-            hi: `
+          hi: `
               <p>हाइनरिक का सिद्धांत: 1 बड़ी दुर्घटना के पीछे 3000 असुरक्षित कार्य होते हैं।</p>
             `,
-            te: `
+          te: `
               <p>హెన్రిచ్ సిద్ధాంతం: 1 పెద్ద ప్రమాదానికి వెనుక 3000 సురక్షితం కాని పనులు ఉంటాయి.</p>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-3-3',
-          type: 'content',
-          title: { en: 'Why Accidents Happen?', ta: 'விபத்துக்கள் ஏன் நடக்கின்றன?', hi: 'दुर्घटनाएं क्यों होती हैं?', te: 'ప్రమాదాలు ఎందుకు జరుగుతాయి?' },
-          content: {
-            en: `
+      },
+      {
+        id: "step-3-3",
+        type: "content",
+        title: {
+          en: "Why Accidents Happen?",
+          ta: "\u0bb5\u0bbf\u0baa\u0ba4\u0bcd\u0ba4\u0bc1\u0b95\u0bcd\u0b95\u0bb3\u0bcd \u0b8f\u0ba9\u0bcd \u0ba8\u0b9f\u0b95\u0bcd\u0b95\u0bbf\u0ba9\u0bcd\u0bb1\u0ba9?",
+          hi: "\u0926\u0941\u0930\u094d\u0918\u091f\u0928\u093e\u090f\u0902 \u0915\u094d\u092f\u094b\u0902 \u0939\u094b\u0924\u0940 \u0939\u0948\u0902?",
+          te: "\u0c2a\u0c4d\u0c30\u0c2e\u0c3e\u0c26\u0c3e\u0c32\u0c41 \u0c0e\u0c02\u0c26\u0c41\u0c15\u0c41 \u0c1c\u0c30\u0c41\u0c17\u0c41\u0c24\u0c3e\u0c2f\u0c3f?",
+        },
+        content: {
+          en: `
               <div class="flex flex-col items-center">
                 <h3>Root Causes of Accidents</h3>
                 <div class="flex flex-col items-center w-full max-w-2xl mt-4">
@@ -834,24 +991,29 @@ export async function initializeSeedData() {
                 </div>
               </div>
             `,
-            ta: `
+          ta: `
                <p>88% விபத்துக்கள் பாதுகாப்பற்ற செயல்களால் (மனித தவறு) ஏற்படுகின்றன.</p>
             `,
-            hi: `
+          hi: `
               <p>88% दुर्घटनाएं मानवीय गलती (असुरक्षित कार्य) के कारण होती हैं।</p>
             `,
-            te: `
+          te: `
               <p>88% ప్రమాదాలు మనిషి తప్పుల వల్ల జరుగుతాయి.</p>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-3-4',
-          type: 'content',
-          title: { en: 'Hierarchy of Controls', ta: 'கட்டுப்பாட்டு படிநிலை', hi: 'नियंत्रण पदानुक्रम', te: 'నియంత్రణల క్రమానుగత రూపం' },
-          imageUrl: assets.hierarchy,
-          content: {
-            en: `
+      },
+      {
+        id: "step-3-4",
+        type: "content",
+        title: {
+          en: "Hierarchy of Controls",
+          ta: "\u0b95\u0b9f\u0bcd\u0b9f\u0bc1\u0baa\u0bcd\u0baa\u0bbe\u0b9f\u0bcd\u0b9f\u0bc1 \u0baa\u0b9f\u0bbf\u0ba8\u0bbf\u0bb2\u0bc8",
+          hi: "\u0928\u093f\u092f\u0902\u0924\u094d\u0930\u0923 \u092a\u0926\u093e\u0928\u0941\u0915\u094d\u0930\u092e",
+          te: "\u0c28\u0c3f\u0c2f\u0c02\u0c24\u0c4d\u0c30\u0c23\u0c32 \u0c15\u0c4d\u0c30\u0c2e\u0c3e\u0c28\u0c41\u0c17\u0c24 \u0c30\u0c42\u0c2a\u0c02",
+        },
+        imageUrl: assets.hierarchy,
+        content: {
+          en: `
               <h3 class="text-lg font-bold text-purple-800 mb-4">The Most Effective Way to Control Hazards</h3>
               <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-600 mb-6">
                 <p class="font-semibold">Not all safety measures are equally effective!</p>
@@ -910,7 +1072,7 @@ export async function initializeSeedData() {
                 <p class="text-sm mt-2">PPE doesn't eliminate the hazard - it only provides protection IF worn correctly. It requires constant vigilance and discipline.</p>
               </div>
             `,
-            ta: `
+          ta: `
               <h3>கட்டுப்பாட்டு படிநிலை</h3>
               <p>அனைத்து பாதுகாப்பு நடவடிக்கைகளும் சமமாக பயனுள்ளதாக இல்லை!</p>
               <ol>
@@ -921,7 +1083,7 @@ export async function initializeSeedData() {
                 <li><strong>PPE:</strong> கடைசி பாதுகாப்பு வரிசை</li>
               </ol>
             `,
-            hi: `
+          hi: `
               <h3>नियंत्रण पदानुक्रम</h3>
               <p>सभी सुरक्षा उपाय समान रूप से प्रभावी नहीं हैं!</p>
               <ol>
@@ -932,7 +1094,7 @@ export async function initializeSeedData() {
                 <li><strong>PPE:</strong> अंतिम रक्षा पंक्ति</li>
               </ol>
             `,
-            te: `
+          te: `
               <h3>నియంత్రణల క్రమానుగత రూపం</h3>
               <p>అన్ని భద్రతా చర్యలు సమానంగా ప్రభావవంతంగా ఉండవు!</p>
               <ol>
@@ -942,32 +1104,57 @@ export async function initializeSeedData() {
                 <li><strong>నిర్వాహక నియంత్రణలు:</strong> శిక్షణ, విధానాలు</li>
                 <li><strong>PPE:</strong> చివరి రక్షణ వరుస</li>
               </ol>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-3-quiz',
-          type: 'quiz',
-          title: { en: 'Module 3 Assessment', ta: 'தொகுதி 3 மதிப்பீடு', hi: 'मॉड्यूल 3 मूल्यांकन', te: 'మాడ్యూల్ 3 అసెస్మెंట్' },
-          content: { en: 'Test your knowledge on Accident Theories.', ta: 'விபத்து கோட்பாடுகள் பற்றிய உங்கள் அறிவை சோதிக்கவும்.', hi: 'दुर्घटना सिद्धांतों पर अपने ज्ञान का परीक्षण करें।', te: 'ప్రమాద సిద్ధాంతాలపై మీ అవగాహనను పరీక్షించండి.' }
-        }
-      ]
+      },
+      {
+        id: "step-3-quiz",
+        type: "quiz",
+        title: {
+          en: "Module 3 Assessment",
+          ta: "\u0ba4\u0bca\u0b95\u0bc1\u0ba4\u0bbf 3 \u0bae\u0ba4\u0bbf\u0baa\u0bcd\u0baa\u0bc0\u0b9f\u0bc1",
+          hi: "\u092e\u0949\u0921\u094d\u092f\u0942\u0932 3 \u092e\u0942\u0932\u094d\u092f\u093e\u0902\u0915\u0928",
+          te: "\u0c2e\u0c3e\u0c21\u0c4d\u0c2f\u0c42\u0c32\u0c4d 3 \u0c05\u0c38\u0c46\u0c38\u0c4d\u0c2e\u0c46\u0902\u0c1f\u0c4d",
+        },
+        content: {
+          en: "Test your knowledge on Accident Theories.",
+          ta: "\u0bb5\u0bbf\u0baa\u0ba4\u0bcd\u0ba4\u0bc1 \u0b95\u0bcb\u0b9f\u0bcd\u0baa\u0bbe\u0b9f\u0bc1\u0b95\u0bb3\u0bcd \u0baa\u0bb1\u0bcd\u0bb1\u0bbf\u0baf \u0b89\u0b99\u0bcd\u0b95\u0bb3\u0bcd \u0b85\u0bb1\u0bbf\u0bb5\u0bc8 \u0b9a\u0bcb\u0ba4\u0bbf\u0b95\u0bcd\u0b95\u0bb5\u0bc1\u0bae\u0bcd.",
+          hi: "\u0926\u0941\u0930\u094d\u0918\u091f\u0928\u093e \u0938\u093f\u0926\u094d\u0927\u093e\u0902\u0924\u094b\u0902 \u092a\u0930 \u0905\u092a\u0928\u0947 \u091c\u094d\u091e\u093e\u0928 \u0915\u093e \u092a\u0930\u0940\u0915\u094d\u0937\u0923 \u0915\u0930\u0947\u0902\u0964",
+          te: "\u0c2a\u0c4d\u0c30\u0c2e\u0c3e\u0c26 \u0c38\u0c3f\u0c26\u0c4d\u0c27\u0c3e\u0c02\u0c24\u0c3e\u0c32\u0c2a\u0c48 \u0c2e\u0c40 \u0c05\u0c35\u0c17\u0c3e\u0c39\u0c28\u0c28\u0c41 \u0c2a\u0c30\u0c40\u0c15\u0c4d\u0c37\u0c3f\u0c02\u0c1a\u0c02\u0c21\u0c3f.",
+        },
+      },
+    ],
+  },
+  {
+    id: "ehs-004",
+    title: {
+      en: "Machine Safety & LOTO",
+      ta: "\u0b87\u0baf\u0ba8\u0bcd\u0ba4\u0bbf\u0bb0 \u0baa\u0bbe\u0ba4\u0bc1\u0b95\u0bbe\u0baa\u0bcd\u0baa\u0bc1 & LOTO",
+      hi: "\u092e\u0936\u0940\u0928 \u0938\u0941\u0930\u0915\u094d\u0937\u093e \u0914\u0930 LOTO",
+      te: "\u0c2f\u0c02\u0c24\u0c4d\u0c30 \u0c2d\u0c26\u0c4d\u0c30\u0c24 & LOTO",
     },
-    {
-      id: 'ehs-004',
-      title: { en: 'Machine Safety & LOTO', ta: 'இயந்திர பாதுகாப்பு & LOTO', hi: 'मशीन सुरक्षा और LOTO', te: 'యంత్ర భద్రత & LOTO' },
-      description: { en: 'Safety Systems, Guarding, Interlocks', ta: 'பாதுகாப்பு அமைப்புகள், காவலாளிகள்', hi: 'सुरक्षा प्रणालियां', te: 'భద్రతా వ్యవస్థలు' },
-      category: 'Technical Safety',
-      estimatedTime: '25 min',
-      icon: 'Lock',
-      thumbnail: assets.machineGuard,
-      steps: [
-        {
-          id: 'step-4-1',
-          type: 'content',
-          title: { en: 'Machine Safety Systems', ta: 'இயந்திர பாதுகாப்பு அமைப்புகள்', hi: 'मशीन सुरक्षा प्रणालियां', te: 'మెషిన్ గార్డింగ్ & భద్రతా వ్యవస్థలు' },
-          content: {
-            en: `
+    description: {
+      en: "Safety Systems, Guarding, Interlocks",
+      ta: "\u0baa\u0bbe\u0ba4\u0bc1\u0b95\u0bbe\u0baa\u0bcd\u0baa\u0bc1 \u0b85\u0bae\u0bc8\u0baa\u0bcd\u0baa\u0bc1\u0b95\u0bb3\u0bcd, \u0b95\u0bbe\u0bb5\u0bb2\u0bbe\u0bb3\u0bbf\u0b95\u0bb3\u0bcd",
+      hi: "\u0938\u0941\u0930\u0915\u094d\u0937\u093e \u092a\u094d\u0930\u0923\u093e\u0932\u093f\u092f\u093e\u0902",
+      te: "\u0c2d\u0c26\u0c4d\u0c30\u0c24\u0c3e \u0c35\u0c4d\u0c2f\u0c35\u0c38\u0c4d\u0c25\u0c32\u0c41",
+    },
+    category: "Technical Safety",
+    estimatedTime: "25 min",
+    icon: "Lock",
+    thumbnail: assets.machineGuard,
+    steps: [
+      {
+        id: "step-4-1",
+        type: "content",
+        title: {
+          en: "Machine Safety Systems",
+          ta: "\u0b87\u0baf\u0ba8\u0bcd\u0ba4\u0bbf\u0bb0 \u0baa\u0bbe\u0ba4\u0bc1\u0b95\u0bbe\u0baa\u0bcd\u0baa\u0bc1 \u0b85\u0bae\u0bc8\u0baa\u0bcd\u0baa\u0bc1\u0b95\u0bb3\u0bcd",
+          hi: "\u092e\u0936\u0940\u0928 \u0938\u0941\u0930\u0915\u094d\u0937\u093e \u092a\u094d\u0930\u0923\u093e\u0932\u093f\u092f\u093e\u0902",
+          te: "\u0c2e\u0c46\u0c37\u0c3f\u0c28\u0c4d \u0c17\u0c3e\u0c30\u0c4d\u0c21\u0c3f\u0c02\u0c17\u0c4d & \u0c2d\u0c26\u0c4d\u0c30\u0c24\u0c3e \u0c35\u0c4d\u0c2f\u0c35\u0c38\u0c4d\u0c25\u0c32\u0c41",
+        },
+        content: {
+          en: `
               <div class="flex justify-center mb-6">
                  <img src="${assets.machineGuard}" alt="Machine Guarding" class="max-w-md w-full rounded shadow-lg" />
               </div>
@@ -989,27 +1176,32 @@ export async function initializeSeedData() {
                 🚫 NEVER Bypass Safety Guards or Sensors!
               </div>
             `,
-            ta: `
+          ta: `
                <ul class="list-disc pl-5">
                  <li><strong>இரட்டை கை பொத்தான்:</strong> இயந்திரத்தை இயக்க இரண்டு கைகளையும் பயன்படுத்த வேண்டும்.</li>
                  <li><strong>பாதுகாப்பு திரைச்சீலைகள்:</strong> ஆபத்தான பகுதிக்குள் நுழைந்தால் இயந்திரத்தை நிறுத்தும்.</li>
                  <li><strong>இன்டர்லாக்:</strong> கதவு திறந்திருந்தால் இயந்திரம் இயங்காது.</li>
                </ul>
             `,
-            hi: `
+          hi: `
               <p>सुरक्षा प्रणालियों (गार्ड, सेंसर) को कभी भी बायपास न करें।</p>
             `,
-            te: `
+          te: `
               <p>భద్రతా గార్డులను ఎప్పుడూ దాటవేయవద్దు.</p>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-4-2',
-          type: 'content',
-          title: { en: 'LOTO (Lock Out Tag Out)', ta: 'LOTO (லாக் அவுட் டேக் அவுட்)', hi: 'LOTO प्रक्रिया', te: 'LOTO విధానం' },
-          content: {
-            en: `
+      },
+      {
+        id: "step-4-2",
+        type: "content",
+        title: {
+          en: "LOTO (Lock Out Tag Out)",
+          ta: "LOTO (\u0bb2\u0bbe\u0b95\u0bcd \u0b85\u0bb5\u0bc1\u0b9f\u0bcd \u0b9f\u0bc7\u0b95\u0bcd \u0b85\u0bb5\u0bc1\u0b9f\u0bcd)",
+          hi: "LOTO \u092a\u094d\u0930\u0915\u094d\u0930\u093f\u092f\u093e",
+          te: "LOTO \u0c35\u0c3f\u0c27\u0c3e\u0c28\u0c02",
+        },
+        content: {
+          en: `
               <div class="bg-gray-50 p-6 rounded-lg">
                 <div class="float-right ml-4 mb-4 w-1/3">
                    <img src="${assets.lotoLock}" alt="LOTO Lock" class="w-full rounded shadow border" />
@@ -1046,24 +1238,29 @@ export async function initializeSeedData() {
                 </div>
               </div>
             `,
-            ta: `
+          ta: `
                <p>பராமரிப்பு பணியின் போது இயந்திரத்தை தனிமைப்படுத்த LOTO பயன்படுத்தப்படுகிறது.</p>
             `,
-            hi: `
+          hi: `
               <p>रखरखाव के दौरान LOTO का उपयोग करें। ऊर्जा स्रोत को बंद करें और लॉक करें।</p>
             `,
-            te: `
+          te: `
               <p>మెయింటేనెన్స్ సమయంలో LOTO ఉపయోగించండి.</p>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-4-4',
-          type: 'content',
-          title: { en: 'Confined Space Safety', ta: 'வரம்பிற்குட்பட்ட இடம் பாதுகாப்பு', hi: 'सीमित स्थान सुरक्षा', te: 'పరిమిత స్థల భద్రత' },
-          imageUrl: assets.confinedSpace,
-          content: {
-            en: `
+      },
+      {
+        id: "step-4-4",
+        type: "content",
+        title: {
+          en: "Confined Space Safety",
+          ta: "\u0bb5\u0bb0\u0bae\u0bcd\u0baa\u0bbf\u0bb1\u0bcd\u0b95\u0bc1\u0b9f\u0bcd\u0baa\u0b9f\u0bcd\u0b9f \u0b87\u0b9f\u0bae\u0bcd \u0baa\u0bbe\u0ba4\u0bc1\u0b95\u0bbe\u0baa\u0bcd\u0baa\u0bc1",
+          hi: "\u0938\u0940\u092e\u093f\u0924 \u0938\u094d\u0925\u093e\u0928 \u0938\u0941\u0930\u0915\u094d\u0937\u093e",
+          te: "\u0c2a\u0c30\u0c3f\u0c2e\u0c3f\u0c24 \u0c38\u0c4d\u0c25\u0c32 \u0c2d\u0c26\u0c4d\u0c30\u0c24",
+        },
+        imageUrl: assets.confinedSpace,
+        content: {
+          en: `
               <h3 class="text-lg font-bold text-indigo-800 mb-4">What is a Confined Space?</h3>
               <div class="bg-indigo-50 p-4 rounded-lg border-l-4 border-indigo-600 mb-6">
                 <p class="font-semibold">A space that is:</p>
@@ -1139,7 +1336,7 @@ export async function initializeSeedData() {
                 <p class="text-sm mt-1">60% of confined space deaths are would-be rescuers</p>
               </div>
             `,
-            ta: `
+          ta: `
               <h3>வரம்பிற்குட்பட்ட இடம் பாதுகாப்பு</h3>
               <p>வரம்பிற்குட்பட்ட இடம் என்றால்:</p>
               <ul>
@@ -1153,7 +1350,7 @@ export async function initializeSeedData() {
                 <li>எரியக்கூடிய வளிமண்டலம்</li>
               </ul>
             `,
-            hi: `
+          hi: `
               <h3>सीमित स्थान सुरक्षा</h3>
               <p>सीमित स्थान क्या है:</p>
               <ul>
@@ -1167,7 +1364,7 @@ export async function initializeSeedData() {
                 <li>ज्वलनशील वातावरण</li>
               </ul>
             `,
-            te: `
+          te: `
               <h3>పరిమిత స్థల భద్రత</h3>
               <p>పరిమిత స్థలం అంటే:</p>
               <ul>
@@ -1180,32 +1377,57 @@ export async function initializeSeedData() {
                 <li>విష వాయువులు</li>
                 <li>మండే వాతావరణం</li>
               </ul>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-4-quiz',
-          type: 'quiz',
-          title: { en: 'Module 4 Assessment', ta: 'தொகுதி 4 மதிப்பீடு', hi: 'मॉड्यूल 4 मूल्यांकन', te: 'మాడ్యూల్ 4 అసెస్మెంట్' },
-          content: { en: 'Test your knowledge on Machine Safety.', ta: 'இயந்திர பாதுகாப்பு பற்றிய உங்கள் அறிவை சோதிக்கவும்.', hi: 'मशीन सुरक्षा पर अपने ज्ञान का परीक्षण करें।', te: 'యంత్ర భద్రతపై మీ అవగాహనను పరీక్షించండి.' }
-        }
-      ]
+      },
+      {
+        id: "step-4-quiz",
+        type: "quiz",
+        title: {
+          en: "Module 4 Assessment",
+          ta: "\u0ba4\u0bca\u0b95\u0bc1\u0ba4\u0bbf 4 \u0bae\u0ba4\u0bbf\u0baa\u0bcd\u0baa\u0bc0\u0b9f\u0bc1",
+          hi: "\u092e\u0949\u0921\u094d\u092f\u0942\u0932 4 \u092e\u0942\u0932\u094d\u092f\u093e\u0902\u0915\u0928",
+          te: "\u0c2e\u0c3e\u0c21\u0c4d\u0c2f\u0c42\u0c32\u0c4d 4 \u0c05\u0c38\u0c46\u0c38\u0c4d\u0c2e\u0c46\u0c02\u0c1f\u0c4d",
+        },
+        content: {
+          en: "Test your knowledge on Machine Safety.",
+          ta: "\u0b87\u0baf\u0ba8\u0bcd\u0ba4\u0bbf\u0bb0 \u0baa\u0bbe\u0ba4\u0bc1\u0b95\u0bbe\u0baa\u0bcd\u0baa\u0bc1 \u0baa\u0bb1\u0bcd\u0bb1\u0bbf\u0baf \u0b89\u0b99\u0bcd\u0b95\u0bb3\u0bcd \u0b85\u0bb1\u0bbf\u0bb5\u0bc8 \u0b9a\u0bcb\u0ba4\u0bbf\u0b95\u0bcd\u0b95\u0bb5\u0bc1\u0bae\u0bcd.",
+          hi: "\u092e\u0936\u0940\u0928 \u0938\u0941\u0930\u0915\u094d\u0937\u093e \u092a\u0930 \u0905\u092a\u0928\u0947 \u091c\u094d\u091e\u093e\u0928 \u0915\u093e \u092a\u0930\u0940\u0915\u094d\u0937\u0923 \u0915\u0930\u0947\u0902\u0964",
+          te: "\u0c2f\u0c02\u0c24\u0c4d\u0c30 \u0c2d\u0c26\u0c4d\u0c30\u0c24\u0c2a\u0c48 \u0c2e\u0c40 \u0c05\u0c35\u0c17\u0c3e\u0c39\u0c28\u0c28\u0c41 \u0c2a\u0c30\u0c40\u0c15\u0c4d\u0c37\u0c3f\u0c02\u0c1a\u0c02\u0c21\u0c3f.",
+        },
+      },
+    ],
+  },
+  {
+    id: "ehs-005",
+    title: {
+      en: "Personal Protective Equipment (PPE)",
+      ta: "\u0ba4\u0ba9\u0bbf\u0baa\u0bcd\u0baa\u0b9f\u0bcd\u0b9f \u0baa\u0bbe\u0ba4\u0bc1\u0b95\u0bbe\u0baa\u0bcd\u0baa\u0bc1 \u0b89\u0baa\u0b95\u0bb0\u0ba3\u0b99\u0bcd\u0b95\u0bb3\u0bcd (PPE)",
+      hi: "\u0935\u094d\u092f\u0915\u094d\u0924\u093f\u0917\u0924 \u0938\u0941\u0930\u0915\u094d\u0937\u093e \u0909\u092a\u0915\u0930\u0923 (PPE)",
+      te: "\u0c35\u0c4d\u0c2f\u0c15\u0c4d\u0c24\u0c3f\u0c17\u0c24 \u0c30\u0c15\u0c4d\u0c37\u0c23 \u0c2a\u0c30\u0c3f\u0c15\u0c30\u0c3e\u0c32\u0c41 (PPE)",
     },
-    {
-      id: 'ehs-005',
-      title: { en: 'Personal Protective Equipment (PPE)', ta: 'தனிப்பட்ட பாதுகாப்பு உபகரணங்கள் (PPE)', hi: 'व्यक्तिगत सुरक्षा उपकरण (PPE)', te: 'వ్యక్తిగత రక్షణ పరికరాలు (PPE)' },
-      description: { en: 'Head to Toe Protection standards', ta: 'தலை முதல் கால் வரை பாதுகாப்பு', hi: 'सिर से पैर तक सुरक्षा', te: 'తలపై నుండి కాలి వరకు రక్షణ' },
-      category: 'Personal Safety',
-      estimatedTime: '15 min',
-      icon: 'HardHat',
-      thumbnail: assets.ppeEquipment,
-      steps: [
-        {
-          id: 'step-5-1',
-          type: 'content',
-          title: { en: 'Head to Toe Protection', ta: 'தலை முதல் கால் வரை பாதுகாப்பு', hi: 'सिर से पैर तक सुरक्षा', te: 'తలపై నుండి కాలి వరకు రక్షణ' },
-          content: {
-            en: `
+    description: {
+      en: "Head to Toe Protection standards",
+      ta: "\u0ba4\u0bb2\u0bc8 \u0bae\u0bc1\u0ba4\u0bb2\u0bcd \u0b95\u0bbe\u0bb2\u0bcd \u0bb5\u0bb0\u0bc8 \u0baa\u0bbe\u0ba4\u0bc1\u0b95\u0bbe\u0baa\u0bcd\u0baa\u0bc1",
+      hi: "\u0938\u093f\u0930 \u0938\u0947 \u092a\u0948\u0930 \u0924\u0915 \u0938\u0941\u0930\u0915\u094d\u0937\u093e",
+      te: "\u0c24\u0c32\u0c2a\u0c48 \u0c28\u0c41\u0c02\u0c21\u0c3f \u0c15\u0c3e\u0c32\u0c3f \u0c35\u0c30\u0c15\u0c41 \u0c30\u0c15\u0c4d\u0c37\u0c23",
+    },
+    category: "Personal Safety",
+    estimatedTime: "15 min",
+    icon: "HardHat",
+    thumbnail: assets.ppeEquipment,
+    steps: [
+      {
+        id: "step-5-1",
+        type: "content",
+        title: {
+          en: "Head to Toe Protection",
+          ta: "\u0ba4\u0bb2\u0bc8 \u0bae\u0bc1\u0ba4\u0bb2\u0bcd \u0b95\u0bbe\u0bb2\u0bcd \u0bb5\u0bb0\u0bc8 \u0baa\u0bbe\u0ba4\u0bc1\u0b95\u0bbe\u0baa\u0bcd\u0baa\u0bc1",
+          hi: "\u0938\u093f\u0930 \u0938\u0947 \u092a\u0948\u0930 \u0924\u0915 \u0938\u0941\u0930\u0915\u094d\u0937\u093e",
+          te: "\u0c24\u0c32\u0c2a\u0c48 \u0c28\u0c41\u0c02\u0c21\u0c3f \u0c15\u0c3e\u0c32\u0c3f \u0c35\u0c30\u0c15\u0c41 \u0c30\u0c15\u0c4d\u0c37\u0c23",
+        },
+        content: {
+          en: `
                 <img src="${assets.ppeGear}" alt="PPE Gear" class="col-span-2 md:col-span-3 w-48 mx-auto mb-4" />
                 <div class="bg-yellow-50 p-4 rounded text-center border-b-4 border-yellow-400">
                   <div class="text-4xl mb-2"><img src="${assets.ppeEquipment}" class="h-16 mx-auto object-contain" /></div>
@@ -1239,28 +1461,33 @@ export async function initializeSeedData() {
                 </div>
               </div>
             `,
-            ta: `
+          ta: `
                <ul class="list-disc pl-5">
                  <li><strong>தலை:</strong> தலைக்கவசம் (Helmet) - விழும் பொருட்களிலிருந்து காக்கிறது.</li>
                  <li><strong>கண்கள்:</strong> கண்ணாடி (Goggles) - தூசி மற்றும் தீப்பொறிகளிலிருந்து காக்கிறது.</li>
                  <li><strong>கால்:</strong> பாதுகாப்பு காலணிகள் (Safety Shoes).</li>
                </ul>
             `,
-            hi: `
+          hi: `
               <p>हेलमेट, गॉगल्स, दस्ताने, और सुरक्षा जूते हमेशा पहनें।</p>
             `,
-            te: `
+          te: `
               <p>హెల్మెట్, కళ్లద్దాలు, చేతి తొడుగులు మరియు భద్రతా బూట్లు ధరించండి.</p>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-5-2',
-          type: 'content',
-          title: { en: 'Choosing the Right PPE', ta: 'சரியான PPE தேர்வு', hi: 'सही PPE का चुनाव', te: 'సరైన PPE ఎంపిక' },
-          imageUrl: assets.ppeEquipment,
-          content: {
-            en: `
+      },
+      {
+        id: "step-5-2",
+        type: "content",
+        title: {
+          en: "Choosing the Right PPE",
+          ta: "\u0b9a\u0bb0\u0bbf\u0baf\u0bbe\u0ba9 PPE \u0ba4\u0bc7\u0bb0\u0bcd\u0bb5\u0bc1",
+          hi: "\u0938\u0939\u0940 PPE \u0915\u093e \u091a\u0941\u0928\u093e\u0935",
+          te: "\u0c38\u0c30\u0c48\u0c28 PPE \u0c0e\u0c02\u0c2a\u0c3f\u0c15",
+        },
+        imageUrl: assets.ppeEquipment,
+        content: {
+          en: `
               <h3 class="text-lg font-bold text-gray-800 mb-4">Match Control to Hazard</h3>
               <p class="mb-4">PPE must be selected based on the specific hazard. One size does not fit all.</p>
 
@@ -1295,33 +1522,38 @@ export async function initializeSeedData() {
                 <strong>Key Rule:</strong> PPE is the LAST resort. Try to eliminate the hazard first!
               </div>
             `,
-            ta: `
+          ta: `
               <h3>சரியான PPE தேர்வு</h3>
               <p>இரசாயன கையாளுதல்: இரசாயன கண்ணாடிகள், நைட்ரைல் கையுறைகள்.</p>
               <p>வெல்டிங்: முக கவசம், தோல் கையுறைகள்.</p>
               <p>பளு தூக்குதல்: பாதுகாப்பு காலணிகள்.</p>
             `,
-            hi: `
+          hi: `
               <h3>सही PPE का चुनाव</h3>
               <p>रसायन: केमिकल गॉगल्स, नाइट्राइल दस्ताने।</p>
               <p>वेल्डिंग: फेस शील्ड, चमड़े के दस्ताने।</p>
               <p>भारी सामान: सुरक्षा जूते।</p>
             `,
-            te: `
+          te: `
               <h3>సరైన PPE ఎంపిక</h3>
               <p>రసాయనాలు: కెమికల్ గాగుల్స్, నైట్రైల్ గ్లోవ్స్.</p>
               <p>వెల్డింగ్: ఫేస్ షీల్డ్, లెదర్ గ్లోవ్స్.</p>
               <p>బరువైన పనులు: సేఫ్టీ షూస్.</p>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-5-3',
-          type: 'content',
-          title: { en: 'PPE Inspection & Maintenance', ta: 'PPE ஆய்வு & பராமரிப்பு', hi: 'PPE निरीक्षण और रखरखाव', te: 'PPE తనిఖీ & నిర్వహణ' },
-          imageUrl: assets.ppeGear,
-          content: {
-            en: `
+      },
+      {
+        id: "step-5-3",
+        type: "content",
+        title: {
+          en: "PPE Inspection & Maintenance",
+          ta: "PPE \u0b86\u0baf\u0bcd\u0bb5\u0bc1 & \u0baa\u0bb0\u0bbe\u0bae\u0bb0\u0bbf\u0baa\u0bcd\u0baa\u0bc1",
+          hi: "PPE \u0928\u093f\u0930\u0940\u0915\u094d\u0937\u0923 \u0914\u0930 \u0930\u0916\u0930\u0916\u093e\u0935",
+          te: "PPE \u0c24\u0c28\u0c3f\u0c16\u0c40 & \u0c28\u0c3f\u0c30\u0c4d\u0c35\u0c39\u0c23",
+        },
+        imageUrl: assets.ppeGear,
+        content: {
+          en: `
               <h3 class="text-lg font-bold text-purple-800 mb-4">PPE is Your Last Line of Defense</h3>
               <div class="bg-purple-50 p-4 rounded-lg border-l-4 border-purple-600 mb-6">
                 <p class="font-semibold">PPE only works if it's in good condition!</p>
@@ -1400,7 +1632,7 @@ export async function initializeSeedData() {
                 <p class="text-sm mt-2">If your PPE is damaged, report it immediately and get a replacement. Never compromise on safety!</p>
               </div>
             `,
-            ta: `
+          ta: `
               <h3>PPE ஆய்வு & பராமரிப்பு</h3>
               <p>PPE நல்ல நிலையில் இருந்தால் மட்டுமே வேலை செய்யும்!</p>
               <h4>ஆய்வு செய்யுங்கள்:</h4>
@@ -1411,7 +1643,7 @@ export async function initializeSeedData() {
                 <li>செய்தி: ஸ்டீல் டோ கேப் உள்ளது</li>
               </ul>
             `,
-            hi: `
+          hi: `
               <h3>PPE निरीक्षण और रखरखाव</h3>
               <p>PPE तभी काम करता है जब यह अच्छी स्थिति में हो!</p>
               <h4>निरीक्षण करें:</h4>
@@ -1422,7 +1654,7 @@ export async function initializeSeedData() {
                 <li>जूते: स्टील टो कैप बरकरार</li>
               </ul>
             `,
-            te: `
+          te: `
               <h3>PPE తనిఖీ & నిర్వహణ</h3>
               <p>PPE మంచి స్థితిలో ఉన్నప్పుడు మాత్రమే పని చేస్తుంది!</p>
               <h4>తనిఖీ చేయండి:</h4>
@@ -1432,16 +1664,21 @@ export async function initializeSeedData() {
                 <li>చేతి తొడుగులు: రంధ్రాలు లేవు</li>
                 <li>బూట్లు: స్టీల్ టో క్యాప్ సరిగ్గా ఉంది</li>
               </ul>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-5-4',
-          type: 'content',
-          title: { en: 'Donning & Doffing PPE', ta: 'PPE அணிதல் & கழற்றுதல்', hi: 'PPE पहनना और उतारना', te: 'PPE ధరించడం & తీసివేయడం' },
-          imageUrl: assets.ppeEquipment,
-          content: {
-            en: `
+      },
+      {
+        id: "step-5-4",
+        type: "content",
+        title: {
+          en: "Donning & Doffing PPE",
+          ta: "PPE \u0b85\u0ba3\u0bbf\u0ba4\u0bb2\u0bcd & \u0b95\u0bb4\u0bb1\u0bcd\u0bb1\u0bc1\u0ba4\u0bb2\u0bcd",
+          hi: "PPE \u092a\u0939\u0928\u0928\u093e \u0914\u0930 \u0909\u0924\u093e\u0930\u0928\u093e",
+          te: "PPE \u0c27\u0c30\u0c3f\u0c02\u0c1a\u0c21\u0c02 & \u0c24\u0c40\u0c38\u0c3f\u0c35\u0c47\u0c2f\u0c21\u0c02",
+        },
+        imageUrl: assets.ppeEquipment,
+        content: {
+          en: `
           <h3 class="text-lg font-bold text-gray-800 mb-4">How to Wear PPE Correctly</h3>
           
           <div class="grid md:grid-cols-2 gap-6 mb-6">
@@ -1475,48 +1712,69 @@ export async function initializeSeedData() {
             <p class="text-sm">Removing PPE incorrectly can contaminate you with the very hazards you protected yourself against!</p>
           </div>
         `,
-            ta: `
+          ta: `
           <h3>PPE அணிதல் & கழற்றுதல்</h3>
           <p><strong>அணிதல்:</strong> சேதத்தை சரிபார்க்கவும், சரியாக பொருத்தவும்.</p>
           <p><strong>கழற்றுதல்:</strong> கையுறைகளை முதலில் கழற்றவும், கைகளை கழுவவும், பாதுகாப்பாக சேமிக்கவும்.</p>
         `,
-            hi: `
+          hi: `
           <h3>PPE पहनना और उतारना</h3>
           <p>पहनना: क्षति की जाँच करें, फिट सुनिश्चित करें।</p>
           <p>उचारना: पहले दस्ताने उतारें, हाथ धोएं, सही जगह रखें।</p>
         `,
-            te: `
+          te: `
           <h3>PPE ధరించడం & తీసివేయడం</h3>
           <p>ధరించడం: డ్యామేజ్ ఉందా అని చూడండి, సరిగ్గా వేసుకోండి.</p>
           <p>తీసివేయడం: ముందుగా గ్లోవ్స్ తీయండి, చేతులు శుభ్రం చేసుకోండి.</p>
-        `
-          }
+        `,
         },
-        {
-          id: 'step-5-quiz',
-          type: 'quiz',
-          title: { en: 'Module 5 Assessment', ta: 'தொகுதி 5 மதிப்பீடு', hi: 'मॉड्यूल 5 मूल्यांकन', te: 'మాడ్యూల్ 5 అసెస్మెంట్' },
-          content: { en: 'Check your PPE knowledge.', ta: 'உங்கள் PPE அறிவை சரிபார்க்கவும்.', hi: 'अपने PPE ज्ञान की जाँच करें।', te: 'మీ PPE పరిజ్ఞానాన్ని తనిఖీ చేయండి.' }
-        }
-      ]
+      },
+      {
+        id: "step-5-quiz",
+        type: "quiz",
+        title: {
+          en: "Module 5 Assessment",
+          ta: "\u0ba4\u0bca\u0b95\u0bc1\u0ba4\u0bbf 5 \u0bae\u0ba4\u0bbf\u0baa\u0bcd\u0baa\u0bc0\u0b9f\u0bc1",
+          hi: "\u092e\u0949\u0921\u094d\u092f\u0942\u0932 5 \u092e\u0942\u0932\u094d\u092f\u093e\u0902\u0915\u0928",
+          te: "\u0c2e\u0c3e\u0c21\u0c4d\u0c2f\u0c42\u0c32\u0c4d 5 \u0c05\u0c38\u0c46\u0c38\u0c4d\u0c2e\u0c46\u0c02\u0c1f\u0c4d",
+        },
+        content: {
+          en: "Check your PPE knowledge.",
+          ta: "\u0b89\u0b99\u0bcd\u0b95\u0bb3\u0bcd PPE \u0b85\u0bb1\u0bbf\u0bb5\u0bc8 \u0b9a\u0bb0\u0bbf\u0baa\u0bbe\u0bb0\u0bcd\u0b95\u0bcd\u0b95\u0bb5\u0bc1\u0bae\u0bcd.",
+          hi: "\u0905\u092a\u0928\u0947 PPE \u091c\u094d\u091e\u093e\u0928 \u0915\u0940 \u091c\u093e\u0901\u091a \u0915\u0930\u0947\u0902\u0964",
+          te: "\u0c2e\u0c40 PPE \u0c2a\u0c30\u0c3f\u0c1c\u0c4d\u0c1e\u0c3e\u0c28\u0c3e\u0c28\u0c4d\u0c28\u0c3f \u0c24\u0c28\u0c3f\u0c16\u0c40 \u0c1a\u0c47\u0c2f\u0c02\u0c21\u0c3f.",
+        },
+      },
+    ],
+  },
+  {
+    id: "ehs-006",
+    title: {
+      en: "Fire Safety",
+      ta: "\u0ba4\u0bc0 \u0baa\u0bbe\u0ba4\u0bc1\u0b95\u0bbe\u0baa\u0bcd\u0baa\u0bc1",
+      hi: "\u0905\u0917\u094d\u0928\u093f \u0938\u0941\u0930\u0915\u094d\u0937\u093e",
+      te: "\u0c05\u0c17\u0c4d\u0c28\u0c3f \u0c2d\u0c26\u0c4d\u0c30\u0c24",
     },
-    {
-      id: 'ehs-006',
-      title: { en: 'Fire Safety', ta: 'தீ பாதுகாப்பு', hi: 'अग्नि सुरक्षा', te: 'అగ్ని భద్రత' },
-      description: { en: 'Fire Triangle, Extinguishers, Evacuation', ta: 'தீ முக்கோணம், அணைப்பான்கள்', hi: 'फायर ट्राइएंगल, एक्सटिंग्विशर', te: 'ఫైర్ ట్రయాంగిల్, ఎక్స్‌టింగ్విషర్స్' },
-      category: 'Emergency Response',
-      estimatedTime: '20 min',
-      icon: 'Flame',
-      thumbnail: assets.fireExtinguisher,
-      steps: [
-        {
-          id: 'step-6-1',
-          type: 'content',
-          title: { en: 'The Fire Triangle', ta: 'தீ முக்கோணம்', hi: 'फायर ट्राइएंगल', te: 'ఫైర్ ట్రయాంగిల్' },
-          imageUrl: assets.fireTriangle,
-          imageHeight: '300px',
-          content: {
-            en: `
+    description: {
+      en: "Fire Triangle, Extinguishers, Evacuation",
+      ta: "\u0ba4\u0bc0 \u0bae\u0bc1\u0b95\u0bcd\u0b95\u0bcb\u0ba3\u0bae\u0bcd, \u0b85\u0ba3\u0bc8\u0baa\u0bcd\u0baa\u0bbe\u0ba9\u0bcd\u0b95\u0bb3\u0bcd",
+      hi: "\u092b\u093e\u092f\u0930 \u091f\u094d\u0930\u093e\u0907\u090f\u0902\u0917\u0932, \u090f\u0915\u094d\u0938\u091f\u093f\u0902\u0917\u094d\u0935\u093f\u0936\u0930",
+      te: "\u0c2b\u0c48\u0c30\u0c4d \u0c1f\u0c4d\u0c30\u0c2f\u0c3e\u0c02\u0c17\u0c3f\u0c32\u0c4d, \u0c0e\u0c15\u0c4d\u0c38\u0c4d\u200c\u0c1f\u0c3f\u0c02\u0c17\u0c4d\u0c35\u0c3f\u0c37\u0c30\u0c4d\u0c38\u0c4d",
+    },
+    icon: "Flame",
+    imageUrl: "",
+    steps: [
+      {
+        id: "step-6-1",
+        type: "content",
+        title: {
+          en: "The Fire Triangle",
+          ta: "\u0ba4\u0bc0 \u0bae\u0bc1\u0b95\u0bcd\u0b95\u0bcb\u0ba3\u0bae\u0bcd",
+          hi: "\u092b\u093e\u092f\u0930 \u091f\u094d\u0930\u093e\u0907\u090f\u0902\u0917\u0932",
+          te: "\u0c2b\u0c48\u0c30\u0c4d \u0c1f\u0c4d\u0c30\u0c2f\u0c3e\u0c02\u0c17\u0c3f\u0c32\u0c4d",
+        },
+        content: {
+          en: `
                 <div class="mt-4 p-4 bg-orange-50 border-l-4 border-orange-500 rounded">
                   <h4 class="font-bold text-orange-900">How to Stop Fire?</h4>
                   <p>Remove <strong>ONE</strong> element to extinguish the fire.</p>
@@ -1527,23 +1785,51 @@ export async function initializeSeedData() {
                   </ul>
                 </div>
             `,
-            ta: `
-               <p>தீ எரிய 3 விஷயங்கள் தேவை: வெப்பம், எரிபொருள், ஆக்சிஜன்.</p>
+          ta: `<div class="mt-4 p-4 bg-orange-50 border-l-4 border-orange-500 rounded">
+                  <h4 class="font-bold text-orange-900">தீயை நிறுத்துவது எப்படி?</h4>
+                  <p>வாய்க் குழல்<strong>ஒன்று</strong>element to extinguish the fire.</p>
+                  <ul class="list-disc pl-5 mt-2 text-sm">
+                    <li><strong>கூலிங்:</strong>வெப்பத்தை நீக்குகிறது (தண்ணீர்)</li>
+                    <li><strong>Starvation:</strong>Removes Fuel (Closing Valvue)</li>
+                    <li><strong>Smothering:</strong>ஆக்ஸிஜனை நீக்குகிறது (நுரை/CO2)</li>
+                  </ul>
+                </div>
             `,
-            hi: `
-              <p>आग के लिए 3 चीजों की आवश्यकता होती है: गर्मी, ईंधन, ऑक्सीजन।</p>
+          hi: `<div class="mt-4 p-4 bg-orange-50 border-l-4 border-orange-500 rounded">
+                  <h4 class="font-bold text-orange-900">रिकॉर्डिंग कैसे रोकें?</h4>
+                  <p>निकालें<strong>कभी ....</strong>element to extinguish the fire.</p>
+                  <ul class="list-disc pl-5 mt-2 text-sm">
+                    <li><strong>अभिशीतितीकरण</strong>Removes Heat (Water)</li>
+                    <li><strong>Starvation:</strong>ईंधन निकालता है (क्लोजिंग वैल्यू)</li>
+                    <li><strong>Smothering:</strong>ऑक्सीजन निकालता है (फोम/CO2)</li>
+                  </ul>
+                </div>
             `,
-            te: `
-              <p>మంటలకు 3 విషయాలు అవసరం: వేడి, ఇంధనం, ఆక్సిజన్.</p>
-            `
-          }
+          te: `<div class="mt-4 p-4 bg-orange-50 border-l-4 border-orange-500 rounded">
+                  <h4 class="font-bold text-orange-900">How to Stop Fire?</h4>
+                  <p> తొలగించు<strong>ONE</strong>అగ్నిని ఆర్పివేయు మూలకము.</p>
+                  <ul class="list-disc pl-5 mt-2 text-sm">
+                    <li><strong>శీతలీకరణ:</strong>వేడిని తొలగిస్తుంది (నీరు)</li>
+                    <li><strong>అన్నపాన రాహిత్యం</strong>ఇంధనాన్ని తొలగిస్తుంది (ముగింపు వాల్వ్యూ)</li>
+                    <li><strong>ఉక్కిరిబిక్కిరి చేయడం:</strong>ఆక్సిజన్ను తొలగిస్తుంది (ఫోమ్/CO2)</li>
+                  </ul>
+                </div>
+            `,
         },
-        {
-          id: 'step-6-2',
-          type: 'content',
-          title: { en: 'Fire Extinguisher Types', ta: 'தீயணைப்பானின் வகைகள்', hi: 'अग्निशामक के प्रकार', te: 'అగ్నిమాపక రకాలు' },
-          content: {
-            en: `
+        imageUrl: assets.fireTriangle,
+        imageHeight: "300px",
+      },
+      {
+        id: "step-6-2",
+        type: "content",
+        title: {
+          en: "Fire Extinguisher Types",
+          ta: "\u0ba4\u0bc0\u0baf\u0ba3\u0bc8\u0baa\u0bcd\u0baa\u0bbe\u0ba9\u0bbf\u0ba9\u0bcd \u0bb5\u0b95\u0bc8\u0b95\u0bb3\u0bcd",
+          hi: "\u0905\u0917\u094d\u0928\u093f\u0936\u093e\u092e\u0915 \u0915\u0947 \u092a\u094d\u0930\u0915\u093e\u0930",
+          te: "\u0c05\u0c17\u0c4d\u0c28\u0c3f\u0c2e\u0c3e\u0c2a\u0c15 \u0c30\u0c15\u0c3e\u0c32\u0c41",
+        },
+        content: {
+          en: `
               <div class="mb-6 flex justify-center">
                 <img src="${assets.fireExtinguisher}" alt="Fire Extinguisher Chart" class="max-w-full rounded shadow-md" />
               </div>
@@ -1592,26 +1878,163 @@ export async function initializeSeedData() {
                  <p class="mt-2 text-sm">Follow the green exit signs. Gather at the designated Assembly Point.</p>
               </div>
             `,
-            ta: `
-               <p>வகுப்பு A: மரம், காகிதம் (நீர் பயன்படுத்தவும்).</p>
-               <p>வகுப்பு B: எண்ணெய் (நுரை பயன்படுத்தவும்).</p>
-               <p>மின்சாரம்: CO2 பயன்படுத்தவும்.</p>
+          ta: `<div class="mb-6 flex justify-center">
+                <img src="${assets.fireExtinguisher}" alt="Fire Extinguisher Chart" class="max-w-full rounded shadow-md">
+              </div>
+              <table class="w-full border-collapse border border-slate-300 text-sm">
+                <thead>
+                  <tr class="bg-slate-100">
+                    <th class="border p-2">à®®à¯à®² à®¤à®¿à®à¯à®à®®à¯</th>
+                    <th class="border p-2">Fire Type</th>
+                    <th class="border p-2">தீயணைப்பான்</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border p-2 font-bold text-red-600">Class A</td>
+                    <td class="border p-2">சாலிட்ஸ் (மரம், காகிதம்)</td>
+                    <td class="border p-2">Water, ABC Powder</td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2 font-bold text-yellow-600">வகை B</td>
+                    <td class="border p-2">திரவங்கள் (எண்ணெய், பெட்ரோல்)</td>
+                    <td class="border p-2">நுரை, CO2, DCP</td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2 font-bold text-blue-600">வகை C</td>
+                    <td class="border p-2">வாயுக்கள் (எல்பிஜி, ஹைட்ரஜன்)</td>
+                    <td class="border p-2">DCP (உலர் தூள்)</td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2 font-bold text-gray-600">மின்சாரம்</td>
+                    <td class="border p-2">மின் உபகரணங்கள்</td>
+                    <td class="border p-2">CO2 (கார்பன் டை ஆக்சைடு)</td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2 font-bold text-orange-600">வகுப்பு D</td>
+                    <td class="border p-2">உலோகங்கள் (மெக்னீசியம்)</td>
+                    <td class="border p-2">சிறப்பு தூள்</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="mt-6 bg-green-50 p-4 rounded border-l-4 border-green-500">
+                 <h4 class="font-bold text-green-900 mb-2">வெளியேற்றத் திட்டம்</h4>
+                 <div class="flex flex-col md:flex-row gap-4">
+                    <img src="${assets.fireEvacuation}" alt="Evacuation Route" class="w-1/2 rounded shadow">
+                    <img src="${assets.assemblyPoint}" alt="Assembly Point" class="w-1/2 rounded shadow">
+                 </div>
+                 <p class="mt-2 text-sm">பச்சை வெளியேறும் அறிகுறிகளைப் பின்பற்றவும். நியமிக்கப்பட்ட அசெம்பிளி பாயிண்டில் கூடிவருங்கள்.</p>
+              </div>
             `,
-            hi: `
-              <p>बिजली की आग पर पानी का प्रयोग न करें। CO2 का प्रयोग करें।</p>
+          hi: `<div class="mb-6 flex justify-center">
+                <img src="${assets.fireExtinguisher}" alt="Fire Extinguisher Chart" class="max-w-full rounded shadow-md">
+              </div>
+              <table class="w-full border-collapse border border-slate-300 text-sm">
+                <thead>
+                  <tr class="bg-slate-100">
+                    <th class="border p-2">डॉन बॉस्को हाई स्कूल</th>
+                    <th class="border p-2">आग का प्रकार</th>
+                    <th class="border p-2">Extinguisher</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border p-2 font-bold text-red-600">वर्ग A</td>
+                    <td class="border p-2">ठोस पदार्थ (लकड़ी, कागज)</td>
+                    <td class="border p-2">Water, ABC Powder</td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2 font-bold text-yellow-600">Class B</td>
+                    <td class="border p-2">तरल पदार्थ (तेल, पेट्रोल)</td>
+                    <td class="border p-2">Foam, CO2, DCP</td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2 font-bold text-blue-600">श्रेणी C</td>
+                    <td class="border p-2">गैसें (एलपीजी, हाइड्रोजन)</td>
+                    <td class="border p-2">डीसीपी (सूखा पाउडर)</td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2 font-bold text-gray-600">इलेक्ट्रिक</td>
+                    <td class="border p-2">विद्युत उपकरण</td>
+                    <td class="border p-2">CO2 (कार्बन डाइऑक्साइड)</td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2 font-bold text-orange-600">श्रेणी D</td>
+                    <td class="border p-2">धातु (मैग्नीशियम)</td>
+                    <td class="border p-2">विशेष पाउडर</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="mt-6 bg-green-50 p-4 rounded border-l-4 border-green-500">
+                 <h4 class="font-bold text-green-900 mb-2">निकासी</h4>
+                 <div class="flex flex-col md:flex-row gap-4">
+                    <img src="${assets.fireEvacuation}" alt="Evacuation Route" class="w-1/2 rounded shadow">
+                    <img src="${assets.assemblyPoint}" alt="Assembly Point" class="w-1/2 rounded shadow">
+                 </div>
+                 <p class="mt-2 text-sm">हरे रंग के निकास संकेतों का पालन करें। निर्धारित असेंबली पॉइंट पर इकट्ठा हों।</p>
+              </div>
             `,
-            te: `
-              <p>విద్యుత్ మంటలపై నీటిని ఉపయోగించవద్దు. CO2 ఉపయోగించండి.</p>
-            `
-          }
+          te: `<div class="mb-6 flex justify-center">
+                <img src="${assets.fireExtinguisher}" alt="Fire Extinguisher Chart" class="max-w-full rounded shadow-md">
+              </div>
+              <table class="w-full border-collapse border border-slate-300 text-sm">
+                <thead>
+                  <tr class="bg-slate-100">
+                    <th class="border p-2">క్లాసు</th>
+                    <th class="border p-2">అగ్ని రకం</th>
+                    <th class="border p-2">Extinguisher</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border p-2 font-bold text-red-600">Class A</td>
+                    <td class="border p-2">ఘనపదార్థాలు (కలప, కాగితం)</td>
+                    <td class="border p-2">నీరు, ABC పౌడర్</td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2 font-bold text-yellow-600">క్లాస్ "బి":</td>
+                    <td class="border p-2">Liquids (Oil, Petrol)</td>
+                    <td class="border p-2">ఫోమ్, CO2, DCP</td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2 font-bold text-blue-600">&lt;g id="1"&gt;క్లాస్ "సి"&lt;/g&gt; :</td>
+                    <td class="border p-2">వాయువులు (LPG, హైడ్రోజన్)</td>
+                    <td class="border p-2">DCP (డ్రై పౌడర్)</td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2 font-bold text-gray-600">విద్యుత్తు</td>
+                    <td class="border p-2">ఎలక్ట్రికల్ ఎక్విప్ ‌ మెంట్</td>
+                    <td class="border p-2">CO2 (కార్బన్ డయాక్సైడ్)</td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2 font-bold text-orange-600">క్లాస్ D</td>
+                    <td class="border p-2">లోహాలు (మెగ్నీషియం)</td>
+                    <td class="border p-2">ప్రత్యేక పౌడర్</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="mt-6 bg-green-50 p-4 rounded border-l-4 border-green-500">
+                 <h4 class="font-bold text-green-900 mb-2">తరలింపు ప్రణాళిక</h4>
+                 <div class="flex flex-col md:flex-row gap-4">
+                    <img src="${assets.fireEvacuation}" alt="Evacuation Route" class="w-1/2 rounded shadow">
+                    <img src="${assets.assemblyPoint}" alt="Assembly Point" class="w-1/2 rounded shadow">
+                 </div>
+                 <p class="mt-2 text-sm">ఆకుపచ్చ నిష్క్రమణ సంకేతాలను అనుసరించండి. నియమించబడిన అసెంబ్లీ పాయింట్ వద్ద సమావేశమవ్వండి.</p>
+              </div>
+            `,
         },
-        {
-          id: 'step-6-4',
-          type: 'content',
-          title: { en: 'Emergency Response Procedures', ta: 'அவசர நடவடிக்கை நடைமுறைகள்', hi: 'आपातकालीन प्रतिक्रिया प्रक्रियाएं', te: 'అత్యవసర ప్రతిస్పందన విధానాలు' },
-          imageUrl: assets.emergency,
-          content: {
-            en: `
+      },
+      {
+        id: "step-6-4",
+        type: "content",
+        title: {
+          en: "Emergency Response Procedures",
+          ta: "\u0b85\u0bb5\u0b9a\u0bb0 \u0ba8\u0b9f\u0bb5\u0b9f\u0bbf\u0b95\u0bcd\u0b95\u0bc8 \u0ba8\u0b9f\u0bc8\u0bae\u0bc1\u0bb1\u0bc8\u0b95\u0bb3\u0bcd",
+          hi: "\u0906\u092a\u093e\u0924\u0915\u093e\u0932\u0940\u0928 \u092a\u094d\u0930\u0924\u093f\u0915\u094d\u0930\u093f\u092f\u093e \u092a\u094d\u0930\u0915\u094d\u0930\u093f\u092f\u093e\u090f\u0902",
+          te: "\u0c05\u0c24\u0c4d\u0c2f\u0c35\u0c38\u0c30 \u0c2a\u0c4d\u0c30\u0c24\u0c3f\u0c38\u0c4d\u0c2a\u0c02\u0c26\u0c28 \u0c35\u0c3f\u0c27\u0c3e\u0c28\u0c3e\u0c32\u0c41",
+        },
+        content: {
+          en: `
               <h3 class="text-lg font-bold text-red-800 mb-4">🚨 What to Do in an Emergency</h3>
               <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-600 mb-6">
                 <p class="font-semibold">Every second counts in an emergency!</p>
@@ -1685,79 +2108,276 @@ export async function initializeSeedData() {
                 <p class="text-sm mt-2">Know your workplace assembly point! Look for the green "Assembly Point" sign.</p>
               </div>
             `,
-            ta: `
-              <h3>அவசர நடவடிக்கை நடைமுறைகள்</h3>
-              <h4>அவசர எண்கள்</h4>
-              <ul>
-                <li>108 - ஆம்புலன்ஸ்</li>
-                <li>101 - தீயணைப்பு</li>
-                <li>100 - போலீஸ்</li>
+          ta: `<h3 class="text-lg font-bold text-red-800 mb-4">அவசரகாலத்தில் 🚨 என்ன செய்ய வேண்டும்</h3>
+              <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-600 mb-6">
+                <p class="font-semibold">ஒவ்வொரு தமிழ் எண்ணிக்கைகள் வாக்களிக்கும்போது</p>
+                <p class="text-sm mt-2">அவசரநிலை ஏற்படுவதற்கு முன்பு நடைமுறைகளை அறிந்து கொள்ளுங்கள்.</p>
+              </div>
+
+              <h4 class="font-bold mb-3">அவசர எண்கள் - இந்தியா</h4>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+                <div class="bg-red-100 p-3 rounded text-center border-2 border-red-600">
+                  <div class="text-2xl font-bold text-red-700">108</div>
+                  <p class="text-xs font-semibold">நோயாளர் ஊர்தி</p>
+                </div>
+                <div class="bg-orange-100 p-3 rounded text-center border-2 border-orange-600">
+                  <div class="text-2xl font-bold text-orange-700">101</div>
+                  <p class="text-xs font-semibold">நெருப்பு</p>
+                </div>
+                <div class="bg-blue-100 p-3 rounded text-center border-2 border-blue-600">
+                  <div class="text-2xl font-bold text-blue-700">100</div>
+                  <p class="text-xs font-semibold">Police</p>
+                </div>
+                <div class="bg-green-100 p-3 rounded text-center border-2 border-green-600">
+                  <div class="text-2xl font-bold text-green-700">112</div>
+                  <p class="text-xs font-semibold">All Services</p>
+                </div>
+              </div>
+
+              <h4 class="font-bold text-lg mb-3">அவசரகால செயல் திட்டம் - இனம்</h4>
+              <div class="space-y-3 mb-6">
+                <div class="flex items-start bg-red-100 p-4 rounded border-l-4 border-red-600">
+                  <div class="bg-red-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold mr-3 flex-shrink-0">Comment</div>
+                  <div>
+                    <strong class="text-red-900">RESCUE</strong>
+                    <p class="text-sm mt-1">உடனடி ஆபத்தில் உள்ள எவரையும் அகற்றவும் (அவ்வாறு செய்வது பாதுகாப்பானது என்றால்)</p>
+                  </div>
+                </div>
+                <div class="flex items-start bg-orange-100 p-4 rounded border-l-4 border-orange-600">
+                  <div class="bg-orange-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold mr-3 flex-shrink-0">A</div>
+                  <div>
+                    <strong class="text-orange-900">ALARM</strong>
+                    <p class="text-sm mt-1">அலாரத்தை செயல்படுத்துங்கள் மற்றும் அவசர சேவைகளை அழைக்கவும்</p>
+                  </div>
+                </div>
+                <div class="flex items-start bg-yellow-100 p-4 rounded border-l-4 border-yellow-600">
+                  <div class="bg-yellow-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold mr-3 flex-shrink-0">C.</div>
+                  <div>
+                    <strong class="text-yellow-900">வரையறு</strong>
+                    <p class="text-sm mt-1">Close doors to contain fire/smoke (for fire emergencies)</p>
+                  </div>
+                </div>
+                <div class="flex items-start bg-green-100 p-4 rounded border-l-4 border-green-600">
+                  <div class="bg-green-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold mr-3 flex-shrink-0">E</div>
+                  <div>
+                    <strong class="text-green-900">வெளியேற்றவும்/அணைக்கவும்</strong>
+                    <p class="text-sm mt-1">தீ சிறியதாக இருந்தால் அப்பகுதியை காலி செய்யவும் அல்லது அணைக்கவும்</p>
+                  </div>
+                </div>
+              </div>
+
+              <h4 class="font-bold mb-3">வெளியேற்ற வழிகாட்டுதல்கள்:</h4>
+              <ul class="space-y-2 mb-6">
+                <li class="flex items-start"><span class="text-green-600 mr-2 font-bold">✓</span>அமைதியாக இருங்கள், பீதியடைய வேண்டாம்</li>
+                <li class="flex items-start"><span class="text-green-600 mr-2 font-bold">✓</span>அருகிலுள்ள பாதுகாப்பான வெளியேறுவதற்கு வெளியேறும் அறிகுறிகளைப் பின்பற்றவும்</li>
+                <li class="flex items-start"><span class="text-green-600 mr-2 font-bold">✓</span>à®à®¿à®±à¯ à®à¯à®±à®¿à®ªà¯à®ªà¯ à®¨à¯à®à¯à®à¯à®</li>
+                <li class="flex items-start"><span class="text-green-600 mr-2 font-bold">✓</span>பாதுகாப்பாக இருந்தால் வயதானவர்கள்/ஊனமுற்றவர்களுக்கு உதவுங்கள்</li>
+                <li class="flex items-start"><span class="text-green-600 mr-2 font-bold">✓</span>நியமிக்கப்பட்ட அசெம்பிளி பாயிண்டில் சந்தித்தல்</li>
+                <li class="flex items-start"><span class="text-green-600 mr-2 font-bold">✓</span>அதிகாரிகளால் அகற்றப்படும் வரை மீண்டும் நுழைய வேண்டாம்</li>
               </ul>
-              <h4>RACE</h4>
-              <ul>
-                <li><strong>R - மீட்பு:</strong> உடனடி ஆபத்தில் உள்ளவர்களை நீக்கவும்</li>
-                <li><strong>A - எச்சரிக்கை:</strong> அலாரத்தை செயல்படுத்தவும்</li>
-                <li><strong>C - கட்டுப்படுத்தல்:</strong> கதவுகளை மூடவும்</li>
-                <li><strong>E - வெளியேற்றம்:</strong> பகுதியை காலி செய்யவும்</li>
-              </ul>
+
+              <div class="bg-blue-100 border-2 border-blue-600 p-4 rounded">
+                <p class="font-bold text-blue-900">📍 அசெம்பிளி பாயிண்ட் இடம்:</p>
+                <p class="text-sm mt-2">உங்கள் பணியிட அசெம்பிளி புள்ளியை அறிந்து கொள்ளுங்கள்! பச்சை நிற &amp;quot;அசெம்பிளி புள்ளி&amp;quot; அடையாளத்தைத் தேடுங்கள்.</p>
+              </div>
             `,
-            hi: `
-              <h3>आपातकालीन प्रतिक्रिया प्रक्रियाएं</h3>
-              <h4>आपातकालीन नंबर</h4>
-              <ul>
-                <li>108 - एम्बुलेंस</li>
-                <li>101 - फायर</li>
-                <li>100 - पुलिस</li>
+          hi: `<h3 class="text-lg font-bold text-red-800 mb-4">आपातकाल में क्या करें?</h3>
+              <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-600 mb-6">
+                <p class="font-semibold">आपातकाल में हर सेकंड मायने रखता है!</p>
+                <p class="text-sm mt-2">Know the procedures BEFORE an emergency happens.</p>
+              </div>
+
+              <h4 class="font-bold mb-3">आपातकालीन नंबर - भारत</h4>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+                <div class="bg-red-100 p-3 rounded text-center border-2 border-red-600">
+                  <div class="text-2xl font-bold text-red-700">108</div>
+                  <p class="text-xs font-semibold">Ambulance</p>
+                </div>
+                <div class="bg-orange-100 p-3 rounded text-center border-2 border-orange-600">
+                  <div class="text-2xl font-bold text-orange-700">101</div>
+                  <p class="text-xs font-semibold">आग</p>
+                </div>
+                <div class="bg-blue-100 p-3 rounded text-center border-2 border-blue-600">
+                  <div class="text-2xl font-bold text-blue-700">100</div>
+                  <p class="text-xs font-semibold">पुलिस</p>
+                </div>
+                <div class="bg-green-100 p-3 rounded text-center border-2 border-green-600">
+                  <div class="text-2xl font-bold text-green-700">112</div>
+                  <p class="text-xs font-semibold">सेवाएँ</p>
+                </div>
+              </div>
+
+              <h4 class="font-bold text-lg mb-3">Emergency Action Plan - RACE</h4>
+              <div class="space-y-3 mb-6">
+                <div class="flex items-start bg-red-100 p-4 rounded border-l-4 border-red-600">
+                  <div class="bg-red-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold mr-3 flex-shrink-0">R</div>
+                  <div>
+                    <strong class="text-red-900">बचाव</strong>
+                    <p class="text-sm mt-1">तत्काल खतरे में किसी को भी हटा दें (यदि ऐसा करना सुरक्षित है)</p>
+                  </div>
+                </div>
+                <div class="flex items-start bg-orange-100 p-4 rounded border-l-4 border-orange-600">
+                  <div class="bg-orange-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold mr-3 flex-shrink-0">A</div>
+                  <div>
+                    <strong class="text-orange-900">अलार्म</strong>
+                    <p class="text-sm mt-1">Activate the alarm and call emergency services</p>
+                  </div>
+                </div>
+                <div class="flex items-start bg-yellow-100 p-4 rounded border-l-4 border-yellow-600">
+                  <div class="bg-yellow-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold mr-3 flex-shrink-0">C</div>
+                  <div>
+                    <strong class="text-yellow-900">सीमित करें</strong>
+                    <p class="text-sm mt-1">आग/धुएं को रोकने के लिए दरवाजे बंद करें (आग की आपात स्थिति के लिए)</p>
+                  </div>
+                </div>
+                <div class="flex items-start bg-green-100 p-4 rounded border-l-4 border-green-600">
+                  <div class="bg-green-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold mr-3 flex-shrink-0">E</div>
+                  <div>
+                    <strong class="text-green-900">खाली करना/बुझाना</strong>
+                    <p class="text-sm mt-1">अगर आग छोटी है और आपको प्रशिक्षित किया गया है, तो उस जगह को खाली करें या बुझाएँ</p>
+                  </div>
+                </div>
+              </div>
+
+              <h4 class="font-bold mb-3">निकासी के दिशानिर्देश:</h4>
+              <ul class="space-y-2 mb-6">
+                <li class="flex items-start"><span class="text-green-600 mr-2 font-bold">✓</span>शांत रहें और घबराएँ नहीं</li>
+                <li class="flex items-start"><span class="text-green-600 mr-2 font-bold">✓</span>नज़दीकी सुरक्षित निकास के लिए निकास संकेतों का पालन करें</li>
+                <li class="flex items-start"><span class="text-green-600 mr-2 font-bold">✓</span>लिफ्ट का उपयोग न करें</li>
+                <li class="flex items-start"><span class="text-green-600 mr-2 font-bold">✓</span>सुरक्षित होने पर बुजुर्गों/दिव्यांगों की मदद</li>
+                <li class="flex items-start"><span class="text-green-600 mr-2 font-bold">✓</span>निर्धारित असेंबली पॉइंट पर मिलें</li>
+                <li class="flex items-start"><span class="text-green-600 mr-2 font-bold">✓</span>अधिकारियों द्वारा मंजूरी दिए जाने तक फिर से प्रवेश न करें</li>
               </ul>
-              <h4>RACE</h4>
-              <ul>
-                <li><strong>R - बचाव:</strong> तत्काल खतरे में किसी को हटाएं</li>
-                <li><strong>A - अलार्म:</strong> अलार्म सक्रिय करें</li>
-                <li><strong>C - सीमित करें:</strong> दरवाजे बंद करें</li>
-                <li><strong>E - निकासी:</strong> क्षेत्र खाली करें</li>
-              </ul>
+
+              <div class="bg-blue-100 border-2 border-blue-600 p-4 rounded">
+                <p class="font-bold text-blue-900">📍 असेंबली प्वाइंट लोकेशन:</p>
+                <p class="text-sm mt-2">अपने कार्यस्थल असेंबली पॉइंट को जानें! हरे रंग का "असेंबली पॉइंट" चिह्न देखें।</p>
+              </div>
             `,
-            te: `
-              <h3>అత్యవసర ప్రతిస్పందన విధానాలు</h3>
-              <h4>అత్యవసర నంబర్లు</h4>
-              <ul>
-                <li>108 - అంబులెన్స్</li>
-                <li>101 - ఫైర్</li>
-                <li>100 - పోలీస్</li>
+          te: `<h3 class="text-lg font-bold text-red-800 mb-4">అత్యవసర పరిస్థితిలో 🚨 ఏమి చేయాలి</h3>
+              <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-600 mb-6">
+                <p class="font-semibold">ప్రతి సెకను అత్యవసర పరిస్థితుల్లో లెక్కించబడుతుంది!</p>
+                <p class="text-sm mt-2">అత్యవసర పరిస్థితి ఏర్పడే ముందు విధానాలను తెలుసుకోండి.</p>
+              </div>
+
+              <h4 class="font-bold mb-3">అత్యవసర సంఖ్యలు - భారతదేశం</h4>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+                <div class="bg-red-100 p-3 rounded text-center border-2 border-red-600">
+                  <div class="text-2xl font-bold text-red-700">108</div>
+                  <p class="text-xs font-semibold">అంబులెన్సులు</p>
+                </div>
+                <div class="bg-orange-100 p-3 rounded text-center border-2 border-orange-600">
+                  <div class="text-2xl font-bold text-orange-700">101</div>
+                  <p class="text-xs font-semibold">అగ్ని</p>
+                </div>
+                <div class="bg-blue-100 p-3 rounded text-center border-2 border-blue-600">
+                  <div class="text-2xl font-bold text-blue-700">100</div>
+                  <p class="text-xs font-semibold">రక్షకులు</p>
+                </div>
+                <div class="bg-green-100 p-3 rounded text-center border-2 border-green-600">
+                  <div class="text-2xl font-bold text-green-700">112</div>
+                  <p class="text-xs font-semibold">అన్ని సేవలు</p>
+                </div>
+              </div>
+
+              <h4 class="font-bold text-lg mb-3">అత్యవసర కార్యాచరణ ప్రణాళిక - జాతి</h4>
+              <div class="space-y-3 mb-6">
+                <div class="flex items-start bg-red-100 p-4 rounded border-l-4 border-red-600">
+                  <div class="bg-red-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold mr-3 flex-shrink-0">R</div>
+                  <div>
+                    <strong class="text-red-900">రెస్క్యూ</strong>
+                    <p class="text-sm mt-1">తక్షణ ప్రమాదంలో ఉన్న ఎవరినైనా తొలగించండి (అలా చేయడం సురక్షితం అయితే)</p>
+                  </div>
+                </div>
+                <div class="flex items-start bg-orange-100 p-4 rounded border-l-4 border-orange-600">
+                  <div class="bg-orange-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold mr-3 flex-shrink-0">A</div>
+                  <div>
+                    <strong class="text-orange-900">అలారం</strong>
+                    <p class="text-sm mt-1">అలారం యాక్టివేట్ చేసి, అత్యవసర సేవలకు కాల్ చేయండి</p>
+                  </div>
+                </div>
+                <div class="flex items-start bg-yellow-100 p-4 rounded border-l-4 border-yellow-600">
+                  <div class="bg-yellow-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold mr-3 flex-shrink-0">Chala gurthu vastunauu</div>
+                  <div>
+                    <strong class="text-yellow-900">CONFINE</strong>
+                    <p class="text-sm mt-1">Close doors to contain fire/smoke (for fire emergencies)</p>
+                  </div>
+                </div>
+                <div class="flex items-start bg-green-100 p-4 rounded border-l-4 border-green-600">
+                  <div class="bg-green-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold mr-3 flex-shrink-0">E</div>
+                  <div>
+                    <strong class="text-green-900">ఖాళీ/ఆరిపోవడం</strong>
+                    <p class="text-sm mt-1">మంటలు చిన్నగా ఉంటే ఆ ప్రాంతాన్ని ఖాళీ చేయండి లేదా ఆర్పివేయండి మరియు మీకు శిక్షణ ఇవ్వబడుతుంది</p>
+                  </div>
+                </div>
+              </div>
+
+              <h4 class="font-bold mb-3">తరలింపు మార్గదర్శకాలు:</h4>
+              <ul class="space-y-2 mb-6">
+                <li class="flex items-start"><span class="text-green-600 mr-2 font-bold">✓</span>అబ్బాయిలను ఏ విషయంలోనూ నమ్మవద్దు</li>
+                <li class="flex items-start"><span class="text-green-600 mr-2 font-bold">✓</span>సమీప సురక్షిత నిష్క్రమణకు నిష్క్రమణ సంకేతాలను అనుసరించండి</li>
+                <li class="flex items-start"><span class="text-green-600 mr-2 font-bold">✓</span>ఎలివేటర్ ‌ లను ఉపయోగించవద్దు</li>
+                <li class="flex items-start"><span class="text-green-600 mr-2 font-bold">✓</span>సురక్షితంగా ఉంటే వృద్ధులకు/వికలాంగులకు సహాయం చేయండి</li>
+                <li class="flex items-start"><span class="text-green-600 mr-2 font-bold">✓</span>నియమించబడిన అసెంబ్లీ పాయింట్ వద్ద కలవండి</li>
+                <li class="flex items-start"><span class="text-green-600 mr-2 font-bold">✓</span>అధికారులు క్లియర్ చేసే వరకు తిరిగి ప్రవేశించవద్దు</li>
               </ul>
-              <h4>RACE</h4>
-              <ul>
-                <li><strong>R - రక్షణ:</strong> తక్షణ ప్రమాదంలో ఎవరినైనా తొలగించండి</li>
-                <li><strong>A - అలారం:</strong> అలారం ను సక్రియం చేయండి</li>
-                <li><strong>C - నియంత్రించండి:</strong> తలుపులు మూసివేయండి</li>
-                <li><strong>E - తరలింపు:</strong> ప్రాంతాన్ని ఖాళీ చేయండి</li>
-              </ul>
-            `
-          }
+
+              <div class="bg-blue-100 border-2 border-blue-600 p-4 rounded">
+                <p class="font-bold text-blue-900">📍 అసెంబ్లీ పాయింట్ లొకేషన్:</p>
+                <p class="text-sm mt-2">మీ కార్యాలయంలోని అసెంబ్లీ పాయింట్ గురించి తెలుసుకోండి! ఆకుపచ్చ &amp;quot;అసెంబ్లీ పాయింట్&amp;quot; గుర్తు కోసం చూడండి.</p>
+              </div>
+            `,
         },
-        {
-          id: 'step-6-quiz',
-          type: 'quiz',
-          title: { en: 'Module 6 Assessment', ta: 'தொகுதி 6 மதிப்பீடு', hi: 'मॉड्यूल 6 मूल्यांकन', te: 'మాడ్యూల్ 6 అసెస్మెంట్' },
-          content: { en: 'Test your Fire Safety Awareness.', ta: 'தீ பாதுகாப்பு விழிப்புணர்வை சோதிக்கவும்.', hi: 'अग्नि सुरक्षा जागरूकता का परीक्षण करें।', te: 'అగ్ని భద్రత అవగాహనను పరీక్షించండి.' }
-        }
-      ]
+        imageUrl: assets.emergency,
+      },
+      {
+        id: "step-6-quiz",
+        type: "quiz",
+        title: {
+          en: "Module 6 Assessment",
+          ta: "\u0ba4\u0bca\u0b95\u0bc1\u0ba4\u0bbf 6 \u0bae\u0ba4\u0bbf\u0baa\u0bcd\u0baa\u0bc0\u0b9f\u0bc1",
+          hi: "\u092e\u0949\u0921\u094d\u092f\u0942\u0932 6 \u092e\u0942\u0932\u094d\u092f\u093e\u0902\u0915\u0928",
+          te: "\u0c2e\u0c3e\u0c21\u0c4d\u0c2f\u0c42\u0c32\u0c4d 6 \u0c05\u0c38\u0c46\u0c38\u0c4d\u0c2e\u0c46\u0c02\u0c1f\u0c4d",
+        },
+        content: {
+          en: "Test your Fire Safety Awareness.",
+          ta: "\u0ba4\u0bc0 \u0baa\u0bbe\u0ba4\u0bc1\u0b95\u0bbe\u0baa\u0bcd\u0baa\u0bc1 \u0bb5\u0bbf\u0bb4\u0bbf\u0baa\u0bcd\u0baa\u0bc1\u0ba3\u0bb0\u0bcd\u0bb5\u0bc8 \u0b9a\u0bcb\u0ba4\u0bbf\u0b95\u0bcd\u0b95\u0bb5\u0bc1\u0bae\u0bcd.",
+          hi: "\u0905\u0917\u094d\u0928\u093f \u0938\u0941\u0930\u0915\u094d\u0937\u093e \u091c\u093e\u0917\u0930\u0942\u0915\u0924\u093e \u0915\u093e \u092a\u0930\u0940\u0915\u094d\u0937\u0923 \u0915\u0930\u0947\u0902\u0964",
+          te: "\u0c05\u0c17\u0c4d\u0c28\u0c3f \u0c2d\u0c26\u0c4d\u0c30\u0c24 \u0c05\u0c35\u0c17\u0c3e\u0c39\u0c28\u0c28\u0c41 \u0c2a\u0c30\u0c40\u0c15\u0c4d\u0c37\u0c3f\u0c02\u0c1a\u0c02\u0c21\u0c3f.",
+        },
+      },
+    ],
+  },
+  {
+    id: "ehs-007",
+    title: {
+      en: "Material Handling",
+      ta: "\u0baa\u0bca\u0bb0\u0bc1\u0bb3\u0bcd \u0b95\u0bc8\u0baf\u0bbe\u0bb3\u0bc1\u0ba4\u0bb2\u0bcd",
+      hi: "\u0938\u093e\u092e\u0917\u094d\u0930\u0940 \u0939\u0948\u0902\u0921\u0932\u093f\u0902\u0917",
+      te: "\u0c2e\u0c46\u0c1f\u0c40\u0c30\u0c3f\u0c2f\u0c32\u0c4d \u0c39\u0c4d\u0c2f\u0c3e\u0c02\u0c21\u0c4d\u0c32\u0c3f\u0c02\u0c17\u0c4d",
     },
-    {
-      id: 'ehs-007',
-      title: { en: 'Material Handling', ta: 'பொருள் கையாளுதல்', hi: 'सामग्री हैंडलिंग', te: 'మెటీరియల్ హ్యాండ్లింగ్' },
-      description: { en: 'Manual Lifting, Trolley Safety, Forklifts', ta: 'கையால் தூக்குதல், ட்ராலி பாதுகாப்பு', hi: 'मैनुअल लिफ्टिंग, ट्रॉली सुरक्षा', te: 'మాన్యువల్ లిఫ్టింగ్, ట్రాలీ సేఫ్టీ' },
-      category: 'Occupational Health',
-      estimatedTime: '15 min',
-      icon: 'User',
-      thumbnail: assets.safeLifting,
-      steps: [
-        {
-          id: 'step-7-1',
-          type: 'content',
-          title: { en: 'Manual Lifting Safety', ta: 'கையால் தூக்கும் பாதுகாப்பு', hi: 'मैनुअल लिफ्टिंग सुरक्षा', te: 'మాన్యువల్ లిఫ్టింగ్ భద్రత' },
-          content: {
-            en: `
+    description: {
+      en: "Manual Lifting, Trolley Safety, Forklifts",
+      ta: "\u0b95\u0bc8\u0baf\u0bbe\u0bb2\u0bcd \u0ba4\u0bc2\u0b95\u0bcd\u0b95\u0bc1\u0ba4\u0bb2\u0bcd, \u0b9f\u0bcd\u0bb0\u0bbe\u0bb2\u0bbf \u0baa\u0bbe\u0ba4\u0bc1\u0b95\u0bbe\u0baa\u0bcd\u0baa\u0bc1",
+      hi: "\u092e\u0948\u0928\u0941\u0905\u0932 \u0932\u093f\u092b\u094d\u091f\u093f\u0902\u0917, \u091f\u094d\u0930\u0949\u0932\u0940 \u0938\u0941\u0930\u0915\u094d\u0937\u093e",
+      te: "\u0c2e\u0c3e\u0c28\u0c4d\u0c2f\u0c41\u0c35\u0c32\u0c4d \u0c32\u0c3f\u0c2b\u0c4d\u0c1f\u0c3f\u0c02\u0c17\u0c4d, \u0c1f\u0c4d\u0c30\u0c3e\u0c32\u0c40 \u0c38\u0c47\u0c2b\u0c4d\u0c1f\u0c40",
+    },
+    category: "Occupational Health",
+    estimatedTime: "15 min",
+    icon: "User",
+    thumbnail: assets.safeLifting,
+    steps: [
+      {
+        id: "step-7-1",
+        type: "content",
+        title: {
+          en: "Manual Lifting Safety",
+          ta: "\u0b95\u0bc8\u0baf\u0bbe\u0bb2\u0bcd \u0ba4\u0bc2\u0b95\u0bcd\u0b95\u0bc1\u0bae\u0bcd \u0baa\u0bbe\u0ba4\u0bc1\u0b95\u0bbe\u0baa\u0bcd\u0baa\u0bc1",
+          hi: "\u092e\u0948\u0928\u0941\u0905\u0932 \u0932\u093f\u092b\u094d\u091f\u093f\u0902\u0917 \u0938\u0941\u0930\u0915\u094d\u0937\u093e",
+          te: "\u0c2e\u0c3e\u0c28\u0c4d\u0c2f\u0c41\u0c35\u0c32\u0c4d \u0c32\u0c3f\u0c2b\u0c4d\u0c1f\u0c3f\u0c02\u0c17\u0c4d \u0c2d\u0c26\u0c4d\u0c30\u0c24",
+        },
+        content: {
+          en: `
               <div class="flex justify-center mb-6">
                  <img src="${assets.safeLifting}" alt="Safe Lifting Technique" class="max-w-md w-full rounded shadow-lg" />
               </div>
@@ -1783,23 +2403,28 @@ export async function initializeSeedData() {
                 </div>
               </div>
             `,
-            ta: `
+          ta: `
                <p>முழங்கால்களை வளைத்து, முதுகை நேராக வைத்து தூக்கவும். கால்களைப் பயன்படுத்தவும், முதுகை அல்ல.</p>
             `,
-            hi: `
+          hi: `
               <p>घुटनों को मोड़ें, पीठ सीधी रखें। पैरों से उठाएं, पीठ से नहीं।</p>
             `,
-            te: `
+          te: `
               <p>మోకాళ్లను వంచి, వెనుక భాగాన్ని నిటారుగా ఉంచండి. కాళ్లతో ఎత్తండి, వెనుకతో కాదు.</p>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-7-2',
-          type: 'content',
-          title: { en: 'Trolley & Equipment Safety', ta: 'ட்ராலி & உபகரண பாதுகாப்பு', hi: 'ट्रॉली और उपकरण सुरक्षा', te: 'ట్రాలీ & పరికరాల భద్రత' },
-          content: {
-            en: `
+      },
+      {
+        id: "step-7-2",
+        type: "content",
+        title: {
+          en: "Trolley & Equipment Safety",
+          ta: "\u0b9f\u0bcd\u0bb0\u0bbe\u0bb2\u0bbf & \u0b89\u0baa\u0b95\u0bb0\u0ba3 \u0baa\u0bbe\u0ba4\u0bc1\u0b95\u0bbe\u0baa\u0bcd\u0baa\u0bc1",
+          hi: "\u091f\u094d\u0930\u0949\u0932\u0940 \u0914\u0930 \u0909\u092a\u0915\u0930\u0923 \u0938\u0941\u0930\u0915\u094d\u0937\u093e",
+          te: "\u0c1f\u0c4d\u0c30\u0c3e\u0c32\u0c40 & \u0c2a\u0c30\u0c3f\u0c15\u0c30\u0c3e\u0c32 \u0c2d\u0c26\u0c4d\u0c30\u0c24",
+        },
+        content: {
+          en: `
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="bg-blue-50 p-4 rounded shadow-sm">
                   <h4 class="font-bold text-blue-900">🛒 Hand Trolley</h4>
@@ -1813,24 +2438,29 @@ export async function initializeSeedData() {
                 </div>
               </div>
             `,
-            ta: `
+          ta: `
                <p>ட்ராலியை இழுப்பதை விட தள்ளுவது சிறந்தது.</p>
             `,
-            hi: `
+          hi: `
               <p>ट्रॉली को खींचने की बजाय धक्का देना बेहतर है।</p>
             `,
-            te: `
+          te: `
               <p>ట్రాలీని లాగడం కంటే నెట్టడం మంచిది.</p>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-7-3',
-          type: 'content',
-          title: { en: 'Ergonomics & Proper Lifting', ta: 'பணியிட வசதி & சரியான தூக்குதல்', hi: 'एर्गोनॉमिक्स और सही उठाना', te: 'ఎర్గొనామిక్స్ & సరైన లిఫ్టింగ్' },
-          imageUrl: assets.safeLifting,
-          content: {
-            en: `
+      },
+      {
+        id: "step-7-3",
+        type: "content",
+        title: {
+          en: "Ergonomics & Proper Lifting",
+          ta: "\u0baa\u0ba3\u0bbf\u0baf\u0bbf\u0b9f \u0bb5\u0b9a\u0ba4\u0bbf & \u0b9a\u0bb0\u0bbf\u0baf\u0bbe\u0ba9 \u0ba4\u0bc2\u0b95\u0bcd\u0b95\u0bc1\u0ba4\u0bb2\u0bcd",
+          hi: "\u090f\u0930\u094d\u0917\u094b\u0928\u0949\u092e\u093f\u0915\u094d\u0938 \u0914\u0930 \u0938\u0939\u0940 \u0909\u0920\u093e\u0928\u093e",
+          te: "\u0c0e\u0c30\u0c4d\u0c17\u0c4a\u0c28\u0c3e\u0c2e\u0c3f\u0c15\u0c4d\u0c38\u0c4d & \u0c38\u0c30\u0c48\u0c28 \u0c32\u0c3f\u0c2b\u0c4d\u0c1f\u0c3f\u0c02\u0c17\u0c4d",
+        },
+        imageUrl: assets.safeLifting,
+        content: {
+          en: `
               <h3 class="text-lg font-bold text-teal-800 mb-4">Work Smarter, Not Harder</h3>
               <div class="bg-teal-50 p-4 rounded-lg border-l-4 border-teal-600 mb-6">
                 <p class="font-semibold">Poor ergonomics cause back pain, muscle strain, and long-term injuries!</p>
@@ -1915,7 +2545,7 @@ export async function initializeSeedData() {
                 </ul>
               </div>
             `,
-            ta: `
+          ta: `
               <h3>பணியிட வசதி & சரியான தூக்குதல்</h3>
               <p>மோசமான பணியிட வசதி முதுகு வலி, தசை வலி ஏற்படுத்துகிறது!</p>
               <h4>பாதுகாப்பான தூக்குதல் நுட்பம்:</h4>
@@ -1929,7 +2559,7 @@ export async function initializeSeedData() {
               </ol>
               <p><strong>எடை வரம்புகள்:</strong> ஆண்கள் 25 kg, பெண்கள் 16 kg</p>
             `,
-            hi: `
+          hi: `
               <h3>एर्गोनॉमिक्स और सही उठाना</h3>
               <p>खराब एर्गोनॉमिक्स पीठ दर्द, मांसपेशियों में खिंचाव का कारण बनता है!</p>
               <h4>सुरक्षित उठाने की तकनीक:</h4>
@@ -1943,7 +2573,7 @@ export async function initializeSeedData() {
               </ol>
               <p><strong>वजन सीमा:</strong> पुरुष 25 kg, महिला 16 kg</p>
             `,
-            te: `
+          te: `
               <h3>ఎర్గొనామిక్స్ & సరైన లిఫ్టింగ్</h3>
               <p>పేలవమైన ఎర్గొనామిక్స్ వెన్నెముక నొప్పి, కండరాల ఒత్తిడికి కారణమవుతుంది!</p>
               <h4>సురక్షిత లిఫ్టింగ్ టెక్నిక్:</h4>
@@ -1956,16 +2586,21 @@ export async function initializeSeedData() {
                 <li>లోడ్‌ను దగ్గరగా ఉంచండి</li>
               </ol>
               <p><strong>బరువు పరిమితులు:</strong> పురుషులు 25 kg, మహిళలు 16 kg</p>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-7-4',
-          type: 'content',
-          title: { en: 'Safe Storage & Stacking', ta: 'பாதுகாப்பான சேமிப்பு', hi: 'सुरक्षित भंडारण', te: 'సురక్షిత నిల్వ' },
-          imageUrl: assets.materialHandlingIntro,
-          content: {
-            en: `
+      },
+      {
+        id: "step-7-4",
+        type: "content",
+        title: {
+          en: "Safe Storage & Stacking",
+          ta: "\u0baa\u0bbe\u0ba4\u0bc1\u0b95\u0bbe\u0baa\u0bcd\u0baa\u0bbe\u0ba9 \u0b9a\u0bc7\u0bae\u0bbf\u0baa\u0bcd\u0baa\u0bc1",
+          hi: "\u0938\u0941\u0930\u0915\u094d\u0937\u093f\u0924 \u092d\u0902\u0921\u093e\u0930\u0923",
+          te: "\u0c38\u0c41\u0c30\u0c15\u0c4d\u0c37\u0c3f\u0c24 \u0c28\u0c3f\u0c32\u0c4d\u0c35",
+        },
+        imageUrl: assets.materialHandlingIntro,
+        content: {
+          en: `
               <h3 class="text-lg font-bold text-gray-800 mb-4">Gravity Never Sleeps!</h3>
               
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
@@ -1993,53 +2628,90 @@ export async function initializeSeedData() {
                 <p class="text-sm">Inspect pallets for broken slats or protruding nails. A broken pallet can cause a stack to collapse!</p>
               </div>
             `,
-            ta: `
+          ta: `
               <h3>பாதுகாப்பான சேமிப்பு</h3>
               <p>கனமான பொருட்களை கீழே வைக்கவும்.</p>
               <p>அதிக உயரத்தில் அடுக்கி வைக்காதீர்கள்.</p>
               <p>மிகவும் அகலமாக அடுக்கி வைக்காதீர்கள் (Interlock).</p>
             `,
-            hi: `
+          hi: `
               <h3>सुरक्षित भंडारण</h3>
               <p>भारी सामान नीचे रखें।</p>
               <p>बहुत ऊंचा न ढेर लगाएं।</p>
               <p>रास्तों में बाधा न डालें।</p>
             `,
-            te: `
+          te: `
               <h3>సురక్షిత నిల్వ</h3>
               <p>బరువైన వస్తువులను కింద ఉంచండి.</p>
               <p>మరీ ఎత్తుగా పేర్చవద్దు.</p>
               <p>నడక దారిలో అడ్డంకులు లేకుండా ఉంచండి.</p>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-7-quiz',
-          type: 'interactive',
-          interactive: {
-            image: assets.quizAwkwardLift,
-            hazards: [{ id: 'q7', x: 50, y: 50, description: { en: 'Unsafe Lifting Posture', ta: 'பாதுகாப்பற்ற தூக்கும் முறை', hi: 'असुरक्षित लिफ्टिंग', te: 'సురక్షితం కాని లిఫ్టింగ్' } }]
-          },
-          title: { en: 'Module 7 Assessment', ta: 'தொகுதி 7 மதிப்பீடு', hi: 'मॉड्यूल 7 मूल्यांकन', te: 'మాడ్యూల్ 7 అసెస్మెంట్' },
-          content: { en: 'Identify the unsafe lifting practice.', ta: 'பாதுகாப்பற்ற தூக்கும் முறையை அடையாளம் காணவும்.', hi: 'असुरक्षित लिफ्टिंग की पहचान करें।', te: 'సురక్షితం కాని లిఫ్టింగ్‌ను గుర్తించండి.' }
-        }
-      ]
+      },
+      {
+        id: "step-7-quiz",
+        type: "interactive",
+        interactive: {
+          image: assets.quizAwkwardLift,
+          hazards: [
+            {
+              id: "q7",
+              x: 50,
+              y: 50,
+              description: {
+                en: "Unsafe Lifting Posture",
+                ta: "\u0baa\u0bbe\u0ba4\u0bc1\u0b95\u0bbe\u0baa\u0bcd\u0baa\u0bb1\u0bcd\u0bb1 \u0ba4\u0bc2\u0b95\u0bcd\u0b95\u0bc1\u0bae\u0bcd \u0bae\u0bc1\u0bb1\u0bc8",
+                hi: "\u0905\u0938\u0941\u0930\u0915\u094d\u0937\u093f\u0924 \u0932\u093f\u092b\u094d\u091f\u093f\u0902\u0917",
+                te: "\u0c38\u0c41\u0c30\u0c15\u0c4d\u0c37\u0c3f\u0c24\u0c02 \u0c15\u0c3e\u0c28\u0c3f \u0c32\u0c3f\u0c2b\u0c4d\u0c1f\u0c3f\u0c02\u0c17\u0c4d",
+              },
+            },
+          ],
+        },
+        title: {
+          en: "Module 7 Assessment",
+          ta: "\u0ba4\u0bca\u0b95\u0bc1\u0ba4\u0bbf 7 \u0bae\u0ba4\u0bbf\u0baa\u0bcd\u0baa\u0bc0\u0b9f\u0bc1",
+          hi: "\u092e\u0949\u0921\u094d\u092f\u0942\u0932 7 \u092e\u0942\u0932\u094d\u092f\u093e\u0902\u0915\u0928",
+          te: "\u0c2e\u0c3e\u0c21\u0c4d\u0c2f\u0c42\u0c32\u0c4d 7 \u0c05\u0c38\u0c46\u0c38\u0c4d\u0c2e\u0c46\u0c02\u0c1f\u0c4d",
+        },
+        content: {
+          en: "Identify the unsafe lifting practice.",
+          ta: "\u0baa\u0bbe\u0ba4\u0bc1\u0b95\u0bbe\u0baa\u0bcd\u0baa\u0bb1\u0bcd\u0bb1 \u0ba4\u0bc2\u0b95\u0bcd\u0b95\u0bc1\u0bae\u0bcd \u0bae\u0bc1\u0bb1\u0bc8\u0baf\u0bc8 \u0b85\u0b9f\u0bc8\u0baf\u0bbe\u0bb3\u0bae\u0bcd \u0b95\u0bbe\u0ba3\u0bb5\u0bc1\u0bae\u0bcd.",
+          hi: "\u0905\u0938\u0941\u0930\u0915\u094d\u0937\u093f\u0924 \u0932\u093f\u092b\u094d\u091f\u093f\u0902\u0917 \u0915\u0940 \u092a\u0939\u091a\u093e\u0928 \u0915\u0930\u0947\u0902\u0964",
+          te: "\u0c38\u0c41\u0c30\u0c15\u0c4d\u0c37\u0c3f\u0c24\u0c02 \u0c15\u0c3e\u0c28\u0c3f \u0c32\u0c3f\u0c2b\u0c4d\u0c1f\u0c3f\u0c02\u0c17\u0c4d\u200c\u0c28\u0c41 \u0c17\u0c41\u0c30\u0c4d\u0c24\u0c3f\u0c02\u0c1a\u0c02\u0c21\u0c3f.",
+        },
+      },
+    ],
+  },
+  {
+    id: "ehs-008",
+    title: {
+      en: "Electrical Safety",
+      ta: "\u0bae\u0bbf\u0ba9\u0bcd \u0baa\u0bbe\u0ba4\u0bc1\u0b95\u0bbe\u0baa\u0bcd\u0baa\u0bc1",
+      hi: "\u0935\u093f\u0926\u094d\u092f\u0941\u0924 \u0938\u0941\u0930\u0915\u094d\u0937\u093e",
+      te: "\u0c35\u0c3f\u0c26\u0c4d\u0c2f\u0c41\u0c24\u0c4d \u0c2d\u0c26\u0c4d\u0c30\u0c24",
     },
-    {
-      id: 'ehs-008',
-      title: { en: 'Electrical Safety', ta: 'மின் பாதுகாப்பு', hi: 'विद्युत सुरक्षा', te: 'విద్యుత్ భద్రత' },
-      description: { en: 'Shock Prevention, Wires, Fuse Boxes', ta: 'அதிர்ச்சி தடுப்பு, கம்பிகள்', hi: 'शॉक की रोकथाम', te: 'షాక్ నివారణ' },
-      category: 'Technical Safety',
-      estimatedTime: '20 min',
-      icon: 'Zap',
-      thumbnail: assets.electricalDanger,
-      steps: [
-        {
-          id: 'step-8-1',
-          type: 'content',
-          title: { en: 'Preventing Electric Shock', ta: 'மின் அதிர்ச்சியைத் தடுத்தல்', hi: 'बिजली के झटके की रोकथाम', te: 'విద్యుత్ షాక్ నివారణ' },
-          content: {
-            en: `
+    description: {
+      en: "Shock Prevention, Wires, Fuse Boxes",
+      ta: "\u0b85\u0ba4\u0bbf\u0bb0\u0bcd\u0b9a\u0bcd\u0b9a\u0bbf \u0ba4\u0b9f\u0bc1\u0baa\u0bcd\u0baa\u0bc1, \u0b95\u0bae\u0bcd\u0baa\u0bbf\u0b95\u0bb3\u0bcd",
+      hi: "\u0936\u0949\u0915 \u0915\u0940 \u0930\u094b\u0915\u0925\u093e\u092e",
+      te: "\u0c37\u0c3e\u0c15\u0c4d \u0c28\u0c3f\u0c35\u0c3e\u0c30\u0c23",
+    },
+    category: "Technical Safety",
+    estimatedTime: "20 min",
+    icon: "Zap",
+    thumbnail: assets.electricalDanger,
+    steps: [
+      {
+        id: "step-8-1",
+        type: "content",
+        title: {
+          en: "Preventing Electric Shock",
+          ta: "\u0bae\u0bbf\u0ba9\u0bcd \u0b85\u0ba4\u0bbf\u0bb0\u0bcd\u0b9a\u0bcd\u0b9a\u0bbf\u0baf\u0bc8\u0ba4\u0bcd \u0ba4\u0b9f\u0bc1\u0ba4\u0bcd\u0ba4\u0bb2\u0bcd",
+          hi: "\u092c\u093f\u091c\u0932\u0940 \u0915\u0947 \u091d\u091f\u0915\u0947 \u0915\u0940 \u0930\u094b\u0915\u0925\u093e\u092e",
+          te: "\u0c35\u0c3f\u0c26\u0c4d\u0c2f\u0c41\u0c24\u0c4d \u0c37\u0c3e\u0c15\u0c4d \u0c28\u0c3f\u0c35\u0c3e\u0c30\u0c23",
+        },
+        content: {
+          en: `
               <div class="flex justify-center mb-6">
                  <img src="${assets.electricalDanger}" alt="Electrical Hazards" class="max-w-md w-full rounded shadow-lg" />
               </div>
@@ -2064,28 +2736,33 @@ export async function initializeSeedData() {
                 </div>
               </div>
             `,
-            ta: `
+          ta: `
                <ul class="list-disc pl-5">
                  <li>சேதமடைந்த கம்பிகளை பயன்படுத்த வேண்டாம்.</li>
                  <li>ஈரமான கைகளால் தொட வேண்டாம்.</li>
                  <li>தகுதிவாய்ந்த எலக்ட்ரீஷியன்களை மட்டும் அனுமதிக்கவும்.</li>
                </ul>
             `,
-            hi: `
+          hi: `
               <p>कटे हुए तारों का प्रयोग न करें। गीले हाथों से न छुएं।</p>
             `,
-            te: `
+          te: `
               <p>దెబ్బతిన్న వైర్లను ఉపయోగించవద్దు. తడి చేతులతో తాకవద్దు.</p>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-8-2',
-          type: 'content',
-          title: { en: 'Effects of Current on Body', ta: 'உடலில் மின்னோட்டத்தின் விளைவுகள்', hi: 'शरीर पर करंट का प्रभाव', te: 'శరీరంపై విద్యుత్ ప్రభావం' },
-          imageUrl: assets.electricalDanger,
-          content: {
-            en: `
+      },
+      {
+        id: "step-8-2",
+        type: "content",
+        title: {
+          en: "Effects of Current on Body",
+          ta: "\u0b89\u0b9f\u0bb2\u0bbf\u0bb2\u0bcd \u0bae\u0bbf\u0ba9\u0bcd\u0ba9\u0bcb\u0b9f\u0bcd\u0b9f\u0ba4\u0bcd\u0ba4\u0bbf\u0ba9\u0bcd \u0bb5\u0bbf\u0bb3\u0bc8\u0bb5\u0bc1\u0b95\u0bb3\u0bcd",
+          hi: "\u0936\u0930\u0940\u0930 \u092a\u0930 \u0915\u0930\u0902\u091f \u0915\u093e \u092a\u094d\u0930\u092d\u093e\u0935",
+          te: "\u0c36\u0c30\u0c40\u0c30\u0c02\u0c2a\u0c48 \u0c35\u0c3f\u0c26\u0c4d\u0c2f\u0c41\u0c24\u0c4d \u0c2a\u0c4d\u0c30\u0c2d\u0c3e\u0c35\u0c02",
+        },
+        imageUrl: assets.electricalDanger,
+        content: {
+          en: `
               <h3 class="text-lg font-bold text-red-800 mb-4">Why Electricity is Dangerous</h3>
               <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-600 mb-6">
                 <p class="font-semibold">It's not just the voltage, it's the CURRENT that kills!</p>
@@ -2131,7 +2808,7 @@ export async function initializeSeedData() {
                 <li><strong>Duration:</strong> Longer exposure = severe burns/death.</li>
               </ul>
             `,
-            ta: `
+          ta: `
               <h3>உடலில் மின்னோட்டத்தின் விரைவான விளைவுகள்</h3>
               <ul>
                 <li><strong>1 mA:</strong> லேசான கூச்ச உணர்வு</li>
@@ -2141,7 +2818,7 @@ export async function initializeSeedData() {
               </ul>
               <p>மின்னோட்டம் இதயத்தின் வழியாக பாய்வது மிகவும் ஆபத்தானது.</p>
             `,
-            hi: `
+          hi: `
               <h3>शरीर पर करंट का प्रभाव</h3>
               <ul>
                 <li><strong>1 mA:</strong> हल्का झटका</li>
@@ -2150,7 +2827,7 @@ export async function initializeSeedData() {
                 <li><strong>100 mA:</strong> दिल का दौरा (घातक)</li>
               </ul>
             `,
-            te: `
+          te: `
               <h3>శరీరంపై విద్యుత్ ప్రభావం</h3>
               <ul>
                 <li><strong>1 mA:</strong> స్వల్ప జలదరింపు</li>
@@ -2158,16 +2835,21 @@ export async function initializeSeedData() {
                 <li><strong>30 mA:</strong> శ్వాస ఆగిపోవడం</li>
                 <li><strong>100 mA:</strong> గుండె వైఫల్యం</li>
               </ul>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-8-3',
-          type: 'content',
-          title: { en: 'Voltage Levels & Safe Distances', ta: 'மின்னழுத்த நிலைகள் & பாதுகாப்பு', hi: 'voltage स्तर और सुरक्षित दूरी', te: 'వోల్టేజ్ స్థాయిలు & సురక్షిత దూరాలు' },
-          imageUrl: assets.electricalVoltage,
-          content: {
-            en: `
+      },
+      {
+        id: "step-8-3",
+        type: "content",
+        title: {
+          en: "Voltage Levels & Safe Distances",
+          ta: "\u0bae\u0bbf\u0ba9\u0bcd\u0ba9\u0bb4\u0bc1\u0ba4\u0bcd\u0ba4 \u0ba8\u0bbf\u0bb2\u0bc8\u0b95\u0bb3\u0bcd & \u0baa\u0bbe\u0ba4\u0bc1\u0b95\u0bbe\u0baa\u0bcd\u0baa\u0bc1",
+          hi: "voltage \u0938\u094d\u0924\u0930 \u0914\u0930 \u0938\u0941\u0930\u0915\u094d\u0937\u093f\u0924 \u0926\u0942\u0930\u0940",
+          te: "\u0c35\u0c4b\u0c32\u0c4d\u0c1f\u0c47\u0c1c\u0c4d \u0c38\u0c4d\u0c25\u0c3e\u0c2f\u0c3f\u0c32\u0c41 & \u0c38\u0c41\u0c30\u0c15\u0c4d\u0c37\u0c3f\u0c24 \u0c26\u0c42\u0c30\u0c3e\u0c32\u0c41",
+        },
+        imageUrl: assets.electricalVoltage,
+        content: {
+          en: `
               <h3 class="text-lg font-bold text-blue-800 mb-4">Understanding Voltage Levels</h3>
               <p class="mb-4 text-sm">Different voltages require different safety protocols and approach limits.</p>
 
@@ -2211,36 +2893,41 @@ export async function initializeSeedData() {
                 ⛔ Always assume overhead lines are LIVE and DANGEROUS.
               </div>
             `,
-            ta: `
+          ta: `
               <h3>மின்னழுத்த நிலைகள்</h3>
               <p><strong>குறைந்த மின்னழுத்தம் (LV):</strong> < 1000V (அலுவலகம், விளக்குகள்)</p>
               <p><strong>உயர் மின்னழுத்தம் (HV):</strong> > 1000V (மின்மாற்றிகள்)</p>
               <h4>பாதுகாப்பான இடைவெளி:</h4>
               <p>11kV வரை: 3 மீட்டர் இடைவெளி அவசியம்.</p>
             `,
-            hi: `
+          hi: `
               <h3>वोल्टेज स्तर</h3>
               <p><strong>कम वोल्टेज:</strong> < 1000V</p>
               <p><strong>उच्च वोल्टेज:</strong> > 1000V</p>
               <h4>सुरक्षित दूरी:</h4>
               <p>11kV तक: 3 मीटर की दूरी बनाए रखें।</p>
             `,
-            te: `
+          te: `
               <h3>వోల్టేజ్ స్థాయిలు</h3>
               <p><strong>తక్కువ వోల్టేజ్:</strong> < 1000V</p>
               <p><strong>హై వోల్టేజ్:</strong> > 1000V</p>
               <h4>సురక్షిత దూరం:</h4>
               <p>11kV వరకు: 3 మీటర్ల దూరంలో ఉండాలి.</p>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-8-4',
-          type: 'content',
-          title: { en: 'Safety Devices: ELCB & RCCB', ta: 'பாதுகாப்பு சாதனங்கள்', hi: 'सुरक्षा उपकरण', te: 'భద్రతా పరికరాలు' },
-          imageUrl: assets.electricalDanger,
-          content: {
-            en: `
+      },
+      {
+        id: "step-8-4",
+        type: "content",
+        title: {
+          en: "Safety Devices: ELCB & RCCB",
+          ta: "\u0baa\u0bbe\u0ba4\u0bc1\u0b95\u0bbe\u0baa\u0bcd\u0baa\u0bc1 \u0b9a\u0bbe\u0ba4\u0ba9\u0b99\u0bcd\u0b95\u0bb3\u0bcd",
+          hi: "\u0938\u0941\u0930\u0915\u094d\u0937\u093e \u0909\u092a\u0915\u0930\u0923",
+          te: "\u0c2d\u0c26\u0c4d\u0c30\u0c24\u0c3e \u0c2a\u0c30\u0c3f\u0c15\u0c30\u0c3e\u0c32\u0c41",
+        },
+        imageUrl: assets.electricalDanger,
+        content: {
+          en: `
               <h3 class="text-lg font-bold text-green-800 mb-4">Life Saving Devices</h3>
               <p class="mb-4">Standard fuses protect equipment. <strong>RCCBs protect HUMANS.</strong></p>
 
@@ -2268,51 +2955,88 @@ export async function initializeSeedData() {
                 </ol>
               </div>
             `,
-            ta: `
+          ta: `
               <h3>பாதுகாப்பு சாதனங்கள் (RCCB)</h3>
               <p>சாதாரண பிரேக்கர்கள் (MCB) உபகரணங்களை மட்டுமே பாதுகாக்கும்.</p>
               <p><strong>RCCB</strong> மட்டுமே மின்சார அதிர்ச்சியிலிருந்து உங்களை காப்பாற்றும்.</p>
               <p><strong>சோதனை பொத்தான் (Test Button):</strong> மாதம் ஒருமுறை அழுத்தி சோதிக்கவும். அது உடனே அணைக்க வேண்டும்.</p>
             `,
-            hi: `
+          hi: `
               <h3>सुरक्षा उपकरण (RCCB)</h3>
               <p>MCB केवल उपकरणों की रक्षा करता है। <strong>RCCB</strong> इंसानों को करंट से बचाता है।</p>
               <p><strong>टेस्ट बटन:</strong> महीने में एक बार 'T' बटन दबाएं। बिजली तुरंत बंद होनी चाहिए।</p>
             `,
-            te: `
+          te: `
               <h3>భద్రతా పరికరాలు (RCCB)</h3>
               <p>MCB పరికరాలను మాత్రమే రక్షిస్తుంది. <strong>RCCB</strong> విద్యుత్ షాక్ నుండి మిమ్మల్ని రక్షిస్తుంది.</p>
               <p><strong>టెస్ట్ బటన్:</strong> నెలకు ఒకసారి 'T' బటన్‌ను నొక్కండి. విద్యుత్ వెంటనే ఆగిపోవాలి.</p>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-8-quiz',
-          type: 'interactive',
-          interactive: {
-            image: assets.quizExposedWire,
-            hazards: [{ id: 'q8', x: 50, y: 50, description: { en: 'Exposed Live Wires', ta: 'திறந்த மின் கம்பிகள்', hi: 'खुले तार', te: 'బహిర్గతమైన వైర్లు' } }]
-          },
-          title: { en: 'Module 8 Assessment', ta: 'தொகுதி 8 மதிப்பீடு', hi: 'मॉड्यूल 8 मूल्यांकन', te: 'మాడ్యూల్ 8 అసెస్మెంట్' },
-          content: { en: 'Identify the electrical hazard.', ta: 'மின் ஆபத்தை அடையாளம் காணவும்.', hi: 'विद्युत खतरे की पहचान करें।', te: 'విద్యుత్ ప్రమాదాన్ని గుర్తించండి.' }
-        }
-      ]
+      },
+      {
+        id: "step-8-quiz",
+        type: "interactive",
+        interactive: {
+          image: assets.quizExposedWire,
+          hazards: [
+            {
+              id: "q8",
+              x: 50,
+              y: 50,
+              description: {
+                en: "Exposed Live Wires",
+                ta: "\u0ba4\u0bbf\u0bb1\u0ba8\u0bcd\u0ba4 \u0bae\u0bbf\u0ba9\u0bcd \u0b95\u0bae\u0bcd\u0baa\u0bbf\u0b95\u0bb3\u0bcd",
+                hi: "\u0916\u0941\u0932\u0947 \u0924\u093e\u0930",
+                te: "\u0c2c\u0c39\u0c3f\u0c30\u0c4d\u0c17\u0c24\u0c2e\u0c48\u0c28 \u0c35\u0c48\u0c30\u0c4d\u0c32\u0c41",
+              },
+            },
+          ],
+        },
+        title: {
+          en: "Module 8 Assessment",
+          ta: "\u0ba4\u0bca\u0b95\u0bc1\u0ba4\u0bbf 8 \u0bae\u0ba4\u0bbf\u0baa\u0bcd\u0baa\u0bc0\u0b9f\u0bc1",
+          hi: "\u092e\u0949\u0921\u094d\u092f\u0942\u0932 8 \u092e\u0942\u0932\u094d\u092f\u093e\u0902\u0915\u0928",
+          te: "\u0c2e\u0c3e\u0c21\u0c4d\u0c2f\u0c42\u0c32\u0c4d 8 \u0c05\u0c38\u0c46\u0c38\u0c4d\u0c2e\u0c46\u0c02\u0c1f\u0c4d",
+        },
+        content: {
+          en: "Identify the electrical hazard.",
+          ta: "\u0bae\u0bbf\u0ba9\u0bcd \u0b86\u0baa\u0ba4\u0bcd\u0ba4\u0bc8 \u0b85\u0b9f\u0bc8\u0baf\u0bbe\u0bb3\u0bae\u0bcd \u0b95\u0bbe\u0ba3\u0bb5\u0bc1\u0bae\u0bcd.",
+          hi: "\u0935\u093f\u0926\u094d\u092f\u0941\u0924 \u0916\u0924\u0930\u0947 \u0915\u0940 \u092a\u0939\u091a\u093e\u0928 \u0915\u0930\u0947\u0902\u0964",
+          te: "\u0c35\u0c3f\u0c26\u0c4d\u0c2f\u0c41\u0c24\u0c4d \u0c2a\u0c4d\u0c30\u0c2e\u0c3e\u0c26\u0c3e\u0c28\u0c4d\u0c28\u0c3f \u0c17\u0c41\u0c30\u0c4d\u0c24\u0c3f\u0c02\u0c1a\u0c02\u0c21\u0c3f.",
+        },
+      },
+    ],
+  },
+  {
+    id: "ehs-009",
+    title: {
+      en: "Chemical Safety",
+      ta: "\u0bb5\u0bc7\u0ba4\u0bbf\u0baf\u0bbf\u0baf\u0bb2\u0bcd \u0baa\u0bbe\u0ba4\u0bc1\u0b95\u0bbe\u0baa\u0bcd\u0baa\u0bc1",
+      hi: "\u0930\u093e\u0938\u093e\u092f\u0928\u093f\u0915 \u0938\u0941\u0930\u0915\u094d\u0937\u093e",
+      te: "\u0c30\u0c38\u0c3e\u0c2f\u0c28 \u0c2d\u0c26\u0c4d\u0c30\u0c24",
     },
-    {
-      id: 'ehs-009',
-      title: { en: 'Chemical Safety', ta: 'வேதியியல் பாதுகாப்பு', hi: 'रासायनिक सुरक्षा', te: 'రసాయన భద్రత' },
-      description: { en: 'Handling, MSDS, NFPA Diamond', ta: 'கையாளுதல், MSDS, NFPA', hi: 'हैंडलिंग, MSDS', te: 'హ్యాండ్లింగ్, MSDS' },
-      category: 'Technical Safety',
-      estimatedTime: '20 min',
-      icon: 'Beaker',
-      thumbnail: assets.chemicalHazards,
-      steps: [
-        {
-          id: 'step-9-1',
-          type: 'content',
-          title: { en: 'Safe Handling & MSDS', ta: 'பாதுகாப்பான கையாளுதல் & MSDS', hi: 'सुरक्षित हैंडलिंग और MSDS', te: 'సురక్షిత నిర్వహణ & MSDS' },
-          content: {
-            en: `
+    description: {
+      en: "Handling, MSDS, NFPA Diamond",
+      ta: "\u0b95\u0bc8\u0baf\u0bbe\u0bb3\u0bc1\u0ba4\u0bb2\u0bcd, MSDS, NFPA",
+      hi: "\u0939\u0948\u0902\u0921\u0932\u093f\u0902\u0917, MSDS",
+      te: "\u0c39\u0c4d\u0c2f\u0c3e\u0c02\u0c21\u0c4d\u0c32\u0c3f\u0c02\u0c17\u0c4d, MSDS",
+    },
+    category: "Technical Safety",
+    estimatedTime: "20 min",
+    icon: "Beaker",
+    thumbnail: assets.chemicalHazards,
+    steps: [
+      {
+        id: "step-9-1",
+        type: "content",
+        title: {
+          en: "Safe Handling & MSDS",
+          ta: "\u0baa\u0bbe\u0ba4\u0bc1\u0b95\u0bbe\u0baa\u0bcd\u0baa\u0bbe\u0ba9 \u0b95\u0bc8\u0baf\u0bbe\u0bb3\u0bc1\u0ba4\u0bb2\u0bcd & MSDS",
+          hi: "\u0938\u0941\u0930\u0915\u094d\u0937\u093f\u0924 \u0939\u0948\u0902\u0921\u0932\u093f\u0902\u0917 \u0914\u0930 MSDS",
+          te: "\u0c38\u0c41\u0c30\u0c15\u0c4d\u0c37\u0c3f\u0c24 \u0c28\u0c3f\u0c30\u0c4d\u0c35\u0c39\u0c23 & MSDS",
+        },
+        content: {
+          en: `
               <div class="flex justify-center mb-6">
                  <img src="${assets.chemicalHazards}" alt="Chemical Hazards" class="max-w-md w-full rounded shadow-lg" />
               </div>
@@ -2340,23 +3064,28 @@ export async function initializeSeedData() {
                 </div>
               </div>
             `,
-            ta: `
+          ta: `
                <p>MSDS - வேதிப்பொருட்களின் பண்புகள் மற்றும் பாதுகாப்பு முன்னெச்சரிக்கைகள் பற்றிய தகவல்.</p>
             `,
-            hi: `
+          hi: `
               <p>MSDS: रसायनों के गुणों और सुरक्षा सावधानियों के बारे में जानकारी।</p>
             `,
-            te: `
+          te: `
               <p>MSDS: రసాయనాల గుణాలు మరియు భద్రతా జాగ్రత్తల గురించిన సమాచారం.</p>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-9-2',
-          type: 'content',
-          title: { en: 'NFPA 704 Diamond', ta: 'NFPA 704 வைரம்', hi: 'NFPA 704 डायमंड', te: 'NFPA 704 డైమండ్' },
-          content: {
-            en: `
+      },
+      {
+        id: "step-9-2",
+        type: "content",
+        title: {
+          en: "NFPA 704 Diamond",
+          ta: "NFPA 704 \u0bb5\u0bc8\u0bb0\u0bae\u0bcd",
+          hi: "NFPA 704 \u0921\u093e\u092f\u092e\u0902\u0921",
+          te: "NFPA 704 \u0c21\u0c48\u0c2e\u0c02\u0c21\u0c4d",
+        },
+        content: {
+          en: `
               <div class="flex flex-col items-center">
                 <div class="mb-4">
                    <img src="${assets.chemicalLabel}" alt="Chemical Labels" class="max-w-xs rounded shadow" />
@@ -2377,25 +3106,29 @@ export async function initializeSeedData() {
                 </div>
               </div>
             `,
-            ta: `
+          ta: `
                <p>நீலம் (சுகாதாரம்), சிவப்பு (தீ), மஞ்சள் (வினைத்திறன்), வெள்ளை (குறிப்பிட்ட ஆபத்து).</p>
             `,
-            hi: `
+          hi: `
               <p>नीला (स्वास्थ्य), लाल (आग), पीला (प्रतिक्रियाशीलता), सफेद (विशिष्ट)।</p>
             `,
-            te: `
+          te: `
               <p>నీలం (ఆరోగ్యం), ఎరుపు (మంట), పసుపు (రియాక్టివిటీ), తెలుపు (నిర్దిష్ట).</p>
-            `
-          }
+            `,
         },
-
-        {
-          id: 'step-9-3',
-          type: 'content',
-          title: { en: 'GHS Hazard Symbols', ta: 'GHS ஆபத்து குறியீடுகள்', hi: ' GHS खतरा प्रतीक', te: 'GHS ప్రమాద చిహ్నాలు' },
-          imageUrl: assets.chemicalLabel,
-          content: {
-            en: `
+      },
+      {
+        id: "step-9-3",
+        type: "content",
+        title: {
+          en: "GHS Hazard Symbols",
+          ta: "GHS \u0b86\u0baa\u0ba4\u0bcd\u0ba4\u0bc1 \u0b95\u0bc1\u0bb1\u0bbf\u0baf\u0bc0\u0b9f\u0bc1\u0b95\u0bb3\u0bcd",
+          hi: " GHS \u0916\u0924\u0930\u093e \u092a\u094d\u0930\u0924\u0940\u0915",
+          te: "GHS \u0c2a\u0c4d\u0c30\u0c2e\u0c3e\u0c26 \u0c1a\u0c3f\u0c39\u0c4d\u0c28\u0c3e\u0c32\u0c41",
+        },
+        imageUrl: assets.chemicalLabel,
+        content: {
+          en: `
               <h3 class="text-lg font-bold text-gray-800 mb-4">Know Your Symbols (GHS)</h3>
               <p class="mb-4">Global Harmonized System (GHS) uses standard pictograms to identify hazards instantly.</p>
 
@@ -2433,7 +3166,7 @@ export async function initializeSeedData() {
               </div>
               <p class="font-bold text-center bg-gray-100 p-2 rounded">Always look for these diamond-shaped red border signs on containers!</p>
             `,
-            ta: `
+          ta: `
               <h3>GHS ஆபத்து குறியீடுகள்</h3>
               <ul>
                 <li>🔥 தீப்பற்றக்கூடியவை</li>
@@ -2442,7 +3175,7 @@ export async function initializeSeedData() {
                 <li>💥 வெடிக்கும் தன்மை கொண்டவை</li>
               </ul>
             `,
-            hi: `
+          hi: `
               <h3>GHS खतरा प्रतीक</h3>
               <ul>
                 <li>🔥 ज्वलनशील</li>
@@ -2451,7 +3184,7 @@ export async function initializeSeedData() {
                 <li>💥 विस्फोटक</li>
               </ul>
             `,
-            te: `
+          te: `
               <h3>GHS ప్రమాద చిహ్నాలు</h3>
               <ul>
                 <li>🔥 మండే గుణం</li>
@@ -2459,16 +3192,21 @@ export async function initializeSeedData() {
                 <li>🧪 తినివేసే గుణం</li>
                 <li>💥 పేలుడు పదార్థం</li>
               </ul>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-9-4',
-          type: 'content',
-          title: { en: 'Spill Response Procedure', ta: 'கசிவு கையாளும் முறை', hi: 'स्पिल रिस्पांस', te: 'స్పిల్ రెస్పాన్స్' },
-          imageUrl: assets.oilSpill,
-          content: {
-            en: `
+      },
+      {
+        id: "step-9-4",
+        type: "content",
+        title: {
+          en: "Spill Response Procedure",
+          ta: "\u0b95\u0b9a\u0bbf\u0bb5\u0bc1 \u0b95\u0bc8\u0baf\u0bbe\u0bb3\u0bc1\u0bae\u0bcd \u0bae\u0bc1\u0bb1\u0bc8",
+          hi: "\u0938\u094d\u092a\u093f\u0932 \u0930\u093f\u0938\u094d\u092a\u093e\u0902\u0938",
+          te: "\u0c38\u0c4d\u0c2a\u0c3f\u0c32\u0c4d \u0c30\u0c46\u0c38\u0c4d\u0c2a\u0c3e\u0c28\u0c4d\u0c38\u0c4d",
+        },
+        imageUrl: assets.oilSpill,
+        content: {
+          en: `
               <h3 class="text-lg font-bold text-red-800 mb-4">Chemical Spill Response</h3>
               <div class="bg-red-50 p-4 rounded-lg border-l-4 border-red-600 mb-6">
                 <p class="font-bold">ACT FAST, but ACT SAFELY.</p>
@@ -2498,7 +3236,7 @@ export async function initializeSeedData() {
                 <strong>⛔ NEVER wash chemicals down the drain!</strong>
               </div>
             `,
-            ta: `
+          ta: `
               <h3>ரசாயன கசிவு கையாளும் முறை</h3>
               <ol>
                 <li>மேற்பார்வையாளருக்கு தெரிவிக்கவும்.</li>
@@ -2508,7 +3246,7 @@ export async function initializeSeedData() {
                 <li>சிவப்பு பையில் அப்புறப்படுத்தவும்.</li>
               </ol>
             `,
-            hi: `
+          hi: `
               <h3>रासायनिक रिसाव प्रतिक्रिया</h3>
               <ol>
                 <li>पर्यवेक्षक को सूचित करें।</li>
@@ -2518,7 +3256,7 @@ export async function initializeSeedData() {
                 <li>लाल बैग में डिस्पोज करें।</li>
               </ol>
             `,
-            te: `
+          te: `
               <h3>రసాయన స్పిల్ రెస్పాన్స్</h3>
               <ol>
                 <li>సూపర్‌వైజర్‌కు తెలియజేయండి.</li>
@@ -2527,16 +3265,21 @@ export async function initializeSeedData() {
                 <li>శుభ్రం చేయండి.</li>
                 <li>ఎరుపు సంచిలో పారవేయండి.</li>
               </ol>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-9-5',
-          type: 'content',
-          title: { en: 'Safe Storage Rules', ta: 'பாதுகாப்பான சேமிப்பு', hi: 'सुरक्षित भंडारण', te: 'సురక్షిత నిల్వ' },
-          imageUrl: assets.chemicalLabel,
-          content: {
-            en: `
+      },
+      {
+        id: "step-9-5",
+        type: "content",
+        title: {
+          en: "Safe Storage Rules",
+          ta: "\u0baa\u0bbe\u0ba4\u0bc1\u0b95\u0bbe\u0baa\u0bcd\u0baa\u0bbe\u0ba9 \u0b9a\u0bc7\u0bae\u0bbf\u0baa\u0bcd\u0baa\u0bc1",
+          hi: "\u0938\u0941\u0930\u0915\u094d\u0937\u093f\u0924 \u092d\u0902\u0921\u093e\u0930\u0923",
+          te: "\u0c38\u0c41\u0c30\u0c15\u0c4d\u0c37\u0c3f\u0c24 \u0c28\u0c3f\u0c32\u0c4d\u0c35",
+        },
+        imageUrl: assets.chemicalLabel,
+        content: {
+          en: `
               <h3 class="text-lg font-bold text-indigo-800 mb-4">Chemical Storage Golden Rules</h3>
               
               <div class="space-y-4">
@@ -2572,7 +3315,7 @@ export async function initializeSeedData() {
                 </div>
               </div>
             `,
-            ta: `
+          ta: `
               <h3>பாதுகாப்பான சேமிப்பு விதிகள்</h3>
               <ul>
                 <li>மூடிகளை மூடி வைக்கவும்.</li>
@@ -2581,7 +3324,7 @@ export async function initializeSeedData() {
                 <li>வேதிப்பொருட்களை பிரித்து வைக்கவும்.</li>
               </ul>
             `,
-            hi: `
+          hi: `
               <h3>सुरक्षित भंडारण नियम</h3>
               <ul>
                 <li>ढक्कन बंद रखें।</li>
@@ -2590,7 +3333,7 @@ export async function initializeSeedData() {
                 <li>असंगत रसायनों को दूर रखें।</li>
               </ul>
             `,
-            te: `
+          te: `
               <h3>సురక్షిత నిల్వ సూత్రాలు</h3>
               <ul>
                 <li>మూతలు మూసి ఉంచండి.</li>
@@ -2598,35 +3341,72 @@ export async function initializeSeedData() {
                 <li>కంటి స్థాయి కంటే దిగువన నిల్వ చేయండి.</li>
                 <li>రసాయనాలను వేరుగా ఉంచండి.</li>
               </ul>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-9-quiz',
-          type: 'interactive',
-          interactive: {
-            image: assets.quizUnlabeledBottle,
-            hazards: [{ id: 'q9', x: 50, y: 50, description: { en: 'Unlabeled Chemical Bottle', ta: 'லேபிள் இல்லாத பாட்டில்', hi: 'बिना लेबल वाली बोतल', te: 'లేబుల్ లేని బాటిల్' } }]
-          },
-          title: { en: 'Module 9 Assessment', ta: 'தொகுதி 9 மதிப்பீடு', hi: 'मॉड्यूल 9 मूल्यांकन', te: 'మాడ్యూల్ 9 అసెస్మెంట్' },
-          content: { en: 'Identify the chemical handling error.', ta: 'வேதியியல் கையாளுதல் பிழையை அடையாளம் காணவும்.', hi: 'रासायनिक हैंडलिंग त्रुटि की पहचान करें।', te: 'రసాయన నిర్వహణ లోపాన్ని గుర్తించండి.' }
-        }
-      ]
+      },
+      {
+        id: "step-9-quiz",
+        type: "interactive",
+        interactive: {
+          image: assets.quizUnlabeledBottle,
+          hazards: [
+            {
+              id: "q9",
+              x: 50,
+              y: 50,
+              description: {
+                en: "Unlabeled Chemical Bottle",
+                ta: "\u0bb2\u0bc7\u0baa\u0bbf\u0bb3\u0bcd \u0b87\u0bb2\u0bcd\u0bb2\u0bbe\u0ba4 \u0baa\u0bbe\u0b9f\u0bcd\u0b9f\u0bbf\u0bb2\u0bcd",
+                hi: "\u092c\u093f\u0928\u093e \u0932\u0947\u092c\u0932 \u0935\u093e\u0932\u0940 \u092c\u094b\u0924\u0932",
+                te: "\u0c32\u0c47\u0c2c\u0c41\u0c32\u0c4d \u0c32\u0c47\u0c28\u0c3f \u0c2c\u0c3e\u0c1f\u0c3f\u0c32\u0c4d",
+              },
+            },
+          ],
+        },
+        title: {
+          en: "Module 9 Assessment",
+          ta: "\u0ba4\u0bca\u0b95\u0bc1\u0ba4\u0bbf 9 \u0bae\u0ba4\u0bbf\u0baa\u0bcd\u0baa\u0bc0\u0b9f\u0bc1",
+          hi: "\u092e\u0949\u0921\u094d\u092f\u0942\u0932 9 \u092e\u0942\u0932\u094d\u092f\u093e\u0902\u0915\u0928",
+          te: "\u0c2e\u0c3e\u0c21\u0c4d\u0c2f\u0c42\u0c32\u0c4d 9 \u0c05\u0c38\u0c46\u0c38\u0c4d\u0c2e\u0c46\u0c02\u0c1f\u0c4d",
+        },
+        content: {
+          en: "Identify the chemical handling error.",
+          ta: "\u0bb5\u0bc7\u0ba4\u0bbf\u0baf\u0bbf\u0baf\u0bb2\u0bcd \u0b95\u0bc8\u0baf\u0bbe\u0bb3\u0bc1\u0ba4\u0bb2\u0bcd \u0baa\u0bbf\u0bb4\u0bc8\u0baf\u0bc8 \u0b85\u0b9f\u0bc8\u0baf\u0bbe\u0bb3\u0bae\u0bcd \u0b95\u0bbe\u0ba3\u0bb5\u0bc1\u0bae\u0bcd.",
+          hi: "\u0930\u093e\u0938\u093e\u092f\u0928\u093f\u0915 \u0939\u0948\u0902\u0921\u0932\u093f\u0902\u0917 \u0924\u094d\u0930\u0941\u091f\u093f \u0915\u0940 \u092a\u0939\u091a\u093e\u0928 \u0915\u0930\u0947\u0902\u0964",
+          te: "\u0c30\u0c38\u0c3e\u0c2f\u0c28 \u0c28\u0c3f\u0c30\u0c4d\u0c35\u0c39\u0c23 \u0c32\u0c4b\u0c2a\u0c3e\u0c28\u0c4d\u0c28\u0c3f \u0c17\u0c41\u0c30\u0c4d\u0c24\u0c3f\u0c02\u0c1a\u0c02\u0c21\u0c3f.",
+        },
+      },
+    ],
+  },
+  {
+    id: "ehs-010",
+    title: {
+      en: "Environment & Sustainability",
+      ta: "\u0b9a\u0bc1\u0bb1\u0bcd\u0bb1\u0bc1\u0b9a\u0bcd\u0b9a\u0bc2\u0bb4\u0bb2\u0bcd & \u0ba8\u0bbf\u0bb2\u0bc8\u0ba4\u0bcd\u0ba4\u0ba9\u0bcd\u0bae\u0bc8",
+      hi: "\u092a\u0930\u094d\u092f\u093e\u0935\u0930\u0923 \u0914\u0930 \u0938\u094d\u0925\u093f\u0930\u0924\u093e",
+      te: "\u0c2a\u0c30\u0c4d\u0c2f\u0c3e\u0c35\u0c30\u0c23\u0c02 & \u0c38\u0c41\u0c38\u0c4d\u0c25\u0c3f\u0c30\u0c24",
     },
-    {
-      id: 'ehs-010',
-      title: { en: 'Environment & Sustainability', ta: 'சுற்றுச்சூழல் & நிலைத்தன்மை', hi: 'पर्यावरण और स्थिरता', te: 'పర్యావరణం & సుస్థిరత' },
-      description: { en: '5R Principles, Waste Management', ta: '5R கொள்கைகள், கழிவு மேலாண்மை', hi: '5R सिद्धांत, अपशिष्ट प्रबंधन', te: '5R సూత్రాలు, వ్యర్థాల నిర్వహణ' },
-      category: 'Environment',
-      estimatedTime: '15 min',
-      thumbnail: assets.wasteBins,
-      steps: [
-        {
-          id: 'step-10-1',
-          type: 'content',
-          title: { en: 'The 5R Principle', ta: '5R கொள்கை', hi: '5R सिद्धांत', te: '5R సూత్రం' },
-          content: {
-            en: `
+    description: {
+      en: "5R Principles, Waste Management",
+      ta: "5R \u0b95\u0bca\u0bb3\u0bcd\u0b95\u0bc8\u0b95\u0bb3\u0bcd, \u0b95\u0bb4\u0bbf\u0bb5\u0bc1 \u0bae\u0bc7\u0bb2\u0bbe\u0ba3\u0bcd\u0bae\u0bc8",
+      hi: "5R \u0938\u093f\u0926\u094d\u0927\u093e\u0902\u0924, \u0905\u092a\u0936\u093f\u0937\u094d\u091f \u092a\u094d\u0930\u092c\u0902\u0927\u0928",
+      te: "5R \u0c38\u0c42\u0c24\u0c4d\u0c30\u0c3e\u0c32\u0c41, \u0c35\u0c4d\u0c2f\u0c30\u0c4d\u0c25\u0c3e\u0c32 \u0c28\u0c3f\u0c30\u0c4d\u0c35\u0c39\u0c23",
+    },
+    category: "Environment",
+    estimatedTime: "15 min",
+    thumbnail: assets.wasteBins,
+    steps: [
+      {
+        id: "step-10-1",
+        type: "content",
+        title: {
+          en: "The 5R Principle",
+          ta: "5R \u0b95\u0bca\u0bb3\u0bcd\u0b95\u0bc8",
+          hi: "5R \u0938\u093f\u0926\u094d\u0927\u093e\u0902\u0924",
+          te: "5R \u0c38\u0c42\u0c24\u0c4d\u0c30\u0c02",
+        },
+        content: {
+          en: `
               <div class="space-y-4">
                 <div class="flex justify-center mb-4">
                   <img src="${assets.envImpact}" alt="Environmental Impact" class="max-w-md w-full rounded shadow" />
@@ -2643,23 +3423,28 @@ export async function initializeSeedData() {
                 </div>
               </div>
             `,
-            ta: `
+          ta: `
                <p>மறுக்கவும் (Refuse), குறைக்கவும் (Reduce), மீண்டும் பயன்படுத்தவும் (Reuse), மறுநோக்கம் (Repurpose), மறுசுழற்சி (Recycle).</p>
             `,
-            hi: `
+          hi: `
               <p>5R: मना करें, कम करें, पुनः उपयोग करें, नया उद्देश्य दें, पुनर्चक्रण करें।</p>
             `,
-            te: `
+          te: `
               <p>5R: తిరస్కరించండి, తగ్గించండి, మళ్లీ ఉపయోగించండి, మరొక ప్రయోజనం కోసం వాడండి, రీసైకిల్ చేయండి.</p>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-10-2',
-          type: 'content',
-          title: { en: 'Waste Segregation', ta: 'கழிவு தரம் பிரித்தல்', hi: 'अपशिष्ट पृथक्करण', te: 'వ్యర్థాల విభజన' },
-          content: {
-            en: `
+      },
+      {
+        id: "step-10-2",
+        type: "content",
+        title: {
+          en: "Waste Segregation",
+          ta: "\u0b95\u0bb4\u0bbf\u0bb5\u0bc1 \u0ba4\u0bb0\u0bae\u0bcd \u0baa\u0bbf\u0bb0\u0bbf\u0ba4\u0bcd\u0ba4\u0bb2\u0bcd",
+          hi: "\u0905\u092a\u0936\u093f\u0937\u094d\u091f \u092a\u0943\u0925\u0915\u094d\u0915\u0930\u0923",
+          te: "\u0c35\u0c4d\u0c2f\u0c30\u0c4d\u0c25\u0c3e\u0c32 \u0c35\u0c3f\u0c2d\u0c1c\u0c28",
+        },
+        content: {
+          en: `
               <div class="flex justify-center gap-4 mb-6">
                  <img src="${assets.recyclingBins}" alt="Recycling Bins" class="h-32 rounded shadow object-contain" />
                  <img src="${assets.waste}" alt="Waste Types" class="h-32 rounded shadow object-contain" />
@@ -2682,24 +3467,29 @@ export async function initializeSeedData() {
                 </div>
               </div>
             `,
-            ta: `
+          ta: `
                <p>பச்சை (மக்கும் குப்பை), நீலம் (மறுசுழற்சி), சிவப்பு (ஆபத்தான கழிவு).</p>
             `,
-            hi: `
+          hi: `
               <p>हरा (जैविक), नीला (रीसाइकिलेबल), लाल (खतरनाक)।</p>
             `,
-            te: `
+          te: `
               <p>ఆకుపచ్చ (బయోడిగ్రేడబుల్), నీలం (రీసైకిల్), ఎరుపు (ప్రమాదకరమైన).</p>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-10-3',
-          type: 'content',
-          title: { en: 'Energy Conservation', ta: 'ஆற்றல் சேமிப்பு', hi: 'ऊर्जा संरक्षण', te: 'శక్తి ఆదా' },
-          imageUrl: assets.envImpact,
-          content: {
-            en: `
+      },
+      {
+        id: "step-10-3",
+        type: "content",
+        title: {
+          en: "Energy Conservation",
+          ta: "\u0b86\u0bb1\u0bcd\u0bb1\u0bb2\u0bcd \u0b9a\u0bc7\u0bae\u0bbf\u0baa\u0bcd\u0baa\u0bc1",
+          hi: "\u090a\u0930\u094d\u091c\u093e \u0938\u0902\u0930\u0915\u094d\u0937\u0923",
+          te: "\u0c36\u0c15\u0c4d\u0c24\u0c3f \u0c06\u0c26\u0c3e",
+        },
+        imageUrl: assets.envImpact,
+        content: {
+          en: `
               <h3 class="text-lg font-bold text-yellow-600 mb-4">Save Energy, Save Future</h3>
               <p class="mb-4">Reducing energy consumption lowers our carbon footprint.</p>
 
@@ -2724,7 +3514,7 @@ export async function initializeSeedData() {
                 <strong>Did you know?</strong> One compressed air leak can cost ₹50,000 per year!
               </div>
             `,
-            ta: `
+          ta: `
               <h3>ஆற்றல் சேமிப்பு</h3>
               <ul>
                 <li>LED விளக்குகளைப் பயன்படுத்தவும்.</li>
@@ -2733,7 +3523,7 @@ export async function initializeSeedData() {
                 <li>காற்று கசிவுகளை சரிசெய்யவும்.</li>
               </ul>
             `,
-            hi: `
+          hi: `
               <h3>ऊर्जा संरक्षण</h3>
               <ul>
                 <li>LED का उपयोग करें।</li>
@@ -2741,23 +3531,28 @@ export async function initializeSeedData() {
                 <li>मशीनों को बेवजह न चलाएं।</li>
               </ul>
             `,
-            te: `
+          te: `
               <h3>శక్తి ఆదా</h3>
               <ul>
                 <li>LED లైట్లను వాడండి.</li>
                 <li>AC ని 24°C వద్ద ఉంచండి.</li>
                 <li>యంత్రాలను అనవసరంగా నడపవద్దు.</li>
               </ul>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-10-4',
-          type: 'content',
-          title: { en: 'Water Conservation', ta: 'நீர் சேமிப்பு', hi: 'जल संरक्षण', te: 'నీటి ఆదా' },
-          imageUrl: assets.envImpact,
-          content: {
-            en: `
+      },
+      {
+        id: "step-10-4",
+        type: "content",
+        title: {
+          en: "Water Conservation",
+          ta: "\u0ba8\u0bc0\u0bb0\u0bcd \u0b9a\u0bc7\u0bae\u0bbf\u0baa\u0bcd\u0baa\u0bc1",
+          hi: "\u091c\u0932 \u0938\u0902\u0930\u0915\u094d\u0937\u0923",
+          te: "\u0c28\u0c40\u0c1f\u0c3f \u0c06\u0c26\u0c3e",
+        },
+        imageUrl: assets.envImpact,
+        content: {
+          en: `
               <h3 class="text-lg font-bold text-blue-600 mb-4">Every Drop Counts</h3>
               
               <div class="space-y-4 mb-6">
@@ -2781,7 +3576,7 @@ export async function initializeSeedData() {
                 </div>
               </div>
             `,
-            ta: `
+          ta: `
               <h3>நீர் சேமிப்பு</h3>
               <ul>
                 <li>கசிவுகளை சரிசெய்யவும்.</li>
@@ -2789,7 +3584,7 @@ export async function initializeSeedData() {
                 <li>சிக்கனமாக பயன்படுத்தவும்.</li>
               </ul>
             `,
-            hi: `
+          hi: `
               <h3>जल संरक्षण</h3>
               <ul>
                 <li>लीक ठीक करें।</li>
@@ -2797,23 +3592,28 @@ export async function initializeSeedData() {
                 <li>कम पानी इस्तेमाल करें।</li>
               </ul>
             `,
-            te: `
+          te: `
               <h3>నీటి ఆదా</h3>
               <ul>
                 <li>లీకేజీలను అరికట్టండి.</li>
                 <li>నీటిని రీసైకిల్ చేయండి.</li>
                 <li>తక్కువ నీటిని వాడండి.</li>
               </ul>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-10-5',
-          type: 'content',
-          title: { en: 'Pollution Control', ta: 'மாசு கட்டுப்பாடு', hi: 'प्रदूषण नियंत्रण', te: 'కాలుష్య నియంత్రణ' },
-          imageUrl: assets.envImpact,
-          content: {
-            en: `
+      },
+      {
+        id: "step-10-5",
+        type: "content",
+        title: {
+          en: "Pollution Control",
+          ta: "\u0bae\u0bbe\u0b9a\u0bc1 \u0b95\u0b9f\u0bcd\u0b9f\u0bc1\u0baa\u0bcd\u0baa\u0bbe\u0b9f\u0bc1",
+          hi: "\u092a\u094d\u0930\u0926\u0942\u0937\u0923 \u0928\u093f\u092f\u0902\u0924\u094d\u0930\u0923",
+          te: "\u0c15\u0c3e\u0c32\u0c41\u0c37\u0c4d\u0c2f \u0c28\u0c3f\u0c2f\u0c02\u0c24\u0c4d\u0c30\u0c23",
+        },
+        imageUrl: assets.envImpact,
+        content: {
+          en: `
               <h3 class="text-lg font-bold text-gray-700 mb-4">Air & Noise Pollution</h3>
               
               <div class="grid md:grid-cols-2 gap-4">
@@ -2835,46 +3635,70 @@ export async function initializeSeedData() {
                 </div>
               </div>
             `,
-            ta: `
+          ta: `
               <h3>மாசு கட்டுப்பாடு</h3>
               <p><strong>காற்று:</strong> தூசி வடிகட்டிகளை பயன்படுத்தவும்.</p>
               <p><strong>ஒலி:</strong> இயந்திரங்களை சத்தமில்லாமல் பராமரிக்கவும். காது கேட்கும் கருவி (Ear plug) அணியவும்.</p>
             `,
-            hi: `
+          hi: `
               <h3>प्रदूषण नियंत्रण</h3>
               <p>वायु: धूल फिल्टर का प्रयोग करें।</p>
               <p>ध्वनि: मशीनों को लुब्रिकेट करें। ईयर प्लग पहनें।</p>
             `,
-            te: `
+          te: `
               <h3>కాలుష్య నియంత్రణ</h3>
               <p>గాలి: డస్ట్ ఫిల్టర్ల వాడకం.</p>
               <p>ధ్వని: యంత్రాల నిర్వహణ. ఇయర్ ప్లగ్ ధరించండి.</p>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-10-quiz',
-          type: 'quiz',
-          title: { en: 'Module 10 Assessment', ta: 'தொகுதி 10 மதிப்பீடு', hi: 'मॉड्यूल 10 मूल्यांकन', te: 'మాడ్యూల్ 10 అసెస్మెంట్' },
-          content: { en: 'Test your Environmental knowledge.', ta: 'சுற்றுச்சூழல் அறிவை சோதிக்கவும்.', hi: 'पर्यावरण ज्ञान का परीक्षण करें।', te: 'పర్యావరణ పరిజ్ఞానాన్ని పరీక్షించండి.' }
-
-        }
-      ]
+      },
+      {
+        id: "step-10-quiz",
+        type: "quiz",
+        title: {
+          en: "Module 10 Assessment",
+          ta: "\u0ba4\u0bca\u0b95\u0bc1\u0ba4\u0bbf 10 \u0bae\u0ba4\u0bbf\u0baa\u0bcd\u0baa\u0bc0\u0b9f\u0bc1",
+          hi: "\u092e\u0949\u0921\u094d\u092f\u0942\u0932 10 \u092e\u0942\u0932\u094d\u092f\u093e\u0902\u0915\u0928",
+          te: "\u0c2e\u0c3e\u0c21\u0c4d\u0c2f\u0c42\u0c32\u0c4d 10 \u0c05\u0c38\u0c46\u0c38\u0c4d\u0c2e\u0c46\u0c02\u0c1f\u0c4d",
+        },
+        content: {
+          en: "Test your Environmental knowledge.",
+          ta: "\u0b9a\u0bc1\u0bb1\u0bcd\u0bb1\u0bc1\u0b9a\u0bcd\u0b9a\u0bc2\u0bb4\u0bb2\u0bcd \u0b85\u0bb1\u0bbf\u0bb5\u0bc8 \u0b9a\u0bcb\u0ba4\u0bbf\u0b95\u0bcd\u0b95\u0bb5\u0bc1\u0bae\u0bcd.",
+          hi: "\u092a\u0930\u094d\u092f\u093e\u0935\u0930\u0923 \u091c\u094d\u091e\u093e\u0928 \u0915\u093e \u092a\u0930\u0940\u0915\u094d\u0937\u0923 \u0915\u0930\u0947\u0902\u0964",
+          te: "\u0c2a\u0c30\u0c4d\u0c2f\u0c3e\u0c35\u0c30\u0c23 \u0c2a\u0c30\u0c3f\u0c1c\u0c4d\u0c1e\u0c3e\u0c28\u0c3e\u0c28\u0c4d\u0c28\u0c3f \u0c2a\u0c30\u0c40\u0c15\u0c4d\u0c37\u0c3f\u0c02\u0c1a\u0c02\u0c21\u0c3f.",
+        },
+      },
+    ],
+  },
+  {
+    id: "ehs-011",
+    title: {
+      en: "Incident Reporting & Analysis",
+      ta: "\u0bb5\u0bbf\u0baa\u0ba4\u0bcd\u0ba4\u0bc1 \u0b85\u0bb1\u0bbf\u0b95\u0bcd\u0b95\u0bc8 & \u0baa\u0b95\u0bc1\u0baa\u0bcd\u0baa\u0bbe\u0baf\u0bcd\u0bb5\u0bc1",
+      hi: "\u0918\u091f\u0928\u093e \u0930\u093f\u092a\u094b\u0930\u094d\u091f\u093f\u0902\u0917 \u0914\u0930 \u0935\u093f\u0936\u094d\u0932\u0947\u0937\u0923",
+      te: "\u0c38\u0c02\u0c18\u0c1f\u0c28 \u0c28\u0c3f\u0c35\u0c47\u0c26\u0c3f\u0c15 & \u0c35\u0c3f\u0c36\u0c4d\u0c32\u0c47\u0c37\u0c23",
     },
-    {
-      id: 'ehs-011',
-      title: { en: 'Incident Reporting & Analysis', ta: 'விபத்து அறிக்கை & பகுப்பாய்வு', hi: 'घटना रिपोर्टिंग और विश्लेषण', te: 'సంఘటన నివేదిక & విశ్లేషణ' },
-      description: { en: 'Case Studies, Reporting Procedure', ta: 'வழக்கு ஆய்வுகள், அறிக்கை முறை', hi: 'केस स्टडीज, रिपोर्टिंग प्रक्रिया', te: 'కేస్ స్టడీస్, రిపోర్టింగ్ విధానం' },
-      category: 'Management',
-      estimatedTime: '20 min',
-      thumbnail: assets.emergency,
-      steps: [
-        {
-          id: 'step-11-1',
-          type: 'content',
-          title: { en: 'Case Study: The Loose Bolt', ta: 'வழக்கு ஆய்வு: தளர்வான போல்ட்', hi: 'केस स्टडी: ढीला बोल्ट', te: 'కేస్ స్టడీ: లూస్ బోల్ట్' },
-          content: {
-            en: `
+    description: {
+      en: "Case Studies, Reporting Procedure",
+      ta: "\u0bb5\u0bb4\u0b95\u0bcd\u0b95\u0bc1 \u0b86\u0baf\u0bcd\u0bb5\u0bc1\u0b95\u0bb3\u0bcd, \u0b85\u0bb1\u0bbf\u0b95\u0bcd\u0b95\u0bc8 \u0bae\u0bc1\u0bb1\u0bc8",
+      hi: "\u0915\u0947\u0938 \u0938\u094d\u091f\u0921\u0940\u091c, \u0930\u093f\u092a\u094b\u0930\u094d\u091f\u093f\u0902\u0917 \u092a\u094d\u0930\u0915\u094d\u0930\u093f\u092f\u093e",
+      te: "\u0c15\u0c47\u0c38\u0c4d \u0c38\u0c4d\u0c1f\u0c21\u0c40\u0c38\u0c4d, \u0c30\u0c3f\u0c2a\u0c4b\u0c30\u0c4d\u0c1f\u0c3f\u0c02\u0c17\u0c4d \u0c35\u0c3f\u0c27\u0c3e\u0c28\u0c02",
+    },
+    category: "Management",
+    estimatedTime: "20 min",
+    thumbnail: assets.emergency,
+    steps: [
+      {
+        id: "step-11-1",
+        type: "content",
+        title: {
+          en: "Case Study: The Loose Bolt",
+          ta: "\u0bb5\u0bb4\u0b95\u0bcd\u0b95\u0bc1 \u0b86\u0baf\u0bcd\u0bb5\u0bc1: \u0ba4\u0bb3\u0bb0\u0bcd\u0bb5\u0bbe\u0ba9 \u0baa\u0bcb\u0bb2\u0bcd\u0b9f\u0bcd",
+          hi: "\u0915\u0947\u0938 \u0938\u094d\u091f\u0921\u0940: \u0922\u0940\u0932\u093e \u092c\u094b\u0932\u094d\u091f",
+          te: "\u0c15\u0c47\u0c38\u0c4d \u0c38\u0c4d\u0c1f\u0c21\u0c40: \u0c32\u0c42\u0c38\u0c4d \u0c2c\u0c4b\u0c32\u0c4d\u0c1f\u0c4d",
+        },
+        content: {
+          en: `
               <div class="bg-gray-50 p-6 rounded-lg">
                 <div class="float-right ml-4 mb-4 w-1/3">
                    <img src="${assets.firstAidScene}" alt="Accident Scene" class="w-full rounded shadow border" />
@@ -2908,23 +3732,28 @@ export async function initializeSeedData() {
                 </div>
               </div>
             `,
-            ta: `
+          ta: `
                <p>பாடம்: சிறிய பிரச்சனைகளை உடனடியாக புகாரளிக்கவும்.</p>
             `,
-            hi: `
+          hi: `
               <p>पाठ: छोटी समस्याओं की तुरंत रिपोर्ट करें।</p>
             `,
-            te: `
+          te: `
               <p>పాఠం: చిన్న సమస్యలను వెంటనే నివేదించండి.</p>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-11-2',
-          type: 'content',
-          title: { en: 'Reporting Procedure', ta: 'அறிக்கை முறை', hi: 'रिपोर्टिंग प्रक्रिया', te: 'రిపోర్టింగ్ విధానం' },
-          content: {
-            en: `
+      },
+      {
+        id: "step-11-2",
+        type: "content",
+        title: {
+          en: "Reporting Procedure",
+          ta: "\u0b85\u0bb1\u0bbf\u0b95\u0bcd\u0b95\u0bc8 \u0bae\u0bc1\u0bb1\u0bc8",
+          hi: "\u0930\u093f\u092a\u094b\u0930\u094d\u091f\u093f\u0902\u0917 \u092a\u094d\u0930\u0915\u094d\u0930\u093f\u092f\u093e",
+          te: "\u0c30\u0c3f\u0c2a\u0c4b\u0c30\u0c4d\u0c1f\u0c3f\u0c02\u0c17\u0c4d \u0c35\u0c3f\u0c27\u0c3e\u0c28\u0c02",
+        },
+        content: {
+          en: `
               <div class="flex flex-col items-center">
                 <div class="w-full max-w-2xl bg-white p-6 shadow-lg rounded-lg border-t-4 border-blue-600">
                   <h3 class="text-blue-900 font-bold text-xl mb-4">Steps to Report</h3>
@@ -2950,36 +3779,41 @@ export async function initializeSeedData() {
                 </div>
               </div>
             `,
-            ta: `
+          ta: `
                <ol class="list-decimal pl-5">
                  <li>மேற்பார்வையாளரிடம் தெரிவிக்கவும்.</li>
                  <li>முதலுதவி பெறவும்.</li>
                  <li>விபத்து படிவத்தை நிரப்பவும்.</li>
                </ol>
             `,
-            hi: `
+          hi: `
               <ol class="list-decimal pl-5">
                 <li>पर्यवेक्षक को सूचित करें।</li>
                 <li>प्राथमिक चिकित्सा प्राप्त करें।</li>
                 <li>घटना फॉर्म भरें।</li>
               </ol>
             `,
-            te: `
+          te: `
               <ol class="list-decimal pl-5">
                 <li>పర్యవేక్షకుడికి తెలియజేయండి.</li>
                 <li>ప్రథమ చికిత్స పొందండి.</li>
                 <li>సంఘటన ఫారమ్‌ను పూరించండి.</li>
               </ol>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-11-4',
-          type: 'content',
-          title: { en: 'First Aid Basics', ta: 'முதலுதவி அடிப்படைகள்', hi: 'प्राथमिक चिकित्सा मूल बातें', te: 'ప్రథమ చికిత్స ప్రాథమికాలు' },
-          imageUrl: assets.firstAidKit,
-          content: {
-            en: `
+      },
+      {
+        id: "step-11-4",
+        type: "content",
+        title: {
+          en: "First Aid Basics",
+          ta: "\u0bae\u0bc1\u0ba4\u0bb2\u0bc1\u0ba4\u0bb5\u0bbf \u0b85\u0b9f\u0bbf\u0baa\u0bcd\u0baa\u0b9f\u0bc8\u0b95\u0bb3\u0bcd",
+          hi: "\u092a\u094d\u0930\u093e\u0925\u092e\u093f\u0915 \u091a\u093f\u0915\u093f\u0924\u094d\u0938\u093e \u092e\u0942\u0932 \u092c\u093e\u0924\u0947\u0902",
+          te: "\u0c2a\u0c4d\u0c30\u0c25\u0c2e \u0c1a\u0c3f\u0c15\u0c3f\u0c24\u0c4d\u0c38 \u0c2a\u0c4d\u0c30\u0c3e\u0c25\u0c2e\u0c3f\u0c15\u0c3e\u0c32\u0c41",
+        },
+        imageUrl: assets.firstAidKit,
+        content: {
+          en: `
               <h3 class="text-lg font-bold text-rose-800 mb-4">🏥 First Aid - The Golden Hour</h3>
               <div class="bg-rose-50 p-4 rounded-lg border-l-4 border-rose-600 mb-6">
                 <p class="font-semibold">The first 60 minutes after an injury are critical!</p>
@@ -3061,7 +3895,7 @@ export async function initializeSeedData() {
                 </ul>
               </div>
             `,
-            ta: `
+          ta: `
               <h3>முதலுதவி அடிப்படைகள்</h3>
               <p>காயத்திற்கு பிறகு முதல் 60 நிமிடங்கள் முக்கியமானவை!</p>
               <h4>DR ABC</h4>
@@ -3073,7 +3907,7 @@ export async function initializeSeedData() {
                 <li><strong>C - இரத்த ஓட்டம்:</strong> துடிப்பு மற்றும் இரத்தப்போக்கு சரிபார்ப்பு</li>
               </ul>
             `,
-            hi: `
+          hi: `
               <h3>प्राथमिक चिकित्सा मूल बातें</h3>
               <p>चोट के बाद पहले 60 मिनट महत्वपूर्ण हैं!</p>
               <h4>DR ABC</h4>
@@ -3085,7 +3919,7 @@ export async function initializeSeedData() {
                 <li><strong>C - परिसंचरण:</strong> नाड़ी और गंभीर रक्तस्राव की जांच करें</li>
               </ul>
             `,
-            te: `
+          te: `
               <h3>ప్రథమ చికిత్స ప్రాథమికాలు</h3>
               <p>గాయం తర్వాత మొదటి 60 నిమిషాలు కీలకమైనవి!</p>
               <h4>DR ABC</h4>
@@ -3096,18 +3930,28 @@ export async function initializeSeedData() {
                 <li><strong>B - శ్వాస:</strong> వారు శ్వాస తీసుకుంటున్నారో లేదో తనిఖీ చేయండి</li>
                 <li><strong>C - రక్త ప్రసరణ:</strong> పల్స్ మరియు తీవ్రమైన రక్తస్రావం తనిఖీ చేయండి</li>
               </ul>
-            `
-          }
+            `,
         },
-        {
-          id: 'step-11-quiz',
-          type: 'quiz',
-          title: { en: 'Module 11 Assessment', ta: 'தொகுதி 11 மதிப்பீடு', hi: 'मॉड्यूल 11 मूल्यांकन', te: 'మాడ్యూల్ 11 అసెస్మెంట్' },
-          content: { en: 'Final Case Study Assessment.', ta: 'இறுதி வழக்கு ஆய்வு மதிப்பீடு.', hi: 'अंतिम केस स्टडी मूल्यांकन।', te: 'తుది కేస్ స్టడీ అసెస్మెంట్.' }
-        }
-      ]
-    }
-  ];
+      },
+      {
+        id: "step-11-quiz",
+        type: "quiz",
+        title: {
+          en: "Module 11 Assessment",
+          ta: "\u0ba4\u0bca\u0b95\u0bc1\u0ba4\u0bbf 11 \u0bae\u0ba4\u0bbf\u0baa\u0bcd\u0baa\u0bc0\u0b9f\u0bc1",
+          hi: "\u092e\u0949\u0921\u094d\u092f\u0942\u0932 11 \u092e\u0942\u0932\u094d\u092f\u093e\u0902\u0915\u0928",
+          te: "\u0c2e\u0c3e\u0c21\u0c4d\u0c2f\u0c42\u0c32\u0c4d 11 \u0c05\u0c38\u0c46\u0c38\u0c4d\u0c2e\u0c46\u0c02\u0c1f\u0c4d",
+        },
+        content: {
+          en: "Final Case Study Assessment.",
+          ta: "\u0b87\u0bb1\u0bc1\u0ba4\u0bbf \u0bb5\u0bb4\u0b95\u0bcd\u0b95\u0bc1 \u0b86\u0baf\u0bcd\u0bb5\u0bc1 \u0bae\u0ba4\u0bbf\u0baa\u0bcd\u0baa\u0bc0\u0b9f\u0bc1.",
+          hi: "\u0905\u0902\u0924\u093f\u092e \u0915\u0947\u0938 \u0938\u094d\u091f\u0921\u0940 \u092e\u0942\u0932\u094d\u092f\u093e\u0902\u0915\u0928\u0964",
+          te: "\u0c24\u0c41\u0c26\u0c3f \u0c15\u0c47\u0c38\u0c4d \u0c38\u0c4d\u0c1f\u0c21\u0c40 \u0c05\u0c38\u0c46\u0c38\u0c4d\u0c2e\u0c46\u0c02\u0c1f\u0c4d.",
+        },
+      },
+    ],
+  },
+];
 
   // Seed questions for each module
   const questions: Question[] = [

@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Shield, User, Lock, AlertCircle, Loader2 } from 'lucide-react';
 import delphiLogo from '@/assets/delphi-tvs-logo.png';
+import { assets } from '@/lib/assetsMap';
 
 export function LoginForm() {
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   const { login } = useAuth();
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -18,23 +22,37 @@ export function LoginForm() {
     setError('');
     setIsLoading(true);
 
-    const result = await login(username, password);
+    try {
+      const result = await login(username, password);
 
-    if (!result.success) {
-      setError(result.error || 'Login failed');
+      if (result.success) {
+        // Explicitly navigate on success to ensure immediate feedback
+        navigate('/dashboard');
+      } else {
+        setError(result.error || 'Login failed');
+        setIsLoading(false);
+      }
+    } catch (err) {
+      console.error('Login error:', err);
+      // Show actual error message for better debugging
+      setError(err instanceof Error ? err.message : 'An unexpected error occurred. Please try again.');
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   };
 
   return (
     <div className="min-h-screen flex bg-background">
       {/* Left Side - Brand & Information */}
-      <div className="hidden lg:flex lg:w-1/2 hero-gradient p-12 flex-col justify-between">
-        <div>
+      <div className="hidden lg:flex lg:w-1/2 hero-gradient p-12 flex-col justify-between relative overflow-hidden">
+        {/* Background Overlay Image */}
+        <div className="absolute inset-0 z-0 opacity-10 mix-blend-overlay pointer-events-none">
+          <img src={assets.workerOrientation} alt="Background" className="w-full h-full object-cover" />
+        </div>
+
+        <div className="relative z-10">
           {/* Logo and Company Name */}
           <div className="flex items-center gap-4 mb-12">
-            <div className="h-24 w-24 bg-white rounded-lg flex items-center justify-center p-2">
+            <div className="h-24 w-24 bg-white rounded-lg flex items-center justify-center p-2 shadow-lg">
               <img
                 src={delphiLogo}
                 alt="Delphi TVS Logo"
@@ -62,19 +80,19 @@ export function LoginForm() {
 
           {/* Company Info Cards */}
           <div className="grid grid-cols-2 gap-6 mb-8">
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/20 transition-colors">
               <div className="text-3xl font-bold text-white mb-2">30+</div>
               <div className="text-white/80 text-sm">Years of Excellence</div>
             </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/20 transition-colors">
               <div className="text-3xl font-bold text-white mb-2">5000+</div>
               <div className="text-white/80 text-sm">Employees Trained</div>
             </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/20 transition-colors">
               <div className="text-3xl font-bold text-white mb-2">BS6</div>
               <div className="text-white/80 text-sm">Emission Compliance</div>
             </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/20 transition-colors">
               <div className="text-3xl font-bold text-white mb-2">100%</div>
               <div className="text-white/80 text-sm">Safety Standards</div>
             </div>
@@ -92,7 +110,7 @@ export function LoginForm() {
         </div>
 
         {/* Footer Info */}
-        <div className="text-white/60 text-sm">
+        <div className="relative z-10 text-white/60 text-sm">
           <p>Joint Venture: PHINIA Inc. (USA) × TVS Group (India)</p>
         </div>
       </div>
@@ -198,4 +216,3 @@ export function LoginForm() {
     </div>
   );
 }
-

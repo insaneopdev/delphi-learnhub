@@ -261,8 +261,14 @@ export default function Dashboard() {
                       onClick={() => navigate(`/training/${module.id}`)}
                       className="w-full flex items-center gap-4 p-3 rounded-lg hover:bg-muted/50 transition-colors text-left"
                     >
-                      <div className="w-10 h-10 rounded-lg hero-gradient flex items-center justify-center flex-shrink-0">
-                        <BookOpen className="w-5 h-5 text-primary-foreground" />
+                      <div className="w-16 h-12 rounded-lg overflow-hidden flex-shrink-0 border border-border shadow-sm">
+                        {module.imageUrl ? (
+                          <img src={module.imageUrl} alt={t(module.title)} className="w-full h-full object-cover" />
+                        ) : (
+                          <div className="w-full h-full hero-gradient flex items-center justify-center">
+                            <BookOpen className="w-6 h-6 text-white" />
+                          </div>
+                        )}
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="font-medium text-foreground truncate">{t(module.title)}</p>

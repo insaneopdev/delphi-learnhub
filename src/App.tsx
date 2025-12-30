@@ -16,7 +16,8 @@ import TestResults from "./pages/TestResults";
 import Review from "./pages/Review";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
-import { Component, ReactNode } from "react";
+import { Component, ReactNode, useEffect } from "react";
+import { initializeSeedData } from "@/lib/seedData";
 
 const queryClient = new QueryClient();
 
@@ -141,24 +142,48 @@ function AppRoutes() {
   );
 }
 
-const App = () => (
-  <ErrorBoundary>
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <AuthProvider>
-          <LanguageProvider>
-            <DisplayProvider>
-              <Toaster />
-              <Sonner />
-              <BrowserRouter basename="/delphi-learnhub">
-                <AppRoutes />
-              </BrowserRouter>
-            </DisplayProvider>
-          </LanguageProvider>
-        </AuthProvider>
-      </TooltipProvider>
-    </QueryClientProvider>
-  </ErrorBoundary>
-);
+
+
+
+const App = () => {
+  useEffect(() => {
+    console.log('🔄 App mounted - initializing seed data...');
+    const result = initializeSeedData();
+    console.log('✅ Seed initialization completed:', result);
+
+    // Force check version
+    const currentVersion = localStorage.getItem('delphi_tvs_data_version');
+    console.log(' Current localStorage version:', currentVersion);
+    console.log('📦 Expected version: 15.2');
+
+    if (currentVersion !== '15.2') {
+      console.warn('⚠️ Version mismatch! Clearing all data and reinitializing...');
+      localStorage.clear();
+      initializeSeedData();
+      console.log('✅ Force reinitialization complete!');
+    }
+  }, []);
+
+  return (
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <AuthProvider>
+            <LanguageProvider>
+              <DisplayProvider>
+                <Toaster />
+                <Sonner />
+                <BrowserRouter basename="/delphi-learnhub">
+                  <AppRoutes />
+                </BrowserRouter>
+              </DisplayProvider>
+            </LanguageProvider>
+          </AuthProvider>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
+  );
+
+};
 
 export default App;

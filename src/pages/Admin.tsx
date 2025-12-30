@@ -31,7 +31,7 @@ import {
   type TestAttempt,
 } from '@/lib/storage';
 import { toast } from '@/hooks/use-toast';
-import { translateToAllLanguages } from '@/lib/translator';
+import { translateToAllLanguages, translateHtml } from '@/lib/translator';
 import { htmlToMarkdown, markdownToHtml } from '@/lib/markdown';
 import { RichTextEditor } from '@/components/RichTextEditor';
 import { Shield, BookOpen, AlertTriangle, Zap, Heart, Star, Award, Target, Lightbulb, Briefcase, Wrench, HardHat } from 'lucide-react';
@@ -65,7 +65,7 @@ export default function Admin() {
     description: Record<string, string>;
     icon: string;
     imageUrl?: string;
-    steps: { id: string; type: string; title: Record<string, string>; content: Record<string, string>; imageUrl?: string; imageWidth?: string; imageHeight?: string; videoUrl?: string; questions?: any[] }[];
+    steps: { id: string; type: string; title: Record<string, string>; content: Record<string, string>; imageUrl?: string; imageWidth?: string; imageHeight?: string; videoUrl?: string; questions?: any[]; interactive?: { image: string; hazards: { id: string; description: Record<string, string>; x?: number; y?: number }[] } }[];
   }>({ title: {}, description: {}, icon: '', imageUrl: '', steps: [] });
 
   const [testForm, setTestForm] = useState<{
@@ -169,6 +169,7 @@ export default function Admin() {
 
     const u: User = {
       id,
+      name: newUsername, // Default name to username
       username: newUsername,
       passwordHash,
       role: newRole,
@@ -235,7 +236,8 @@ export default function Admin() {
               imageWidth: s.imageWidth ?? '',
               imageHeight: s.imageHeight ?? '',
               videoUrl: s.videoUrl ?? '',
-              questions: stepQuestions
+              questions: stepQuestions,
+              interactive: s.interactive ?? undefined,
             };
           }),
         });
@@ -287,6 +289,7 @@ export default function Admin() {
           imageWidth: s.imageWidth || undefined,
           imageHeight: s.imageHeight || undefined,
           videoUrl: s.videoUrl || undefined,
+          interactive: s.interactive && s.type === 'interactive' ? s.interactive : undefined,
         })),
       };
 
@@ -643,6 +646,7 @@ export default function Admin() {
                         <option value="intro">Intro</option>
                         <option value="video">Video</option>
                         <option value="quiz">Quiz</option>
+                        <option value="interactive">Interactive (Spot the Hazard)</option>
                       </select>
                       <Button variant="destructive" onClick={() => removeModuleStep(s.id)}>Remove</Button>
                     </div>
@@ -705,25 +709,34 @@ export default function Admin() {
                             size="sm"
                             variant="outline"
                             onClick={async () => {
-                              const englishContent = s.content.en || '';
+                              const englishContent = String(s.content.en || '');
                               if (!englishContent.trim()) {
                                 toast({ title: 'Please enter English content first', variant: 'destructive' });
                                 return;
                               }
+
                               try {
-                                toast({ title: 'Translating...' });
-                                const translations = await translateToAllLanguages(englishContent);
-                                const steps = [...moduleForm.steps];
-                                steps[idx].content = {
-                                  ...steps[idx].content,
-                                  ta: translations.ta,
-                                  hi: translations.hi,
-                                  te: translations.te,
-                                };
-                                setModuleForm(prev => ({ ...prev, steps }));
-                                toast({ title: 'Translation complete!' });
+                                toast({ title: 'Translating HTML content...', description: 'This may take a moment for long text.' });
+                                const translations = await translateHtml(englishContent);
+
+                                setModuleForm(prev => {
+                                  const newSteps = [...prev.steps];
+                                  newSteps[idx] = {
+                                    ...newSteps[idx],
+                                    content: {
+                                      ...newSteps[idx].content,
+                                      ta: translations.ta,
+                                      hi: translations.hi,
+                                      te: translations.te,
+                                    }
+                                  };
+                                  return { ...prev, steps: newSteps };
+                                });
+
+                                toast({ title: 'Translation complete!', className: 'bg-green-500 text-white' });
                               } catch (error) {
-                                toast({ title: 'Translation failed', variant: 'destructive' });
+                                console.error(error);
+                                toast({ title: 'Translation failed', description: 'Please check console for details.', variant: 'destructive' });
                               }
                             }}
                           >
@@ -1247,6 +1260,243 @@ export default function Admin() {
                             </div>
                           </div>
                         )}
+                      </div>
+                    )}
+
+                    {/* Interactive Quiz Editor for "Spot the Hazard" Steps */}
+                    {s.type === 'interactive' && (
+                      <div className="mt-3 p-3 bg-yellow-50 dark:bg-yellow-950/20 rounded-md border border-yellow-200 dark:border-yellow-800">
+                        <h4 className="font-medium mb-3 text-sm flex items-center gap-2">
+                          🎯 Interactive Quiz (Spot the Hazard)
+                        </h4>
+
+                        {/* Quiz Image */}
+                        <div className="mb-4">
+                          <Label className="text-sm font-medium">Quiz Image</Label>
+                          <p className="text-xs text-muted-foreground mb-2">Upload or paste the image URL for this "Spot the Hazard" quiz</p>
+                          <div className="flex gap-2">
+                            <Input
+                              placeholder="https://example.com/hazard-scene.jpg"
+                              value={s.interactive?.image || ''}
+                              onChange={(e) => {
+                                const steps = [...moduleForm.steps];
+                                if (!steps[idx].interactive) steps[idx].interactive = { image: '', hazards: [] };
+                                steps[idx].interactive!.image = (e.target as HTMLInputElement).value;
+                                setModuleForm(prev => ({ ...prev, steps }));
+                              }}
+                            />
+                            <Button type="button" variant="outline" size="sm" onClick={async () => {
+                              const input = document.createElement('input');
+                              input.type = 'file';
+                              input.accept = 'image/*';
+                              input.onchange = async (e) => {
+                                const file = (e.target as HTMLInputElement).files?.[0];
+                                if (file) {
+                                  try {
+                                    const base64 = await handleImageUpload(file);
+                                    const steps = [...moduleForm.steps];
+                                    if (!steps[idx].interactive) steps[idx].interactive = { image: '', hazards: [] };
+                                    steps[idx].interactive!.image = base64;
+                                    setModuleForm(prev => ({ ...prev, steps }));
+                                    toast({ title: 'Image uploaded successfully' });
+                                  } catch (error) {
+                                    toast({ title: 'Upload failed', description: (error as Error).message, variant: 'destructive' });
+                                  }
+                                }
+                              };
+                              input.click();
+                            }}>Upload</Button>
+                          </div>
+
+                          {/* Image Preview with Hazard Points */}
+                          {s.interactive?.image && (
+                            <div className="mt-3 relative border rounded-lg overflow-hidden bg-muted/30 inline-block max-w-full">
+                              <div className="relative" style={{ maxWidth: '600px' }}>
+                                <img
+                                  src={s.interactive.image}
+                                  alt="Interactive Quiz"
+                                  className="w-full rounded"
+                                  onError={(e) => (e.currentTarget.style.display = 'none')}
+                                  onClick={(e) => {
+                                    // Calculate click coordinates as percentages
+                                    const rect = e.currentTarget.getBoundingClientRect();
+                                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+                                    // Add new hazard point
+                                    const steps = [...moduleForm.steps];
+                                    if (!steps[idx].interactive) steps[idx].interactive = { image: '', hazards: [] };
+                                    steps[idx].interactive!.hazards.push({
+                                      id: crypto.randomUUID(),
+                                      description: { en: `Hazard ${(steps[idx].interactive!.hazards.length + 1)}` },
+                                      x: Math.round(x * 10) / 10,
+                                      y: Math.round(y * 10) / 10,
+                                    });
+                                    setModuleForm(prev => ({ ...prev, steps }));
+                                    toast({ title: '✓ Hazard point added', description: `Click: ${Math.round(x)}%, ${Math.round(y)}%` });
+                                  }}
+                                  style={{ cursor: 'crosshair' }}
+                                />
+                                {/* Show hazard markers */}
+                                {(s.interactive.hazards || []).map((hazard, hIdx) => (
+                                  <div
+                                    key={hazard.id}
+                                    className="absolute w-8 h-8 bg-red-500 rounded-full border-2 border-white shadow-lg flex items-center justify-center text-white font-bold text-xs"
+                                    style={{
+                                      left: `${hazard.x}%`,
+                                      top: `${hazard.y}%`,
+                                      transform: 'translate(-50%, -50%)',
+                                      cursor: 'pointer',
+                                    }}
+                                    title={`${hazard.description?.en || 'Hazard'} (${hazard.x}%, ${hazard.y}%)`}
+                                  >
+                                    {hIdx + 1}
+                                  </div>
+                                ))}
+                              </div>
+                              <p className="text-xs text-muted-foreground p-2 bg-muted/50">
+                                💡 Click on the image to add hazard points
+                              </p>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Hazard Points List */}
+                        <div>
+                          <Label className="text-sm font-medium">Hazard Points ({(s.interactive?.hazards || []).length})</Label>
+                          <div className="space-y-3 mt-2">
+                            {(s.interactive?.hazards || []).map((hazard, hIdx) => (
+                              <div key={hazard.id} className="p-3 border rounded-lg bg-background">
+                                <div className="flex items-center justify-between mb-2">
+                                  <span className="font-medium text-sm">Hazard {hIdx + 1}</span>
+                                  <div className="flex gap-2 items-center">
+                                    <span className="text-xs text-muted-foreground">
+                                      ({hazard.x?.toFixed(1)}%, {hazard.y?.toFixed(1)}%)
+                                    </span>
+                                    <Button
+                                      size="sm"
+                                      variant="destructive"
+                                      onClick={() => {
+                                        const steps = [...moduleForm.steps];
+                                        if (steps[idx].interactive) {
+                                          steps[idx].interactive!.hazards = steps[idx].interactive!.hazards.filter((_, i) => i !== hIdx);
+                                          setModuleForm(prev => ({ ...prev, steps }));
+                                        }
+                                      }}
+                                    >
+                                      Delete
+                                    </Button>
+                                  </div>
+                                </div>
+
+                                {/* Coordinates (editable) */}
+                                <div className="grid grid-cols-2 gap-2 mb-2">
+                                  <div>
+                                    <Label className="text-xs">X Position (%)</Label>
+                                    <Input
+                                      type="number"
+                                      min="0"
+                                      max="100"
+                                      step="0.1"
+                                      value={hazard.x || 50}
+                                      onChange={(e) => {
+                                        const steps = [...moduleForm.steps];
+                                        if (steps[idx].interactive) {
+                                          steps[idx].interactive!.hazards[hIdx].x = parseFloat(e.target.value);
+                                          setModuleForm(prev => ({ ...prev, steps }));
+                                        }
+                                      }}
+                                    />
+                                  </div>
+                                  <div>
+                                    <Label className="text-xs">Y Position (%)</Label>
+                                    <Input
+                                      type="number"
+                                      min="0"
+                                      max="100"
+                                      step="0.1"
+                                      value={hazard.y || 50}
+                                      onChange={(e) => {
+                                        const steps = [...moduleForm.steps];
+                                        if (steps[idx].interactive) {
+                                          steps[idx].interactive!.hazards[hIdx].y = parseFloat(e.target.value);
+                                          setModuleForm(prev => ({ ...prev, steps }));
+                                        }
+                                      }}
+                                    />
+                                  </div>
+                                </div>
+
+                                {/* Description (all languages) */}
+                                <div>
+                                  <div className="flex items-center justify-between mb-1">
+                                    <Label className="text-xs">Description (all languages)</Label>
+                                    <Button
+                                      type="button"
+                                      size="sm"
+                                      variant="outline"
+                                      className="h-6 text-xs px-2"
+                                      onClick={async () => {
+                                        const enText = hazard.description?.en || '';
+                                        if (!enText.trim()) {
+                                          toast({ title: 'Enter English description first', variant: 'destructive' });
+                                          return;
+                                        }
+                                        try {
+                                          toast({ title: 'Translating...' });
+                                          const translations = await translateToAllLanguages(enText);
+                                          const steps = [...moduleForm.steps];
+                                          if (steps[idx].interactive) {
+                                            if (!steps[idx].interactive!.hazards[hIdx].description) {
+                                              steps[idx].interactive!.hazards[hIdx].description = {};
+                                            }
+                                            steps[idx].interactive!.hazards[hIdx].description = {
+                                              ...steps[idx].interactive!.hazards[hIdx].description,
+                                              ta: translations.ta,
+                                              hi: translations.hi,
+                                              te: translations.te,
+                                            };
+                                            setModuleForm(prev => ({ ...prev, steps }));
+                                            toast({ title: 'Translation complete!' });
+                                          }
+                                        } catch (error) {
+                                          toast({ title: 'Translation failed', variant: 'destructive' });
+                                        }
+                                      }}
+                                    >
+                                      🌐 Translate
+                                    </Button>
+                                  </div>
+                                  <div className="grid gap-2">
+                                    {languageKeys.map((lk) => (
+                                      <Input
+                                        key={lk}
+                                        placeholder={`Description (${languageNames[lk]})`}
+                                        value={hazard.description?.[lk] || ''}
+                                        onChange={(e) => {
+                                          const steps = [...moduleForm.steps];
+                                          if (steps[idx].interactive) {
+                                            if (!steps[idx].interactive!.hazards[hIdx].description) {
+                                              steps[idx].interactive!.hazards[hIdx].description = {};
+                                            }
+                                            steps[idx].interactive!.hazards[hIdx].description[lk] = (e.target as HTMLInputElement).value;
+                                            setModuleForm(prev => ({ ...prev, steps }));
+                                          }
+                                        }}
+                                      />
+                                    ))}
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+
+                          {s.interactive?.image && (
+                            <p className="text-xs text-muted-foreground mt-2">
+                              💡 Tip: Click directly on the image above to add hazard points, or use this list to edit coordinates and descriptions
+                            </p>
+                          )}
+                        </div>
                       </div>
                     )}
                   </div>

@@ -13,28 +13,19 @@ import {
   type Step,
   type UserProgress
 } from '@/lib/storage';
-import {
-  ArrowLeft,
-  ArrowRight,
-  CheckCircle2,
-  PlayCircle,
-  BookOpen,
-  HelpCircle,
-  Lightbulb,
-  Check,
-  X
-} from 'lucide-react';
+import { ChevronLeft, ChevronRight, CheckCircle, CheckCircle2, Play, PlayCircle, Info, AlertTriangle, ArrowLeft, ArrowRight, X, BookOpen, HelpCircle, Lightbulb, Check } from "lucide-react";
 import { toast } from '@/hooks/use-toast';
+import { InteractiveImage } from '@/components/InteractiveImage';
 
 export default function TrainingModule() {
   const { moduleId } = useParams<{ moduleId: string }>();
   const { user } = useAuth();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const navigate = useNavigate();
 
   const module = moduleId ? getModuleById(moduleId) : undefined;
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState<number | number[] | null>(null);
+  const [quizAnswers, setQuizAnswers] = useState<Map<string, number | number[]>>(new Map());
   const [showResult, setShowResult] = useState(false);
   const [completedSteps, setCompletedSteps] = useState<Set<string>>(new Set());
   const [currentQuestions, setCurrentQuestions] = useState<any[]>([]);
@@ -46,15 +37,21 @@ export default function TrainingModule() {
     const progress = getModuleProgress(user.id, module.id);
     if (progress) {
       setCompletedSteps(new Set(progress.completedSteps));
-      // Resume from first incomplete step
-      const firstIncomplete = module.steps.findIndex(
-        step => !progress.completedSteps.includes(step.id)
-      );
-      if (firstIncomplete > 0) {
-        setCurrentStepIndex(firstIncomplete);
+      // Resume from first incomplete step ONLY ON MOUNT
+      // We check if currentStepIndex is 0 to avoid resetting if user has already navigated
+      if (currentStepIndex === 0) {
+        const firstIncomplete = module.steps.findIndex(
+          step => !progress.completedSteps.includes(step.id)
+        );
+        if (firstIncomplete > 0) {
+          setCurrentStepIndex(firstIncomplete);
+        }
       }
     }
-  }, [module, user]);
+    // Disable ESLint warning for missing dependency 'currentStepIndex' 
+    // We intentionally only want this to run when the module loads, not when step changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [module?.id, user?.id]);
 
   // Load questions when current step changes
   useEffect(() => {
@@ -67,6 +64,11 @@ export default function TrainingModule() {
       setCurrentQuestions([]);
     }
   }, [module, moduleId, currentStepIndex]);
+
+  // Scroll to top when step changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentStepIndex]);
 
   if (!module) {
     return (
@@ -135,7 +137,7 @@ export default function TrainingModule() {
       navigate('/training');
     } else {
       setCurrentStepIndex(prev => prev + 1);
-      setSelectedAnswer(null);
+      setQuizAnswers(new Map());
       setShowResult(false);
     }
   };
@@ -143,7 +145,7 @@ export default function TrainingModule() {
   const handlePrevious = () => {
     if (currentStepIndex > 0) {
       setCurrentStepIndex(prev => prev - 1);
-      setSelectedAnswer(null);
+      setQuizAnswers(new Map());
       setShowResult(false);
     }
   };
@@ -153,42 +155,56 @@ export default function TrainingModule() {
     const question = currentQuestions.find(q => q.id === questionId);
     if (!question) return;
 
-    if (question.type === 'multi') {
-      // Multiple choice - toggle selection
-      const current = Array.isArray(selectedAnswer) ? selectedAnswer : [];
-      if (current.includes(index)) {
-        setSelectedAnswer(current.filter(i => i !== index));
+    setQuizAnswers(prev => {
+      const newAnswers = new Map(prev);
+      if (question.type === 'multi') {
+        // Multiple choice - toggle selection
+        const current = Array.isArray(newAnswers.get(questionId)) ? newAnswers.get(questionId) as number[] : [];
+        if (current.includes(index)) {
+          newAnswers.set(questionId, current.filter(i => i !== index));
+        } else {
+          newAnswers.set(questionId, [...current, index]);
+        }
       } else {
-        setSelectedAnswer([...current, index]);
+        // Single choice
+        newAnswers.set(questionId, index);
       }
-    } else {
-      // Single choice
-      setSelectedAnswer(index);
-    }
+      return newAnswers;
+    });
   };
 
   const checkAnswer = () => {
-    if (selectedAnswer === null || currentQuestions.length === 0) return;
+    if (quizAnswers.size === 0 || currentQuestions.length === 0) return;
     setShowResult(true);
 
-    // Check if answer is correct (works for both single and multi)
-    const question = currentQuestions[0]; // For now, show first question
-    let isCorrect = false;
+    // Check if all answers are correct
+    let allCorrect = true;
+    for (const question of currentQuestions) {
+      const userAnswer = quizAnswers.get(question.id);
+      if (userAnswer === undefined) {
+        allCorrect = false;
+        break;
+      }
 
-    if (question.type === 'multi') {
-      // For multiple choice, check if arrays match
-      const correctAnswers = Array.isArray(question.answer) ? question.answer.sort() : [];
-      const selectedAnswers = Array.isArray(selectedAnswer) ? [...selectedAnswer].sort() : [];
-      isCorrect = JSON.stringify(correctAnswers) === JSON.stringify(selectedAnswers);
-    } else {
-      // For single choice
-      isCorrect = selectedAnswer === question.answer;
+      let isCorrect = false;
+      if (question.type === 'multi') {
+        const correctAnswers = Array.isArray(question.answer) ? [...question.answer].sort() : [];
+        const selectedAnswers = Array.isArray(userAnswer) ? [...userAnswer].sort() : [];
+        isCorrect = JSON.stringify(correctAnswers) === JSON.stringify(selectedAnswers);
+      } else {
+        isCorrect = userAnswer === question.answer;
+      }
+
+      if (!isCorrect) {
+        allCorrect = false;
+        break;
+      }
     }
 
-    if (isCorrect) {
+    if (allCorrect) {
       toast({
         title: "Correct! ✓",
-        description: "Great job! You got it right.",
+        description: `You got all ${currentQuestions.length} question(s) right!`,
       });
     }
   };
@@ -204,6 +220,8 @@ export default function TrainingModule() {
           return <BookOpen className="w-5 h-5" />;
         case 'quiz':
           return <HelpCircle className="w-5 h-5" />;
+        case 'interactive':
+          return <CheckCircle2 className="w-5 h-5" />;
         default:
           return <BookOpen className="w-5 h-5" />;
       }
@@ -325,9 +343,10 @@ export default function TrainingModule() {
                   {(isSingle || isMulti) && question.options && (
                     <div className="space-y-3">
                       {(t(question.options) as string[] || []).map((option: string, index: number) => {
+                        const userAnswer = quizAnswers.get(question.id);
                         const isSelected = isMulti
-                          ? Array.isArray(selectedAnswer) && selectedAnswer.includes(index)
-                          : selectedAnswer === index;
+                          ? Array.isArray(userAnswer) && userAnswer.includes(index)
+                          : userAnswer === index;
                         const correctAnswer = question.answer;
                         const isCorrect = isMulti
                           ? Array.isArray(correctAnswer) && correctAnswer.includes(index)
@@ -385,65 +404,99 @@ export default function TrainingModule() {
               );
             })}
 
-            {selectedAnswer !== null && !showResult && (
+            {quizAnswers.size > 0 && !showResult && (
               <Button onClick={checkAnswer} className="mt-4 btn-hero text-primary-foreground">
-                Check Answer
+                Check Answer{currentQuestions.length > 1 ? 's' : ''}
               </Button>
             )}
 
             {showResult && (
               <div className={`p-4 rounded-lg ${
-                // Check if correct
+                // Check if all correct
                 (() => {
-                  const question = currentQuestions[0];
-                  if (question.type === 'multi') {
-                    const correctAnswers = Array.isArray(question.answer) ? [...question.answer].sort() : [];
-                    const selectedAnswers = Array.isArray(selectedAnswer) ? [...selectedAnswer].sort() : [];
-                    return JSON.stringify(correctAnswers) === JSON.stringify(selectedAnswers)
-                      ? 'bg-success/10 border border-success/20'
-                      : 'bg-destructive/10 border border-destructive/20';
-                  } else {
-                    return selectedAnswer === question.answer
-                      ? 'bg-success/10 border border-success/20'
-                      : 'bg-destructive/10 border border-destructive/20';
-                  }
-                })()
-                }`}>
-                <p className={`font-medium ${(() => {
-                  const question = currentQuestions[0];
-                  if (question.type === 'multi') {
-                    const correctAnswers = Array.isArray(question.answer) ? [...question.answer].sort() : [];
-                    const selectedAnswers = Array.isArray(selectedAnswer) ? [...selectedAnswer].sort() : [];
-                    return JSON.stringify(correctAnswers) === JSON.stringify(selectedAnswers) ? 'text-success' : 'text-destructive';
-                  } else {
-                    return selectedAnswer === question.answer ? 'text-success' : 'text-destructive';
-                  }
-                })()
-                  }`}>
-                  {(() => {
-                    const question = currentQuestions[0];
+                  let allCorrect = true;
+                  for (const question of currentQuestions) {
+                    const userAnswer = quizAnswers.get(question.id);
+                    if (userAnswer === undefined) {
+                      allCorrect = false;
+                      break;
+                    }
                     let isCorrect = false;
                     if (question.type === 'multi') {
                       const correctAnswers = Array.isArray(question.answer) ? [...question.answer].sort() : [];
-                      const selectedAnswers = Array.isArray(selectedAnswer) ? [...selectedAnswer].sort() : [];
+                      const selectedAnswers = Array.isArray(userAnswer) ? [...userAnswer].sort() : [];
                       isCorrect = JSON.stringify(correctAnswers) === JSON.stringify(selectedAnswers);
                     } else {
-                      isCorrect = selectedAnswer === question.answer;
+                      isCorrect = userAnswer === question.answer;
                     }
-
-                    if (isCorrect) {
-                      return '✓ Correct! Well done.';
+                    if (!isCorrect) {
+                      allCorrect = false;
+                      break;
+                    }
+                  }
+                  return allCorrect
+                    ? 'bg-success/10 border border-success/20'
+                    : 'bg-destructive/10 border border-destructive/20';
+                })()
+                }`}>
+                <p className={`font-medium ${(() => {
+                  let allCorrect = true;
+                  for (const question of currentQuestions) {
+                    const userAnswer = quizAnswers.get(question.id);
+                    if (userAnswer === undefined) {
+                      allCorrect = false;
+                      break;
+                    }
+                    let isCorrect = false;
+                    if (question.type === 'multi') {
+                      const correctAnswers = Array.isArray(question.answer) ? [...question.answer].sort() : [];
+                      const selectedAnswers = Array.isArray(userAnswer) ? [...userAnswer].sort() : [];
+                      isCorrect = JSON.stringify(correctAnswers) === JSON.stringify(selectedAnswers);
                     } else {
-                      const correctOptionText = Array.isArray(question.answer)
-                        ? question.answer.map((idx: number) => t(question.options)?.[idx]).join(', ')
-                        : t(question.options)?.[question.answer as number];
-                      return `✗ Incorrect. The correct answer was: ${correctOptionText}`;
+                      isCorrect = userAnswer === question.answer;
                     }
+                    if (!isCorrect) {
+                      allCorrect = false;
+                      break;
+                    }
+                  }
+                  return allCorrect ? 'text-success' : 'text-destructive';
+                })()
+                  }`}>
+                  {(() => {
+                    let allCorrect = true;
+                    for (const question of currentQuestions) {
+                      const userAnswer = quizAnswers.get(question.id);
+                      if (!userAnswer) {
+                        allCorrect = false;
+                        break;
+                      }
+                      let isCorrect = false;
+                      if (question.type === 'multi') {
+                        const correctAnswers = Array.isArray(question.answer) ? [...question.answer].sort() : [];
+                        const selectedAnswers = Array.isArray(userAnswer) ? [...userAnswer].sort() : [];
+                        isCorrect = JSON.stringify(correctAnswers) === JSON.stringify(selectedAnswers);
+                      } else {
+                        isCorrect = userAnswer === question.answer;
+                      }
+
+                      if (!isCorrect) {
+                        allCorrect = false;
+                        break;
+                      }
+                    }
+                    return allCorrect ? '✓ Correct! Well done.' : '✗ Please review the correct answers highlighted above.';
                   })()}
                 </p>
               </div>
             )}
           </div>
+        ) : step.type === 'interactive' && step.interactive ? (
+          <InteractiveImage
+            step={step.interactive}
+            language={language}
+            onComplete={() => markStepComplete(step.id)}
+          />
         ) : step.type === 'quiz' ? (
           <div className="text-center py-8 text-muted-foreground">
             <p>No questions available for this quiz yet.</p>
@@ -460,22 +513,34 @@ export default function TrainingModule() {
 
   return (
     <Layout>
-      <div className="container mx-auto px-4 py-8 max-w-3xl">
-        {/* Header */}
-        <div className="flex items-center gap-4 mb-6">
+      <div className="container mx-auto px-4 py-8 max-w-4xl">
+        {/* Header with Exit Button */}
+        <div className="flex items-center justify-between gap-4 mb-6">
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => navigate('/training')}
+            onClick={handlePrevious}
+            disabled={currentStepIndex === 0}
           >
-            <ArrowLeft className="w-5 h-5" />
+            <ChevronLeft className="w-5 h-5" />
           </Button>
-          <div className="flex-1">
+
+          <div className="flex-1 text-center">
             <h1 className="text-lg font-semibold text-foreground">{t(module.title)}</h1>
             <p className="text-sm text-muted-foreground">
               Step {currentStepIndex + 1} of {module.steps.length}
             </p>
           </div>
+
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => navigate('/training')}
+            title="Exit Module"
+            className="text-gray-500 hover:text-red-600 hover:bg-red-50"
+          >
+            <X className="w-6 h-6" />
+          </Button>
         </div>
 
         {/* Progress Bar */}
@@ -490,7 +555,7 @@ export default function TrainingModule() {
               key={step.id}
               onClick={() => {
                 setCurrentStepIndex(index);
-                setSelectedAnswer(null);
+                setQuizAnswers(new Map());
                 setShowResult(false);
               }}
               className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all ${index === currentStepIndex
@@ -501,7 +566,7 @@ export default function TrainingModule() {
                 }`}
             >
               {completedSteps.has(step.id) ? (
-                <Check className="w-4 h-4" />
+                <CheckCircle className="w-4 h-4" />
               ) : (
                 index + 1
               )}
@@ -528,7 +593,6 @@ export default function TrainingModule() {
           <Button
             onClick={handleNext}
             className="btn-hero text-primary-foreground"
-            disabled={currentStep.type === 'quiz' && !showResult}
           >
             {isLastStep ? 'Complete Module' : 'Next'}
             {!isLastStep && <ArrowRight className="w-4 h-4 ml-2" />}

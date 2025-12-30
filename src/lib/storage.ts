@@ -2,24 +2,32 @@
 
 export interface User {
   id: string;
+  name: string;
   username: string;
+  employeeId?: string;
+  department?: string;
+  language?: 'en' | 'ta' | 'hi' | 'te';
   passwordHash: string;
   role: 'admin' | 'trainee';
-  createdAt: string;
+  joinedAt?: string;
+  createdAt?: string;
 }
 
 export interface Module {
   id: string;
   title: Record<string, string>;
   description: Record<string, string>;
-  icon: string;
+  category?: string;
+  estimatedTime?: string;
+  thumbnail?: string;
+  icon?: string;
   imageUrl?: string;
   steps: Step[];
 }
 
 export interface Step {
   id: string;
-  type: 'intro' | 'video' | 'content' | 'quiz';
+  type: 'intro' | 'video' | 'content' | 'quiz' | 'interactive';
   title: Record<string, string>;
   content?: Record<string, string>;
   videoUrl?: string;
@@ -27,6 +35,7 @@ export interface Step {
   imageWidth?: string;
   imageHeight?: string;
   quiz?: QuizStep;
+  interactive?: InteractiveStep;
   testId?: string;
 }
 
@@ -35,6 +44,16 @@ export interface QuizStep {
   options: Record<string, string[]>;
   correctIndex: number;
   hint?: Record<string, string>;
+}
+
+export interface InteractiveStep {
+  image: string;
+  hazards: {
+    id: string;
+    description: Record<string, string>;
+    x?: number; // percentage
+    y?: number; // percentage
+  }[];
 }
 
 export interface Question {
@@ -102,13 +121,29 @@ const STORAGE_KEYS = {
   INITIALIZED: 'delphi_tvs_initialized',
 };
 
-// SHA-256 hash function for passwords
+// SHA-256 hash function for passwords with fallback for insecure contexts
 export async function hashPassword(password: string): Promise<string> {
   const encoder = new TextEncoder();
   const data = encoder.encode(password);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+  // Check if crypto.subtle is available (secure context)
+  if (window.crypto && window.crypto.subtle) {
+    try {
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    } catch (e) {
+      console.warn('Crypto API failed, falling back to simple hash', e);
+    }
+  }
+
+  // Fallback for non-secure contexts (http://IP) where crypto.subtle is undefined
+  // Simple DJB2-like hash for local dev stability
+  let hash = 5381;
+  for (let i = 0; i < password.length; i++) {
+    hash = ((hash << 5) + hash) + password.charCodeAt(i); /* hash * 33 + c */
+  }
+  return (hash >>> 0).toString(16);
 }
 
 export async function verifyPassword(password: string, hash: string): Promise<boolean> {
@@ -316,10 +351,32 @@ export function addAuditLog(log: Omit<AuditLog, 'id' | 'timestamp'>): void {
 }
 
 // Initialize with seed data
+const CURRENT_DATA_VERSION = '15.2'; // Increment this to force reload
+
 export function isInitialized(): boolean {
-  return localStorage.getItem(STORAGE_KEYS.INITIALIZED) === 'true';
+  const currentVersion = localStorage.getItem('delphi_tvs_data_version');
+  const isInit = localStorage.getItem(STORAGE_KEYS.INITIALIZED) === 'true';
+
+  // If version mismatch, clear everything immediately
+  if (isInit && currentVersion !== CURRENT_DATA_VERSION) {
+    console.log('Data version mismatch - clearing all data for fresh reload');
+    clearAllData();
+    return false;
+  }
+
+  return isInit && currentVersion === CURRENT_DATA_VERSION;
 }
 
 export function markInitialized(): void {
   localStorage.setItem(STORAGE_KEYS.INITIALIZED, 'true');
+  localStorage.setItem('delphi_tvs_data_version', CURRENT_DATA_VERSION);
+}
+
+export function clearAllData(): void {
+  // Clear all storage keys
+  Object.values(STORAGE_KEYS).forEach(key => {
+    localStorage.removeItem(key);
+  });
+  localStorage.removeItem('delphi_tvs_data_version');
+  console.log('All app data cleared');
 }

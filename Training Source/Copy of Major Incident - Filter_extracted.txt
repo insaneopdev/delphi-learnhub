@@ -1,0 +1,132 @@
+Total Pages: 10
+================================================================================
+
+
+--- PAGE 1 ---
+REPORTABLE INCIDENT REPORT
+Delphi TVS Technologies Ltd,
+Oragadam
+================================================================================
+
+--- PAGE 2 ---
+Department         : Filter Cell
+Process / Activity : Pleating machine -1
+Injured person       : T Monish
+CC.No                     : TIT 1504
+Date  & Shift                 : 29.07.2025 & 2nd shift 
+Incident Time     : 10.35 PMINCIDENT DETAILS
+================================================================================
+
+--- PAGE 3 ---
+INCIDENT DESCRIPTION
+➢The running Pleating paper roll  emptied
+➢Trainee loaded new pleating paper roll at the loading 
+point & started feeding to pleating machine
+➢He found paper struck up (Pop up) inside the roller & 
+removed the paper manually
+➢Then stopped the pleating roller unit and opened the 
+safety door which was in bye passed condition.
+➢Trainee tried to insert the paper roll at the pleating 
+roller station manually by  switching on the unit 
+simultaneously.
+➢During the course of this activity, his left hand caught 
+between the pleating rollers and got crush injury in his 
+left index, middle and ring fingers.
+➢He pressed the emergency button immediately. Upon 
+hearing his noise, the line supervisor and maintenance 
+engineer rushed to the spot and removed the roller 
+manually to free his hand .  
+Safety door
+Pleating 
+rollers
+================================================================================
+
+--- PAGE 4 ---
+INCIDENT DESCRIPTION
+Observations:
+1) Pleating Roller safety door switch was 
+found in bye passed condition  
+2) The machine was operated in an 
+unsafe condition; production continued 
+despite the known failure of the safety 
+system by all responsible personnel
+3) Manual insertion of paper while 
+machine was energized
+Safety door switch
+Safety door switch 
+is not connected 
+with safety door
+Safety Door
+================================================================================
+
+--- PAGE 5 ---
+The new paper roll did not move properly inside the roller unitCrush injury to the left hand index,middle  and ring fingers Injury
+WHY 1
+WHY 2
+WHY 3ROOT CAUSE ANALYSIS
+He attempted to feed the paper manually into the roller gap using his 
+left hand while simultaneously switching on the roller unit with his 
+right handThe trainee’s left hand got caught between the pleating rollers
+WHY 4
+The edges of the running and new paper rolls were not properly 
+joinedWHY 5The operator opened the safety door and inserted his left hand into 
+the running roller. The safety door switch was in a bypassed condition
+================================================================================
+
+--- PAGE 6 ---
+CORRECTIVE ACTION
+Sl.No Cause  of Accident Corrective  Action Resp Status
+   1The safety door switch 
+was in a bypassed 
+conditionInstall tamper -proof safety 
+interlock switches with 
+bypass detection alarmsRavikumar Completed
+Conduct On the Job training 
+to all trainees/freshers and 
+supervisors (with a focus on 
+LOTO and interlocks)Thiyagarajan Completed
+Safety FLM gaps to be 
+reviewed by the Supervisors 
+and ManagersThiyagarajan Completed
+Review and audit all 
+machines to identify any 
+other bypassed safety 
+systemsThiyagarajan
+/RavikumarCompleted
+2 The edges of the running 
+and new paper rolls were 
+not properly joinedDevelop and implement SOP 
+for paper roll changeover, 
+including safe methods for 
+feedingThiyagarajan Completed
+================================================================================
+
+--- PAGE 7 ---
+Medical Treatment
+ ➢First Aid given at Jaya Hospital, Mathur
+➢After First Aid ,Injured person transferred to SIMS Hospital, Vadapalani & 
+admitted under Dr.Karthikeyan -HOD, Plastic Surgeon
+➢Wound debridement & skin grafting  is done in SIMS Hospital, Vadapalani
+================================================================================
+
+--- PAGE 8 ---
+Cause of Accident Corrective Action
+Safety door switch was in a bypassed  condition Installed tamper  proof safety interlock switches with bypass 
+detection alarms
+Tamper proof interlocking switch provided
+Bypass 
+Detection alarms
+================================================================================
+
+--- PAGE 9 ---
+Corrective Action
+Conducted on the Job training to all trainees / fresher and supervisors (with a focus on LOTO and interlocks)
+================================================================================
+
+--- PAGE 10 ---
+Cause of Accident Corrective Action
+Filter paper entry to roller: Safety door bottom 
+having gap 20mm which having chance of finger may 
+enter inside itsafety door design has been modified to reduce the gap to less 
+than 8 mm
+================================================================================

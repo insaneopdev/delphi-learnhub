@@ -17,7 +17,9 @@ const ZOOM_LEVELS: ZoomLevel[] = [90, 100, 110, 125, 150];
 export function DisplayProvider({ children }: { children: React.ReactNode }) {
     const [zoomLevel, setZoomLevelState] = useState<number>(() => {
         const saved = localStorage.getItem('delphi-zoom-level');
-        return saved ? parseInt(saved, 10) : 100;
+        const parsed = saved ? parseInt(saved, 10) : 100;
+        // Validate parsed value is within acceptable range, otherwise reset
+        return [90, 100, 110, 125, 150].includes(parsed) ? parsed : 100;
     });
 
     useEffect(() => {

@@ -15,7 +15,11 @@ export function ModuleCard({ module, progress = 0, onClick, variant = 'default' 
   const { t } = useLanguage();
 
   // Dynamic icon component
-  const IconComponent = (Icons[module.icon as keyof typeof Icons] as LucideIcon) || Icons.BookOpen;
+  // Dynamic icon component
+  let iconName = module.icon;
+  if (iconName === 'Tool') iconName = 'Wrench';
+
+  const IconComponent = (Icons[iconName as keyof typeof Icons] as LucideIcon) || Icons.BookOpen;
 
   const isCompleted = progress === 100;
 

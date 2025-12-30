@@ -18,13 +18,13 @@ export async function login(username: string, password: string): Promise<{ succe
   }
 
   const user = getUserByUsername(username.trim());
-  
+
   if (!user) {
     return { success: false, error: 'Invalid username or password' };
   }
 
   const isValid = await verifyPassword(password, user.passwordHash);
-  
+
   if (!isValid) {
     return { success: false, error: 'Invalid username or password' };
   }
@@ -40,7 +40,7 @@ export async function login(username: string, password: string): Promise<{ succe
   };
 
   sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
-  
+
   return { success: true, session };
 }
 

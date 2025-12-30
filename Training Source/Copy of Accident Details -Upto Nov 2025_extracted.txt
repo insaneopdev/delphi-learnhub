@@ -1,0 +1,431 @@
+Total Pages: 4
+================================================================================
+
+
+--- PAGE 1 ---
+SI.NO Date Time/Shift Name CC No. Dept APURepeat?/
+1st timeAccident AreaCategory 
+of 
+AccidentNature of 
+InjuryInjured Part M/c Name & No. Return to work USC USA Description Of Accident Root Cause Corrective action Responsibility Status
+1 05.01.2025 5.20 AM & 
+3rd ShiftManikandan RS10368 FPD Filter 1st time Filter - Rework area Minor Cut InjuryLeft hand 
+thumb fingerImmediately 1While working at the rework station, the victim tried to loosen the bracket 
+mounting screw from the filter component to reuse the bracket. During 
+this course of activity, the victim was holding the filter component firmly 
+in one hand and operating the torque switch on another hand at that time, 
+part slipped and sustained a deep cut injury in his left hand thumb finger.Poor Design of fixture for Component reworks1. Fixture design to be improved to effectively perform all type of 
+reworks and can also be able to perform reworks in all filter variants. 
+2. SOP to be made for all the activities involved in filter component 
+reworks (Visual representation)
+3. New SOP awareness to be given to all trainees through OPLThiyagarajan Completed
+2 07.01.20251.30pm & 
+1st shiftBalakumar NA1463 FPD Filter 1st time Filter - Pleating cell First aid Burn injuryRight hand 
+wristPleating machine -2 Immediately 1While working at the Pleating machine, the victim tried to correct & clear 
+the filter paper pop up issue in the heater section at forward mode. During 
+this course of activity, Victim holds filter paper in one hand and operates 
+the push button switch on another hand as well as Heater is moved 
+forward direction & heater contact into his right hand with high 
+temperature. It resulted in accidentally getting a burn injury over his right 
+hand wrist.Lack in safety system - Interlocking b/w heater and 
+safety guard was not available1. Interlocking to be provided to cut off the heater when the safety 
+guard was in open condition
+Monitoring of safety guard interlocking ensured thorugh machine FLM 
+2. Two Hand push button to be provided in the machineThiyagarajan Completed
+3 18.01.2025 1st shift - 
+10amBidya sagar RS12218 FPD Filter 1st time Filter - Pleating cell First aid Swelling Left leg Pleating machine -2 Immediately 1While change over the clipping roll in the pleating process at the 2nd 
+station, where the trainee placed the clipping roll beside the machine 
+support. The roll slipped, resulting in the trainee injuring his left leg. The 
+trainee was promptly taken to the Occupational Health Center (OHC) for 
+further treatment.No SOP available for Clipping coil changing activity1. SOP to be provided for the Clipping coil loading
+2. Clipping coil movement trolley with adequate support for coil 
+feeder Thiyagarajan Completed
+4 26.01.202510.40am & 
+1st shiftVasu RS12844 FPD Rail 1st timeRail assembly and 
+testing -1First aid Swelling Right leg Aquarese testing station Immediately 1After the machine cycle completion, the front door starts moving to its 
+home position. At that time, the front door was completely detached from 
+the machine and fell onto the victim's right thigh while he was standing in 
+front of the machine to unload the rail component. It resulted severe pain 
+and swelling in his right leg.Machine front door connecting hinges was poorly 
+designed1. Design to be improved on machine front door hinges to eliminate 
+the impact of load on machine front door hinges
+2. In TBM, ensure the machine doors working condition and all its 
+parts are available in proper manner and it has to be evidenced 
+quarterly
+3. In MQ new machine safety audit, Check the machine doors 
+movement and its actuating position from start to end and ensure 
+there shouldn’t be any load acts on cylinder connecting part & doorSelvakumar Completed
+5 04.02.20256.10am & 
+3rd shiftSanthosh kumar MA1251 FPD Injector 1st timeNozzle Soft - 
+machiningFirst aid Laceration Head Immediately 1Operator entered into a gap at the bottom of the quality display board 
+instead of gangway for reporting with supervisor from Fanuc machine to 
+ECM machine, So he was hit with a power box corner at the near(Victim 
+used shortcut). It resulted in a laceration of his scalp.Trainee used shortcut way to reach the location - Unsafe 
+act1. As per Reaction plan for Identified Unsafe act (WIN) - Counselling to 
+be given to the trainee
+2. OPL to be made to follow the SOPAnantharaj Completed
+6 04.02.20252.30am & 
+3rd shiftSethupathi RS 12711 FPD DFP4 1st time DFP4  Testing area First aid Cut InjuryLeft hand 
+middle 
+fingerFunctional testing 
+machineImmediately 1During the manual activity, the Operator tried to adjust the struckup 
+fixture in the loading test pallet machine conveyor.  It was released from 
+the conveyor & moved suddenly. So that pallet hit over his hand.  It 
+resulted in a small cut injury over the left hand middle finger.No periodical maintenance is carried out in conveyor1. Misalignment in conveyor to be corrected
+2. Guard to be provided
+3. PM schedule to be prepared for coneyor system and adhere itAnbarasan Completed
+7 24.02.20253rd shift & 
+12.40AM K Raghuraj RS11702 WED UPCR 1st time UPCR Minor Cut InjuryRight hand 
+middle 
+fingerAMS Buffing machine Immediately 1Maintenance technician tried to remove the spindle with a wooden piece 
+by hand, At the same time the spindle indexer moved and hit his hand. It 
+resulted in a minor cut injury to his right hand middle finger.No SOP available for spindle changing activity SOP to be made for spindle changing and setting change activities Ravikumar Completed
+8 02.03.20257am & 1st 
+shift AKSHAYA RS11017 FPD Injector 1st timeInjector finish off L-
+3First aid Swelling Head Immediately 1Victim tried to take an empty bin at the backside of the machine, Because 
+of oil spillage occured by the maintenance, She got slips and fell down at 
+the floor . It leads to swelling in her forehead at the right side.Lack of safety awareness – Victim’s safety shoes bottom 
+was in worn out conditionAwareness to be given to avoid this type of unsafe behaviours Palanivel Completed
+9 05.03.20256.50 pm & 
+2nd shiftAKASH DNA159 FPD DFP6 1st time DFP6 finish off First aid Cut InjuryRight hand 
+index fingerNear bubble leak test 
+machineImmediately 1Victim attempted to lift the upper part of a pump component from the 
+trolley. During this process, the victim's right hand finger became caught 
+in the lock mechanism of the upper rack. As a result, the individual 
+sustained a cut injury on his right hand index finger.Presence of sharp edges on the upper lock hinges 
+Failure to follow the MHE Checklist (EOHS-P07-121-F03) 
+for condition monitoring of trolleys -USA1. Awareness to be given to all the trainees and line supervisors to 
+properly adhere the MHE checklist for conditional monitoring of all 
+component handling trolleys
+2. Deburr the sharp edges from the lock hinges of trolleyNandagopal CompletedAccident Details - 2025 (Upto Nov-25)
+================================================================================
+
+--- PAGE 2 ---
+SI.NO Date Time/Shift Name CC No. Dept APURepeat?/
+1st timeAccident AreaCategory 
+of 
+AccidentNature of 
+InjuryInjured Part M/c Name & No. Return to work USC USA Description Of Accident Root Cause Corrective action Responsibility StatusAccident Details - 2025 (Upto Nov-25)
+10 05.03.202510.30 pm & 
+2nd shiftKARTHICK M NA1322 WED DFP3 1st timeEOU Drive shaft 
+Hard stage Minor Cut InjuryRight hand 
+index fingerImmediately 1Victim was assisting his supervisor on the front side of the machine, while 
+the supervisor manually controlled the hydraulic system by using a tool, 
+instead of the machine's panel controls, on the back side of the machine. 
+During the activity, the tailstock moved backward from the home position. 
+As the drive shaft fell into the machine, the victim attempted to retrieve it. 
+During this process, the tailstock moved suddenly forward due to the 
+manual operation and struck the victim's right hand, resulting in a cut 
+injury to the ring finger of his right handLOTO procedures were not followed during the 
+troubleshooting activity1. Comphrensive LOTO procedure has to be made that it must be 
+followed for all troubleshooting /PM activities
+2. Procedural training to be imparted to all maintenance personnels 
+about the effective implementation of LOTOSriram Completed
+11 14.03.20256 pm & 2nd 
+shiftS.Sowmiya RS12383 QED Injector 1st time Nozzle hard Minor Cut InjuryMiddle 
+fingerImmediately 1Trainee was trying to open the main door when, suddenly, the door closed 
+without any manual force, resulting in a minor cut injury on the right 
+hand's middle finger. The trainee immediately visited OHS for further 
+treatment.No periodical condition monitoring carried out for that 
+nozzle hard single doorPeriodical condition monitoring schedule has to be prepared (Verify 
+that all the doors are included in it) and adherence to this schedule 
+should be ensured.
+Monitoring record to be maintainedPraveen Completed
+12 29.03.20256.15 pm & 
+2nd shiftKanchu charan 
+basheraRS12705 FPD DFP6 1st timeDFP6 assembly and 
+testingFirst aidLaceration 
+and 
+SwellingThumb 
+fingerImmediately 1When the victim was closing the upper tray of the component loaded 
+trolley, at that time the upper tray fell and impact his right hand, which he 
+was placed at the connecting point of the trays.
+Due to this impact, the victim got swelling and mild laceration in his right-
+hand thumb finger .Functional failure of installed Gas spring in trolley 
+MHE Checklist (EOHS-P07-121-F03) for condition 
+monitoring of trolleys was not followed- USA1. All the gas springs must be replaced with new one By MSE)
+2. Gas spring life to be determined in all trolleys and also periodical 
+monitoring and replacement has to be done by WED
+3. Awareness to be given to all the trainees and line supervisors to 
+properly adhere the MHE checklist for conditional monitoring of all 
+component handling trolleysNandagopal Completed
+13 04.04.202509:00 pm & 
+2nd shiftMANIKANDAN  TIT1092 FPD Injector 1st time Nozzle hard cell Minor cut injuryright-hand 
+ring fingerOM12017 Bahmullar 
+head & shank grindingImmediately 1Trainee was attempting to remove the nozzle component from the 
+tailstock while the grinding wheel was near the tailstock(Instead at home 
+position). During this action, the operator's hand slipped, causing 
+accidental contact with the  grinding wheel. This resulted in a minor cut 
+injury to the operator's right-hand ring finger.Unsafe Act - The trainee bypassed the standard 
+procedure for the warm-up activity and used an 
+unauthorized method1. Counselling to be given to the trainee for this SOP violation
+2. Awareness should be provided to all trainees
+through OPL to avoid performing unauthorized work on machines 
+without supervisor knowledge
+3. Skill evaluations should be conducted for all jobs requiring specific 
+skilled manpowerSurenderraj Completed
+14 04.04.20257.45PM & 
+2nd shiftK ABINAYA  TIT1188 FPD Injector 1st time Finish off First aid Laceration left thighOP105 Coil 
+orientation & cone leak 
+checking stationImmediately 1The injector trolley’s top tray, which was not locked in place  As a result, 
+the top tray slipped and descended. While attempting to reposition the 
+tray by another trainee, the component trolley skidded and fell onto the 
+trainee's left thigh. It resulted over her left thigh, sustained a pain and 
+mild abrasion.Lack of awareness on importance of safety system 
+(Victim didn’t lock the upper rack while handling the 
+trolley)	OPL & Awareness to be given on safe handling of trolley Palanivel Completed
+15 12.04.202504:00PM&
+1st shiftDeepika RS12088 FPD Injector 1st time Nozzle hard line -2 First aid Swellingleft-hand 
+Ring  fingerEDM 8-Passivation 
+StationImmediately 1While attempting to start the cycle on the passivation bench, the trainee 
+operated the machine with one hand. During this process, the trainee’s 
+left-hand finger became trapped in the top cover, resulting in a hand 
+injury.   . The trainee immediately visited OHS for further treatment.Poor design: The two-hand control could be operated 
+with one hand, violating ISO safety standards.1. Two hand push button design has to be modified as per the 
+standard requirements (Center-to-Center Distance Between Buttons 
+must be minimum distance of 260mm)
+2. In MQ new machine safety audit, Two hand push button operation 
+and also compliance of  installation requirements has to be ensured 
+(i.e Distance between the buttons must meet the standard 
+requirements )
+3. Awareness to be given to all the trainees through OPL to properly 
+adhere the two-push button operationKailash Completed
+16 15.04.202501:00  
+PM& 1st 
+shiftArunachalam 
+S.R.M102921 WED Injector 1st timeNozzle assembly 
+lineFirst aid Cut Injury finger  Lift grinding machine 3 Immediately 1The shuttle movement was stuck on Lift Grinding Machine 3 due to a 
+fallen needle. While attempting to rectify the problem, the shuttle was 
+moved manually. At that moment, it disengaged from the needle and 
+moved rapidly, causing injury to the operator's finger. . The trainee 
+immediately visited OHS for further treatment.LOTO procedures were not followed during the 
+troubleshooting activity1. Comphrensive LOTO procedure has to be made that it must be 
+followed for all troubleshooting /PM activities
+2. Procedural training to be imparted to all maintenance personnels 
+about the effective implementation of LOTOSarvankumar Completed
+17 16.04.20257.45am & 
+1st shiftArunSecurity 
+GuardHR- 
+Security1st time Main gate Minor Cut Injury head  Main Gate Immediately 1The parking main gate moved back automatically without any external 
+input. The bottom roller of the gate hit the stopper and jumped off, 
+causing the gate to come off the track and fall. The PRR Transport 
+Supervisor, who was standing nearby, attempted to stop the falling gate 
+and sustained a head injury. He was immediately taken to OHC for further 
+treatmentNo periodical maintenance for the sliding gate system1. Periodical maintenance schedule to be made 
+2. Sliding gate shall be operated through motorised mechanism 
+instead of manual movement
+3. Wheel stoppers shall be maintained in good condition
+4. Additional upper guide roller support shall be provided before end 
+of the trackJayseelan/ Kumaresan Completed
+18 20.04.20256.30pm & 
+2nd shiftMinnal Kodi RS1248 FPD Injector 1st time Nozzle hard First aid Swellingleft leg 
+thumbImmediately 1Victim entered the IAT area from nozzle hard to collect empty pallets for a 
+nozzle needle assembly. After collecting the five pallets from the area, she 
+returned. While doing so, she slipped and it caused the pallets in her 
+hands to fall onto her right leg thumb finger and it  resulted a severe pain 
+and swelling in her right leg thumbUnsafe Behaviour - Victim was not wearing the safety 
+shoes while entering the Injector Assembly and testing 
+area1. Counselling to be given to the trainee for this SOP violation
+2. Awareness should be provided to all trainees through OPL to avoid Palanivel Completed
+================================================================================
+
+--- PAGE 3 ---
+SI.NO Date Time/Shift Name CC No. Dept APURepeat?/
+1st timeAccident AreaCategory 
+of 
+AccidentNature of 
+InjuryInjured Part M/c Name & No. Return to work USC USA Description Of Accident Root Cause Corrective action Responsibility StatusAccident Details - 2025 (Upto Nov-25)
+19 28.04.20257.30pm & 
+2nd shiftHariharasudhan RS12806 FPD Injector 1st timeNozzle Soft - 
+machiningFirst aid Cut InjuryRight hand 
+index fingerTsugami 4 Immediately 1While attempting to remove a nozzle component from a machine, the 
+operator's hand came into contact with burr particles present on the part. 
+The sharp burrs caused a cut on the index finger of the operator’s right 
+hand.No scheduled periodic maintenance was carried out for 
+the auto conveyor of the Tsugami machine1. PM schedule to be prepared for conveyor system and adhere it
+2. Awareness should be provided to all trainees and line supervisors to 
+properly wear cut-resistant gloves when handling burr particles in 
+case of any malfunctions in the auto conveyor or in the machineSarvankumar Completed
+20 05.05.20254.30pm & 
+1st shiftMary DNA020 FPD Injector 1st time IAT Finish off First aid Swelling Left leg Immediately 1After shift work completion, the victim ran fastly to get out of the IAT 
+area. At that time, She slipped and fell down on the floor due to oil spills. It 
+leads to severe pain in the left leg and neck.USA - victim ran fastly in the workplace
+Oil Leakage from the Injector testing machine and 
+overflow from the secondary containment1.Counselling to be given to the trainee to avoid this unsafe behaviour
+2. Oil leakage from the Injector testing machine to be arrestedSarvankumar Completed
+21 07.05.20254.30pm & 
+1st shiftHARITH DNA205 FPD DFP6 1st timeDFP6 –Helium Leak 
+test m/c entranceMinor Cut InjuryLeft Hand 
+index fingerImmediately 1After collecting the rejected pump component trolley from the helium 
+leak testing machine, he returned to the entrance and opened the door to 
+pull the fully loaded trolley out. As he did this, the door swung back and at 
+that moment, his forefinger became trapped between the door and the 
+trolley handle which resulted a minor cut injury on his left hand 
+forefinger.Lack of proper training or awareness on safe material 
+handling practicesAwareness should be provided to all trainees on safe material 
+handling techniquesNandagopal Completed
+22 17.05.20258pm & 2nd 
+shiftSurya K DV214 FPD UPCR 1st time UPCR Testing area  Minor Cut Injury Left hand Bubble Leak testing 
+machineImmediately 1After completion of  HP & LP bubble leak test on the machine, the victim 
+noticed air leakage from the connecting pneumatic port and so attempted 
+to adjust it. While doing so, he held the pneumatic port with one hand and 
+supported himself by holding the connecting guide rod frame of the 
+cylinder unit with the other hand. At that moment, the pneumatic cylinder 
+moved upwards, causing his hand to get trapped between the connecting 
+guide rod frame and the machine frame, resulting in a cut injury to his left 
+hand.Unsafe Act -  Trainee attempted to adjust the pneumatic 
+port before the machine cycle operation completion1. Counselling to be given to the trainee for this SOP violation
+2. Awareness should be provided to all trainees
+through OPL to avoid performing unauthorized work on machines 
+without supervisor knowledge
+3. Machine switch box frame to be relocated to avoid performing the Ravi kumar/Nandagopal Completed
+23 22.05.2025 3.15pm & 
+1st shiftYogesh kumar TIT1288 FPD Injector 1st time Nozzle hard Minor Burn injury PMT machine 1 Immediately 1After the grinding wheel's life was completed, the operator attempted to 
+replace it with a new one but failed to adjust the offset setting. This 
+oversight led to an overload on the chuck, causing excessive heat and 
+resulting in a flame being produced from the machine. The flame made 
+contact with the operator's hand, necessitating immediate treatment at 
+the Occupational Health Center (OHC).No SOP available for Grinding wheel changing activity 
+and setting changeSOP to be made for grinding wheel changing and setting change 
+activities
+Awareness should be provided to all trainees
+through OPL to follow new SOP of grinding wheel change and setting 
+change activitiesSarvankumar/ Surrenderraj Completed
+24 24.05.202511am & 1st 
+shiftRajesh K TIT999 FPD Rail 1st time Rail machining 5 A First aid Prick injuryMiddle 
+fingerPort -2 - MAKINO Immediately 1An operator attempted to remove a rail component from a fixture too 
+quickly. During the process, his finger was positioned between the 
+component and the fixture. As a result, he sustained a nail injury to his 
+middle finger.Design issue - Ball bush provision on fixture was 
+appropriate for easily locating componentBall bush provision on the fixture was removed Boopathi Completed
+25 25.05.202511.30am & 
+1st shiftNalamani WP064 FPD Rail 1st time Rail grey room Minor Cut InjuryRight hand 
+elbowImmediately 1Victim was instructed to perform the fixture changing activity in 
+Maximator -1. He removed the existing fixture from the machine and 
+placed it on the fixture storage stand. He then properly positioned the 
+scissor lift trolley at an even level and attempted to pull the new fixture by 
+its handle from the storage stand to place it onto the trolley. During this 
+process, his hand slipped and struck the end stopper on the trolley, 
+resulting in a minor cut injury to his right elbow.Poor Design - Stopper provided on the scissor lift trolley 
+protruding in the direction of fixture handling, with 
+sharp edges in that corners Scissor lift trolley stopper design to be improved to eliminate the 
+sharp edges and protrusions that pose a risk of contact injury during 
+fixture handlingBoopathi Completed
+26 26.05.20253pm & 1st 
+shiftJayaprakash 103232 Methods Rail 1st timeRail power pack 
+areaMinor Cut InjuryRight hand 
+and left handImmediately 1Victim was instructed to perform the filter-changing activity on the rail 
+power pack. While attempting to remove the filter bowl using a ring 
+spanner, his hand slipped, and his finger got struck inbetween the spanner 
+and the filter bowl, resulting in a minor cut injury to his left hand ring 
+finger. He didn't initially notice the injury and proceeded to perform the 
+same activity on another filter. During this process, his hand got stuck on 
+the power pack unit frame, causing an injury to his right hand thumb.Inadequate SOP – Didn't clearly specify the type of PPE 
+required for this specific activity
+Poor design of power pack unit equipment - There is no 
+adequate clearance to perform the B/D activity1. SOP to be revised to clearly specify the PPE requirements for this 
+activity
+2. PPE matrix to be provided for all the non routine activities
+3. Design modification to be done in power pack unit to have 
+adequate clearance and easy access for doing this type of activities
+4. OPL to be made to educate all the trainees to properly use the 
+appropriate gloves for all the non routine activitiesBoopathi Completed
+27 02.06.20257.30pm & 
+2nd shiftKaviya C10066 FPD Filter 1st time Filter Assembly Minor SwellingRight 
+shoulderBracket position ( 5L 
+ATEQ)Immediately 1 While attempting to transport input materials from the material room to 
+the riveting operation, a trainee was involved in an incident. As she was 
+moving the trolley, a bracket position bench operator unintentionally 
+made contact with it. This caused the input trolley to become unbalanced, 
+resulting in the material bins falling and striking the trainee’s right 
+shoulder.Unsafe Act- Input bins are kept in the gangway, not 
+maintaining the bins stack height and not maintaing the 
+stack height Input trolley poor design
+Bracket assy station layout not designed to provide 
+adequate working space, leading to obstruction of the 
+gangwayInput trolley design to be improves which the wheels get extended for 
+the entire gangway
+Bracket Assy layout to be modified to avoid interference in gangway 
+movements of trolleySundaresan Completed
+================================================================================
+
+--- PAGE 4 ---
+SI.NO Date Time/Shift Name CC No. Dept APURepeat?/
+1st timeAccident AreaCategory 
+of 
+AccidentNature of 
+InjuryInjured Part M/c Name & No. Return to work USC USA Description Of Accident Root Cause Corrective action Responsibility StatusAccident Details - 2025 (Upto Nov-25)
+28 07.06.202511.30PM & 
+2nd ShiftMuthukumarMSSPL-
+478FPD DFP6 1st time DFP6 FQG area First aid Laceration Right hand Immediately 1While the victim was attempted to lift the upper part of the rack of the 
+component loaded trolley, at that time the upper tray fell and impact his 
+right hand, where he was placed his hand at the connecting point of the 
+trays.
+Due to this impact, the victim got swelling in his right-hand.MHE Checklist (EOHS-P07-121-F03) for condition 
+monitoring of trolleys was not followed- USAAwareness to be given to all the trainees and line supervisors to 
+properly adhere the MHE checklist for conditional monitoring of all 
+component handling trolleysNandagopal Completed
+29 10.06.20253pm & 1st 
+shiftRushi Kumar  C10335 FPD DFP1 1st time Hydraulic Head soft First aid Cut Injury Right handOM03001 - 
+Mounting hole temp 
+sensor IMV machineImmediately 1After machine cycle completion, Operator noticed the burr stuck in the 
+machining tool and then he attempted to remove the burr by pulling it 
+manually and it resulted cut injury in his right hand index fingerUnsafe Act- Victim was not using cut resistant gloves 
+during the timeAwareness should be provided to all trainees and line supervisors to 
+properly wear cut-resistant gloves when handling burr particles Ananthakumar Completed
+30 30.06.20251.40PM & 
+1st ShiftSuryakanthan NA1736 FPD DFP3 1st time DFP3 Drive Shaft Minor FractureRight hand -
+middle 
+fingerOP-20 TP End Turning 
+(Takisawa)Immediately 1In the TP end turning machine, Mr. Ganesh (Supervisor) was engaged in a 
+runout
+correction activity and was supported by Mr. Suryakanth (STT). During this 
+process, When the supervisor was forwarding the turret in X-axis, the 
+victim had placed his hand near the tailstock and was checking the 
+condition of the facing tool simultaneously.
+Unfortunately, the supervisor didn’t see the victim’s hand in the vicinity 
+and continued with the X-axis movement. As a result, the victim’s middle 
+finger was caught between the turret and the tailstock, sustaining a crush 
+injury in his right hand middle finger.Unsafe Act - Victim was placing his hand on the Vicinity 
+of Turret movement - (Lack of awareness)              
+Two-personnels were working simultaneously on the 
+same machine 
+There was no clear coordination or communication 
+between the trainee and the supervisor.1. Awareness & OPL to be made to have safe operation while doing 
+this type of Non- routine activities and avoid two personnels working 
+simultaneously on the same machine. (No Simultaneous tasking)
+2.Enforce a policy that only one person operates or inspects a machine 
+at a time.
+3. Activity matrix to be made for this type of identified non routine 
+activities                                                                     
+4.Implement a clear standard operating procedure (SOP) requiring 
+verbal confirmation before any machine movement when more than 
+one person is involved.Ananthakumar Completed
+31 04.07.20252.20PM & 
+1st ShiftBuddha Bhaskar 
+RaoC10198 FPD Injector 1st time IAT washing Minor LacerationRight hand- 
+four fingersImmediately 1During the relocation of the Nozzle Holder Body (NHB) storage rack, a 
+trainee (injured person) attempted to assist midway while three other 
+trainees were performing the activity. During the course of the activity, 
+when the trainee tried to hold and pull the storage rack, he sustained a 
+laceration on four fingers of his right hand.Relocation/layout change activity was carried out by the 
+internal team without proper planning, instead of being 
+executed by the Designated MSE Team Inappropriate 
+PPE was used for this activity                                                     
+Sharp edges on the storage rack were not identified and 
+corrected initiallyCounselling to be given to avoid involving in unauthorized work 
+without the supervisor knowledge                                                              
+Awareness and OPL to be made for all trainees to wear appropriate 
+gloves for all this type of non routine  activities                                                                             
+Incoming inspection check sheet to be followed for all storage facilities 
+before handing over to user department (New and Repair) and to be 
+included in procedurePalanivel/Sundaresan Completed
+32 26.07.20259.15 PM & 
+2nd ShiftSelvin C10465 FPD Injector 1st time Nozzle Assy First aid Cut InjuryRight hand- 
+Ring finger Lift-2 machine Immediately 1While the trainee was loading the pallet in Lift-2 machine, he unknowingly 
+placed his finger inside and closed the drawer, resulting in a mild cut 
+injury to the nail of his right ring finger.Lack of hazard awareness and insufficient training on 
+machine operation procedures and design flawHandle need to be corrected and to be placed in middle position
+Awareness and OPL to be made for all trainees to use handle for 
+drawerSurenderraj Completed
+================================================================================

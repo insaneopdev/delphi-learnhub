@@ -1,0 +1,136 @@
+Total Pages: 8
+================================================================================
+
+
+--- PAGE 1 ---
+REPORTABLE INCIDENT REPORT
+Delphi TVS Technologies Ltd,
+Oragadam
+================================================================================
+
+--- PAGE 2 ---
+Department         : Heat Treatment
+Process / Activity : DFP6 Hydraulic Head  movement by Material                 
+                                                   Handling Trolley (From HT to DFP6)
+Injured person       : Kalaiselvan A
+CC.No                     : RS10171
+Date  & Shift                 : 03.08.2024 & 3rd shift 
+Incident Time     : 1.25 AMINCIDENT DETAILS
+================================================================================
+
+--- PAGE 3 ---
+INCIDENT DESCRIPTION
+Detached trolley 
+Wheel➢At 1.15am, ArunPrakash  S (FPD supervisor) informed 
+the trainees Kalaiselvan  and Murugan to move the 
+DFP6 Hydraulic Head component loaded trolley by 
+manually from Heat Treatment to DFP6 hard stage 
+area.
+➢Following the instructions , trainee Kalaisaelvan 
+started moving the trolley from HT passing through 
+Phase 1 building main gangway route and then 
+through the main road passage.
+➢While moving on,the rear end left wheel detached 
+from the trolley and causing the trolley collapsed and 
+so trainee attempted to balance the trolley from 
+falling off.
+➢During that time, the trolley completely fell on his 
+right leg and resulted to bone fracture injury in his 
+right leg with an open wound.
+Component loaded trolley fell 
+down while moving  it
+================================================================================
+
+--- PAGE 4 ---
+INCIDENT DESCRIPTION
+Observations:
+1)No Nuts (securing the wheel bolts with 
+base plate) were observed. 
+2)Rotating wheels had been fixed in the 
+rear end side of the trolley.(Should be at 
+the front end side where handle is 
+provided)
+3)Material Handling Trolley with full load 
+was moved manually by pushing the 
+trolley by a single person.
+4)Un even surfaces in the Road
+================================================================================
+
+--- PAGE 5 ---
+Bolt Nuts securing the Trolley wheel with base plate were in loose 
+conditionDFP6 hydraulic Head components loaded trolley collapsed and fell  on 
+his right leg while movement Trainee sustained bone fracture in his right leg Injury
+WHY 1
+WHY 2
+WHY 3ROOT CAUSE ANALYSIS
+One of the wheel (rear end left) in the trolley got detached 
+Trolley condition monitoring and maintenance was not performed 
+on this material handling trolley WHY 4
+No system to ensure for condtion monitoring and maintenance of 
+Material Handling trolleyWHY 5
+================================================================================
+
+--- PAGE 6 ---
+CORRECTIVE ACTION
+Sl.No Cause  of Accident Corrective  Action Resp Target Date
+1No system to ensure for 
+condtion monitoring 
+and maintenance of 
+Material Handling 
+trolleyA comprehensive SOP to be 
+made for Material Handling 
+Trollies on Safe usage, 
+monitoring and maintenanceR.Gopu10.08.2024
+FLM for Material Handling 
+Trollies to be introducedR.Gopu 10.08.2024
+PM for Material Handling 
+Trollies to be doneD.Muthuku
+maran
+2Component loaded 
+trolleys with the huge 
+capacity were handled 
+manually Criteria to be defined for 
+movement of the material 
+handling trollies based on Size 
+and total weight (including 
+parts) to decide the material 
+handling by a)Manual 
+movement and 
+b)Material Handling Equipment 
+(Forklift,Stacker,etc..)R.Gopu 17.08.2024
+================================================================================
+
+--- PAGE 7 ---
+CORRECTIVE ACTION
+Sl.No Cause  of Accident Corrective  Action Resp Target Date
+3Trolley is stuck on the 
+road because of the 
+uneven road surface 
+during its movementSeparate RCC flooring with 
+smooth finishing to be 
+provided in road only for 
+trolley movement on both side 
+of the road TVS
+4No incoming inspection is 
+done for material 
+handling trolleys before 
+handing over to user 
+department 1. Incoming inspection to be 
+done for all new material 
+handling trolleys and storage 
+facilities before handing over 
+to user department(Along with 
+FPD/EHS)
+2. Handing over check sheet to 
+be prepared and followedN.Sairam
+5Lack of Safety Awareness -
+Victim pushing the 
+component loaded trolleyAwareness should be given to 
+all trainees on how to handle 
+the trolleys. "Always pull the 
+trolley, do not push it. M.Rajesh 17.08.2024
+================================================================================
+
+--- PAGE 8 ---
+Medical Treatment
+================================================================================

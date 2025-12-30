@@ -154,9 +154,9 @@ const App = () => {
     // Force check version
     const currentVersion = localStorage.getItem('delphi_tvs_data_version');
     console.log(' Current localStorage version:', currentVersion);
-    console.log('📦 Expected version: 15.2');
+    console.log('📦 Expected version: 15.4');
 
-    if (currentVersion !== '15.2') {
+    if (currentVersion !== '15.4') {
       console.warn('⚠️ Version mismatch! Clearing all data and reinitializing...');
       localStorage.clear();
       initializeSeedData();

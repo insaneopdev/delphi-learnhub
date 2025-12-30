@@ -350,8 +350,8 @@ export function addAuditLog(log: Omit<AuditLog, 'id' | 'timestamp'>): void {
   saveToStorage(STORAGE_KEYS.AUDIT_LOG, logs);
 }
 
-// Initialize with seed data
-const CURRENT_DATA_VERSION = '15.2'; // Increment this to force reload
+// Version control for data migrations
+export const CURRENT_DATA_VERSION = '15.4'; // Updated for persistent icons
 
 export function isInitialized(): boolean {
   const currentVersion = localStorage.getItem('delphi_tvs_data_version');

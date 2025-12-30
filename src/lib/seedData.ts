@@ -61,6 +61,7 @@ export async function initializeSeedData() {
       description: { en: 'DTVS Policy, Zero Accident Vision', ta: 'DTVS கொள்கை, பூஜ்ஜிய விபத்து பார்வை', hi: 'DTVS नीति, शून्य दुर्घटना दृष्टि', te: 'DTVS విధానం, జీరో ప్రమాద విజన్' },
       category: 'General Safety',
       estimatedTime: '15 min',
+      icon: 'Shield',
       thumbnail: assets.workerOrientation,
       steps: [
         {
@@ -316,6 +317,7 @@ export async function initializeSeedData() {
       description: { en: 'Identify -> Assess -> Control', ta: 'அடையாளம் -> மதிப்பீடு -> கட்டுப்பாடு', hi: 'पहचानें -> आकलन -> नियंत्रण', te: 'గుర్తించండి -> అంచనా -> నియంత్రణ' },
       category: 'Occupational Health',
       estimatedTime: '20 min',
+      icon: 'AlertTriangle',
       thumbnail: assets.hazard,
       steps: [
         {
@@ -645,6 +647,7 @@ export async function initializeSeedData() {
       description: { en: 'Why accidents happen? Heinrich Triangle', ta: 'விபத்துக்கள் ஏன் நடக்கின்றன?', hi: 'दुर्घटनाएं क्यों होती हैं?', te: 'ప్రమాదాలు ఎందుకు జరుగుతాయి?' },
       category: 'General Safety',
       estimatedTime: '20 min',
+      icon: 'Activity',
       thumbnail: assets.slipTrip,
       steps: [
         {
@@ -956,6 +959,7 @@ export async function initializeSeedData() {
       description: { en: 'Safety Systems, Guarding, Interlocks', ta: 'பாதுகாப்பு அமைப்புகள், காவலாளிகள்', hi: 'सुरक्षा प्रणालियां', te: 'భద్రతా వ్యవస్థలు' },
       category: 'Technical Safety',
       estimatedTime: '25 min',
+      icon: 'Lock',
       thumbnail: assets.machineGuard,
       steps: [
         {
@@ -1032,11 +1036,11 @@ export async function initializeSeedData() {
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
                    <div class="flex flex-col items-center">
-                     <img src="${assets.lotoEnergyControl}" alt="Energy Control" class="rounded shadow border h-40 object-cover w-full" />
+                     <img src="${assets.lotoEnergyControl}" alt="Energy Control" class="rounded shadow border h-auto object-contain w-full" />
                      <p class="text-xs mt-1 text-center font-bold text-gray-600">Total Energy Isolation</p>
                    </div>
                    <div class="flex flex-col items-center">
-                     <img src="${assets.lotoGroupWork}" alt="Group LOTO" class="rounded shadow border h-40 object-cover w-full" />
+                     <img src="${assets.lotoGroupWork}" alt="Group LOTO" class="rounded shadow border h-auto object-contain w-full" />
                      <p class="text-xs mt-1 text-center font-bold text-gray-600">Group LOTO: Analysis</p>
                    </div>
                 </div>
@@ -1193,6 +1197,7 @@ export async function initializeSeedData() {
       description: { en: 'Head to Toe Protection standards', ta: 'தலை முதல் கால் வரை பாதுகாப்பு', hi: 'सिर से पैर तक सुरक्षा', te: 'తలపై నుండి కాలి వరకు రక్షణ' },
       category: 'Personal Safety',
       estimatedTime: '15 min',
+      icon: 'HardHat',
       thumbnail: assets.ppeEquipment,
       steps: [
         {
@@ -1499,8 +1504,9 @@ export async function initializeSeedData() {
       id: 'ehs-006',
       title: { en: 'Fire Safety', ta: 'தீ பாதுகாப்பு', hi: 'अग्नि सुरक्षा', te: 'అగ్ని భద్రత' },
       description: { en: 'Fire Triangle, Extinguishers, Evacuation', ta: 'தீ முக்கோணம், அணைப்பான்கள்', hi: 'फायर ट्राइएंगल, एक्सटिंग्विशर', te: 'ఫైర్ ట్రయాంగిల్, ఎక్స్‌టింగ్విషర్స్' },
-      category: 'Emergency',
+      category: 'Emergency Response',
       estimatedTime: '20 min',
+      icon: 'Flame',
       thumbnail: assets.fireExtinguisher,
       steps: [
         {
@@ -1742,8 +1748,9 @@ export async function initializeSeedData() {
       title: { en: 'Material Handling', ta: 'பொருள் கையாளுதல்', hi: 'सामग्री हैंडलिंग', te: 'మెటీరియల్ హ్యాండ్లింగ్' },
       description: { en: 'Manual Lifting, Trolley Safety, Forklifts', ta: 'கையால் தூக்குதல், ட்ராலி பாதுகாப்பு', hi: 'मैनुअल लिफ्टिंग, ट्रॉली सुरक्षा', te: 'మాన్యువల్ లిఫ్టింగ్, ట్రాలీ సేఫ్టీ' },
       category: 'Occupational Health',
-      estimatedTime: '20 min',
-      thumbnail: assets.materialHandlingIntro,
+      estimatedTime: '15 min',
+      icon: 'User',
+      thumbnail: assets.safeLifting,
       steps: [
         {
           id: 'step-7-1',
@@ -2023,7 +2030,8 @@ export async function initializeSeedData() {
       title: { en: 'Electrical Safety', ta: 'மின் பாதுகாப்பு', hi: 'विद्युत सुरक्षा', te: 'విద్యుత్ భద్రత' },
       description: { en: 'Shock Prevention, Wires, Fuse Boxes', ta: 'அதிர்ச்சி தடுப்பு, கம்பிகள்', hi: 'शॉक की रोकथाम', te: 'షాక్ నివారణ' },
       category: 'Technical Safety',
-      estimatedTime: '15 min',
+      estimatedTime: '20 min',
+      icon: 'Zap',
       thumbnail: assets.electricalDanger,
       steps: [
         {
@@ -2296,7 +2304,8 @@ export async function initializeSeedData() {
       description: { en: 'Handling, MSDS, NFPA Diamond', ta: 'கையாளுதல், MSDS, NFPA', hi: 'हैंडलिंग, MSDS', te: 'హ్యాండ్లింగ్, MSDS' },
       category: 'Technical Safety',
       estimatedTime: '20 min',
-      thumbnail: assets.chemicalLabel,
+      icon: 'Beaker',
+      thumbnail: assets.chemicalHazards,
       steps: [
         {
           id: 'step-9-1',

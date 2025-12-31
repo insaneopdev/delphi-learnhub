@@ -113,6 +113,27 @@ export async function initializeSeedData() {
                 return path;
             };
 
+            const replaceContentImages = (contentMap: Record<string, string> | undefined) => {
+                if (!contentMap) return undefined;
+                const newContentMap: Record<string, string> = {};
+
+                Object.entries(contentMap).forEach(([lang, html]) => {
+                    let newHtml = html;
+                    // Regex to find image sources that look like our dev paths
+                    // Matches: src="/delphi-learnhub/src/assets/images/filename.png"
+                    const regex = /(?:\/delphi-learnhub\/src\/assets\/images\/|\/assets\/generated\/)([a-zA-Z0-9._-]+)/g;
+
+                    newHtml = newHtml.replace(regex, (match, filename) => {
+                        if (filenameToKey[filename]) {
+                            return assets[filenameToKey[filename]];
+                        }
+                        return match;
+                    });
+                    newContentMap[lang] = newHtml;
+                });
+                return newContentMap;
+            };
+
             return {
                 ...m,
                 thumbnail: replacePath(m.thumbnail),
@@ -121,6 +142,8 @@ export async function initializeSeedData() {
                 steps: m.steps.map((s: any) => ({
                     ...s,
                     imageUrl: replacePath(s.imageUrl),
+                    // Also hydrate content HTML
+                    content: s.type === 'content' || s.type === 'intro' ? replaceContentImages(s.content) : s.content,
                     interactive: s.interactive ? {
                         ...s.interactive,
                         image: replacePath(s.interactive.image)

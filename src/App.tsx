@@ -147,21 +147,8 @@ function AppRoutes() {
 
 const App = () => {
   useEffect(() => {
-    console.log('🔄 App mounted - initializing seed data...');
-    const result = initializeSeedData();
-    console.log('✅ Seed initialization completed:', result);
-
-    // Force check version
-    const currentVersion = localStorage.getItem('delphi_tvs_data_version');
-    console.log(' Current localStorage version:', currentVersion);
-    console.log('📦 Expected version: 15.6');
-
-    if (currentVersion !== '15.6') {
-      console.warn('⚠️ Version mismatch! Clearing all data and reinitializing...');
-      localStorage.clear();
-      initializeSeedData();
-      console.log('✅ Force reinitialization complete!');
-    }
+    // Initialize seed data if needed
+    initializeSeedData();
   }, []);
 
   return (

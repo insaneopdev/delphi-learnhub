@@ -290,27 +290,46 @@ export async function initializeSeedData() {
     ];
 
 
+    try {
+        console.log('📦 Raw Modules imported type:', typeof rawModules);
+        console.log('📦 Raw Modules isArray:', Array.isArray(rawModules));
+        console.log('📦 Raw Modules length:', Array.isArray(rawModules) ? rawModules.length : 'N/A');
 
-    modules.forEach(saveModule);
-    questions.forEach(saveQuestion);
+        if (!rawModules || (Array.isArray(rawModules) && rawModules.length === 0)) {
+            console.error('❌ CRITICAL: Raw modules are empty or undefined!');
+            // throw new Error('Raw modules import failed'); // Don't throw yet, just warn
+        }
 
-    // Create Tests for each Module
-    modules.forEach(module => {
-        // Basic test creation - will be updated when questions are added
-        const moduleQuestions = questions.filter(q => q.moduleId === module.id);
-        const test: Test = {
-            id: `test-${module.id}`,
-            title: { en: `${module.title.en} Quiz`, ta: `${module.title.ta} வினாடி வினா`, hi: `${module.title.hi} प्रश्नोत्तरी`, te: `${module.title.te} క్విజ్` },
-            moduleId: module.id,
-            questionIds: moduleQuestions.map(q => q.id),
-            timeLimitMinutes: 10,
-            passScore: 60
-        };
-        saveTest(test);
-    });
+        const modules: Module[] = hydrateModules(rawModules);
+        console.log('💧 Hydrated modules length:', modules.length);
 
-    console.log('Seeding completed successfully with 11 Modules and Tests.');
-    markInitialized();
+        if (modules.length > 0) {
+            console.log('📝 Saving module:', modules[0].id, modules[0].title.en);
+        }
 
-    // window.location.reload();
+        modules.forEach(saveModule);
+        questions.forEach(saveQuestion);
+
+        // Create Tests for each Module
+        modules.forEach(module => {
+            // Basic test creation - will be updated when questions are added
+            const moduleQuestions = questions.filter(q => q.moduleId === module.id);
+            const test: Test = {
+                id: `test-${module.id}`,
+                title: { en: `${module.title.en} Quiz`, ta: `${module.title.ta} வினாடி வினா`, hi: `${module.title.hi} प्रश्नोत्तरी`, te: `${module.title.te} క్విజ్` },
+                moduleId: module.id,
+                questionIds: moduleQuestions.map(q => q.id),
+                timeLimitMinutes: 10,
+                passScore: 60
+            };
+            saveTest(test);
+        });
+
+        console.log('✅ Seeding completed successfully with modules and tests.');
+        markInitialized();
+
+    } catch (error) {
+        console.error('❌ ERROR in initializeSeedData:', error);
+        // Ensure we don't mark as initialized if it failed, so it retries next time
+    }
 }

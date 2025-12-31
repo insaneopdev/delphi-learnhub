@@ -351,7 +351,7 @@ export function addAuditLog(log: Omit<AuditLog, 'id' | 'timestamp'>): void {
 }
 
 // Version control for data migrations
-export const CURRENT_DATA_VERSION = '15.10'; // Updated for generated image path fix
+export const CURRENT_DATA_VERSION = '15.11'; // Updated for heat stress image size fix
 
 export function isInitialized(): boolean {
   const currentVersion = localStorage.getItem('delphi_tvs_data_version');

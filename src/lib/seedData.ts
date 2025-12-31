@@ -312,6 +312,5 @@ export async function initializeSeedData() {
     console.log('Seeding completed successfully with 11 Modules and Tests.');
     markInitialized();
 
-    // Force reload to reflect changes
-    window.location.reload();
+    // window.location.reload();
 }

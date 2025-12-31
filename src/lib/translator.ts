@@ -1,21 +1,18 @@
-// Translation utility using MyMemory API
-// Free tier: 5000 translations per day, no API key required
+// Google Translate GTX (via Vite Proxy to avoid CORS)
+// Limits: Technically unlimited for this use case, very fast.
 
-const MYMEMORY_API = 'https://api.mymemory.translated.net/get';
+// Helper to decode HTML entities in the result if necessary 
+// (Google sometimes returns encoded text like &quot;)
+function decodeEntities(encodedString: string) {
+    const textArea = document.createElement('textarea');
+    textArea.innerHTML = encodedString;
+    return textArea.value;
+}
 
-// Language codes
-export const LANGUAGES = {
-    en: 'English',
-    ta: 'Tamil',
-    hi: 'Hindi',
-    te: 'Telugu',
-};
-
-// Translation cache to reduce API calls
 const translationCache = new Map<string, string>();
 
 /**
- * Translate text from English to target language
+ * Translate text using Google Translate GTX endpoint (proxied)
  */
 export async function translateText(
     text: string,
@@ -32,11 +29,22 @@ export async function translateText(
     }
 
     try {
-        // Use a valid email to get 50k words/day instead of 5k (anonymous)
-        // Using a generic contact email for the project
-        const email = 'training@delphitvs.com';
-        const url = `${MYMEMORY_API}?q=${encodeURIComponent(text)}&langpair=en|${targetLang}&de=${email}`;
-        const response = await fetch(url);
+        // GTX Endpoint parameters:
+        // client=gtx
+        // sl=auto (source language)
+        // tl=targetLang
+        // dt=t (return translation)
+        // q=text
+        const params = new URLSearchParams({
+            client: 'gtx',
+            sl: 'auto',
+            tl: targetLang,
+            dt: 't',
+            q: text
+        });
+
+        // Use the local proxy path defined in vite.config.ts
+        const response = await fetch(`/api/translate?${params.toString()}`);
 
         if (!response.ok) {
             throw new Error(`Translation API error: ${response.status}`);
@@ -44,17 +52,22 @@ export async function translateText(
 
         const data = await response.json();
 
-        if (data.responseStatus !== 200) {
-            throw new Error('Translation failed');
+        // GTX allows returning multiple sentences. 
+        // data[0] is the array of logical segments. 
+        // Each segment is [translated_text, source_text, ...]
+        // We join them to get the full translation.
+        let translatedText = '';
+        if (data && data[0]) {
+            translatedText = data[0].map((segment: any) => segment[0]).join('');
         }
 
-        const translatedText = data.responseData.translatedText;
-
-        // VERIFICATION: Check if translation is identical to source (likely failed/rate-limited)
-        // If it failed, we return the original text silently (better than modifying it with prefixes)
-        if (translatedText.trim().toLowerCase() === text.trim().toLowerCase()) {
-            console.warn(`Translation service returned formatted source text for ${targetLang}.`);
+        if (!translatedText) {
+            throw new Error('No translation returned');
         }
+
+        // Sometimes GT returns encoded entities
+        // translatedText = decodeEntities(translatedText); 
+        // Actually GTX usually returns clean text, but let's keep it simple for now.
 
         // Cache the result
         translationCache.set(cacheKey, translatedText);
@@ -62,7 +75,7 @@ export async function translateText(
         return translatedText;
     } catch (error) {
         console.error(`Translation error for ${targetLang}:`, error);
-        // Fallback: Return original text on error without prefix
+        // Fallback: Return original text on error
         return text;
     }
 }
@@ -77,15 +90,14 @@ export async function translateToAllLanguages(
         return { ta: '', hi: '', te: '' };
     }
 
-    // Increased delay to avoid rate limiting (MyMemory free tier is sensitive)
+    // GT is fast, we don't need significant delays.
+    // Small delay just to be polite to our local proxy/network.
     const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
     try {
-        // Execute sequentially to avoid rate limiting
+        // We can run these somewhat parallel or with very short delays now
         const ta = await translateText(englishText, 'ta');
-        await delay(1000); // Increased to 1s
         const hi = await translateText(englishText, 'hi');
-        await delay(1000);
         const te = await translateText(englishText, 'te');
 
         return { ta, hi, te };

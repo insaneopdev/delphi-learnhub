@@ -61,13 +61,14 @@ export interface Question {
   moduleId: string;
   stepId?: string;
   text: Record<string, string>;
-  type: 'single' | 'multi' | 'code' | 'fill';
+  type: 'single' | 'multi' | 'code' | 'fill' | 'interactive';
   options?: Record<string, string[]>;
   answer: string | string[] | number | number[];
   hint?: Record<string, string>;
   difficulty: 'simple' | 'complex';
   imageUrl?: string;
   optionImages?: string[];
+  interactive?: InteractiveStep;
 }
 
 export interface Test {
@@ -351,7 +352,7 @@ export function addAuditLog(log: Omit<AuditLog, 'id' | 'timestamp'>): void {
 }
 
 // Version control for data migrations
-export const CURRENT_DATA_VERSION = '15.11'; // Updated for heat stress image size fix
+export const CURRENT_DATA_VERSION = '15.15'; // Updated for more practical questions
 
 export function isInitialized(): boolean {
   const currentVersion = localStorage.getItem('delphi_tvs_data_version');

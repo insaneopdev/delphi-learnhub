@@ -37,11 +37,12 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
+import { InteractiveImage } from '@/components/InteractiveImage';
 
 export default function TestSession() {
   const { testId } = useParams<{ testId: string }>();
   const { user } = useAuth();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const navigate = useNavigate();
 
   const test = React.useMemo(() => testId ? getTestById(testId) : undefined, [testId]);
@@ -179,6 +180,8 @@ export default function TestSession() {
         const correctAnswers = (q.answer as number[]).map(String).sort();
         const userAnswers = (Array.isArray(userAnswer) ? userAnswer : [userAnswer]).map(String).sort();
         if (JSON.stringify(correctAnswers) === JSON.stringify(userAnswers)) correct++;
+      } else if (q.type === 'interactive') {
+        if (userAnswer === 'completed') correct++;
       } else if (q.type === 'fill') {
         const userAns = String(userAnswer);
         const correctAns = String(q.answer);
@@ -530,6 +533,22 @@ export default function TestSession() {
               onChange={(e) => handleAnswerChange(currentQuestion.id, e.target.value)}
               className="font-mono min-h-[200px]"
             />
+          )}
+
+          {currentQuestion.type === 'interactive' && currentQuestion.interactive && (
+            <div className="mt-4">
+              <InteractiveImage
+                step={currentQuestion.interactive}
+                language={language}
+                onComplete={() => handleAnswerChange(currentQuestion.id, 'completed')}
+              />
+              {answers[currentQuestion.id] === 'completed' && (
+                <div className="mt-4 p-4 bg-success/10 text-success rounded-lg flex items-center gap-2">
+                  <Check className="w-5 h-5" />
+                  <span className="font-medium">Interactive task completed!</span>
+                </div>
+              )}
+            </div>
           )}
         </div>
 

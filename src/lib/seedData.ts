@@ -157,7 +157,7 @@ export async function initializeSeedData() {
 
     // Seed questions for each module
     const questions: Question[] = [
-        // Module 1
+        // Module 1: Fundamentals & Safety Culture
         {
             id: 'q-1-1', moduleId: 'ehs-001', stepId: 'step-1-quiz', type: 'single', difficulty: 'simple',
             text: { en: 'What is our "Zero Accident" vision?', ta: 'எங்கள் "பூஜ்ஜிய விபத்து" பார்வை என்ன?', hi: 'हमारा "शून्य दुर्घटना" दृष्टिकोण क्या है?', te: 'మా "జీరో యాక్సిడెంట్" విజన్ ఏమిటి?' },
@@ -180,8 +180,24 @@ export async function initializeSeedData() {
             },
             answer: 1
         },
+        {
+            id: 'q-1-3', moduleId: 'ehs-001', type: 'multi', difficulty: 'complex',
+            text: { en: 'Select all examples of Unsafe Acts:', ta: 'பாதுகாப்பற்ற செயல்களின் உதாரணங்களைத் தேர்ந்தெடுக்கவும்:', hi: 'असुरक्षित कार्यों के सभी उदाहरण चुनें:', te: 'సురక్షితం కాని చర్యల ఉదాహరణలను ఎంచుకోండి:' },
+            options: {
+                en: ['Running in the workshop', 'Using damaged tools', 'Wearing Safety Shoes', 'Following SOP'],
+                ta: ['பட்டறையில் ஓடுவது', 'சேதமடைந்த கருவிகளைப் பயன்படுத்துதல்', 'பாதுகாப்பு காலணிகளை அணிவது', 'SOP ஐப் பின்பற்றுவது'],
+                hi: ['कार्यशाला में दौड़ना', 'क्षतिग्रस्त औजारों का उपयोग करना', 'सुरक्षा जूते पहनना', 'SOP का पालन करना'],
+                te: ['వర్క్‌షాప్‌లో పరిగెత్తడం', 'దెబ్బతిన్న సాధనాలను ఉపయోగించడం', 'సేఫ్టీ షూస్ ధరించడం', 'SOPని పాటించడం']
+            },
+            answer: [0, 1]
+        },
+        {
+            id: 'q-1-4', moduleId: 'ehs-001', type: 'fill', difficulty: 'simple',
+            text: { en: 'Safety is everyone\'s ______?', ta: 'பாதுகாப்பு என்பது அனைவரின் ______?', hi: 'सुरक्षा सबकी ______ है?', te: 'భద్రత అనేది అందరి ______?' },
+            answer: 'responsibility'
+        },
 
-        // Module 2 - Note: Module 2 uses interactive quiz (step-2-quiz)
+        // Module 2: Industrial Hazards
         {
             id: 'q-2-1', moduleId: 'ehs-002', stepId: 'step-2-1', type: 'single', difficulty: 'simple',
             text: { en: 'What is the first step to Safety?', ta: 'பாதுகாப்பிற்கான முதல் படி என்ன?', hi: 'सुरक्षा का पहला कदम क्या है?', te: 'భద్రతకు మొదటి అడుగు ఏమిటి?' },
@@ -193,21 +209,76 @@ export async function initializeSeedData() {
             },
             answer: 1
         },
-
-        // Module 3
         {
-            id: 'q-3-1', moduleId: 'ehs-003', stepId: 'step-3-quiz', type: 'single', difficulty: 'simple',
-            text: { en: 'According to Heinrich, 1 Major accident is preceded by how many Near Misses?', ta: '1 பெரிய விபத்துக்கு முன் எத்தனை நூலிழை தவறுகள்?', hi: '1 बड़ी दुर्घटना से पहले कितनी निकट चूक?', te: '1 పెద్ద ప్రమాదానికి ముందు ఎన్ని దగ్గరగా తప్పిపోయిన సంఘటనలు?' },
+            id: 'q-2-2', moduleId: 'ehs-002', type: 'single', difficulty: 'complex',
+            text: { en: 'You see a chemical leak. What is the BEST way to control this hazard?', ta: 'ஒரு ரசாயன கசிவை நீங்கள் காண்கிறீர்கள். இந்த ஆபத்தைக் கட்டுப்படுத்த சிறந்த வழி எது?', hi: 'आप एक रासायनिक रिसाव देखते हैं। इस खतरे को नियंत्रित करने का सबसे अच्छा तरीका क्या है?', te: 'మీరు కెమికల్ లీక్‌ని చూస్తారు. ఈ ప్రమాదాన్ని నియంత్రించడానికి ఉత్తమ మార్గం ఏమిటి?' },
             options: {
-                en: ['300', '29', '100'],
-                ta: ['300', '29', '100'],
-                hi: ['300', '29', '100'],
-                te: ['300', '29', '100']
+                en: ['Wear a mask (PPE)', 'Fix the leak source (Elimination)', 'Put a sign up (Administrative)'],
+                ta: ['முகமூடி அணிவது (PPE)', 'கசிவு மூலத்தை சரிசெய்யவும் (நீக்குதல்)', 'ஒரு பலகையை வைப்பது (நிர்வாகம்)'],
+                hi: ['मास्क पहनें (PPE)', 'रिसाव स्रोत को ठीक करें (उन्मूलन)', 'एक साइन बोर्ड लगाएं (प्रशासनिक)'],
+                te: ['మాస్క్ ధరించండి (PPE)', 'లీక్ మూలాన్ని సరిచేయండి (తొలగింపు)', 'సైన్ బోర్డ్ పెట్టండి (అడ్మినిస్ట్రేటివ్)']
             },
-            answer: 0
+            answer: 1
+        },
+        {
+            id: 'q-2-3', moduleId: 'ehs-002', type: 'single', difficulty: 'simple',
+            text: { en: 'You need to clean a machine. Is it safe to do so while it is running?', ta: 'நீங்கள் ஒரு இயந்திரத்தை சுத்தம் செய்ய வேண்டும். அது ஓடிக்கொண்டிருக்கும்போது அதைச் செய்வது பாதுகாப்பானதா?', hi: 'आपको एक मशीन साफ करनी है। क्या इसे चलते समय करना सुरक्षित है?', te: 'మీరు ఒక యంత్రాన్ని శుభ్రం చేయాలి. అది నడుస్తున్నప్పుడు చేయడం సురక్షితమేనా?' },
+            options: {
+                en: ['Yes, if careful', 'No, never', 'Yes, quickly'],
+                ta: ['ஆம், கவனமாக இருந்தால்', 'இல்லை, ஒருபோதும் இல்லை', 'ஆம், விரைவாக'],
+                hi: ['हाँ, अगर सावधान रहें', 'नहीं, कभी नहीं', 'हाँ, जल्दी से'],
+                te: ['అవును, జాగ్రత్తగా ఉంటే', 'కాదు, ఎప్పుడూ వద్దు', 'అవును, త్వరగా']
+            },
+            answer: 1
+        },
+        {
+            id: 'q-2-4', moduleId: 'ehs-002', type: 'interactive', difficulty: 'simple',
+            text: { en: 'Spot the Slip Hazard:', ta: 'வழுக்கும் அபாயத்தைக் கண்டறியவும்:', hi: 'फिसलने के खतरे को पहचानें:', te: 'జారిపోయే ప్రమాదాన్ని గుర్తించండి:' },
+            interactive: {
+                image: '/delphi-learnhub/src/assets/images/quiz_oil_puddle.png',
+                hazards: [
+                    { id: 'h1', description: { en: 'Oil Spill', ta: 'எண்ணெய் கசிவு', hi: 'तेल का रिसाव', te: 'చమురు చిందు' }, x: 50, y: 60 }
+                ]
+            },
+            answer: 'completed'
         },
 
-        // Module 4
+        // Module 3: Accidents & Theories
+        {
+            id: 'q-3-1', moduleId: 'ehs-003', stepId: 'step-3-quiz', type: 'single', difficulty: 'simple',
+            text: { en: 'A heavy tool falls near you but hits no one. What should you do?', ta: 'கனமான கருவி உங்கள் அருகில் விழுகிறது ஆனால் யார் மீதும் படவில்லை. நீங்கள் என்ன செய்ய வேண்டும்?', hi: 'एक भारी औजार आपके पास गिरता है लेकिन किसी को नहीं लगता। आपको क्या करना चाहिए?', te: 'బరువైన పరికరం మీ దగ్గర పడింది కానీ ఎవరికీ తగలలేదు. మీరు ఏమి చేయాలి?' },
+            options: {
+                en: ['Ignore it', 'Report it as Near Miss', 'Laugh about it'],
+                ta: ['புறக்கணிக்கவும்', 'நூலிழை தவறாக (Near Miss) புகாரளிக்கவும்', 'அதைப் பற்றி சிரிக்கவும்'],
+                hi: ['इसे अनदेखा करें', 'इसे निकट चूक (Near Miss) के रूप में रिपोर्ट करें', 'इसके बारे में हँसें'],
+                te: ['పట్టించుకోకండి', 'నియర్ మిస్‌గా నివేదించండి', 'దాని గురించి నవ్వండి']
+            },
+            answer: 1
+        },
+        {
+            id: 'q-3-2', moduleId: 'ehs-003', type: 'single', difficulty: 'simple',
+            text: { en: 'Which of the following is an Unsafe Condition?', ta: 'பின்வருவனவற்றில் எது பாதுகாப்பற்ற நிலை?', hi: 'निम्नलिखित में से कौन सी असुरक्षित स्थिति है?', te: 'కింది వాటిలో సురక్షితం కాని పరిస్థితి ఏది?' },
+            options: {
+                en: ['Horseplay / Joking around', 'Oil spill on the floor', 'Operating without authorization'],
+                ta: ['விளையாட்டு / கேலி செய்தல்', 'தரையில் எண்ணெய் கசிவு', 'அனுமதி இல்லாமல் இயக்குதல்'],
+                hi: ['मजाक करना', 'फर्श पर तेल का रिसाव', 'बिना अधिकार के संचालन'],
+                te: ['నిర్లక్ష్యపు ఆటలు', 'నేలపై నూనె చిందు', 'అనుమతి లేకుండా ఆపరేట్ చేయడం']
+            },
+            answer: 1
+        },
+        {
+            id: 'q-3-3', moduleId: 'ehs-003', type: 'single', difficulty: 'complex',
+            text: { en: 'To prevent accidents, what should we focus on fixing FIRST?', ta: 'விபத்துகளைத் தடுக்க, நாம் எதைச் சரிசெய்வதில் முதலில் கவனம் செலுத்த வேண்டும்?', hi: 'दुर्घटनाओं को रोकने के लिए, हमें सबसे पहले क्या ठीक करने पर ध्यान देना चाहिए?', te: 'ప్రమాదాలను నివారించడానికి, మనం దేనిని సరిచేయడంపై ముందుగా దృష్టి పెట్టాలి?' },
+            options: {
+                en: ['The injury', 'The unsafe act/condition (Root Cause)', 'The paperwork'],
+                ta: ['காயம்', 'பாதுகாப்பற்ற செயல்/நிலை (மூல காரணம்)', 'காகிதப்பணி'],
+                hi: ['चोट', 'असुरक्षित कार्य/स्थिति (मूल कारण)', 'कागजी कार्रवाई'],
+                te: ['గాయం', 'సురక్షితం కాని చర్య/పరిస్థితి (మూల కారణం)', 'వ్రాతపని']
+            },
+            answer: 1
+        },
+
+        // Module 4: Machine Safety & LOTO
         {
             id: 'q-4-1', moduleId: 'ehs-004', stepId: 'step-4-quiz', type: 'single', difficulty: 'simple',
             text: { en: 'What is the function of a Safety Light Curtain?', ta: 'பாதுகாப்பு ஒளி திரைச்சீலையின் செயல்பாடு என்ன?', hi: 'सेफ्टी लाइट कर्टन का क्या काम है?', te: 'సేఫ్టీ లైట్ కర్టెన్ పని ఏమిటి?' },
@@ -219,63 +290,195 @@ export async function initializeSeedData() {
             },
             answer: 1
         },
+        {
+            id: 'q-4-2', moduleId: 'ehs-004', type: 'single', difficulty: 'simple',
+            text: { en: 'You need to fix a jammed machine inside. What is the FIRST step?', ta: 'உள்ளே சிக்கிய இயந்திரத்தை நீங்கள் சரிசெய்ய வேண்டும். முதல் படி என்ன?', hi: 'आपको अंदर फंसी हुई मशीन को ठीक करना है। पहला कदम क्या है?', te: 'మీరు జామ్ అయిన మెషీన్‌ను సరిచేయాలి. మొదటి అడుగు ఏమిటి?' },
+            options: {
+                en: ['Reach in quickly', 'Apply LOTO (Lockout/Tagout)', 'Call a friend'],
+                ta: ['விரைவாக கையை உள்ளே விடவும்', 'LOTO (Lockout/Tagout) பயன்படுத்தவும்', 'நண்பரை அழைக்கவும்'],
+                hi: ['जल्दी से हाथ अंदर डालें', 'LOTO (लॉकआउट/टैगआउट) लागू करें', 'दोस्त को बुलाएं'],
+                te: ['త్వరగా చేయి లోపల పెట్టండి', 'LOTO (లాక్అవుట్/ట్యాగ్అవుట్) వర్తించండి', 'స్నేహితుడికి కాల్ చేయండి']
+            },
+            answer: 1
+        },
+        {
+            id: 'q-4-3', moduleId: 'ehs-004', type: 'multi', difficulty: 'complex',
+            text: { en: 'Select all TRUE statements about Machine Guards:', ta: 'இயந்திரக் காவலர்கள் பற்றிய உண்மையான கூற்றுகளைத் தேர்ந்தெடுக்கவும்:', hi: 'मशीन गार्ड के बारे में सत्य कथन चुनें:', te: 'మెషిన్ గార్డ్స్ గురించి నిజమైన స్టేట్‌మెంట్‌లను ఎంచుకోండి:' },
+            options: {
+                en: ['They protect from moving parts', 'They can be removed while running', 'Never result in injuries', 'Must not be bypassed'],
+                ta: ['அவை நகரும் பாகங்களிலிருந்து பாதுகாக்கின்றன', 'இயங்கும்போது அவற்றை அகற்றலாம்', 'காயங்களை ஏற்படுத்தாது', 'புறக்கணிக்கப்படக்கூடாது (Bypass செய்யக்கூடாது)'],
+                hi: ['वे चलने वाले हिस्सों से बचाते हैं', 'चलते समय उन्हें हटाया जा सकता है', 'कभी चोट नहीं लगती', 'उन्हें बायपास नहीं किया जाना चाहिए'],
+                te: ['అవి కదిలే భాగాల నుండి రక్షిస్తాయి', 'నడుస్తున్నప్పుడు వాటిని తొలగించవచ్చు', 'గాయాలు ఎప్పుడూ జరగవు', 'బైపాస్ చేయకూడదు']
+            },
+            answer: [0, 3]
+        },
 
-        // Module 5
+        // Module 5: PPE
         {
             id: 'q-5-1', moduleId: 'ehs-005', stepId: 'step-5-quiz', type: 'single', difficulty: 'simple',
-            text: { en: 'Which PPE is for Ear Protection?', ta: 'காது பாதுகாப்புக்கான PPE எது?', hi: 'कान की सुरक्षा के लिए कौन सा पीपीई है?', te: 'చెవి రక్షణ కోసం ఏ PPE?' },
+            text: { en: 'You are entering a High Noise area (>90dB). What should you wear?', ta: 'நீங்கள் அதிக சத்தம் (>90dB) உள்ள பகுதிக்கு நுழைகிறீர்கள். நீங்கள் என்ன அணிய வேண்டும்?', hi: 'आप उच्च शोर (>90dB) वाले क्षेत्र में प्रवेश कर रहे हैं। आपको क्या पहनना चाहिए?', te: 'మీరు అధిక శబ్దం (>90dB) ఉన్న ప్రదేశంలోకి ప్రవేశిస్తున్నారు. మీరు ఏమి ధరించాలి?' },
             options: {
-                en: ['Goggles', 'Ear Plugs', 'Helmet'],
-                ta: ['கண்ணாடி', 'காது பிளக்குகள்', 'தலைக்கவசம்'],
-                hi: ['चश्मा', 'ईयर प्लग', 'हेलमेट'],
-                te: ['కళ్లద్దాలు', 'చెవి ప్లగ్స్', 'హెల్మెట్']
+                en: ['Sun Goggles', 'Ear Plugs / Ear Muffs', 'Cotton in ears'],
+                ta: ['கண்ணாடி', 'காது பிளக்குகள் (Ear Plugs)', 'காதில் பருத்தி'],
+                hi: ['धूप का चश्मा', 'ईयर प्लग / ईयर मफ', 'कानों में रूई'],
+                te: ['సన్ గ్లాసెస్', 'చెవి ప్లగ్స్ / ఇయర్ మఫ్స్', 'చెవుల్లో దూది']
             },
             answer: 1
         },
+        {
+            id: 'q-5-2', moduleId: 'ehs-005', type: 'single', difficulty: 'simple',
+            text: { en: 'Why must we wear Safety Shoes?', ta: 'நாம் ஏன் பாதுகாப்பு காலணிகளை (Safety Shoes) அணிய வேண்டும்?', hi: 'हमें सुरक्षा जूते क्यों पहनने चाहिए?', te: 'మనం సేఫ్టీ షూస్ ఎందుకు ధరించాలి?' },
+            options: {
+                en: ['To look professional', 'To protect toes from falling objects', 'They are comfortable to sleep in'],
+                ta: ['தொழில்முறை தோற்றத்திற்காக', 'விழும் பொருட்களிலிருந்து கால்விரல்களைப் பாதுகாக்க', 'தூங்குவதற்கு வசதியாக இருப்பதால்'],
+                hi: ['पेशेवर दिखने के लिए', 'गिरने वाली वस्तुओं से पैर की उंगलियों की रक्षा के लिए', 'सोने के लिए आरामदायक'],
+                te: ['ప్రొఫెషనల్ గా కనిపించడానికి', 'పడే వస్తువుల నుండి కాలి వేళ్లను రక్షించడానికి', 'నిద్రించడానికి సౌకర్యవంతంగా ఉంటాయి']
+            },
+            answer: 1
+        },
+        {
+            id: 'q-5-3', moduleId: 'ehs-005', type: 'single', difficulty: 'simple',
+            text: { en: 'Heavy tools are being used above you. What protects your head?', ta: 'உங்களுக்கு மேலே கனமான கருவிகள் பயன்படுத்தப்படுகின்றன. உங்கள் தலையைப் பாதுகாப்பது எது?', hi: 'आपके ऊपर भारी औजारों का उपयोग किया जा रहा है। आपके सिर की रक्षा कौन करता है?', te: 'మీ పైన బరువైన పనిముట్లు వాడుతున్నారు. మీ తలను ఏది రక్షిస్తుంది?' },
+            options: {
+                en: ['Cap', 'Safety Helmet', 'Handkerchief'],
+                ta: ['தொப்பி', 'பாதுகாப்பு தலைக்கவசம் (Helmet)', 'கைக்குட்டை'],
+                hi: ['टोपी', 'सुरक्षा हेलमेट', 'रुमाल'],
+                te: ['టోపీ', 'సేఫ్టీ హెల్మెట్', 'రుమాలు']
+            },
+            answer: 1
+        },
+        {
+            id: 'q-5-4', moduleId: 'ehs-005', type: 'single', difficulty: 'complex',
+            text: { en: 'You notice your safety helmet has a crack. What should you do?', ta: 'உங்கள் பாதுகாப்புத் தலைக்கவசத்தில் விரிசல் இருப்பதை நீங்கள் கவனிக்கிறீர்கள். நீங்கள் என்ன செய்ய வேண்டும்?', hi: 'आप देखते हैं कि आपके सुरक्षा हेलमेट में दरार है। आपको क्या करना चाहिए?', te: 'మీ సేఫ్టీ హెల్మెట్‌లో పగుళ్లు ఉన్నాయని మీరు గమనించారు. మీరు ఏమి చేయాలి?' },
+            options: {
+                en: ['Use it anyway', 'Tape it up', 'Report and replace it immediately'],
+                ta: ['எப்படியும் பயன்படுத்தவும்', 'அதை ஒட்டவும்', 'புகாரளித்து உடனடியாக மாற்றவும்'],
+                hi: ['वैसे भी इसका इस्तेमाल करें', 'इसे टेप करें', 'रिपोर्ट करें और इसे तुरंत बदलें'],
+                te: ['ఏమైనప్పటికీ దానిని ఉపయోగించండి', 'టేప్ చేయండి', 'నివేదించండి మరియు వెంటనే భర్తీ చేయండి']
+            },
+            answer: 2
+        },
 
-        // Module 6
+        // Module 6: Fire Safety
         {
             id: 'q-6-1', moduleId: 'ehs-006', stepId: 'step-6-quiz', type: 'single', difficulty: 'simple',
-            text: { en: 'Class A fire involves?', ta: 'வகுப்பு A தீ எதை உள்ளடக்கியது?', hi: 'क्लास A आग में क्या शामिल है?', te: 'క్లాస్ A మంటల్లో ఏమి ఉంటాయి?' },
+            text: { en: 'A pile of cardboard boxes is on fire. What Class of fire is this?', ta: 'அட்டைப்பெட்டிகளின் குவியல் தீப்பிடித்துள்ளது. இது எந்த வகுப்பு தீ?', hi: 'गत्ते के बक्सों के ढेर में आग लगी है। यह किस वर्ग की आग है?', te: 'అట్ట పెట్టెల కుప్ప మండిపోతోంది. ఇది ఏ తరగతి అగ్ని?' },
             options: {
-                en: ['Oil & Petrol', 'Wood, Paper, Cloth', 'Gas'],
-                ta: ['எண்ணெய் & பெட்ரோல்', 'மரம், காகிதம், துணி', 'எரிவாயு'],
-                hi: ['तेल और पेट्रोल', 'लकड़ी, कागज, कपड़ा', 'गैस'],
-                te: ['చమురు & పెట్రోల్', 'చెక్క, కాగితం, వస్త్రం', 'గ్యాస్']
+                en: ['Class A (Solids)', 'Class B (Liquids)', 'Class C (Gas)'],
+                ta: ['வகுப்பு A (திடப்பொருட்கள்)', 'வகுப்பு B (திரவங்கள்)', 'வகுப்பு C (வாயு)'],
+                hi: ['श्रेणी A (ठोस)', 'श्रेणी B (तरल)', 'श्रेणी C (गैस)'],
+                te: ['క్లాస్ A (ఘనపదార్థాలు)', 'క్లాస్ B (ద్రవాలు)', 'క్లాస్ C (గ్యాస్)']
+            },
+            answer: 0
+        },
+        {
+            id: 'q-6-2', moduleId: 'ehs-006', type: 'multi', difficulty: 'complex',
+            text: { en: 'Select the 3 elements of the Fire Triangle:', ta: 'தீ முக்கோணத்தின் 3 கூறுகளைத் தேர்ந்தெடுக்கவும்:', hi: 'आग त्रिकोण के 3 तत्व चुनें:', te: 'ఫైర్ ట్రయాంగిల్ యొక్క 3 అంశాలను ఎంచుకోండి:' },
+            options: {
+                en: ['Fuel', 'Heat', 'Oxygen', 'Sand'],
+                ta: ['எரிபொருள் (Fuel)', 'வெப்பம் (Heat)', 'ஆக்சிஜன் (Oxygen)', 'மணல் (Sand)'],
+                hi: ['ईंधन', 'गर्मी', 'ऑक्सीजन', 'रेत'],
+                te: ['ఇంధనం', 'వేడి', 'ఆక్సిజన్', 'ఇసుక']
+            },
+            answer: [0, 1, 2]
+        },
+        {
+            id: 'q-6-3', moduleId: 'ehs-006', type: 'single', difficulty: 'simple',
+            text: { en: 'To use a fire extinguisher, what is the FIRST step (P.A.S.S)?', ta: 'தீயணைப்பானைப் பயன்படுத்த, முதல் படி என்ன (P.A.S.S)?', hi: 'अग्निशामक यंत्र का उपयोग करने के लिए, पहला कदम (P.A.S.S) क्या है?', te: 'ఫైర్ ఎక్స్‌టింగ్విషర్‌ని ఉపయోగించడానికి, మొదటి దశ (P.A.S.S) ఏమిటి?' },
+            options: {
+                en: ['Push the handle', 'Pull the Pin', 'Aim at fire'],
+                ta: ['கைப்பிடியை அழுத்தவும்', 'ஊசியை இழுக்கவும் (Pull the Pin)', 'தீயை குறிவைக்கவும்'],
+                hi: ['हैंडल दबाएं', 'पिन खींचे (Pull the Pin)', 'आग पर निशाना लगाएँ'],
+                te: ['హ్యాండిల్ పుష్ చేయండి', 'పిన్ లాగండి (Pull the Pin)', 'మంటలపై గురిపెట్టండి']
+            },
+            answer: 1
+        },
+        {
+            id: 'q-6-4', moduleId: 'ehs-006', type: 'single', difficulty: 'complex',
+            text: { en: 'Which extinguisher should NOT be used on an Electrical Fire?', ta: 'மின்சாரத் தீயில் எந்தத் தீயணைப்பானைப் பயன்படுத்தக்கூடாது?', hi: 'बिजली की आग पर किस अग्निशामक का उपयोग नहीं किया जाना चाहिए?', te: 'ఎలక్ట్రికల్ ఫైర్‌పై ఏ మంటార్పకాని ఉపయోగించకూడదు?' },
+            options: {
+                en: ['CO2 Extinguisher', 'Water Type Extinguisher', 'Dry Powder Extinguisher'],
+                ta: ['CO2 தீயணைப்பான்', 'நீர் வகை தீயணைப்பான்', 'உலர்ந்த தூள் தீயணைப்பான்'],
+                hi: ['CO2 अग्निशामक', 'जल प्रकार अग्निशामक', 'सूखा पाउडर अग्निशामक'],
+                te: ['CO2 ఆర్పేది', 'నీటి రకం ఆర్పేది', 'డ్రై పౌడర్ ఎక్స్టinguishర్']
             },
             answer: 1
         },
 
-        // Module 7 - Note: Module 7 uses interactive quiz (step-7-quiz)
+        // Module 7: Material Handling & Ergonomics
         {
             id: 'q-7-1', moduleId: 'ehs-007', stepId: 'step-7-1', type: 'single', difficulty: 'simple',
-            text: { en: 'Ideal max lifting weight for men?', ta: 'ஆண்களுக்கான சிறந்த அதிகபட்ச எடை?', hi: 'पुरुषों के लिए आदर्श अधिकतम भार?', te: 'పురుషులకు ఆదర్శవంతమైన గరిష్ట బరువు?' },
+            text: { en: 'A box weighs 40kg. How should you lift it?', ta: 'ஒரு பெட்டியின் எடை 40 கிலோ. அதை எப்படி தூக்க வேண்டும்?', hi: 'एक बक्से का वजन 40 किलो है। आपको इसे कैसे उठाना चाहिए?', te: 'ఒక పెట్టె బరువు 40 కిలోలు. మీరు దానిని ఎలా ఎత్తాలి?' },
             options: {
-                en: ['50 kg', '25 kg', '40 kg'],
-                ta: ['50 kg', '25 kg', '40 kg'],
-                hi: ['50 kg', '25 kg', '40 kg'],
-                te: ['50 kg', '25 kg', '40 kg']
+                en: ['Lift it alone quickly', 'Ask for help (Two Person Lift) or use a trolley', 'Drag it'],
+                ta: ['தனியாக விரைவாக தூக்கவும்', 'உதவி கேட்கவும் (இரு நபர் தூக்குதல்) அல்லது வண்டியைப் பயன்படுத்தவும்', 'இழுக்கவும்'],
+                hi: ['इसे अकेले जल्दी उठाएं', 'मदद मांगें (दो व्यक्ति उठाएं) या ट्रॉली का उपयोग करें', 'इसे खींचें'],
+                te: ['ఒంటరిగా త్వరగా ఎత్తండి', 'ಸహాయం అడగండి (ఇద్దరు వ్యక్తులు ఎత్తడం) లేదా ట్రాలీని ఉపయోగించండి', 'లాగండి']
+            },
+            answer: 1
+        },
+        {
+            id: 'q-7-2', moduleId: 'ehs-007', type: 'single', difficulty: 'simple',
+            text: { en: 'What is the correct way to lift a heavy load?', ta: 'கனமான பொருளைத் தூக்குவதற்கான சரியான வழி எது?', hi: 'भार उठाने का सही तरीका क्या है?', te: 'బరువును ఎత్తడానికి సరైన మార్గం ఏమిటి?' },
+            options: {
+                en: ['Bend your back', 'Bend your knees and keep back straight', 'Lift with one hand'],
+                ta: ['முதுகை வளைக்கவும்', 'முழங்கால்களை மடக்கி முதுகை நேராக வைக்கவும்', 'ஒரு கையால் தூக்கவும்'],
+                hi: ['अपनी पीठ झुकाएं', 'घुटने मोड़ें और पीठ सीधी रखें', 'एक हाथ से उठाएं'],
+                te: ['మీ వీపును వంచండి', 'మోకాళ్ళను వంచి, వీపును నిటారుగా ఉంచండి', 'ఒక చేతితో ఎత్తండి']
+            },
+            answer: 1
+        },
+        {
+            id: 'q-7-3', moduleId: 'ehs-007', type: 'single', difficulty: 'simple',
+            text: { en: 'You see a forklift key left in the ignition. What should you do?', ta: 'Forklift சாவி வண்டியிலேயே இருப்பதை காண்கிறீர்கள். நீங்கள் என்ன செய்ய வேண்டும்?', hi: 'आप देखते हैं कि फोर्कलिफ्ट की चाबी इग्निशन में ही है। आपको क्या करना चाहिए?', te: 'ఫోర్క్లిఫ్ట్ కీ ఇగ్నిషన్లో వదిలివేయబడిందని మీరు చూస్తారు. మీరు ఏమి చేయాలి?' },
+            options: {
+                en: ['Drive it for fun', 'Take the key to the supervisor', 'Leave it alone'],
+                ta: ['வேடிக்கையாக ஓட்டவும்', 'சாவியை மேற்பார்வையாளரிடம் எடுத்துச் செல்லவும்', 'அதை அப்படியே விட்டுவிடவும்'],
+                hi: ['मजे के लिए इसे चलाएं', 'चाबी पर्यवेक्षक के पास ले जाएं', 'इसे अकेला छोड़ दें'],
+                te: ['సరదాగా నడపండి', 'కీని సూపర్‌వైజర్ వద్దకు తీసుకెళ్లండి', 'వదిలేయండి']
             },
             answer: 1
         },
 
-        // Module 8 - Note: Module 8 uses interactive quiz (step-8-quiz)  
+        // Module 8: Electrical Safety
         {
             id: 'q-8-1', moduleId: 'ehs-008', stepId: 'step-8-1', type: 'single', difficulty: 'simple',
-            text: { en: 'Before working on Electrical Panel?', ta: 'மின்சார பலகையில் வேலை செய்வதற்கு முன்?', hi: 'इलेक्ट्रिकल पैनल पर काम करने से पहले?', te: 'ఎలక్ట్రికల్ ప్యానెల్‌పై పని చేయడానికి ముందు?' },
+            text: { en: 'You need to open an Electrical Panel for maintenance. First step?', ta: 'பராமரிப்பிற்காக மின்சார பலகையைத் திறக்க வேண்டும். முதல் படி?', hi: 'आपको रखरखाव के लिए इलेक्ट्रिकल पैनल खोलना है। पहला कदम?', te: 'నిర్వహణ కోసం మీరు ఎలక్ట్రికల్ ప్యానెల్ తెరవాలి. మొదటి అడుగు?' },
             options: {
-                en: ['Wear Gloves Only', 'Apply LOTO', 'Just Switch Off'],
+                en: ['Wear Gloves Only', 'Apply LOTO (Lockout/Tagout)', 'Just Switch Off'],
                 ta: ['கையுறைகளை மட்டும் அணியவும்', 'LOTO பயன்படுத்தவும்', 'வெறுமனே அணைக்கவும்'],
                 hi: ['केवल दस्ताने पहनें', 'LOTO लागू करें', 'बस स्विच ऑफ करें'],
                 te: ['చేతి తొడుగులు మాత్రమే ధరించండి', 'LOTO ని వర్తించండి', 'జస్ట్ స్విచ్ ఆఫ్ చేయండి']
             },
             answer: 1
         },
+        {
+            id: 'q-8-2', moduleId: 'ehs-008', type: 'single', difficulty: 'simple',
+            text: { en: 'Is it safe to touch switches with wet hands?', ta: 'ஈரமான கைகளால் சுவிட்சுகளைத் தொடுவது பாதுகாப்பானதா?', hi: 'क्या गीले हाथों से स्विच को छूना सुरक्षित है?', te: 'తడి చేతులతో స్విచ్‌లను తాకడం సురక్షితమేనా?' },
+            options: {
+                en: ['Yes', 'No, water conducts electricity', 'Only if wearing rubber shoes'],
+                ta: ['ஆம்', 'இல்லை, நீர் மின்சாரத்தை கடத்தும்', 'ரப்பர் காலணிகள் அணிந்திருந்தால் மட்டும்'],
+                hi: ['हाँ', 'नहीं, पानी बिजली का संचालन करता है', 'केवल रबर के जूते पहनने पर'],
+                te: ['అవును', 'కాదు, నీరు విద్యుత్తును ప్రసరిస్తుంది', 'రబ్బరు బూట్లు ధరిస్తే మాత్రమే']
+            },
+            answer: 1
+        },
+        {
+            id: 'q-8-3', moduleId: 'ehs-008', type: 'single', difficulty: 'simple',
+            text: { en: 'You see a damaged wire with exposed copper. What to do?', ta: 'செம்பு கம்பி வெளியே தெரியும் படி சேதமடைந்த வயரை பார்க்கிறீர்கள். என்ன செய்ய வேண்டும்?', hi: 'आप देखते हैं कि एक तार क्षतिग्रस्त है और तांबा दिखाई दे रहा है। क्या करें?', te: 'రాగి బయటపడేలా దెబ్బతిన్న వైర్‌ను మీరు చూస్తారు. ఏమి చేయాలి?' },
+            options: {
+                en: ['Touch it to check current', 'Tape it yourself', 'Report to maintenance immediately'],
+                ta: ['மின்சாரம் உள்ளதா என தொட்டுப் பார்க்கவும்', 'நீங்களே டேப் ஒட்டவும்', 'உடனடியாக பராமரிப்புத் துறையிடம் புகாரளிக்கவும்'],
+                hi: ['करंट चेक करने के लिए उसे छुएं', 'इसे खुद टेप करें', 'रखरखाव विभाग को तुरंत सूचित करें'],
+                te: ['కరెంట్ ఉందో లేదో చూడటానికి తాకండి', 'మీరే టేప్ చేయండి', 'వెంటనే నిర్వహణకు నివేదించండి']
+            },
+            answer: 2
+        },
 
-        // Module 9 - Note: Module 9 uses interactive quiz (step-9-quiz)
+        // Module 9: Chemical Safety
         {
             id: 'q-9-1', moduleId: 'ehs-009', stepId: 'step-9-1', type: 'single', difficulty: 'simple',
-            text: { en: 'Blue color in NFPA Diamond?', ta: 'NFPA வைரத்தில் நீல நிறம்?', hi: 'NFPA डायमंड में नीला रंगá', te: 'NFPA డైమండ్‌లో నీలం రంగు?' },
+            text: { en: 'A Chemical Label has a "Blue" diamond used. What hazard does it show?', ta: 'ஒரு ரசாயன லேபிளில் "நீல" வைரம் உள்ளது. அது என்ன ஆபத்தைக் காட்டுகிறது?', hi: 'एक रसायन लेबल में "नीला" हीरा है। यह क्या खतरा दिखाता है?', te: 'కెమికల్ లేబుల్‌లో "బ్లూ" డైమండ్ ఉంది. ఇది ఏ ప్రమాదాన్ని చూపుతుంది?' },
             options: {
                 en: ['Fire Hazard', 'Health Hazard', 'Reactivity'],
                 ta: ['தீ ஆபத்து', 'சுகாதார ஆபத்து', 'வினைத்திறன்'],
@@ -284,11 +487,33 @@ export async function initializeSeedData() {
             },
             answer: 1
         },
+        {
+            id: 'q-9-2', moduleId: 'ehs-009', type: 'single', difficulty: 'simple',
+            text: { en: 'Where can you find safety information for a chemical?', ta: 'ஒரு ரசாயனத்திற்கான பாதுகாப்பு தகவலை எங்கே காணலாம்?', hi: 'रसायन के लिए सुरक्षा जानकारी कहाँ मिल सकती है?', te: 'రసాయనం కోసం భద్రతా సమాచారాన్ని మీరు ఎక్కడ కనుగొనవచ్చు?' },
+            options: {
+                en: ['Taste test', 'SDS (Safety Data Sheet)', 'Guess work'],
+                ta: ['சுவை சோதனை', 'SDS (பாதுகாப்பு தரவு தாள்)', 'யூகம்'],
+                hi: ['स्वाद परीक्षण', 'SDS (सुरक्षा डेटा शीट)', 'अंदाजा लगाना'],
+                te: ['రుచి పరీక్ష', 'SDS (సేఫ్టీ డేటా షీట్)', 'ఊహించడం']
+            },
+            answer: 1
+        },
+        {
+            id: 'q-9-3', moduleId: 'ehs-009', type: 'single', difficulty: 'simple',
+            text: { en: 'You are painting in a closed room and feel dizzy. How did the chemical enter?', ta: 'மூடிய அறையில் வர்ணம் பூசுகிறீர்கள், தலைசுற்றல் ஏற்படுகிறது. ரசாயனம் எப்படி உள்ளே சென்றது?', hi: 'आप एक बंद कमरे में पेंटिंग कर रहे हैं और चक्कर आ रहा है। रसायन कैसे प्रवेश किया?', te: 'మీరు మూసి ఉన్న గదిలో పెయింటింగ్ వేస్తున్నారు మరియు తల తిరుగుతున్నట్లు అనిపిస్తుంది. రసాయనం ఎలా ప్రవేశించింది?' },
+            options: {
+                en: ['Inhalation (Breathing fumes)', 'Absorption (Skin)', 'Ingestion (Eating)'],
+                ta: ['சுவாசம் (புகையை சுவாசித்தல்)', 'உறிஞ்சுதல் (தோல்)', 'விழுங்குதல் (உண்ணுதல்)'],
+                hi: ['साँस लेना (धुएं में साँस लेना)', 'अवशोषण (त्वचा)', 'अंतर्ग्रहण (खाना)'],
+                te: ['ఉచ్ఛ్వాసము (పొగలను పీల్చడం)', 'శోషణ (చర్మం)', 'తీసుకోవడం (తినడం)']
+            },
+            answer: 0
+        },
 
-        // Module 10
+        // Module 10: Waste Management & 5S
         {
             id: 'q-10-1', moduleId: 'ehs-010', stepId: 'step-10-quiz', type: 'single', difficulty: 'simple',
-            text: { en: 'Which bin is for food waste?', ta: 'உணவு கழிவுகளுக்கான தொட்டி?', hi: 'खाद्य अपशिष्ट के लिए कौन सा डिब्बा?', te: 'आहార వ్యర్థాలకు ఏ డబ్బా?' },
+            text: { en: 'Which bin is for food waste?', ta: 'உணவு கழிவுகளுக்கான தொட்டி?', hi: 'खाद्य अपशिष्ट के लिए कौन सा डिब्बा?', te: 'ఆహార వ్యర్థాలకు ఏ డబ్బా?' },
             options: {
                 en: ['Red Bin', 'Green Bin', 'Blue Bin'],
                 ta: ['சிவப்பு தொட்டி', 'பச்சை தொட்டி', 'நீல தொட்டி'],
@@ -297,8 +522,30 @@ export async function initializeSeedData() {
             },
             answer: 1
         },
+        {
+            id: 'q-10-2', moduleId: 'ehs-010', type: 'multi', difficulty: 'simple',
+            text: { en: 'Select the 3Rs of Waste Management:', ta: 'கழிவு மேலாண்மையின் 3R-களைத் தேர்ந்தெடுக்கவும்:', hi: 'कचरा प्रबंधन के 3R चुनें:', te: 'వ్యర్థాల నిర్వహణ యొక్క 3Rలను ఎంచుకోండి:' },
+            options: {
+                en: ['Reduce', 'Reuse', 'Recycle', 'Rest'],
+                ta: ['குறைத்தல் (Reduce)', 'மறுபயன்பாடு (Reuse)', 'மறுசுழற்சி (Recycle)', 'ஓய்வு (Rest)'],
+                hi: ['कम करना', 'पुन: उपयोग', 'पुनर्चक्रण', 'आराम'],
+                te: ['తగ్గించు (Reduce)', 'తిరిగి వాడు (Reuse)', 'రీసైకిల్ (Recycle)', 'విశ్రాంతి']
+            },
+            answer: [0, 1, 2]
+        },
+        {
+            id: 'q-10-3', moduleId: 'ehs-010', type: 'single', difficulty: 'simple',
+            text: { en: 'What does "Sort" (Seiri) mean in 5S?', ta: '5S இல் "வகைப்படுத்து" (Seiri) என்றால் என்ன?', hi: '5S में "छांटना" (Seiri) का क्या अर्थ है?', te: '5Sలో "సార్ట్" (Seiri) అంటే ఏమిటి?' },
+            options: {
+                en: ['Clean everything', 'Remove unnecessary items', 'Standardize'],
+                ta: ['எல்லாவற்றையும் சுத்தம் செய்', 'தேவையற்ற பொருட்களை அகற்று', 'தரப்படுத்துதல்'],
+                hi: ['सब कुछ साफ करें', 'अनावश्यक वस्तुओं को हटाएं', 'मानकीकरण'],
+                te: ['అన్నీ శుభ్రం చేయండి', 'అనవసరమైన వస్తువులను తొలగించండి', 'ప్రమాణీకరించండి']
+            },
+            answer: 1
+        },
 
-        // Module 11
+        // Module 11: Emergency Preparedness
         {
             id: 'q-11-1', moduleId: 'ehs-011', stepId: 'step-11-quiz', type: 'single', difficulty: 'simple',
             text: { en: 'Who to report Near Miss to?', ta: 'நூலிழை தவறை யாரிடம் புகாரளிக்க வேண்டும்?', hi: 'निकट चूक की रिपोर्ट किसे करें?', te: 'నియర్ మిస్‌ను ఎవరికి నివేదించాలి?' },
@@ -309,6 +556,39 @@ export async function initializeSeedData() {
                 te: ['ఎవరూ కాదు', 'పర్యవేక్షకుడు', 'స్నేహితుడు']
             },
             answer: 1
+        },
+        {
+            id: 'q-11-2', moduleId: 'ehs-011', type: 'single', difficulty: 'simple',
+            text: { en: 'Where should you assemble during an emergency evacuation?', ta: 'அவசர வெளியேற்றத்தின் போது நீங்கள் எங்கு கூட வேண்டும்?', hi: 'आपातकालीन निकासी के दौरान आपको कहाँ इकट्ठा होना चाहिए?', te: 'అత్యవసర తరలింపు సమయంలో మీరు ఎక్కడ సమావేశం కావాలి?' },
+            options: {
+                en: ['Canteen', 'Assembly Point', 'Restroom'],
+                ta: ['உணவகம்', 'கூடும் இடம் (Assembly Point)', 'கழிவறை'],
+                hi: ['कैंटीन', 'असेंबली प्वाइंट', 'शौचालय'],
+                te: ['కాంటీన్', 'అసెంబ్లీ పాయింట్', 'విశ్రాంతి గది']
+            },
+            answer: 1
+        },
+        {
+            id: 'q-11-3', moduleId: 'ehs-011', type: 'single', difficulty: 'simple',
+            text: { en: 'Where should you perform Chest Compressions for CPR?', ta: 'CPR க்கான மார்பு அழுத்தம் எங்கு செய்ய வேண்டும்?', hi: 'CPR के लिए छाती पर दबाव कहाँ बनाना चाहिए?', te: 'CPR కోసం ఛాతీ కుదింపులను ఎక్కడ చేయాలి?' },
+            options: {
+                en: ['Center of Chest', 'Stomach', 'Neck'],
+                ta: ['மார்பின் மையம்', 'வயிறு', 'கழுத்து'],
+                hi: ['छाती के बीच में', 'पेट', 'गर्दन'],
+                te: ['ఛాతీ మధ్యలో', 'కడుపు', 'మెడ']
+            },
+            answer: 0
+        },
+        {
+            id: 'q-11-4', moduleId: 'ehs-011', type: 'interactive', difficulty: 'simple',
+            text: { en: 'Tap the Blocked Exit Hazard:', ta: 'தடைசெய்யப்பட்ட வெளியேறும் அபாயத்தைத் தட்டவும்:', hi: 'अवरुद्ध निकास खतरे पर टैप करें:', te: 'బ్లాక్ చేయబడిన ఎగ్జిట్ ప్రమాదాన్ని నొక్కండి:' },
+            interactive: {
+                image: '/delphi-learnhub/src/assets/images/quiz_blocked_exit.png',
+                hazards: [
+                    { id: 'h1', description: { en: 'Blocked Emergency Exit', ta: 'தடைசெய்யப்பட்ட அவசர வழி', hi: 'आपातकालीन निकास अवरुद्ध', te: 'అత్యవసర నిష్క్రమణ నిరోధించబడింది' }, x: 60, y: 70 }
+                ]
+            },
+            answer: 'completed'
         }
     ];
 

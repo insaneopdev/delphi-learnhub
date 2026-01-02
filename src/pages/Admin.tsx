@@ -87,12 +87,13 @@ export default function Admin() {
     moduleId: string;
     stepId?: string;
     text: Record<string, string>;
-    type: 'single' | 'multi' | 'code' | 'fill';
+    type: 'single' | 'multi' | 'code' | 'fill' | 'interactive';
     options: Record<string, string[]>;
     correct: number | number[] | string;
     difficulty: 'simple' | 'complex';
     imageUrl?: string;
     optionImages?: string[];
+    interactive?: { image: string; hazards: { id: string; description: Record<string, string>; x: number; y: number }[] };
   }>({ moduleId: '', text: {}, type: 'single', options: {}, correct: 0, difficulty: 'simple', imageUrl: '', optionImages: [] });
 
   const refreshQuestions = () => {
@@ -361,6 +362,7 @@ export default function Admin() {
       difficulty: q.difficulty ?? 'simple',
       imageUrl: q.imageUrl ?? '',
       optionImages: q.optionImages ?? [],
+      interactive: q.interactive ?? undefined,
     });
     setTimeout(() => editingRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 50);
   };
@@ -378,6 +380,7 @@ export default function Admin() {
       difficulty: questionForm.difficulty,
       imageUrl: questionForm.imageUrl,
       optionImages: questionForm.optionImages,
+      interactive: questionForm.interactive,
     } as any;
 
     saveQuestion(q);
@@ -1575,6 +1578,7 @@ export default function Admin() {
                           difficulty: q.difficulty ?? 'simple',
                           imageUrl: q.imageUrl ?? '',
                           optionImages: q.optionImages ?? [],
+                          interactive: q.interactive ?? undefined,
                         });
                       }}>Edit</Button>
                       <Button size="sm" variant="destructive" onClick={() => {
@@ -1611,6 +1615,7 @@ export default function Admin() {
                       <option value="single">Single choice</option>
                       <option value="multi">Multiple choice</option>
                       <option value="fill">Fill</option>
+                      <option value="interactive">Interactive</option>
                     </select>
                     <select className="input" value={questionForm.difficulty} onChange={(e) => setQuestionForm(prev => ({ ...prev, difficulty: (e.target as HTMLSelectElement).value as any }))}>
                       <option value="simple">Simple</option>
@@ -1659,40 +1664,246 @@ export default function Admin() {
                     </div>
                   </div>
 
-                  {/* Question Image */}
-                  <div className="mb-3">
-                    <Label className="text-sm">Question Image URL or Upload (optional)</Label>
-                    <div className="flex gap-2">
-                      <Input
-                        placeholder="https://example.com/question-image.jpg"
-                        value={questionForm.imageUrl || ''}
-                        onChange={(e) => setQuestionForm(prev => ({ ...prev, imageUrl: (e.target as HTMLInputElement).value }))}
-                      />
-                      <Button type="button" variant="outline" size="sm" onClick={async () => {
-                        const input = document.createElement('input');
-                        input.type = 'file';
-                        input.accept = 'image/*';
-                        input.onchange = async (e) => {
-                          const file = (e.target as HTMLInputElement).files?.[0];
-                          if (file) {
-                            try {
-                              const base64 = await handleImageUpload(file);
-                              setQuestionForm(prev => ({ ...prev, imageUrl: base64 }));
-                              toast({ title: 'Image uploaded' });
-                            } catch (error) {
-                              toast({ title: 'Upload failed', description: (error as Error).message, variant: 'destructive' });
+                  {/* Question Image (for non-interactive types) */}
+                  {questionForm.type !== 'interactive' && (
+                    <div className="mb-3">
+                      <Label className="text-sm">Question Image URL or Upload (optional)</Label>
+                      <div className="flex gap-2">
+                        <Input
+                          placeholder="https://example.com/question-image.jpg"
+                          value={questionForm.imageUrl || ''}
+                          onChange={(e) => setQuestionForm(prev => ({ ...prev, imageUrl: (e.target as HTMLInputElement).value }))}
+                        />
+                        <Button type="button" variant="outline" size="sm" onClick={async () => {
+                          const input = document.createElement('input');
+                          input.type = 'file';
+                          input.accept = 'image/*';
+                          input.onchange = async (e) => {
+                            const file = (e.target as HTMLInputElement).files?.[0];
+                            if (file) {
+                              try {
+                                const base64 = await handleImageUpload(file);
+                                setQuestionForm(prev => ({ ...prev, imageUrl: base64 }));
+                                toast({ title: 'Image uploaded' });
+                              } catch (error) {
+                                toast({ title: 'Upload failed', description: (error as Error).message, variant: 'destructive' });
+                              }
                             }
-                          }
-                        };
-                        input.click();
-                      }}>Upload</Button>
-                    </div>
-                    {questionForm.imageUrl && (
-                      <div className="mt-2">
-                        <img src={questionForm.imageUrl} alt="Question preview" className="max-w-xs max-h-32 rounded border" onError={(e) => (e.currentTarget.style.display = 'none')} />
+                          };
+                          input.click();
+                        }}>Upload</Button>
                       </div>
-                    )}
-                  </div>
+                      {questionForm.imageUrl && (
+                        <div className="mt-2">
+                          <img src={questionForm.imageUrl} alt="Question preview" className="max-w-xs max-h-32 rounded border" onError={(e) => (e.currentTarget.style.display = 'none')} />
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Interactive Question Editor */}
+                  {questionForm.type === 'interactive' && (
+                    <div className="mb-3 p-3 bg-yellow-50 dark:bg-yellow-950/20 rounded-md border border-yellow-200 dark:border-yellow-800">
+                      <h4 className="font-medium mb-3 text-sm flex items-center gap-2">
+                        🎯 Interactive Quiz (Spot the Hazard)
+                      </h4>
+
+                      {/* Image Upload */}
+                      <div className="mb-3">
+                        <Label className="text-sm">Interactive Image (Required)</Label>
+                        <div className="flex gap-2">
+                          <Input
+                            placeholder="https://example.com/interactive-image.jpg"
+                            value={questionForm.interactive?.image || ''}
+                            onChange={(e) => setQuestionForm(prev => ({ ...prev, interactive: { ...(prev.interactive || { hazards: [] }), image: (e.target as HTMLInputElement).value } }))}
+                          />
+                          <Button type="button" variant="outline" size="sm" onClick={async () => {
+                            const input = document.createElement('input');
+                            input.type = 'file';
+                            input.accept = 'image/*';
+                            input.onchange = async (e) => {
+                              const file = (e.target as HTMLInputElement).files?.[0];
+                              if (file) {
+                                try {
+                                  const base64 = await handleImageUpload(file);
+                                  setQuestionForm(prev => ({ ...prev, interactive: { ...(prev.interactive || { hazards: [] }), image: base64 } }));
+                                  toast({ title: 'Image uploaded' });
+                                } catch (error) {
+                                  toast({ title: 'Upload failed', description: (error as Error).message, variant: 'destructive' });
+                                }
+                              }
+                            };
+                            input.click();
+                          }}>Upload</Button>
+                        </div>
+                      </div>
+
+                      {/* Image Preview & Clicking */}
+                      {questionForm.interactive?.image && (
+                        <div className="mb-4">
+                          <div className="relative border rounded-lg overflow-hidden bg-muted/30 inline-block max-w-full">
+                            <div className="relative" style={{ maxWidth: '600px' }}>
+                              <img
+                                src={questionForm.interactive.image}
+                                alt="Interactive"
+                                className="w-full rounded"
+                                onClick={(e) => {
+                                  // Add hazard point logic
+                                  const rect = e.currentTarget.getBoundingClientRect();
+                                  const x = ((e.clientX - rect.left) / rect.width) * 100;
+                                  const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+                                  const hazards = [...(questionForm.interactive?.hazards || [])];
+                                  hazards.push({
+                                    id: crypto.randomUUID(),
+                                    description: { en: `Hazard ${hazards.length + 1}` },
+                                    x: Math.round(x * 10) / 10,
+                                    y: Math.round(y * 10) / 10
+                                  });
+
+                                  setQuestionForm(prev => ({
+                                    ...prev,
+                                    interactive: { ...prev.interactive!, hazards },
+                                    correct: 'completed' // For interactive, answer is always 'completed'
+                                  }));
+                                  toast({ title: '✓ Hazard point added' });
+                                }}
+                                style={{ cursor: 'crosshair' }}
+                              />
+                              {/* Markers */}
+                              {(questionForm.interactive.hazards || []).map((h, i) => (
+                                <div
+                                  key={h.id}
+                                  className="absolute w-6 h-6 bg-red-500 rounded-full border-2 border-white flex items-center justify-center text-white text-xs font-bold pointer-events-none"
+                                  style={{ left: `${h.x}%`, top: `${h.y}%`, transform: 'translate(-50%, -50%)' }}
+                                >
+                                  {i + 1}
+                                </div>
+                              ))}
+                            </div>
+                            <p className="text-xs text-muted-foreground p-1">Click image to add hazard points</p>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Hazards List */}
+                      <div>
+                        <Label className="text-sm">Hazard Points</Label>
+                        {(!questionForm.interactive?.hazards || questionForm.interactive.hazards.length === 0) && (
+                          <p className="text-sm text-muted-foreground italic">No hazards defined. Click on the image.</p>
+                        )}
+                        <div className="space-y-2 mt-2">
+                          {(questionForm.interactive?.hazards || []).map((h, i) => (
+                            <div key={h.id} className="p-3 border rounded-lg bg-background">
+                              <div className="flex justify-between items-center mb-2">
+                                <span className="text-sm font-medium">Hazard {i + 1}</span>
+                                <div className="flex gap-2 items-center">
+                                  <span className="text-xs text-muted-foreground">
+                                    ({h.x?.toFixed(1)}%, {h.y?.toFixed(1)}%)
+                                  </span>
+                                  <Button
+                                    size="sm" variant="destructive"
+                                    onClick={() => {
+                                      const hazards = questionForm.interactive!.hazards.filter((_, idx) => idx !== i);
+                                      setQuestionForm(prev => ({ ...prev, interactive: { ...prev.interactive!, hazards } }));
+                                    }}
+                                  >
+                                    Delete
+                                  </Button>
+                                </div>
+                              </div>
+
+                              {/* Coordinates (editable) */}
+                              <div className="grid grid-cols-2 gap-2 mb-2">
+                                <div>
+                                  <Label className="text-xs">X Position (%)</Label>
+                                  <Input
+                                    type="number"
+                                    min="0"
+                                    max="100"
+                                    step="0.1"
+                                    value={h.x || 50}
+                                    onChange={(e) => {
+                                      const hazards = [...questionForm.interactive!.hazards];
+                                      hazards[i].x = parseFloat(e.target.value);
+                                      setQuestionForm(prev => ({ ...prev, interactive: { ...prev.interactive!, hazards } }));
+                                    }}
+                                  />
+                                </div>
+                                <div>
+                                  <Label className="text-xs">Y Position (%)</Label>
+                                  <Input
+                                    type="number"
+                                    min="0"
+                                    max="100"
+                                    step="0.1"
+                                    value={h.y || 50}
+                                    onChange={(e) => {
+                                      const hazards = [...questionForm.interactive!.hazards];
+                                      hazards[i].y = parseFloat(e.target.value);
+                                      setQuestionForm(prev => ({ ...prev, interactive: { ...prev.interactive!, hazards } }));
+                                    }}
+                                  />
+                                </div>
+                              </div>
+
+                              {/* Description (all languages) */}
+                              <div>
+                                <div className="flex items-center justify-between mb-1">
+                                  <Label className="text-xs">Description (all languages)</Label>
+                                  <Button
+                                    type="button"
+                                    size="sm"
+                                    variant="outline"
+                                    className="h-6 text-xs px-2"
+                                    onClick={async () => {
+                                      const enText = h.description?.en || '';
+                                      if (!enText.trim()) {
+                                        toast({ title: 'Enter English description first', variant: 'destructive' });
+                                        return;
+                                      }
+                                      try {
+                                        toast({ title: 'Translating...' });
+                                        const translations = await translateToAllLanguages(enText);
+                                        const hazards = [...questionForm.interactive!.hazards];
+                                        hazards[i].description = {
+                                          ...hazards[i].description,
+                                          ta: translations.ta,
+                                          hi: translations.hi,
+                                          te: translations.te,
+                                        };
+                                        setQuestionForm(prev => ({ ...prev, interactive: { ...prev.interactive!, hazards } }));
+                                        toast({ title: 'Translation complete!' });
+                                      } catch (error) {
+                                        toast({ title: 'Translation failed', variant: 'destructive' });
+                                      }
+                                    }}
+                                  >
+                                    🌐 Translate
+                                  </Button>
+                                </div>
+                                <div className="grid gap-2">
+                                  {languageKeys.map((lk) => (
+                                    <Input
+                                      key={lk}
+                                      placeholder={`Description (${languageNames[lk]})`}
+                                      value={h.description?.[lk] || ''}
+                                      onChange={(e) => {
+                                        const hazards = [...questionForm.interactive!.hazards];
+                                        if (!hazards[i].description) hazards[i].description = {};
+                                        hazards[i].description[lk] = (e.target as HTMLInputElement).value;
+                                        setQuestionForm(prev => ({ ...prev, interactive: { ...prev.interactive!, hazards } }));
+                                      }}
+                                    />
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
                   {questionForm.type === 'single' || questionForm.type === 'multi' ? (
                     <div className="mb-3">
